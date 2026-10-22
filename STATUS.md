@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-10-22 (living PM docs moved to the `ramble-pm` repo)
+**Updated:** 2026-10-22 (`architecture-audit` decided as a required check; PR 160)
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
 ## Done
@@ -75,7 +75,7 @@ In this demo, the client facts have no one to ask. Where a fact blocks a decisio
 ## Blocked on Dave
 1. Approval window is on (checked 2026-10-21). Later, `scripts/merge-desk/approval-window.sh off` when automated checks alone may merge.
 2. **Architecture guardrails** (PM roundup 2026-10-21). Done: `architecture.md` committed; U-001's ADDED line carries the import-boundary lint; blank stack settings filled (pnpm, React Compiler on, `strict-type-checked`; DECISIONS). Still Dave's, none blocks U-001:
-   - make `architecture-audit` a required check in both rulesets (adds a post-check step for every PR; your call);
+   - ~~make `architecture-audit` a required check~~ decided 2026-10-22 (DECISIONS). PR 160 (code and runbook C3) is open; Dave merges it with bypass, then runs the C3 ruleset command. Until then, nothing changes for PRs;
    - after U-001 merges, add the lint and TypeScript config files to `PROTECTED` in `scripts/merge-desk/scope-check.ts` (adding them now would fail U-001 itself);
    - commit the vig standards edits (Next.js 16.4.1 baseline, `senior` and `review-pr`), still uncommitted in vig;
    - the six pattern notes (U-002, U-003, U-116, U-011, U-005, U-024) go in those units' manifests before each starts, not before U-001. U-003's is in issue #4 (2026-10-22, drafted by the PM, approved by Dave).
@@ -99,12 +99,12 @@ Since the freeze, plan files are read-only; departures go in `delta-log.md`.
 
 ## Next chat
 
-**Before you start:** nothing; U-003's pattern note is in issue #4.
+**Before you start:** (1) merge PR 160 with bypass: `gh pr merge 160 --squash --admin --repo defaultdave/ramble`; (2) then run the `architecture-audit` ruleset command in runbook C3 (`docs/plan/merge-desk-runbook.md`). U-003's pattern note is in issue #4.
 
 **Run:** `/senior #4` in a new desktop chat opened in the ramble folder (terminal: `claude`, then `/senior #4`). **Model and effort:** Sonnet, medium. No workflow, unless you opt into a swarm of U-003, U-116, U-102, U-119.
 
 **Prompt:**
 
 ```
-Read STATUS.md in the ramble-pm repo (bun scripts/plan/site.ts dir prints its path), issue #4 (U-003, scope manifest), docs/adr/0002 and 0007 (Neon, a branch per preview), .claude/standards/architecture.md and stack-decisions.md. If issue #4 has no pattern note, stop and say so. Build U-003 in a worktree off main and stop before push. When done, check the touched files against the manifest, then (as the PM) open the PR into integration with scripts/merge-desk/agent-git.ts, post the checks, request Dave's review with agent-git.ts review, and queue auto-merge. Vercel builds a preview for the branch on push; check it is Ready. List any secrets or Neon settings Dave must add; never add them yourself. Don't commit plan files; PM docs go out with bun scripts/plan/site.ts publish.
+Read STATUS.md in the ramble-pm repo (bun scripts/plan/site.ts dir prints its path), issue #4 (U-003, scope manifest), docs/adr/0002 and 0007 (Neon, a branch per preview), .claude/standards/architecture.md and stack-decisions.md. If issue #4 has no pattern note, stop and say so. Build U-003 in a worktree off main and stop before push. When done, check the touched files against the manifest, then (as the PM) open the PR into integration with scripts/merge-desk/agent-git.ts, post the checks (review-agent, qa-agent, spec-compliance, and architecture-audit), request Dave's review with agent-git.ts review, and queue auto-merge. Vercel builds a preview for the branch on push; check it is Ready. List any secrets or Neon settings Dave must add; never add them yourself. Don't commit plan files; PM docs go out with bun scripts/plan/site.ts publish.
 ```

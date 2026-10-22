@@ -98,16 +98,13 @@
       "when": "Oct 20"
     }
   ],
-  "decisionsNeeded": [
-    {
-      "title": "Make architecture-audit a required check",
-      "detail": "Ramble's layer rules are written, U-001 carries the import-boundary lint, and the stack settings are decided. architecture-audit is still not required on either branch.",
-      "impact": "Does not move any date. Each PR then needs one more posted check; without it a layer break relies on the lint alone.",
-      "recommendation": "Add it once U-001 has merged and the lint exists",
-      "blocks": "Nothing"
-    }
-  ],
+  "decisionsNeeded": [],
   "actionsForDave": [
+    {
+      "title": "Merge PR 160, then add architecture-audit to the rulesets",
+      "detail": "Merge PR 160 with bypass (gh pr merge 160 --squash --admin --repo defaultdave/ramble), then run the ruleset command in runbook C3. In that order, or no PR can pass.",
+      "where": "docs/plan/merge-desk-runbook.md (C3)"
+    },
     {
       "title": "Start U-003",
       "detail": "Its pattern note is in issue #4. Run /senior #4 in a new chat in the ramble folder (prompt in STATUS), then approve its PR.",
@@ -122,6 +119,10 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Oct 22",
+      "what": "architecture-audit becomes a required check on main and integration, beside the other three agent checks"
+    },
     {
       "when": "Oct 22",
       "what": "Project status, decisions, delta log, and this roadmap move to their own repo, ramble-pm, published without PRs; unit status and actuals move to the board"

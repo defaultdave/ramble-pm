@@ -18,11 +18,12 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Next for Dave**
 
+- Merge PR 160, then add architecture-audit to the rulesets. Merge PR 160 with bypass (gh pr merge 160 --squash --admin --repo defaultdave/ramble), then run the ruleset command in runbook C3. In that order, or no PR can pass.
 - Start U-003. Its pattern note is in issue #4. Run /senior #4 in a new chat in the ramble folder (prompt in STATUS), then approve its PR.
 
 **Decisions needed**
 
-- Make architecture-audit a required check. Recommended: Add it once U-001 has merged and the lint exists.
+- None
 
 **Held up**
 
