@@ -73,7 +73,7 @@
 In this demo, the client facts have no one to ask. Where a fact blocks a decision, the PM proposes a working assumption and logs it as one.
 
 ## Blocked on Dave
-0. **Set up `ramble-pm`** (2026-10-22). Commands in the PM's hand-off of that day: create the repo, add it to the App installation, turn on Pages, add the `site.ts` allow rule, then merge the code repo PR that repoints the scripts.
+0. **Finish `ramble-pm`** (2026-10-22). Done: repo created, App access, allow rule, first publish. Left: merge PR 159 with bypass, turn on Pages (command in Next chat).
 1. Approval window is on (checked 2026-10-21). Later, `scripts/merge-desk/approval-window.sh off` when automated checks alone may merge.
 2. **Architecture guardrails** (PM roundup 2026-10-21). Done: `architecture.md` committed; U-001's ADDED line carries the import-boundary lint; blank stack settings filled (pnpm, React Compiler on, `strict-type-checked`; DECISIONS). Still Dave's, none blocks U-001:
    - make `architecture-audit` a required check in both rulesets (adds a post-check step for every PR; your call);
@@ -100,7 +100,7 @@ Since the freeze, plan files are read-only; departures go in `delta-log.md`.
 
 ## Next chat
 
-**Before you start:** nothing; U-003's pattern note is in issue #4. Production deploys are staged now; promote one only when you want it live.
+**Before you start:** merge [PR 159](https://github.com/defaultdave/ramble/pull/159) with bypass (it repoints the PM scripts at this repo; `scope-manifest` fails by design), then turn on Pages: `gh api -X POST repos/defaultdave/ramble-pm/pages -f "source[branch]=main" -f "source[path]=/"`. U-003's pattern note is in issue #4.
 
 **Run:** `/senior #4` in a new desktop chat opened in the ramble folder (terminal: `claude`, then `/senior #4`). **Model and effort:** Sonnet, medium. No workflow, unless you opt into a swarm of U-003, U-116, U-102, U-119.
 

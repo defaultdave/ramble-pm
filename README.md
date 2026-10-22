@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 22, 2026.** U-001 and U-002 merged Oct 21, and Vercel now builds every push from GitHub; production deploys wait for your promote. Eight units are ready, U-003 first. The forecast still puts the Prototype at Nov 13 and launch at Feb 23.
+**As of Oct 22, 2026.** U-023 merged and is live in production after your first promotes. Project status now lives in its own repo, ramble-pm, so status updates no longer need PRs in the code repo. Nine units are ready, U-003 first. The forecast still puts the Prototype at Nov 13 and launch at Feb 23.
 
 | Milestone | Likely |
 |---|---|
@@ -18,6 +18,7 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Next for Dave**
 
+- Merge PR 159 and turn on Pages. PR 159 repoints the PM scripts at ramble-pm; merge it with bypass. Then turn on GitHub Pages for ramble-pm (command in STATUS).
 - Start U-003. Its pattern note is in issue #4. Run /senior #4 in a new chat in the ramble folder (prompt in STATUS), then approve its PR.
 
 **Decisions needed**

@@ -1,6 +1,6 @@
 {
   "asOf": "2026-10-22",
-  "headline": "U-001 and U-002 merged Oct 21, and Vercel now builds every push from GitHub; production deploys wait for your promote. Eight units are ready, U-003 first. The forecast still puts the Prototype at Nov 13 and launch at Feb 23.",
+  "headline": "U-023 merged and is live in production after your first promotes. Project status now lives in its own repo, ramble-pm, so status updates no longer need PRs in the code repo. Nine units are ready, U-003 first. The forecast still puts the Prototype at Nov 13 and launch at Feb 23.",
   "recommended": "Plan, Dave 12.5 h",
   "phases": [
     {
@@ -109,6 +109,11 @@
   ],
   "actionsForDave": [
     {
+      "title": "Merge PR 159 and turn on Pages",
+      "detail": "PR 159 repoints the PM scripts at ramble-pm; merge it with bypass. Then turn on GitHub Pages for ramble-pm (command in STATUS).",
+      "where": "STATUS.md in ramble-pm"
+    },
+    {
       "title": "Start U-003",
       "detail": "Its pattern note is in issue #4. Run /senior #4 in a new chat in the ramble folder (prompt in STATUS), then approve its PR.",
       "where": "STATUS.md in ramble-pm"
@@ -122,6 +127,10 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Oct 22",
+      "what": "Project status, decisions, delta log, and this roadmap move to their own repo, ramble-pm, published without PRs; unit status and actuals move to the board"
+    },
     {
       "when": "Oct 22",
       "what": "U-003 pattern note set: one database folder, a pooled handle for transactions and a read-only one, committed migrations checked in CI, production migrated only with your approval"
