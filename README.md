@@ -18,7 +18,6 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Next for Dave**
 
-- Merge PR 159 and turn on Pages. PR 159 repoints the PM scripts at ramble-pm; merge it with bypass. Then turn on GitHub Pages for ramble-pm (command in STATUS).
 - Start U-003. Its pattern note is in issue #4. Run /senior #4 in a new chat in the ramble folder (prompt in STATUS), then approve its PR.
 
 **Decisions needed**
