@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-10-22 (`architecture-audit` decided as a required check; PR 160)
+**Updated:** 2026-10-22 (`architecture-audit` is now a required check on `main` and `integration`; PR 160 merged, C3 ruleset update run by Dave)
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
 ## Done
@@ -75,7 +75,7 @@ In this demo, the client facts have no one to ask. Where a fact blocks a decisio
 ## Blocked on Dave
 1. Approval window is on (checked 2026-10-21). Later, `scripts/merge-desk/approval-window.sh off` when automated checks alone may merge.
 2. **Architecture guardrails** (PM roundup 2026-10-21). Done: `architecture.md` committed; U-001's ADDED line carries the import-boundary lint; blank stack settings filled (pnpm, React Compiler on, `strict-type-checked`; DECISIONS). Still Dave's, none blocks U-001:
-   - ~~make `architecture-audit` a required check~~ decided 2026-10-22 (DECISIONS). PR 160 (code and runbook C3) is open; Dave merges it with bypass, then runs the C3 ruleset command. Until then, nothing changes for PRs;
+   - ~~make `architecture-audit` a required check~~ done 2026-10-22: PR 160 merged, both rulesets now require it (Dave ran the C3 update);
    - after U-001 merges, add the lint and TypeScript config files to `PROTECTED` in `scripts/merge-desk/scope-check.ts` (adding them now would fail U-001 itself);
    - commit the vig standards edits (Next.js 16.4.1 baseline, `senior` and `review-pr`), still uncommitted in vig;
    - the six pattern notes (U-002, U-003, U-116, U-011, U-005, U-024) go in those units' manifests before each starts, not before U-001. U-003's is in issue #4 (2026-10-22, drafted by the PM, approved by Dave).
@@ -99,7 +99,7 @@ Since the freeze, plan files are read-only; departures go in `delta-log.md`.
 
 ## Next chat
 
-**Before you start:** (1) merge PR 160 with bypass: `gh pr merge 160 --squash --admin --repo defaultdave/ramble`; (2) then run the `architecture-audit` ruleset command in runbook C3 (`docs/plan/merge-desk-runbook.md`). U-003's pattern note is in issue #4.
+**Before you start:** nothing; PR 160 is merged and both rulesets require `architecture-audit`. U-003's pattern note is in issue #4.
 
 **Run:** `/senior #4` in a new desktop chat opened in the ramble folder (terminal: `claude`, then `/senior #4`). **Model and effort:** Sonnet, medium. No workflow, unless you opt into a swarm of U-003, U-116, U-102, U-119.
 
