@@ -77,3 +77,5 @@ Choices kept for speed that later work may need to undo. Each is cheap now and c
 - **Neon Free allows 10 branches** (U-003): main, staging, and 8 previews. The Prototype's parallel PRs can hit the cap; the 7-day expiry only clears stale ones.
 - **Analytics wrapper lives under `src/server/analytics/`** (U-119): the folder otherwise holds server code; `(host)` and `(ops)` are excluded by test only. Check the scripts against the nonce CSP before guest pages take it.
 - **Neon integration needs a redeploy per new branch** (U-003): previews are unusable until then; the overnight plan must either redeploy automatically or tolerate it. A first-push build with no database URL passes but the preview has no database.
+
+- **2026-10-23, U-024 pattern note (Dave):** primitives are stateless unless absolutely necessary, with state passed in as props; the Storybook adapter is the agent's choice, justified in the PR; Stepper takes `min` and `max`; no `className` prop on primitives.
