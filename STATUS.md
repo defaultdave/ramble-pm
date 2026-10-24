@@ -110,12 +110,12 @@ Since the freeze, plan files are read-only; departures go in `delta-log.md`.
 
 ## Next chat
 
-**Before you start:** nothing. Note: until `integration` is promoted, `main`'s CI lacks the `db` and `storybook` jobs that its ruleset requires, so standard-tier PRs into `main` cannot merge.
+**Before you start:** decide whether to close the approval window (`scripts/merge-desk/approval-window.sh off`) so standard-tier units merge on green checks without your approval.
 
-**Run:** `/ramble-pm` in a new desktop chat opened in the ramble folder (terminal: `claude --agent ramble-pm`). **Model and effort:** Sonnet, medium. No workflow.
+**Run:** `/ramble-pm` in a new desktop chat opened in the ramble folder (terminal: `claude --agent ramble-pm`), and say "use a workflow" to opt in. **Model and effort:** Sonnet, medium for the builders; the PM session on Opus, high.
 
 **Prompt:**
 
 ```
-Read STATUS.md in the ramble-pm repo (bun scripts/plan/site.ts dir prints its path) and docs/plan/units.yaml. U-024 is done and on integration. Find the agent units that are now ready (start with U-117, U-007, U-008a, U-009, then check what U-003, U-116, U-102, and U-024 unblocked), check each one's file scope, and propose a swarm if three or more have disjoint scopes; otherwise name the single next unit and its /senior command. Done when STATUS.md names the next units and the Next chat block is ready to start them. Don't commit plan files; PM docs go out with bun scripts/plan/site.ts publish.
+Read STATUS.md in the ramble-pm repo (bun scripts/plan/site.ts dir prints its path), docs/plan/units.yaml, and docs/plan/merge-desk-runbook.md. Launch wave 1 of the Prototype as a swarm, one builder per unit in its own worktree: U-011 (critical, into integration), U-009, U-117, U-025, U-026 (standard, into main). Each prompt carries the unit's scope manifest from its issue. Each unit pushes its unit/U-… branch and opens its PR with scripts/merge-desk/agent-git.ts, and the PM posts the four agent checks and queues auto-merge. U-117 and U-026 both add dependencies, so merge them one after the other and rebase the second onto the first. Also open a small U-102 PR into main with pnpm overrides for zod >=4.6.6 and esbuild >=0.25.0 (see the OSV note in STATUS.md), checking that drizzle-kit still runs. Done when all six PRs are open with green checks. Don't commit plan files; PM docs go out with bun scripts/plan/site.ts publish.
 ```
