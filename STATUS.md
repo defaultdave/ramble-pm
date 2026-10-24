@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-10-24 18:30 (first promotion: PR 181 put `integration` onto `main`; five Prototype units are ready for a swarm)
+**Updated:** 2026-10-24 18:45 (approval window closed; Prototype wave 1 swarm launching in a new session)
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
 ## Done
@@ -100,7 +100,7 @@ Legal and vendor questions for the real job, logged, not blocking the demo: Ramb
 ## Next
 P5 under way: U-118, U-001, U-002, U-023 done in `main`; U-003, U-116, U-119, U-102 merged into `integration` and waiting for the next promotion.
 
-1. **Dave:** delete the remote `senior/31-…` branch; decide the swarm for the five ready Prototype units (U-011, U-009, U-117, U-025, U-026) and whether to close the approval window.
+1. **Dave:** delete the remote `senior/31-…` branch; launch Prototype wave 1 (U-011, U-009, U-117, U-025, U-026) as a swarm; approval window closed 18:45.
 2. Dave, any time: promote `integration` to `main` (it carries U-002's successors, U-003, U-116, U-119, U-102); turn on Web Analytics and Speed Insights for U-119; correct the harness path in issue #4 to `tests/db/harness.ts`.
 3. Next planning topic: overnight auto mode in a container; then the single-lane merge amendment (`drafts/single-lane-merge-amendment.md`).
 
@@ -110,7 +110,7 @@ Since the freeze, plan files are read-only; departures go in `delta-log.md`.
 
 ## Next chat
 
-**Before you start:** decide whether to close the approval window (`scripts/merge-desk/approval-window.sh off`) so standard-tier units merge on green checks without your approval.
+**Before you start:** nothing. The approval window is closed (2026-10-24 18:45), so standard units merge on green checks; request Dave's review only for people checks and escalations.
 
 **Run:** `/ramble-pm` in a new desktop chat opened in the ramble folder (terminal: `claude --agent ramble-pm`), and say "use a workflow" to opt in. **Model and effort:** Sonnet, medium for the builders; the PM session on Opus, high.
 
