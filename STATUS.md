@@ -99,7 +99,7 @@ Legal and vendor questions for the real job, logged, not blocking the demo: Ramb
 ## Next
 P5 under way: U-118, U-001, U-002, U-023 done in `main`; U-003, U-116, U-119, U-102 merged into `integration` and waiting for the next promotion.
 
-1. **Dave:** delete the remote `senior/31-…` branch; promote `integration` to `main` when ready (it now merges without conflicts).
+1. **Dave:** delete the remote `senior/31-…` branch; promote `integration` to `main` (runbook E1). Ready since 18:08: the on-demand smoke passed on `integration` at `5e44153`, and the promotion body is drafted (local, not committed; the PM gives its path).
 2. Dave, any time: promote `integration` to `main` (it carries U-002's successors, U-003, U-116, U-119, U-102); turn on Web Analytics and Speed Insights for U-119; correct the harness path in issue #4 to `tests/db/harness.ts`.
 3. Next planning topic: overnight auto mode in a container; then the single-lane merge amendment (`drafts/single-lane-merge-amendment.md`).
 
