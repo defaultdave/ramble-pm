@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-10-22",
-  "headline": "U-023 merged and is live in production after your first promotes. Project status now lives in its own repo, ramble-pm, so status updates no longer need PRs in the code repo. Nine units are ready, U-003 first. The forecast still puts the Prototype at Nov 13 and launch at Feb 23.",
+  "asOf": "2026-10-24",
+  "headline": "Prototype wave 1 ran as a parallel agent swarm: U-009, U-025, U-026 and U-117 merged into main the same evening, with the U-102 dependency fix. U-011, the catalog pattern-setter, is built and reviewed, waiting only for the integration branch to be recreated. The Prototype forecast moves to Nov 6 (P90 Nov 10).",
   "recommended": "Plan, Dave 12.5 h",
   "phases": [
     {
@@ -98,17 +98,23 @@
       "when": "Oct 20"
     }
   ],
-  "decisionsNeeded": [],
+  "decisionsNeeded": [
+    {
+      "title": "How promotions stop deleting integration",
+      "detail": "Promote from a promote/<date> branch cut from integration, or turn off delete-branch-on-merge. No effect on dates; without one, the next promotion deletes integration again.",
+      "recommendation": "promote from a promote/<date> branch"
+    }
+  ],
   "actionsForDave": [
     {
-      "title": "Merge PR 160, then add architecture-audit to the rulesets",
-      "detail": "Merge PR 160 with bypass (gh pr merge 160 --squash --admin --repo defaultdave/ramble), then run the ruleset command in runbook C3. In that order, or no PR can pass.",
-      "where": "docs/plan/merge-desk-runbook.md (C3)"
+      "title": "Recreate the integration branch",
+      "detail": "Promotion PR 181 deleted it (delete-branch-on-merge under your login bypasses the ruleset). Run: gh api repos/defaultdave/ramble/git/refs -f ref=refs/heads/integration -f sha=<current main sha>. U-011's PR waits on it.",
+      "where": "STATUS.md in ramble-pm (Blocked on Dave)"
     },
     {
-      "title": "Start U-003",
-      "detail": "Its pattern note is in issue #4. Run /senior #4 in a new chat in the ramble folder (prompt in STATUS), then approve its PR.",
-      "where": "STATUS.md in ramble-pm"
+      "title": "Bypass-merge PR 188",
+      "detail": "Writes the B6 guest-read and B7 first-caller exemptions you approved into the architecture standard; .claude/ is protected, so scope-manifest fails by design.",
+      "where": "https://github.com/defaultdave/ramble/pull/188"
     }
   ],
   "heldUp": [
@@ -119,6 +125,14 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Oct 24",
+      "what": "U-011 pattern note approved with all eight PM recommendations (guest reads take no caller, uuid in addresses, slug history for all four kinds, tiers 24 h, 48 h, 7 days)"
+    },
+    {
+      "when": "Oct 24",
+      "what": "Architecture rules: B6 exempts guest-visible reads from the caller check; B7 allows an export ahead of its first caller when a TODO names that unit"
+    },
     {
       "when": "Oct 22",
       "what": "architecture-audit becomes a required check on main and integration, beside the other three agent checks"
@@ -222,8 +236,8 @@
   ],
   "watch": [
     {
-      "what": "Agent speed is unproven",
-      "detail": "The plan assumes agent-built units cost Dave little: about 180 h for 116 units, roughly 13x leverage; the only measured figure is 3.4x. Checked after the first three merges and the first two promotions."
+      "what": "Agent speed: wave 1 far ahead of estimates",
+      "detail": "Four agent units merged in 0.1 to 0.4 estimate-days each against 0.75 to 2 likely, after two to five review rounds. The forecast does not learn from actuals yet, so later agent units may be overestimated too."
     },
     {
       "what": "The money core is the critical path",
@@ -278,7 +292,7 @@
     "Current forecast (Oct 21, refit): from Oct 22 with U-118 done; Dave puts in about 20 hours this week, then 12.5 a week. Agents merge their own work, with Dave approving each PR at first.",
     "The same start and progress, with Dave at a steady 12.5 hours a week from today."
   ],
-  "forecastNote": "Forecast from Oct 22, with U-118 done; the switch above sets this week’s hours.",
+  "forecastNote": "Forecast from Oct 25, with wave 1 done; the switch above sets this week's hours.",
   "frozen": {
     "prototype": {
       "likely": "2026-11-30",

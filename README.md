@@ -7,23 +7,23 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 22, 2026.** U-023 merged and is live in production after your first promotes. Project status now lives in its own repo, ramble-pm, so status updates no longer need PRs in the code repo. Nine units are ready, U-003 first. The forecast still puts the Prototype at Nov 13 and launch at Feb 23.
+**As of Oct 24, 2026.** Prototype wave 1 ran as a parallel agent swarm: U-009, U-025, U-026 and U-117 merged into main the same evening, with the U-102 dependency fix. U-011, the catalog pattern-setter, is built and reviewed, waiting only for the integration branch to be recreated. The Prototype forecast moves to Nov 6 (P90 Nov 10).
 
 | Milestone | Likely |
 |---|---|
-| Prototype | Nov 13, 2026 (late case Nov 18, 2026) |
-| Launch-ready | Feb 23, 2027 (late case Mar 12, 2027) |
+| Prototype | Nov 5, 2026 (late case Nov 10, 2026) |
+| Launch-ready | Feb 16, 2027 (late case Mar 8, 2027) |
 
 Forecast: Push: 20 h this week, then 12.5 h.
 
 **Next for Dave**
 
-- Merge PR 160, then add architecture-audit to the rulesets. Merge PR 160 with bypass (gh pr merge 160 --squash --admin --repo defaultdave/ramble), then run the ruleset command in runbook C3. In that order, or no PR can pass.
-- Start U-003. Its pattern note is in issue #4. Run /senior #4 in a new chat in the ramble folder (prompt in STATUS), then approve its PR.
+- Recreate the integration branch. Promotion PR 181 deleted it (delete-branch-on-merge under your login bypasses the ruleset). Run: gh api repos/defaultdave/ramble/git/refs -f ref=refs/heads/integration -f sha=<current main sha>. U-011's PR waits on it.
+- Bypass-merge PR 188. Writes the B6 guest-read and B7 first-caller exemptions you approved into the architecture standard; .claude/ is protected, so scope-manifest fails by design.
 
 **Decisions needed**
 
-- None
+- How promotions stop deleting integration. Recommended: promote from a promote/<date> branch.
 
 **Held up**
 
