@@ -23,7 +23,7 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Decisions needed**
 
-- How promotions stop deleting integration. Recommended: promote from a promote/<date> branch.
+- None
 
 **Held up**
 

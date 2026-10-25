@@ -87,7 +87,7 @@ In this demo, the client facts have no one to ask. Where a fact blocks a decisio
 
 ## Blocked on Dave
 1. ~~Approval window~~ closed 2026-10-24 18:45.
-1. **`integration` branch deleted** (2026-10-24): the repo's delete-branch-on-merge setting removed it when promotion PR 181 merged under Dave's login, which bypasses the ruleset's deletion rule. Dave recreates it from `main` and picks how to stop a repeat. U-011's PR waits on it.
+1. **`integration` branch deleted** (2026-10-24): the repo's delete-branch-on-merge setting removed it when promotion PR 181 merged under Dave's login, which bypasses the ruleset's deletion rule. Dave recreates it from `main`; from now on promotions open from a `promote/<date>` branch (DECISIONS 2026-10-25). U-011's PR waits on it.
 1. **PR 188:** bypass-merge the B6 and B7 standards amendment plus the PM memory lessons (`.claude/` is protected). The main checkout holds the same memory edit uncommitted; before pulling after the merge, run `git -C /Users/davidfleming/Workspace/ramble checkout -- .claude/agent-memory/ramble-pm/MEMORY.md`.
 2. **Architecture guardrails** (PM roundup 2026-10-21). Done: `architecture.md` committed; U-001's ADDED line carries the import-boundary lint; blank stack settings filled (pnpm, React Compiler on, `strict-type-checked`; DECISIONS). Still Dave's, none blocks U-001:
    - ~~make `architecture-audit` a required check~~ done 2026-10-22: PR 160 merged, both rulesets now require it (Dave ran the C3 update);
@@ -105,7 +105,7 @@ Legal and vendor questions for the real job, logged, not blocking the demo: Ramb
 ## Next
 P5 under way. Done in `main`: U-118, U-001, U-002, U-023, U-003, U-116, U-024, U-009, U-025, U-026, U-117; U-102 and U-119 partly.
 
-1. **Dave:** recreate `integration`, choose how promotions stop deleting it, bypass-merge PR 188.
+1. **Dave:** recreate `integration` and bypass-merge PR 188 (neither had landed at 2026-10-25 check). Promotions now go through a `promote/<date>` branch.
 2. **PM:** open U-011's PR into `integration` from its worktree (`.claude/worktrees/agent-a85cc154f20fabb62`, branch `unit/U-011`, head `ef592de`), post the four checks from `drafts/u-011-checks/` in ramble-pm, queue auto-merge.
 3. **Wave 2** (dependencies done, no U-011 code needed): U-007, U-008a, U-008b, U-027 into `main`; U-006, U-045a into `integration`. U-005 is a pattern-setter: the PM drafts its note for Dave first.
 4. **Promote soon after U-011 lands:** U-010, U-012, U-018, U-019, U-037, U-091, U-111 all need U-011 in `main`.
@@ -114,12 +114,12 @@ Lessons from wave 1: builders commit and stop, the PM pushes and opens PRs from 
 
 ## Next chat
 
-**Before you start:** (1) recreate `integration`: `gh api repos/defaultdave/ramble/git/refs -f ref=refs/heads/integration -f sha=$(git -C /Users/davidfleming/Workspace/ramble rev-parse origin/main)`; (2) say which way promotions avoid deleting it (promote from a `promote/<date>` branch, recommended, or turn off delete-branch-on-merge); (3) `gh pr merge 188 --squash --admin --repo defaultdave/ramble`.
+**Before you start:** (1) recreate `integration`: `gh api repos/defaultdave/ramble/git/refs -f ref=refs/heads/integration -f sha=$(git -C /Users/davidfleming/Workspace/ramble rev-parse origin/main)`; (2) `gh pr merge 188 --squash --admin --repo defaultdave/ramble`.
 
 **Run:** `/ramble-pm` in a new desktop chat opened in the ramble folder (terminal: `claude --agent ramble-pm`). **Model and effort:** the PM on Opus, high; builders and reviewers as wave 1 (senior and review on Sonnet, narrow checks on Haiku).
 
 **Prompt:**
 
 ```
-Read STATUS.md in the ramble-pm repo (bun scripts/plan/site.ts dir prints its path), its Next section, and docs/plan/merge-desk-runbook.md. First confirm the integration branch exists, then open U-011's PR into integration from its worktree (.claude/worktrees/agent-a85cc154f20fabb62, branch unit/U-011, head ef592de) with agent-git.ts pr, using drafts/u-011-checks/pr-body.md in ramble-pm, post the four checks from that folder at the PR head, and queue auto-merge. Log Dave's promotion choice in DECISIONS.md and delta-log.md. Then launch Prototype wave 2 the way wave 1 ran (parallel senior builders in their own worktrees; builders commit and stop; the PM pushes, opens each PR, runs review, qa, spec-compliance, architecture-audit, plus a11y-audit and a Figma-vs-Storybook check for UI units, posts the checks, queues auto-merge): U-007, U-008a, U-008b, U-027 into main; U-006 and U-045a into integration. Draft U-005's pattern note for Dave before it starts. Apply amended B6 and B7. Done when the wave's PRs are merged or each has a named blocker. Don't commit plan files; PM docs go out with bun scripts/plan/site.ts publish.
+Read STATUS.md in the ramble-pm repo (bun scripts/plan/site.ts dir prints its path), its Next section, and docs/plan/merge-desk-runbook.md. First confirm the integration branch exists, then open U-011's PR into integration from its worktree (.claude/worktrees/agent-a85cc154f20fabb62, branch unit/U-011, head ef592de) with agent-git.ts pr, using drafts/u-011-checks/pr-body.md in ramble-pm, post the four checks from that folder at the PR head, and queue auto-merge. Then launch Prototype wave 2 the way wave 1 ran (parallel senior builders in their own worktrees; builders commit and stop; the PM pushes, opens each PR, runs review, qa, spec-compliance, architecture-audit, plus a11y-audit and a Figma-vs-Storybook check for UI units, posts the checks, queues auto-merge): U-007, U-008a, U-008b, U-027 into main; U-006 and U-045a into integration. Draft U-005's pattern note for Dave before it starts. Apply amended B6 and B7. Done when the wave's PRs are merged or each has a named blocker. Don't commit plan files; PM docs go out with bun scripts/plan/site.ts publish.
 ```

@@ -98,13 +98,7 @@
       "when": "Oct 20"
     }
   ],
-  "decisionsNeeded": [
-    {
-      "title": "How promotions stop deleting integration",
-      "detail": "Promote from a promote/<date> branch cut from integration, or turn off delete-branch-on-merge. No effect on dates; without one, the next promotion deletes integration again.",
-      "recommendation": "promote from a promote/<date> branch"
-    }
-  ],
+  "decisionsNeeded": [],
   "actionsForDave": [
     {
       "title": "Recreate the integration branch",
@@ -125,6 +119,10 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Oct 25",
+      "what": "Promotions open from a promote/<date> branch cut from integration, so merging one no longer deletes integration"
+    },
     {
       "when": "Oct 24",
       "what": "U-011 pattern note approved with all eight PM recommendations (guest reads take no caller, uuid in addresses, slug history for all four kinds, tiers 24 h, 48 h, 7 days)"
