@@ -107,8 +107,8 @@ Legal and vendor questions for the real job, logged, not blocking the demo: Ramb
 P5 under way. Done in `main`: U-118, U-001, U-002, U-023, U-003, U-116, U-024, U-009, U-025, U-026, U-117, U-011; U-102 and U-119 partly.
 
 1. **Promoted 2026-10-25 23:50** (PR 191, `4ddbe0c`, run by the PM at Dave's request; DECISIONS). `main` now holds U-011; trees of `main` and `integration` match. U-010, U-012, U-018, U-019, U-037, U-091, U-111 are unblocked. Before promoting any Vercel deployment that reads the catalog, run `db-migrate-production`. Follow-up for Dave: `scope-check.ts` should treat a `promote/` head as a promotion (delta-log 2026-10-25).
-3. **Wave 2** (dependencies done, no U-011 code needed): U-007, U-008a, U-008b, U-027 into `main`; U-006, U-045a into `integration`. U-005 is a pattern-setter: the PM drafts its note for Dave first.
-4. **Wave 3 candidates, unblocked by U-011 in `main`:** U-010, U-012, U-018, U-019, U-037, U-091, U-111 (check each one's other dependencies first).
+2. **Wave 2** (dependencies done, no U-011 code needed): U-007, U-008a, U-008b, U-027 into `main`; U-006, U-045a into `integration`. U-005 is a pattern-setter: the PM drafts its note for Dave first.
+3. **Wave 3 candidates, unblocked by U-011 in `main`:** U-010, U-012, U-018, U-019, U-037, U-091, U-111 (check each one's other dependencies first).
 
 Lessons from wave 1: builders commit and stop, the PM pushes and opens PRs from the main checkout (`agent-git.ts pr` runs from the unit's worktree because it takes the current branch); `agent-git.ts` cannot force-push or edit a PR body, so never rebase a pushed branch (merge `main` in instead) and carry review-round notes in the check summaries.
 
