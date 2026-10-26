@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-10-25 23:40 (sync PR 190 merged into integration; U-011 ready to promote after tonight's nightly smoke)
+**Updated:** 2026-10-25 23:55 (second promotion: U-011 is in main, PR 191)
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
 ## Done
@@ -104,23 +104,22 @@ Open item from the ADR 0007 measurement amendment (2026-10-18): what New York an
 Legal and vendor questions for the real job, logged, not blocking the demo: Ramble holding host money and the New York gift law (counsel, Q-16); card refund age limit at 12 months (ask Stripe); Stripe's Connect review time.
 
 ## Next
-P5 under way. Done in `main`: U-118, U-001, U-002, U-023, U-003, U-116, U-024, U-009, U-025, U-026, U-117; U-102 and U-119 partly.
+P5 under way. Done in `main`: U-118, U-001, U-002, U-023, U-003, U-116, U-024, U-009, U-025, U-026, U-117, U-011; U-102 and U-119 partly.
 
-1. **Promotion next (Dave):** sync PR 190 merged into `integration` 2026-10-26 03:31 UTC (`258e6f9`); push CI, gitleaks, and CodeQL pass on it. The scheduled nightly smoke runs on it at 07:00 UTC (03:00 New York); no on-demand run is needed. Once it reports `success`, Dave cuts `promote/2026-10-25` from `integration`, opens the PR into `main` with the body in `drafts/promotion-2026-10-25.md`, and merges with `--merge --admin`. U-010, U-012, U-018, U-019, U-037, U-091, U-111 unblock once U-011 is in `main`.
-2. **Wave 2** can start in parallel with the promotion (below).
+1. **Promoted 2026-10-25 23:50** (PR 191, `4ddbe0c`, run by the PM at Dave's request; DECISIONS). `main` now holds U-011; trees of `main` and `integration` match. U-010, U-012, U-018, U-019, U-037, U-091, U-111 are unblocked. Before promoting any Vercel deployment that reads the catalog, run `db-migrate-production`. Follow-up for Dave: `scope-check.ts` should treat a `promote/` head as a promotion (delta-log 2026-10-25).
 3. **Wave 2** (dependencies done, no U-011 code needed): U-007, U-008a, U-008b, U-027 into `main`; U-006, U-045a into `integration`. U-005 is a pattern-setter: the PM drafts its note for Dave first.
-4. **Promote soon after U-011 lands:** U-010, U-012, U-018, U-019, U-037, U-091, U-111 all need U-011 in `main`.
+4. **Wave 3 candidates, unblocked by U-011 in `main`:** U-010, U-012, U-018, U-019, U-037, U-091, U-111 (check each one's other dependencies first).
 
 Lessons from wave 1: builders commit and stop, the PM pushes and opens PRs from the main checkout (`agent-git.ts pr` runs from the unit's worktree because it takes the current branch); `agent-git.ts` cannot force-push or edit a PR body, so never rebase a pushed branch (merge `main` in instead) and carry review-round notes in the check summaries.
 
 ## Next chat
 
-**Before you start:** if the nightly smoke on `integration` passed (`gh api repos/defaultdave/ramble/commits/integration/status -q '.statuses[] | select(.context=="nightly-smoke") | .state'`), promote U-011 from `promote/2026-10-25` with the body in `drafts/promotion-2026-10-25.md`. Wave 2 does not wait on it.
+**Before you start:** nothing.
 
 **Run:** `/ramble-pm` in a new desktop chat opened in the ramble folder (terminal: `claude --agent ramble-pm`). **Model and effort:** the PM on Opus, high; builders and reviewers as wave 1 (senior and review on Sonnet, narrow checks on Haiku).
 
 **Prompt:**
 
 ```
-Read STATUS.md in the ramble-pm repo (bun scripts/plan/site.ts dir prints its path), its Next section, and docs/plan/merge-desk-runbook.md. First check whether Dave promoted U-011 (a promote/2026-10-25 PR into main); if so, open the next sync PR from main into integration and update the board and STATUS. Then launch Prototype wave 2 the way wave 1 ran (parallel senior builders in their own worktrees; builders commit and stop; the PM pushes, opens each PR, runs review, qa, spec-compliance, architecture-audit, plus a11y-audit and a Figma-vs-Storybook check for UI units, posts the checks, queues auto-merge): U-007, U-008a, U-008b, U-027 into main; U-006 and U-045a into integration. Draft U-005's pattern note for Dave before it starts. Apply amended B6 and B7. Done when the wave's PRs are merged or each has a named blocker. Don't commit plan files; PM docs go out with bun scripts/plan/site.ts publish.
+Read STATUS.md in the ramble-pm repo (bun scripts/plan/site.ts dir prints its path), its Next section, and docs/plan/merge-desk-runbook.md. U-011 was promoted in PR 191, so main is one merge commit ahead of integration; open a sync PR from main into integration. Then launch Prototype wave 2 the way wave 1 ran (parallel senior builders in their own worktrees; builders commit and stop; the PM pushes, opens each PR, runs review, qa, spec-compliance, architecture-audit, plus a11y-audit and a Figma-vs-Storybook check for UI units, posts the checks, queues auto-merge): U-007, U-008a, U-008b, U-027 into main; U-006 and U-045a into integration. Draft U-005's pattern note for Dave before it starts. Apply amended B6 and B7. Done when the wave's PRs are merged or each has a named blocker. Don't commit plan files; PM docs go out with bun scripts/plan/site.ts publish.
 ```

@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 25, 2026.** Prototype wave 1 is complete: U-009, U-025, U-026 and U-117 are in main, and U-011, the catalog pattern-setter, is in integration waiting for the next promotion. Promotions now go through a promote/<date> branch. The Prototype forecast is Nov 6 (P90 Nov 10).
+**As of Oct 25, 2026.** U-011, the catalog pattern-setter, is in main after the second promotion (PR 191), which unblocks seven units. Prototype wave 2 is next. The Prototype forecast is Nov 6 (P90 Nov 10).
 
 | Milestone | Likely |
 |---|---|
@@ -18,7 +18,7 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Next for Dave**
 
-- Promote U-011 to main. Sync PR 190 is merged. After tonight's nightly smoke passes on integration, open the promotion from a promote/2026-10-25 branch (body in drafts/promotion-2026-10-25.md) and merge it with --merge --admin. Seven units (U-010, U-012, U-018, U-019, U-037, U-091, U-111) wait on U-011 being in main.
+- None
 
 **Decisions needed**
 

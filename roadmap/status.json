@@ -1,6 +1,6 @@
 {
   "asOf": "2026-10-25",
-  "headline": "Prototype wave 1 is complete: U-009, U-025, U-026 and U-117 are in main, and U-011, the catalog pattern-setter, is in integration waiting for the next promotion. Promotions now go through a promote/<date> branch. The Prototype forecast is Nov 6 (P90 Nov 10).",
+  "headline": "U-011, the catalog pattern-setter, is in main after the second promotion (PR 191), which unblocks seven units. Prototype wave 2 is next. The Prototype forecast is Nov 6 (P90 Nov 10).",
   "recommended": "Plan, Dave 12.5 h",
   "phases": [
     {
@@ -99,13 +99,7 @@
     }
   ],
   "decisionsNeeded": [],
-  "actionsForDave": [
-    {
-      "title": "Promote U-011 to main",
-      "detail": "Sync PR 190 is merged. After tonight's nightly smoke passes on integration, open the promotion from a promote/2026-10-25 branch (body in drafts/promotion-2026-10-25.md) and merge it with --merge --admin. Seven units (U-010, U-012, U-018, U-019, U-037, U-091, U-111) wait on U-011 being in main.",
-      "where": "STATUS.md in ramble-pm (Next)"
-    }
-  ],
+  "actionsForDave": [],
   "heldUp": [
     {
       "what": "Real-job only: legal review, sponsor terms, Stripe review",
@@ -114,6 +108,10 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Oct 25",
+      "what": "Second promotion: U-011 reaches main (PR 191), run by the PM at your request after the smoke passed"
+    },
     {
       "when": "Oct 25",
       "what": "Promotions open from a promote/<date> branch cut from integration, so merging one no longer deletes integration"
