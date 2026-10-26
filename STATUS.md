@@ -131,7 +131,7 @@ Lessons from waves 1 and 2: builders commit and stop; the PM pushes and opens PR
 
 ## Next chat
 
-**Before you start:** say whether to finish the paused promotion (Next, item 1: PR 200, then `promote/2026-10-26`); U-039 needs U-111 promoted later, but wave 3 can start without this one. Answer Blocked on Dave item 4 when you can.
+**Before you start:** run `gh pr merge 200 --merge --admin` (Dave said finish the promotion, 2026-10-26; PR 200 still open at 17:50). The PM then does Next item 1 (b) to (d) and launches wave 3 from the promoted `main`, using `drafts/wave3-builder-rules.md` (waiting avoids regenerating three migrations over U-006's 0004). Answer Blocked on Dave item 4 when you can.
 
 **Run:** `/ramble-pm` in a new desktop chat opened in the ramble folder (terminal: `claude --agent ramble-pm`). **Model and effort:** the PM on Opus, high; builders on Sonnet (or half on Fable if Dave extends the trial), review and QA on Sonnet, narrow checks on Haiku.
 
