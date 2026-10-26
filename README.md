@@ -7,22 +7,29 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 25, 2026.** U-011, the catalog pattern-setter, is in main after the second promotion (PR 191), which unblocks seven units. Prototype wave 2 is next. The Prototype forecast is Nov 6 (P90 Nov 10).
+**As of Oct 26, 2026.** Wave 2 is in. Next is the Prototype first: four foundation units, then home, browse, and the experience page as soon as each one's inputs land. The forecast says Nov 9 (P90 Nov 11); at wave 2's pace the click-through is about two sessions away, if U-111 is promoted the moment it merges.
 
 | Milestone | Likely |
 |---|---|
-| Prototype | Nov 5, 2026 (late case Nov 10, 2026) |
+| Prototype | Nov 6, 2026 (late case Nov 10, 2026) |
 | Launch-ready | Feb 16, 2027 (late case Mar 8, 2027) |
 
 Forecast: Push: 20 h this week, then 12.5 h.
 
 **Next for Dave**
 
-- None
+- undefined.
+- undefined.
+- undefined.
+- undefined.
+- undefined.
+- undefined.
 
 **Decisions needed**
 
-- None
+- undefined.
+- undefined.
+- undefined.
 
 **Held up**
 

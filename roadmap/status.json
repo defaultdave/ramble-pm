@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-10-25",
-  "headline": "U-011, the catalog pattern-setter, is in main after the second promotion (PR 191), which unblocks seven units. Prototype wave 2 is next. The Prototype forecast is Nov 6 (P90 Nov 10).",
+  "asOf": "2026-10-26",
+  "headline": "Wave 2 is in. Next is the Prototype first: four foundation units, then home, browse, and the experience page as soon as each one's inputs land. The forecast says Nov 9 (P90 Nov 11); at wave 2's pace the click-through is about two sessions away, if U-111 is promoted the moment it merges.",
   "recommended": "Plan, Dave 12.5 h",
   "phases": [
     {
@@ -98,8 +98,46 @@
       "when": "Oct 20"
     }
   ],
-  "decisionsNeeded": [],
-  "actionsForDave": [],
+  "decisionsNeeded": [
+    {
+      "what": "Fable trial: extend to half of wave 3's builders, or stop",
+      "effect": "No date effect either way. Fable built cheaper per merged unit ($10.75 vs $16.40) but not in fewer review rounds; two units is a small sample."
+    },
+    {
+      "what": "Bad manage and gift links answer 200 with a not-found page (security nonce trade-off): accept, or design a 'link not valid' page",
+      "effect": "None now; decides how those pages are built later."
+    },
+    {
+      "what": "Next.js's own error line in the server log is unredacted: follow-up unit or accept for the demo",
+      "effect": "None now; a small unit if you want it fixed."
+    }
+  ],
+  "actionsForDave": [
+    {
+      "what": "Promote U-111 (pricing) the moment it merges into integration, not in the weekly batch: the experience page waits on it",
+      "when": "Wave 3"
+    },
+    {
+      "what": "Promote integration (U-045a, U-006) once the nightly smoke passes",
+      "when": "This week"
+    },
+    {
+      "what": "Vercel: publish the beacon firewall rule (PR 193 has the commands), turn on BotID, set the Sentry DSNs",
+      "when": "Before guest pages go public"
+    },
+    {
+      "what": "Sentry: create the projects, name the ops address, apply the three alert rules in docs/runbooks/alerting.md",
+      "when": "Before launch"
+    },
+    {
+      "what": "GitHub: enable private vulnerability reporting (security.txt contact)",
+      "when": "Any time"
+    },
+    {
+      "what": "Edit .claude/: the B3 exemption and line 44 in architecture.md, SEC-10 in stack-decisions.md, the board rule in ramble-pm.md",
+      "when": "Any time"
+    }
+  ],
   "heldUp": [
     {
       "what": "Real-job only: legal review, sponsor terms, Stripe review",
@@ -108,6 +146,34 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Oct 26",
+      "what": "U-005 pattern note approved on the PM's recommendations (you delegated)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Prototype first with rolling starts: wave 3 is U-012, U-018, U-010, U-111 (plus U-037); pages start as soon as their inputs land; U-019, U-004a, U-091 wait (you)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "B3 exemption: the literal process.env.NEXT_RUNTIME guard in src/instrumentation.ts (you)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Fable trial result: builders stay on Sonnet by the rule set in advance; a larger trial is your call"
+    },
+    {
+      "when": "Oct 26",
+      "what": "U-003's database client made lazy so CI can build with no database (PM authorization)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Only a blocking finding from a required check starts a review round, for every unit alike"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Wave 2 started with Fable on two builders as a trial (you)"
+    },
     {
       "when": "Oct 25",
       "what": "Second promotion: U-011 reaches main (PR 191), run by the PM at your request after the smoke passed"
@@ -227,16 +293,28 @@
   ],
   "watch": [
     {
-      "what": "Agent speed: wave 1 far ahead of estimates",
-      "detail": "Four agent units merged in 0.1 to 0.4 estimate-days each against 0.75 to 2 likely, after two to five review rounds. The forecast does not learn from actuals yet, so later agent units may be overestimated too."
+      "what": "The click-through's long pole is a promotion",
+      "detail": "U-111 is critical tier, so it lands in integration; the experience page needs it in main. A same-day promotion keeps the Prototype about two sessions out."
+    },
+    {
+      "what": "Review rounds, not building, set the pace",
+      "detail": "Wave 2 units merged in 2 to 5 rounds; builders took 9 to 29 minutes. Actuals run 75% or more under estimate, and the forecast does not learn from them yet."
+    },
+    {
+      "what": "CI catches what agent reviews miss",
+      "detail": "gitleaks, CodeQL, and a database-free build caused four of wave 2's rounds. Wave 3 builders run those checks before reporting."
     },
     {
       "what": "The money core is the critical path",
       "detail": "Holds, then payment intake, then confirming orders, then gifting. A slip there moves launch day for day."
     },
     {
-      "what": "Review time is about 68 h, not the 30 h hoped for",
-      "detail": "People checks, escalations, and the weekly promotion remain under the new merge rule."
+      "what": "Parallel migrations collide",
+      "detail": "Wave 3 has about five units adding tables; the PM sequences them so each regenerates on top of the last."
+    },
+    {
+      "what": "U-005's job rules were the PM's call",
+      "detail": "Job kinds as text, retries and limits, time travel off by default. Check them at U-005's review and when the first email, reminder, and transfer handlers land: a wrong idempotency or retry rule shows up as double emails or double transfers."
     }
   ],
   "milestones": [
@@ -283,7 +361,7 @@
     "Current forecast (Oct 21, refit): from Oct 22 with U-118 done; Dave puts in about 20 hours this week, then 12.5 a week. Agents merge their own work, with Dave approving each PR at first.",
     "The same start and progress, with Dave at a steady 12.5 hours a week from today."
   ],
-  "forecastNote": "Forecast from Oct 25, with wave 1 done; the switch above sets this week's hours.",
+  "forecastNote": "Forecast from Oct 26, with wave 2 done; the switch above sets this week's hours.",
   "frozen": {
     "prototype": {
       "likely": "2026-11-30",
