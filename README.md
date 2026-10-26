@@ -18,7 +18,7 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Next for Dave**
 
-- Promote U-011 to main. After the PM's sync PR lands, promote from a promote/<date> branch cut from integration. Seven units (U-010, U-012, U-018, U-019, U-037, U-091, U-111) wait on U-011 being in main.
+- Promote U-011 to main. Sync PR 190 is merged. After tonight's nightly smoke passes on integration, open the promotion from a promote/2026-10-25 branch (body in drafts/promotion-2026-10-25.md) and merge it with --merge --admin. Seven units (U-010, U-012, U-018, U-019, U-037, U-091, U-111) wait on U-011 being in main.
 
 **Decisions needed**
 

@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-10-24 21:10 (Prototype wave 1: four units merged into main; U-011 waits on the integration branch)
+**Updated:** 2026-10-25 23:40 (sync PR 190 merged into integration; U-011 ready to promote after tonight's nightly smoke)
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
 ## Done
@@ -106,7 +106,7 @@ Legal and vendor questions for the real job, logged, not blocking the demo: Ramb
 ## Next
 P5 under way. Done in `main`: U-118, U-001, U-002, U-023, U-003, U-116, U-024, U-009, U-025, U-026, U-117; U-102 and U-119 partly.
 
-1. **Promotion next:** sync PR 190 (`main` into `integration`, merge commit) is open with its checks posted and auto-merge queued. Once it lands, Dave runs a fresh smoke on `integration` (the 07:09 run failed only because `integration` did not exist then) and promotes from `promote/2026-10-25` with the body in `drafts/promotion-2026-10-25.md`. U-010, U-012, U-018, U-019, U-037, U-091, U-111 unblock once U-011 is in `main`.
+1. **Promotion next (Dave):** sync PR 190 merged into `integration` 2026-10-26 03:31 UTC (`258e6f9`); push CI, gitleaks, and CodeQL pass on it. The scheduled nightly smoke runs on it at 07:00 UTC (03:00 New York); no on-demand run is needed. Once it reports `success`, Dave cuts `promote/2026-10-25` from `integration`, opens the PR into `main` with the body in `drafts/promotion-2026-10-25.md`, and merges with `--merge --admin`. U-010, U-012, U-018, U-019, U-037, U-091, U-111 unblock once U-011 is in `main`.
 2. **Wave 2** can start in parallel with the promotion (below).
 3. **Wave 2** (dependencies done, no U-011 code needed): U-007, U-008a, U-008b, U-027 into `main`; U-006, U-045a into `integration`. U-005 is a pattern-setter: the PM drafts its note for Dave first.
 4. **Promote soon after U-011 lands:** U-010, U-012, U-018, U-019, U-037, U-091, U-111 all need U-011 in `main`.
@@ -115,7 +115,7 @@ Lessons from wave 1: builders commit and stop, the PM pushes and opens PRs from 
 
 ## Next chat
 
-**Before you start:** nothing.
+**Before you start:** if the nightly smoke on `integration` passed (`gh api repos/defaultdave/ramble/commits/integration/status -q '.statuses[] | select(.context=="nightly-smoke") | .state'`), promote U-011 from `promote/2026-10-25` with the body in `drafts/promotion-2026-10-25.md`. Wave 2 does not wait on it.
 
 **Run:** `/ramble-pm` in a new desktop chat opened in the ramble folder (terminal: `claude --agent ramble-pm`). **Model and effort:** the PM on Opus, high; builders and reviewers as wave 1 (senior and review on Sonnet, narrow checks on Haiku).
 

@@ -102,7 +102,7 @@
   "actionsForDave": [
     {
       "title": "Promote U-011 to main",
-      "detail": "After the PM's sync PR lands, promote from a promote/<date> branch cut from integration. Seven units (U-010, U-012, U-018, U-019, U-037, U-091, U-111) wait on U-011 being in main.",
+      "detail": "Sync PR 190 is merged. After tonight's nightly smoke passes on integration, open the promotion from a promote/2026-10-25 branch (body in drafts/promotion-2026-10-25.md) and merge it with --merge --admin. Seven units (U-010, U-012, U-018, U-019, U-037, U-091, U-111) wait on U-011 being in main.",
       "where": "STATUS.md in ramble-pm (Next)"
     }
   ],
