@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 24, 2026.** Prototype wave 1 ran as a parallel agent swarm: U-009, U-025, U-026 and U-117 merged into main the same evening, with the U-102 dependency fix. U-011, the catalog pattern-setter, is built and reviewed, waiting only for the integration branch to be recreated. The Prototype forecast moves to Nov 6 (P90 Nov 10).
+**As of Oct 25, 2026.** Prototype wave 1 is complete: U-009, U-025, U-026 and U-117 are in main, and U-011, the catalog pattern-setter, is in integration waiting for the next promotion. Promotions now go through a promote/<date> branch. The Prototype forecast is Nov 6 (P90 Nov 10).
 
 | Milestone | Likely |
 |---|---|
@@ -18,8 +18,7 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Next for Dave**
 
-- Recreate the integration branch. Promotion PR 181 deleted it (delete-branch-on-merge under your login bypasses the ruleset). Run: gh api repos/defaultdave/ramble/git/refs -f ref=refs/heads/integration -f sha=<current main sha>. U-011's PR waits on it.
-- Bypass-merge PR 188. Writes the B6 guest-read and B7 first-caller exemptions you approved into the architecture standard; .claude/ is protected, so scope-manifest fails by design.
+- Promote U-011 to main. After the PM's sync PR lands, promote from a promote/<date> branch cut from integration. Seven units (U-010, U-012, U-018, U-019, U-037, U-091, U-111) wait on U-011 being in main.
 
 **Decisions needed**
 
