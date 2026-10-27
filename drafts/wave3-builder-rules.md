@@ -1,6 +1,6 @@
 # Ramble Prototype wave 3: rules for every builder
 
-Five units are being built in parallel, each in its own worktree. You build one. These rules are the same for all five.
+Up to five units are being built in parallel, each in its own worktree. You build one. These rules are the same for all of them.
 
 ## Setup
 1. In your worktree: `git fetch origin`, then `git switch -c unit/<UNIT> origin/<BASE>` (your brief gives UNIT and BASE). Then `pnpm install`. Every commit goes on `unit/<UNIT>`; check `git branch --show-current` before each commit and never commit on a detached HEAD.
@@ -36,8 +36,17 @@ Run them exactly as CI does:
 - UI units also: `pnpm storybook:test`.
 - If you start a server yourself, record its PID and stop it with `kill <pid>`. Never `pkill` or `killall`: other builders' servers run on this machine.
 
+
+## Lessons from wave 3 reviews (apply from the first commit)
+- **Every domain decision lives in a plain `src/lib` function with a unit test**: every comparison, threshold, or state rule that yields a domain result (a refusal, a typed result, a count, "is past", "is a draft", "same kind", version checks, horizon checks, zone validity), including rules hidden in a SQL `WHERE` on a write path. The data layer only fetches, locks, persists, and returns the lib's answer. Guest-visibility filters and ordering in SQL are fine. Reviewers sweep for this exhaustively; each one found later costs a round.
+- **Zod runs every refinement even after `.max()` fails.** Any refinement or regex that walks the string checks the length first; never put a repeated group in a regex over user input.
+- **Ids from callers are lowercased at the write schema** (Postgres returns uuids in lowercase).
+- **Concurrency**: a refusal re-checked under a lock needs a test that fails if the locked re-check is removed (hold the lock on a second connection, change the row, release).
+- **Timestamps that order records** come from `clock_timestamp()` after any lock, not `now()`.
+- **A refusal for a caller without rights is identical** for a missing row, another owner's row, and a staff-only row (same error, same role, same message).
+
 ## Migrations
-U-012, U-018, and U-010 each add a migration, on different branches; they merge in that order. Generate yours with `pnpm db:generate` from the schema as normal and commit it. Whichever lands later merges `main` and regenerates its migration; never hand-number migrations.
+If you add a migration, generate it with `pnpm db:generate --name <name>` from the schema and commit it. Hand-written SQL (triggers, seed rows) goes in its own `pnpm db:generate --custom --name <name>` migration, never appended to a generated one. If another unit's migration lands first, the PM has you merge `main` and regenerate; never hand-number migrations.
 
 ## Finish
 - Commit on `unit/<UNIT>` with the message `<UNIT>: <title>` and the trailer `Co-Authored-By: Claude <noreply@anthropic.com>`. Several commits are fine.

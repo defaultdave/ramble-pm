@@ -7,12 +7,12 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 26, 2026.** Wave 2 is in. Next is the Prototype first: four foundation units, then home, browse, and the experience page as soon as each one's inputs land. The forecast says Nov 9 (P90 Nov 11); at wave 2's pace the click-through is about two sessions away, if U-111 is promoted the moment it merges.
+**As of Oct 27, 2026.** The third promotion is done and the Prototype build is rolling: U-111 pricing, U-012 sessions, and U-018 editorial have merged; U-010 photos passed review; U-031 browse is built. The forecast says Nov 6 (P90 Nov 6). Next: review browse, start home and seed data, and finish photos once you answer the Blob question.
 
 | Milestone | Likely |
 |---|---|
-| Prototype | Nov 6, 2026 (late case Nov 10, 2026) |
-| Launch-ready | Feb 16, 2027 (late case Mar 8, 2027) |
+| Prototype | Nov 6, 2026 (late case Nov 6, 2026) |
+| Launch-ready | Feb 15, 2027 (late case Mar 4, 2027) |
 
 Forecast: Push: 20 h this week, then 12.5 h.
 
@@ -23,10 +23,11 @@ Forecast: Push: 20 h this week, then 12.5 h.
 - undefined.
 - undefined.
 - undefined.
-- undefined.
 
 **Decisions needed**
 
+- undefined.
+- undefined.
 - undefined.
 - undefined.
 - undefined.
