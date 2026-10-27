@@ -18,7 +18,7 @@ Opened from `promote/2026-10-26`, a branch cut from `integration`, so merging it
 - Migration `0004_email_message_log`.
 
 ### Also in the diff
-- The sync merge from `main` (U-007, U-008a, U-027, U-008b, already on `main`), with conflicts resolved in `.env.example`, `playwright.config.ts`, `src/server/env.ts`, its test, and the lockfile.
+- The sync merge from `main` (PR #200: U-007, U-008a, U-027, U-008b, already on `main`), with conflicts resolved in `.env.example`, `playwright.config.ts`, `src/server/env.ts`, its test, and the lockfile.
 
 ### Not yet available
 - No overnight race or access suites exist yet; nothing to report for them.
