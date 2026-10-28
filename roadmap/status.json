@@ -1,6 +1,6 @@
 {
- "asOf": "2026-10-27",
- "headline": "The third promotion is done and the Prototype build is rolling: U-111 pricing, U-012 sessions, and U-018 editorial have merged; U-010 photos passed review; U-031 browse is built. The forecast says Nov 6 (P90 Nov 6). Next: review browse, start home and seed data, and finish photos once you answer the Blob question.",
+ "asOf": "2026-10-28",
+ "headline": "Home, browse, and seed data are in main: 19 of the 21 Prototype units are done. What is left waits on you: the Blob stores (U-010 photos), whether cards show photos (no unit owns it; the PM recommends adding it to U-039), and U-111's promotion. Then the experience page (U-039) completes the click-through, about two working days after those answers.",
  "recommended": "Plan, Dave 12.5 h",
  "phases": [
   {
@@ -104,6 +104,10 @@
    "effect": "None on dates; it is the rate the configured setting starts with."
   },
   {
+   "what": "Card photos: no unit wires photos into the home and browse cards. Add cover photos on cards to U-039 (PM recommends, about half a day), or leave cards photo-less for the Prototype and give it its own unit later",
+   "effect": "Blocks U-010's last check (spec-compliance fails on markers that name it). Adding it to U-039 grows that unit by about half a day; leaving it means a Prototype with empty card frames."
+  },
+  {
    "what": "Photos: create two Vercel Blob stores and set the storage variables in Production, or relax the production guard for the demo",
    "effect": "U-010 cannot merge until then, and the experience page (U-039) needs U-010. This is now on the Prototype's critical path."
   },
@@ -112,18 +116,14 @@
    "effect": "Same-day promotion keeps the experience page on schedule; the weekly batch would add days."
   },
   {
-   "what": "Browse filters: approve the new FilterBar client island (inline chips and date picker), or say how filters should work",
-   "effect": "Browse (U-031) review proceeds either way; a change would rework it."
-  },
-  {
    "what": "Before holds and checkout start: whether B6 covers caller-less configuration reads and transaction-joined writes",
    "effect": "None now; decides how U-014a and U-047a read settings and record acceptances."
   }
  ],
  "actionsForDave": [
   {
-   "what": "Vercel: two Blob stores (public, private) and STORAGE_PROVIDER plus both tokens in Production",
-   "when": "Before U-010 merges"
+   "what": "Vercel: two Blob stores (public, private) and STORAGE_PROVIDER plus both tokens in Production, or tell the PM to relax the guard for the demo",
+   "when": "Now: U-010 and the experience page wait on it"
   },
   {
    "what": "Add an image port to the layers table in .claude/standards/architecture.md",
@@ -150,6 +150,22 @@
   }
  ],
  "decisionsMade": [
+  {
+   "when": "Oct 28",
+   "what": "Merged to main: U-030 home (PR 208), U-021a seed data (PR 209), U-031 browse (PR 207); each ran well under its estimate"
+  },
+  {
+   "when": "Oct 28",
+   "what": "U-031's FilterBar question withdrawn: the island became a server component, so no allowlist change is needed (PM)"
+  },
+  {
+   "when": "Oct 28",
+   "what": "Session day for browse: the date match stays in SQL WHERE and the day list moves to a tested lib function; storing local_date for every session goes to the deep review (PM)"
+  },
+  {
+   "when": "Oct 28",
+   "what": "Fixers run in their own worktrees on wip branches; the PM moves the unit branch and pushes (PM, process)"
+  },
   {
    "when": "Oct 26",
    "what": "Third promotion: U-045a payments and U-006 email are in main (PR 201; you asked the PM to finish it)"
@@ -193,20 +209,20 @@
  ],
  "watch": [
   {
-   "what": "Photos are now on the critical path",
-   "detail": "The experience page needs U-010, and U-010 needs your Blob stores before it can merge to main."
+   "what": "Three answers gate the rest of the Prototype",
+   "detail": "Blob stores, card photos, and U-111's promotion. Everything else in the Prototype is merged or in review."
   },
   {
-   "what": "Architecture findings arrive one round at a time",
-   "detail": "U-012 and U-018 each took 4 rounds, mostly moving decisions out of the data layer that earlier audits did not list. The review rules now require the full list in round 1."
+   "what": "Merging main can break a unit that passed review",
+   "detail": "U-031 deleted a read that U-021a's new seed test called; no textual conflict. Every merge of main now gets gates and a focused re-check before checks are posted."
   },
   {
-   "what": "Actuals run far under estimate",
-   "detail": "U-111 96%, U-012 86%, U-018 58% under; the forecast does not learn from them yet."
+   "what": "Review rounds are the cost",
+   "detail": "U-031 took 7 rounds plus a re-check; U-030 2, U-021a 3. Architecture audits still find B2 items late."
   },
   {
    "what": "Deep review after the Prototype",
-   "detail": "Notes are collecting in drafts/post-prototype-review-notes.md."
+   "detail": "Notes are collecting in drafts/post-prototype-review-notes.md, including the U-030 and U-031 duplicate helpers."
   }
  ],
  "milestones": [
