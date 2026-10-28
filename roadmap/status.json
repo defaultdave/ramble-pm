@@ -1,6 +1,6 @@
 {
  "asOf": "2026-10-28",
- "headline": "Home, browse, and seed data are in main: 19 of the 21 Prototype units are done. What is left waits on you: the Blob stores (U-010 photos) and U-111's promotion. Then the experience page (U-039, now with cover photos on cards) completes the click-through, about two working days after those answers.",
+ "headline": "Home, browse, seed data, and photos are in main: 20 of the 21 Prototype units are done. One answer is left: U-111's promotion from integration to main. Then the experience page (U-039, with cover photos on cards) completes the click-through, about two working days later.",
  "recommended": "Plan, Dave 12.5 h",
  "phases": [
   {
@@ -104,12 +104,8 @@
    "effect": "None on dates; it is the rate the configured setting starts with."
   },
   {
-   "what": "Photos: create two Vercel Blob stores and set the storage variables in Production, or relax the production guard for the demo",
-   "effect": "U-010 passes every check and waits only on this; the experience page (U-039) needs U-010. This is the Prototype's critical path."
-  },
-  {
-   "what": "U-111 promotion: the PM promotes it under your login when U-010 merges, or you run it",
-   "effect": "Same-day promotion keeps the experience page on schedule; the weekly batch would add days."
+   "what": "U-111 promotion: the PM opens and merges the promotion PR under your login, or you run it",
+   "effect": "The last gate on the Prototype path: U-039 (experience page) starts as soon as U-111 is in main."
   },
   {
    "what": "Before holds and checkout start: whether B6 covers caller-less configuration reads and transaction-joined writes",
@@ -117,10 +113,6 @@
   }
  ],
  "actionsForDave": [
-  {
-   "what": "Vercel: two Blob stores (public, private) and STORAGE_PROVIDER plus both tokens in Production, or tell the PM to relax the guard for the demo",
-   "when": "Now: U-010 and the experience page wait on it"
-  },
   {
    "what": "Add an image port to the layers table in .claude/standards/architecture.md",
    "when": "Any time"
@@ -146,6 +138,14 @@
   }
  ],
  "decisionsMade": [
+  {
+   "when": "Oct 28",
+   "what": "U-010 photos merged to main on the fake storage provider (PR 205)"
+  },
+  {
+   "when": "Oct 28",
+   "what": "No Blob stores for the demo: production runs on the fake storage provider; the guard returns with U-021b (you)"
+  },
   {
    "when": "Oct 28",
    "what": "U-010 photos passes all four checks after its card-photo markers moved to U-039; it waits only on the Blob stores"
@@ -213,8 +213,8 @@
  ],
  "watch": [
   {
-   "what": "Two answers gate the rest of the Prototype",
-   "detail": "Blob stores and U-111's promotion. Card photos are decided: U-039 adds them."
+   "what": "One answer gates the rest of the Prototype",
+   "detail": "U-111's promotion. Blob stores are not needed for the demo; card photos are decided (U-039)."
   },
   {
    "what": "Merging main can break a unit that passed review",
