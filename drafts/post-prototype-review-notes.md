@@ -27,3 +27,4 @@
 - After a unit passes review, merging `main` can still break it without a textual conflict (U-031 deleted a read that a newly merged seed test called). Run every gate and a focused four-check re-check on the merge commit before posting checks.
 - A fixer's scope manifest must name every item the PM directs it to change; reviewers fail anything outside the IN SCOPE line, including the PM's own additions.
 - Start PM sessions from the main checkout, not a worktree: from a worktree the PM cannot write its own memory files.
+- Launch workflows whose agents use isolated worktrees from the ramble checkout: the worktree is cut from the current directory, and a launch from the ramble-pm checkout gave the U-010 fixer a ramble-pm worktree (it stopped without changes).

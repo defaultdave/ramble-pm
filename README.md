@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 28, 2026.** Home, browse, and seed data are in main: 19 of the 21 Prototype units are done. What is left waits on you: the Blob stores (U-010 photos), whether cards show photos (no unit owns it; the PM recommends adding it to U-039), and U-111's promotion. Then the experience page (U-039) completes the click-through, about two working days after those answers.
+**As of Oct 28, 2026.** Home, browse, and seed data are in main: 19 of the 21 Prototype units are done. What is left waits on you: the Blob stores (U-010 photos) and U-111's promotion. Then the experience page (U-039, now with cover photos on cards) completes the click-through, about two working days after those answers.
 
 | Milestone | Likely |
 |---|---|
@@ -26,7 +26,6 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Decisions needed**
 
-- undefined.
 - undefined.
 - undefined.
 - undefined.

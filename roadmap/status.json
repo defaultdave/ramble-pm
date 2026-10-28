@@ -1,6 +1,6 @@
 {
  "asOf": "2026-10-28",
- "headline": "Home, browse, and seed data are in main: 19 of the 21 Prototype units are done. What is left waits on you: the Blob stores (U-010 photos), whether cards show photos (no unit owns it; the PM recommends adding it to U-039), and U-111's promotion. Then the experience page (U-039) completes the click-through, about two working days after those answers.",
+ "headline": "Home, browse, and seed data are in main: 19 of the 21 Prototype units are done. What is left waits on you: the Blob stores (U-010 photos) and U-111's promotion. Then the experience page (U-039, now with cover photos on cards) completes the click-through, about two working days after those answers.",
  "recommended": "Plan, Dave 12.5 h",
  "phases": [
   {
@@ -104,12 +104,8 @@
    "effect": "None on dates; it is the rate the configured setting starts with."
   },
   {
-   "what": "Card photos: no unit wires photos into the home and browse cards. Add cover photos on cards to U-039 (PM recommends, about half a day), or leave cards photo-less for the Prototype and give it its own unit later",
-   "effect": "Blocks U-010's last check (spec-compliance fails on markers that name it). Adding it to U-039 grows that unit by about half a day; leaving it means a Prototype with empty card frames."
-  },
-  {
    "what": "Photos: create two Vercel Blob stores and set the storage variables in Production, or relax the production guard for the demo",
-   "effect": "U-010 cannot merge until then, and the experience page (U-039) needs U-010. This is now on the Prototype's critical path."
+   "effect": "U-010 passes every check and waits only on this; the experience page (U-039) needs U-010. This is the Prototype's critical path."
   },
   {
    "what": "U-111 promotion: the PM promotes it under your login when U-010 merges, or you run it",
@@ -150,6 +146,14 @@
   }
  ],
  "decisionsMade": [
+  {
+   "when": "Oct 28",
+   "what": "U-010 photos passes all four checks after its card-photo markers moved to U-039; it waits only on the Blob stores"
+  },
+  {
+   "when": "Oct 28",
+   "what": "Cover photos on the home and browse cards go into U-039 (about +0.5 day) (you)"
+  },
   {
    "when": "Oct 28",
    "what": "Merged to main: U-030 home (PR 208), U-021a seed data (PR 209), U-031 browse (PR 207); each ran well under its estimate"
@@ -209,8 +213,8 @@
  ],
  "watch": [
   {
-   "what": "Three answers gate the rest of the Prototype",
-   "detail": "Blob stores, card photos, and U-111's promotion. Everything else in the Prototype is merged or in review."
+   "what": "Two answers gate the rest of the Prototype",
+   "detail": "Blob stores and U-111's promotion. Card photos are decided: U-039 adds them."
   },
   {
    "what": "Merging main can break a unit that passed review",
