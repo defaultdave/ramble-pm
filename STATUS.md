@@ -191,7 +191,7 @@ One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane
 
 ### lead
 
-**Before you start:** (1) Answer `drafts/owner-decisions-2026-10-29.md` (approve all, or name the exceptions). (2) All four lane chats were opened on 2026-10-29 13:50; check their rows in `## Lanes` before opening another. (3) Bypass-merge PR 230 (the PM memory lessons; pushed and opened 2026-10-29): `gh pr merge 230 --repo defaultdave/ramble --merge --admin`. Board dates were synced by Dave on 2026-10-29.
+**Before you start:** (1) Answer `drafts/owner-decisions-2026-10-29.md` (approve all, or name the exceptions). (2) All four lane chats were opened on 2026-10-29 13:50; check their rows in `## Lanes` before opening another. (3) Nothing: PR 230 (the PM memory lessons) was bypass-merged by Dave on 2026-10-29 (`17b8fc4`), and the board dates were synced the same day.
 
 **Run:** `/ramble-pm` in a new desktop chat on the main checkout (`/Users/davidfleming/Workspace/ramble`). **Model and effort:** Opus or Fable, high (owner decisions, coordination of four lanes).
 
