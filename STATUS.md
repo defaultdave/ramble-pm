@@ -225,6 +225,8 @@ Open item from the ADR 0007 measurement amendment (2026-10-18): what New York an
 Legal and vendor questions for the real job, logged, not blocking the demo: Ramble holding host money and the New York gift law (counsel, Q-16); card refund age limit at 12 months (ask Stripe); Stripe's Connect review time.
 
 ## Next
+**Remind Dave (he asked, 2026-10-29):** a PM chat started without a lane opens by telling Dave that `audit-fixes` is handed off and ready to resume: run `/ramble-pm lane: audit-fixes` from the ramble checkout (`/Users/davidfleming/Workspace/ramble`); it starts with H-54, then H-46, H-47, H-48, H-49, H-53. Drop this line once that lane is picked up again.
+
 P5 under way. Done in `main`: U-118, U-001, U-002, U-023, U-003, U-116, U-024, U-009, U-025, U-026, U-117, U-011, U-008b, U-027, U-007, U-008a, U-045a, U-006, U-012, U-018, U-030, U-021a, U-031, U-010, U-111, U-039; U-102 and U-119 partly. In `integration`, waiting for the next promotion: U-111. Third promotion done 2026-10-26 (PR 201, `e4c51b3`; sync back PR 203).
 
 0. ~~Dave answers `drafts/owner-decisions-2026-10-29.md`~~ done 2026-10-29: all 28 rows approved as recommended (DECISIONS). Every audit row now carries its decision and its lane. **Lanes, read your decided rows:** `audit-fixes` takes the rows marked `decided` whose text names it (H-33, H-35 comment, H-37 after refactor PR C, H-38 index, H-47, H-50, H-67, H-68, H-73, H-80, H-34 after H-22, and H-70 and N1029-7: the two Figma variables exist, ids in the rows); `lib-refactor` takes H-26 (PR A), H-61 and H-65 (Components-4 after PR C) and the H-38 predicate (PR D); the lead runs the H-22 and H-35 preview measurements and the H-23 gaps.
