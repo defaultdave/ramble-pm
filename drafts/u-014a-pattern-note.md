@@ -131,3 +131,15 @@ Secrets and settings (Dave)
 **Q9. The numbers.** A 256-character `giftToken` bound; a 400-day device cookie (browsers cap cookie lifetime at about 400 days); `at` truncated to milliseconds; up to 3 alternatives within 14 days; the concurrency rounds (30 against 10, 60 against 3 by 10, 5 rounds, 50 mixed rounds). None comes from a source in the plan. Change any you want. The 1..6 quantities, 1..4 items, 10-minute default hold, and the 30-per-10-minutes reserve limit are sourced: design doc 4.2.3, settings defaults, and `src/lib/rateLimits.ts`.
 
 **Why this is critical tier:** U-014a writes the first `FOR UPDATE` and the first advisory lock on a money path, and every later path that moves spaces or money (startPayment, confirmOrder, cancellations, refunds, gift redemption) locks in the order set here and counts holds with this predicate. A wrong order deadlocks those paths under load; a wrong predicate oversells or refuses real guests. That is why it merges to `integration` and you read it in the promotion batch (ADR 0010).
+
+---
+
+## Amendments (PM rulings, 2026-10-28, from U-014a's round 1 checks)
+
+Dave can overrule any of them (DECISIONS 2026-10-28).
+
+1. **The device cookie is always `Secure`** (Q3 as written), not only in production. Browsers accept `Secure` cookies on `http://localhost`, so local runs keep working.
+2. **`Device` is minted only inside `src/server/device.ts`, from a cookie that passes `isDeviceCookie`.** No other module, test helper included, can construct one; tests build devices through `getDevice` with mocked `cookies()` and `headers()`, or through a helper under `tests/`.
+3. **Sold-out alternatives read at most the 20 soonest candidates** (`holdLimits.alternativeCandidates`) before choosing up to 3. Bounded work; if 20 or more sessions in the 14 days are full, a later open date is not offered.
+4. **For U-014b (not this unit):** a device is a cookie the client picks and can rotate, so the device limit must also key on `ip_hash` or another second signal, or it limits nothing.
+5. **For U-041 (not this unit):** BotID's client starts only on a hard landing on a guest path. Confirm on a Vercel preview that a guest who soft-navigates from a dynamic path to an experience page is not refused at the first reserve; route into checkout with a hard navigation.
