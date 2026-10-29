@@ -196,8 +196,8 @@ Options: none; an owner check.
 
 | ID | Decision | Recommended option | Approve? |
 |---|---|---|---|
-| H-41 (a) | Session window edges | browse's: start >= from, start < to, both pages | |
-| H-41 (b) | Sold-out browse days | not offered, do not match | |
+| H-41 (a) | Session window edges | browse's: start >= from, start < to, both pages | yes (2026-10-29) |
+| H-41 (b) | Sold-out browse days | not offered, do not match | yes (2026-10-29) |
 | H-26 | One category address | `/new-york/things-to-do/<slug>`, rail switches in U-035 | |
 | H-61 | PageError title size | `display-m` | |
 | Zero price | Zero-price wording | "Free", never "From Free" or "$0"; a free lowest option reads "Free" | |

@@ -8,7 +8,7 @@ Companion documents: the adopted proposal is the "H-18 proposal" section of `aud
 
 - **One at a time, in order A, B, C, D, E, F, G.** Every PR touches `src/lib/home.ts`, `browse.ts`, `experiencePage.ts` and their tests, so they do not run in parallel. One builder, one PR at a time, each cut from `main` after the previous one merged.
 - **Merge `main` before every push.** The builder merges `main` into its branch (merge, never rebase) before each push and reruns every gate on the merge commit.
-- **PR D waits on Dave's H-41 answer.** If the answer is late, E and F run before D; D then follows F and G follows D.
+- **PR D's H-41 inputs are answered** (Dave, 2026-10-29: browse's edges on both pages; sold-out days not offered). D still waits on B and on the `audit-fixes` BE-7 PR. Earlier rule, kept for the record: if an answer had been late, E and F would have run before D; D then follows F and G follows D.
 - **PR G is last and its manifest is recut after F lands.** A to F change G's call-site list (A retargets `HomeHero.tsx`, `HomeEmpty.tsx`, `GuestShell.tsx` to `routes.ts`; C deletes `HomeCardItem.tsx`; F retargets `GuestBanner.tsx` to `settings.ts`). The PM regenerates G's call-site list from `main` before the builder starts.
 - **Held branches.** `unit/U-014a` (going into `integration` today) touches `src/lib/pricing.ts` (PR C) and `src/lib/settings.ts` (PR F). C and F make only additive changes to those two files (new exports appended), and the builder merges `main` first; if U-014a has been promoted to `main` by then, no further action. `unit/U-005` touches no file in A to G; it edits `tests/lint-boundaries.test.ts`, which G does not touch (G's zone test has its own filename).
 - **Unit ID on every PR.** The required `scope-manifest` check (`scripts/merge-desk/scope-check.ts`) fails any PR whose title does not start with a unit ID from `docs/plan/units.yaml` or whose branch is not `unit/<id>[-suffix]`; `docs/plan/units.yaml` has no unit for this refactor and a `PM bookkeeping:` PR cannot add one. The PM ruled the carrier units on 2026-10-29 (DECISIONS), by the unit that introduced most of the code each PR moves: A `unit/U-031-routes`, B `unit/U-030-time`, C `unit/U-031-cards`, D `unit/U-030-session-window`, E `unit/U-007-rethrow-or-log`, F `unit/U-030-display-text`, G `unit/U-030-lib-pages`. PR titles and commits read `<UNIT>: <title>`; the lane PM records the branch in its STATUS section when the builder starts.
@@ -22,7 +22,7 @@ Companion documents: the adopted proposal is the "H-18 proposal" section of `aud
 | A | `routes.ts`: one home for every guest address | nothing; goes first | 2 to 4 | H-43, H-44, the address side of H-26, H-2 (addresses), DRY evidence (route imports `experiencePath` from `@/lib/home`) |
 | B | `venue.ts`, `time.ts`, `duration.ts` | A merged | 2 to 4 | H-63, H-2 (venue day, minute cut, `durationLabel`), N1029-15 (the `time.ts` and `seed/coverage.ts` part), DRY evidence (`experiencePage.ts` imports `durationLabel` from `./browse`) |
 | C | `experienceCards.ts` and `ExperienceCardItem` | A and B merged | 4 to 8 | H-25, H-45, H-2 (card builders, price wording), N1029-14 (the three restated row schemas) |
-| D | `sessionWindow.ts` | B merged; Dave's H-41 answer; the `audit-fixes` BE-7 PR merged | 2 to 6 | H-41, N1029-16 (BE-7's predicate is consolidated here; the fix itself lands in `audit-fixes`) |
+| D | `sessionWindow.ts` | B merged; the `audit-fixes` BE-7 PR merged (H-41 answered 2026-10-29) | 2 to 6 | H-41, N1029-16 (BE-7's predicate is consolidated here; the fix itself lands in `audit-fixes`) |
 | E | server and app cleanup | the previous PR merged (no code dependency) | 2 to 4 | H-51, H-52, BE-6, BE-10, H-2 (read-or-refuse wrapper) |
 | F | display text, `bannerText`, paragraphs | the previous PR merged | 2 to 4 | H-57 |
 | G | rename into `src/lib/pages/` plus the lint zone | F merged; manifest recut | 2 to 5 | H-42 |
@@ -739,7 +739,7 @@ Not a refactor item: the browse audit's H-7 note (the space-taking rule in `show
 
 ## Lane prompt
 
-**Before you start:** Dave's H-41 answers (two questions, "Owner inputs" above) gate PR D; if they are late, run E and F before D. `gh` still fails TLS inside the local sandbox; push and PR calls go through `agent-git.ts`. The required `scope-manifest` check needs a unit ID in every PR title and a `unit/<id>[-suffix]` branch; the carrier units and branch names are ruled in "Order and rules".
+**Before you start:** H-41 is answered (Dave, 2026-10-29, DECISIONS): browse's edges on both pages, sold-out days not offered; PR D is unblocked once B and the audit-fixes BE-7 PR are in. Earlier gate text: if they had been late, run E and F before D. `gh` still fails TLS inside the local sandbox; push and PR calls go through `agent-git.ts`. The required `scope-manifest` check needs a unit ID in every PR title and a `unit/<id>[-suffix]` branch; the carrier units and branch names are ruled in "Order and rules".
 
 **Run:** `/ramble-pm lane: lib-refactor` in a desktop chat on the main checkout (`/Users/davidfleming/Workspace/ramble`), not a worktree. **Model and effort:** Sonnet, medium; builders Sonnet (senior).
 
