@@ -25,7 +25,7 @@ After each of these reaches `main`:
 4. **Visual:** Playwright screenshots of every state at 320, 390, 768, 1024, 1280, and 1440 px in light and dark; broken layout (sideways scroll, overlap, clipping, targets under 44 px); side by side with the Figma frames. Screenshots go in `evidence/<pass>/`.
 5. **Performance (PRD-68):** Lighthouse mobile on a throttled 4G mid-range profile against a seeded production build; RSC payload, client JS, fonts, CLS from streamed sections, cache headers.
 
-Each finding is checked by an independent verifier before it reaches the report.
+Each finding is checked by an independent verifier before it reaches the report. Known, owner-approved departures from Figma live in [design-departures.md](design-departures.md); the visual lens does not raise them again.
 
 ## How a pass runs (lessons from the home pass, 2026-10-28)
 - **No barrier between lenses:** each lens's findings go to verification as soon as that lens returns. In the home pass, 70-odd findings from the fast lenses waited about 35 minutes on the performance lens.

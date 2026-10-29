@@ -7,14 +7,14 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 29, 2026.** The Prototype is live and public at ramble-sand.vercel.app. The deep review is under way: the home pass found 65 verified items; its nine clear fixes are merged (five PRs tonight), with before-and-after images in each PR; 19 items wait for your decision, led by the src/lib layout for the DRY refactor. The browse and experience pass found 21 (one high: unstyled 404 and error pages). PM chats now run in lanes so several can work at once; the critical-path lane holds U-005 in review and U-014a building, both unpushed until the review ends.
+**As of Oct 29, 2026.** New targets from the owner on Oct 29: Sprint 1 work done by Oct 30, and a guest books a seeded session end to end (home, browse, experience, booking, checkout, confirmation) on the fake payment adapter by Monday Nov 2; no Stripe. The Prototype's 21 units are all live at ramble-sand.vercel.app; the checkout and confirmation stubs the plan listed were never built, so that glue goes first. The deep-review hold is lifted: U-005 and U-014a go into integration now, and the audit's fixes run in their own lane beside the build. The src/lib layout (H-18) is adopted; its seven-PR refactor plan is written. The refit below puts the money core on agents (the owner's call for U-016, U-047a and U-049) and still says December for the confirmation page, because it prices every unit at its estimate with review rounds; agent actuals so far run well under that, which is what a Monday landing depends on.
 
 | Milestone | Likely |
 |---|---|
-| Prototype | Nov 9, 2026 (late case Nov 9, 2026) |
-| Launch-ready | Feb 16, 2027 (late case Mar 4, 2027) |
+| Prototype | Nov 10, 2026 (late case Nov 11, 2026) |
+| Launch-ready | Jan 21, 2027 (late case Feb 3, 2027) |
 
-Forecast: Push: 20 h this week, then 12.5 h.
+Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
@@ -22,9 +22,12 @@ Forecast: Push: 20 h this week, then 12.5 h.
 - undefined.
 - undefined.
 - undefined.
+- undefined.
+- undefined.
 
 **Decisions needed**
 
+- undefined.
 - undefined.
 - undefined.
 - undefined.

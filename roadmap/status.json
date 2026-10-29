@@ -1,339 +1,367 @@
 {
- "asOf": "2026-10-29",
- "headline": "The Prototype is live and public at ramble-sand.vercel.app. The deep review is under way: the home pass found 65 verified items; its nine clear fixes are merged (five PRs tonight), with before-and-after images in each PR; 19 items wait for your decision, led by the src/lib layout for the DRY refactor. The browse and experience pass found 21 (one high: unstyled 404 and error pages). PM chats now run in lanes so several can work at once; the critical-path lane holds U-005 in review and U-014a building, both unpushed until the review ends.",
- "recommended": "Plan, Dave 12.5 h",
- "phases": [
-  {
-   "id": "P0",
-   "name": "Setup",
-   "state": "done",
-   "when": "Sep 28",
-   "note": "Repo, PM agent, build plan"
+  "asOf": "2026-10-29",
+  "headline": "New targets from the owner on Oct 29: Sprint 1 work done by Oct 30, and a guest books a seeded session end to end (home, browse, experience, booking, checkout, confirmation) on the fake payment adapter by Monday Nov 2; no Stripe. The Prototype's 21 units are all live at ramble-sand.vercel.app; the checkout and confirmation stubs the plan listed were never built, so that glue goes first. The deep-review hold is lifted: U-005 and U-014a go into integration now, and the audit's fixes run in their own lane beside the build. The src/lib layout (H-18) is adopted; its seven-PR refactor plan is written. The refit below puts the money core on agents (the owner's call for U-016, U-047a and U-049) and still says December for the confirmation page, because it prices every unit at its estimate with review rounds; agent actuals so far run well under that, which is what a Monday landing depends on.",
+  "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
+  "phases": [
+    {
+      "id": "P0",
+      "name": "Setup",
+      "state": "done",
+      "when": "Sep 28",
+      "note": "Repo, PM agent, build plan"
+    },
+    {
+      "id": "P1",
+      "name": "Discovery and PRD",
+      "state": "done",
+      "when": "Oct 18",
+      "note": "PRD v1.0 signed: 78 requirements"
+    },
+    {
+      "id": "P2",
+      "name": "Research and ADRs",
+      "state": "done",
+      "when": "Oct 18",
+      "note": "10 architecture decisions accepted"
+    },
+    {
+      "id": "P3",
+      "name": "Design",
+      "state": "done",
+      "when": "Oct 18",
+      "note": "Mobile flow and error states signed off"
+    },
+    {
+      "id": "P4",
+      "name": "Plan",
+      "state": "done",
+      "when": "Oct 20",
+      "note": "Frozen: tag plan-frozen-2026-10-20"
+    },
+    {
+      "id": "P5",
+      "name": "Build",
+      "state": "now",
+      "when": "From Oct 20",
+      "note": "U-118 done Oct 21 (2 days against 3); agent auto-merge is on. Next: the architecture guardrails, then U-001"
+    },
+    {
+      "id": "P6",
+      "name": "Write-up",
+      "state": "later",
+      "when": "After launch",
+      "note": "Where the plan was wrong, and why"
+    }
+  ],
+  "artifacts": [
+    {
+      "n": 1,
+      "name": "Design doc",
+      "state": "approved",
+      "when": "Oct 18"
+    },
+    {
+      "n": 2,
+      "name": "Work breakdown",
+      "state": "approved",
+      "when": "Oct 18"
+    },
+    {
+      "n": 3,
+      "name": "Size and risk scores",
+      "state": "approved",
+      "when": "Oct 18"
+    },
+    {
+      "n": 4,
+      "name": "Dependency graph",
+      "state": "approved",
+      "when": "Oct 19"
+    },
+    {
+      "n": 5,
+      "name": "Who builds what",
+      "state": "approved",
+      "when": "Oct 19",
+      "note": "Updated for the new merge rule and the levers"
+    },
+    {
+      "n": 6,
+      "name": "Estimate",
+      "state": "approved",
+      "when": "Oct 20"
+    },
+    {
+      "n": 7,
+      "name": "Staffing and dates",
+      "state": "approved",
+      "when": "Oct 20"
+    }
+  ],
+  "decisionsNeeded": [
+    {
+      "what": "End-to-end tier for Monday: stub glue first, then the real chain on the fake payment adapter (PM recommends both, in that order)",
+      "effect": "Decides whether Monday shows fixture data or a booking that persists; opens the e2e-money lane."
+    },
+    {
+      "what": "Deep-review owner decisions: 22 items in one document, drafts/owner-decisions-2026-10-29.md, with a recommendation each; approve all or name exceptions",
+      "effect": "Unblocks the caching direction (H-1), the design departures, and PR D of the refactor (H-41)."
+    },
+    {
+      "what": "Builder limit: five agent builders machine-wide (one Postgres container, the e2e lock) is the binding constraint for Sprint 1 plus the money chain plus the audit fixes in two days",
+      "effect": "Raising it needs a second database container; otherwise Sprint 1's remainder fills idle slots after the money chain."
+    },
+    {
+      "what": "gh inside the sandbox: trust the proxy or allow api.github.com",
+      "effect": "GitHub reads (and the nightly audit's merge list) fail until then."
+    },
+    {
+      "what": "Tax-rate default: 88,750 ppm (New York City 8.875%) pending Q-12; confirm or give the rate",
+      "effect": "None on dates; it is the rate the configured setting starts with."
+    }
+  ],
+  "actionsForDave": [
+    {
+      "what": "Open the lane chats: /ramble-pm lane: critical-path, /ramble-pm lane: audit-fixes, then lane: e2e-money once the tier is confirmed, and lane: lib-refactor",
+      "when": "Now"
+    },
+    {
+      "what": "Promote integration to main when the critical-path lane reports U-005 and U-014a merged (daily this week, not weekly)",
+      "when": "Today and daily to Monday"
+    },
+    {
+      "what": "Add image and sharp to the ports and vendor-SDK lines in .claude/standards/architecture.md (N1029-18)",
+      "when": "Any time"
+    },
+    {
+      "what": "Vercel: publish the beacon firewall rule (PR 193 has the commands), turn on BotID, set the Sentry DSNs",
+      "when": "Before guest pages go public"
+    },
+    {
+      "what": "Sentry: create the projects, name the ops address, apply the three alert rules in docs/runbooks/alerting.md",
+      "when": "Before guest pages go public"
+    },
+    {
+      "what": "GitHub: enable private vulnerability reporting",
+      "when": "Any time"
+    }
+  ],
+  "heldUp": [
+    {
+      "what": "Real-job only: legal review, sponsor terms, Stripe review",
+      "waitingOn": "Client facts with no one to ask in this demo; logged, not blocking",
+      "owner": "Client"
+    }
+  ],
+  "decisionsMade": [
+    {
+      "when": "Oct 29",
+      "what": "End-to-end prototype by Monday Nov 2 on the fake payment adapter; Sprint 1 done by Oct 30; audit fixes run concurrently; the deep-review hold is lifted (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "src/lib layout adopted (H-18, H-42): page modules move to src/lib/pages, shared helpers get named modules, seven PRs A to G (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "PM chats run as lanes with one lead coordinating; the money core's human-led units go to agent builders under pattern notes (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Standards PR 229 merged: B6 exemptions for holds, Button as a client island, BotID wiring (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Production promoted: the home fixes are live at ramble-sand.vercel.app (you asked, the PM ran it)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Home skeleton PR 228 merged: all nine clear home-audit fixes are in main"
+    },
+    {
+      "when": "Oct 29",
+      "what": "PR 223 merged: the lanes and evidence rules are in the agent file (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "PM chats run in lanes: one lead owns the shared status, each chat claims a lane and writes only its own sections (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Pictures of every visible change in the PR: before-and-after images, kept in ramble-pm/evidence, embedded in the PR body and the QA check (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Prototype promoted to the public production domain; home audit pass done; fix swarm approved (you)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Button approved as a client island (B8) so a loading button keeps keyboard focus"
+    },
+    {
+      "when": "Oct 28",
+      "what": "U-014a pattern note approved: all nine recommendations adopted, including the B6 exemption for the settings read and a Device proof for hold rows"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Work beside the deep review: browse and experience audit now, U-005 and U-014a build held unpushed, small fixes as follow-up PRs"
+    },
+    {
+      "when": "Oct 29",
+      "what": "U-039 experience page merged (PR 214): the Prototype click-through is complete"
+    },
+    {
+      "when": "Oct 28",
+      "what": "An audit pass after every section or major feature, tracked in audits/; the home pass is first (you)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "U-010 photos merged to main on the fake storage provider (PR 205)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "No Blob stores for the demo: production runs on the fake storage provider; the guard returns with U-021b (you)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "U-010 photos passes all four checks after its card-photo markers moved to U-039; it waits only on the Blob stores"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Cover photos on the home and browse cards go into U-039 (about +0.5 day) (you)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Merged to main: U-030 home (PR 208), U-021a seed data (PR 209), U-031 browse (PR 207); each ran well under its estimate"
+    },
+    {
+      "when": "Oct 28",
+      "what": "U-031's FilterBar question withdrawn: the island became a server component, so no allowlist change is needed (PM)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Session day for browse: the date match stays in SQL WHERE and the day list moves to a tested lib function; storing local_date for every session goes to the deep review (PM)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Fixers run in their own worktrees on wip branches; the PM moves the unit branch and pushes (PM, process)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Third promotion: U-045a payments and U-006 email are in main (PR 201; you asked the PM to finish it)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Rolling development to the end of the Prototype: at most 5 builders, Prototype units only, no filler; then a deep review of all work so far (you)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Data units own their tables' read and write contracts; page units own rendering (PM)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Two caller-less functions removed from U-018 until B6 is settled for them (PM)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "U-005 pattern note approved on the PM's recommendations (you delegated)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Prototype first with rolling starts: wave 3 is U-012, U-018, U-010, U-111 (plus U-037); pages start as soon as their inputs land; U-019, U-004a, U-091 wait (you)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "B3 exemption: the literal process.env.NEXT_RUNTIME guard in src/instrumentation.ts (you)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Fable trial result: builders stay on Sonnet by the rule set in advance; a larger trial is your call"
+    },
+    {
+      "when": "Oct 26",
+      "what": "U-003's database client made lazy so CI can build with no database (PM authorization)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Only a blocking finding from a required check starts a review round, for every unit alike"
+    }
+  ],
+  "watch": [
+    {
+      "what": "Monday is a stretch target",
+      "detail": "Thirteen money-path units plus the audit fixes and Sprint 1's remainder, five builders, critical units landing in integration. The chain is four waves deep; each wave is about half a day at the measured pace, if nothing bounces."
+    },
+    {
+      "what": "Audit items are tracked, not kept in chat",
+      "detail": "Home 84 rows, browse and experience 21, nightly 18. The audit-fixes lane takes the clear fixes; the lib-refactor lane takes the DRY items; 22 owner decisions wait in one document."
+    },
+    {
+      "what": "Seed guard (N1029-1)",
+      "detail": "The seed's staging and load-test targets guard against a production database only by a word match on the URL; first item in the audit-fixes lane."
+    },
+    {
+      "what": "Merging main can break a unit that passed review",
+      "detail": "U-031 deleted a read that U-021a's new seed test called; no textual conflict. Every merge of main gets gates and a focused re-check before checks are posted."
+    },
+    {
+      "what": "Review rounds are the cost",
+      "detail": "U-031 took 7 rounds plus a re-check; U-030 2, U-021a 3. Architecture audits still find B2 items late."
+    }
+  ],
+  "milestones": [
+    {
+      "id": "desk",
+      "label": "Agents can merge",
+      "unit": "U-118"
+    },
+    {
+      "id": "prototype",
+      "label": "Prototype"
+    },
+    {
+      "id": "money",
+      "label": "Money core done",
+      "unit": "U-049"
+    },
+    {
+      "id": "launch",
+      "label": "Launch-ready",
+      "unit": "U-104"
+    }
+  ],
+  "workstreams": {
+    "platform": "Platform and merge desk",
+    "design-system": "Design system",
+    "data": "Data and holds",
+    "catalog": "Catalog and browse",
+    "experience": "Experience page",
+    "checkout": "Checkout and payments",
+    "post-booking": "After booking",
+    "gifting": "Gifts",
+    "host": "Host tools",
+    "ops": "Ops tools",
+    "measurement": "Measurement",
+    "seo": "SEO and old-site move",
+    "launch": "Launch readiness"
   },
-  {
-   "id": "P1",
-   "name": "Discovery and PRD",
-   "state": "done",
-   "when": "Oct 18",
-   "note": "PRD v1.0 signed: 78 requirements"
-  },
-  {
-   "id": "P2",
-   "name": "Research and ADRs",
-   "state": "done",
-   "when": "Oct 18",
-   "note": "10 architecture decisions accepted"
-  },
-  {
-   "id": "P3",
-   "name": "Design",
-   "state": "done",
-   "when": "Oct 18",
-   "note": "Mobile flow and error states signed off"
-  },
-  {
-   "id": "P4",
-   "name": "Plan",
-   "state": "done",
-   "when": "Oct 20",
-   "note": "Frozen: tag plan-frozen-2026-10-20"
-  },
-  {
-   "id": "P5",
-   "name": "Build",
-   "state": "now",
-   "when": "From Oct 20",
-   "note": "U-118 done Oct 21 (2 days against 3); agent auto-merge is on. Next: the architecture guardrails, then U-001"
-  },
-  {
-   "id": "P6",
-   "name": "Write-up",
-   "state": "later",
-   "when": "After launch",
-   "note": "Where the plan was wrong, and why"
+  "scenarioLabels": [
+    "Money core on agents, 12.5 h",
+    "Plan as frozen, 12.5 h"
+  ],
+  "scenarioNotes": [
+    "Refit Oct 29 from today: the Prototype units done, U-005 and U-014a at review, and U-014a, U-016, U-047a, U-048 and U-049 built by agents under PM pattern notes (the owner's call, Oct 29).",
+    "The frozen routing for comparison: the owner builds U-014a, U-016, U-047a, U-048 and U-049 himself at 12.5 hours a week."
+  ],
+  "forecastNote": "Forecast from Oct 29. The model prices each unit at its three-point estimate with review gates and a WIP limit; it does not yet carry the measured agent actuals (most merged units closed at 10 to 40 percent of their estimate), so treat its dates as the slow case.",
+  "frozen": {
+    "prototype": {
+      "likely": "2026-11-30",
+      "late": "2026-12-07"
+    },
+    "launch": {
+      "likely": "2027-03-08",
+      "late": "2027-03-26"
+    }
   }
- ],
- "artifacts": [
-  {
-   "n": 1,
-   "name": "Design doc",
-   "state": "approved",
-   "when": "Oct 18"
-  },
-  {
-   "n": 2,
-   "name": "Work breakdown",
-   "state": "approved",
-   "when": "Oct 18"
-  },
-  {
-   "n": 3,
-   "name": "Size and risk scores",
-   "state": "approved",
-   "when": "Oct 18"
-  },
-  {
-   "n": 4,
-   "name": "Dependency graph",
-   "state": "approved",
-   "when": "Oct 19"
-  },
-  {
-   "n": 5,
-   "name": "Who builds what",
-   "state": "approved",
-   "when": "Oct 19",
-   "note": "Updated for the new merge rule and the levers"
-  },
-  {
-   "n": 6,
-   "name": "Estimate",
-   "state": "approved",
-   "when": "Oct 20"
-  },
-  {
-   "n": 7,
-   "name": "Staffing and dates",
-   "state": "approved",
-   "when": "Oct 20"
-  }
- ],
- "decisionsNeeded": [
-  {
-   "what": "Home audit: 19 items for your call (audits/home-2026-10-28.md), led by the src/lib layout (H-18, H-42) and the caching direction (H-22, H-34 to H-39)",
-   "effect": "Sets the DRY refactor and how home loads before more pages copy the patterns."
-  },
-  {
-   "what": "PRD-68 lab method: simulated or applied Lighthouse throttling (audit BE-21)",
-   "effect": "None now; decides whether browse LCP 3.07 s is a fail or a pass."
-  },
-  {
-   "what": "gh inside the sandbox: trust the proxy or allow api.github.com",
-   "effect": "GitHub reads (and the nightly audit's merge list) fail until then."
-  },
-  {
-   "what": "Tax-rate default: 88,750 ppm (New York City 8.875%) pending Q-12; confirm or give the rate",
-   "effect": "None on dates; it is the rate the configured setting starts with."
-  }
- ],
- "actionsForDave": [
-  {
-   "what": "Add an image port to the layers table in .claude/standards/architecture.md",
-   "when": "Any time"
-  },
-  {
-   "what": "Vercel: publish the beacon firewall rule (PR 193 has the commands), turn on BotID, set the Sentry DSNs",
-   "when": "Before guest pages go public"
-  },
-  {
-   "what": "Sentry: create the projects, name the ops address, apply the three alert rules in docs/runbooks/alerting.md",
-   "when": "Before guest pages go public"
-  },
-  {
-   "what": "GitHub: enable private vulnerability reporting",
-   "when": "Any time"
-  }
- ],
- "heldUp": [
-  {
-   "what": "Real-job only: legal review, sponsor terms, Stripe review",
-   "waitingOn": "Client facts with no one to ask in this demo; logged, not blocking",
-   "owner": "Client"
-  }
- ],
- "decisionsMade": [
-  {
-   "when": "Oct 29",
-   "what": "Production promoted: the home fixes are live at ramble-sand.vercel.app (you asked, the PM ran it)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "Home skeleton PR 228 merged: all nine clear home-audit fixes are in main"
-  },
-  {
-   "when": "Oct 29",
-   "what": "PR 223 merged: the lanes and evidence rules are in the agent file (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "PM chats run in lanes: one lead owns the shared status, each chat claims a lane and writes only its own sections (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "Pictures of every visible change in the PR: before-and-after images, kept in ramble-pm/evidence, embedded in the PR body and the QA check (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "Prototype promoted to the public production domain; home audit pass done; fix swarm approved (you)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Button approved as a client island (B8) so a loading button keeps keyboard focus"
-  },
-  {
-   "when": "Oct 28",
-   "what": "U-014a pattern note approved: all nine recommendations adopted, including the B6 exemption for the settings read and a Device proof for hold rows"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Work beside the deep review: browse and experience audit now, U-005 and U-014a build held unpushed, small fixes as follow-up PRs"
-  },
-  {
-   "when": "Oct 29",
-   "what": "U-039 experience page merged (PR 214): the Prototype click-through is complete"
-  },
-  {
-   "when": "Oct 28",
-   "what": "An audit pass after every section or major feature, tracked in audits/; the home pass is first (you)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "U-010 photos merged to main on the fake storage provider (PR 205)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "No Blob stores for the demo: production runs on the fake storage provider; the guard returns with U-021b (you)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "U-010 photos passes all four checks after its card-photo markers moved to U-039; it waits only on the Blob stores"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Cover photos on the home and browse cards go into U-039 (about +0.5 day) (you)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Merged to main: U-030 home (PR 208), U-021a seed data (PR 209), U-031 browse (PR 207); each ran well under its estimate"
-  },
-  {
-   "when": "Oct 28",
-   "what": "U-031's FilterBar question withdrawn: the island became a server component, so no allowlist change is needed (PM)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Session day for browse: the date match stays in SQL WHERE and the day list moves to a tested lib function; storing local_date for every session goes to the deep review (PM)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Fixers run in their own worktrees on wip branches; the PM moves the unit branch and pushes (PM, process)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Third promotion: U-045a payments and U-006 email are in main (PR 201; you asked the PM to finish it)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Rolling development to the end of the Prototype: at most 5 builders, Prototype units only, no filler; then a deep review of all work so far (you)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Data units own their tables' read and write contracts; page units own rendering (PM)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Two caller-less functions removed from U-018 until B6 is settled for them (PM)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "U-005 pattern note approved on the PM's recommendations (you delegated)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Prototype first with rolling starts: wave 3 is U-012, U-018, U-010, U-111 (plus U-037); pages start as soon as their inputs land; U-019, U-004a, U-091 wait (you)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "B3 exemption: the literal process.env.NEXT_RUNTIME guard in src/instrumentation.ts (you)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Fable trial result: builders stay on Sonnet by the rule set in advance; a larger trial is your call"
-  },
-  {
-   "when": "Oct 26",
-   "what": "U-003's database client made lazy so CI can build with no database (PM authorization)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Only a blocking finding from a required check starts a review round, for every unit alike"
-  }
- ],
- "watch": [
-  {
-   "what": "Deep review under way",
-   "detail": "Home pass done (65 findings) and browse and experience pass reported (21); the critical path (U-005, U-014a) builds beside it, unpushed. Then the retrospective and the agent-log audit."
-  },
-  {
-   "what": "Audit items are tracked, not kept in chat",
-   "detail": "audits/home-2026-10-28.md lists 17 items raised so far; the home pass adds its findings there."
-  },
-  {
-   "what": "Merging main can break a unit that passed review",
-   "detail": "U-031 deleted a read that U-021a's new seed test called; no textual conflict. Every merge of main now gets gates and a focused re-check before checks are posted."
-  },
-  {
-   "what": "Review rounds are the cost",
-   "detail": "U-031 took 7 rounds plus a re-check; U-030 2, U-021a 3. Architecture audits still find B2 items late."
-  },
-  {
-   "what": "Deep review after the Prototype",
-   "detail": "Notes are collecting in drafts/post-prototype-review-notes.md, including the U-030 and U-031 duplicate helpers."
-  }
- ],
- "milestones": [
-  {
-   "id": "desk",
-   "label": "Agents can merge",
-   "unit": "U-118"
-  },
-  {
-   "id": "prototype",
-   "label": "Prototype"
-  },
-  {
-   "id": "money",
-   "label": "Money core done",
-   "unit": "U-049"
-  },
-  {
-   "id": "launch",
-   "label": "Launch-ready",
-   "unit": "U-104"
-  }
- ],
- "workstreams": {
-  "platform": "Platform and merge desk",
-  "design-system": "Design system",
-  "data": "Data and holds",
-  "catalog": "Catalog and browse",
-  "experience": "Experience page",
-  "checkout": "Checkout and payments",
-  "post-booking": "After booking",
-  "gifting": "Gifts",
-  "host": "Host tools",
-  "ops": "Ops tools",
-  "measurement": "Measurement",
-  "seo": "SEO and old-site move",
-  "launch": "Launch readiness"
- },
- "scenarioLabels": [
-  "20 h this week, then 12.5 h",
-  "Steady 12.5 h"
- ],
- "scenarioNotes": [
-  "Current forecast (Oct 21, refit): from Oct 22 with U-118 done; Dave puts in about 20 hours this week, then 12.5 a week. Agents merge their own work, with Dave approving each PR at first.",
-  "The same start and progress, with Dave at a steady 12.5 hours a week from today."
- ],
- "forecastNote": "Forecast from Oct 27, with U-111, U-012, and U-018 done; the switch above sets this week's hours.",
- "frozen": {
-  "prototype": {
-   "likely": "2026-11-30",
-   "late": "2026-12-07"
-  },
-  "launch": {
-   "likely": "2027-03-08",
-   "late": "2027-03-26"
-  }
- }
 }
