@@ -1,0 +1,5 @@
+PASS (round 3, head 6502a1d). 4-file diff within round 3 items. Round 2: release-clock survivor now killed; r2-arch B2 resolved (spendsReserveTry pure in lib, action only calls it, reserveBlock doc points at it); action test still asserts consumeRateLimit not called for a bot.
+Checks: lib/holds.test 95, src/server unit 637, holds.db 81, holds-races.db 12, eslint clean on changed files (full tsc in the scratch copy shows unrelated missing generated route types; format and knip not run).
+Mutations killed: release updatedAt from new Date(); reserve at from new Date(); release without lockSessionRow; release without the hold row lock (both lock mutations need holds-races.db, not holds.db alone); date_trunc removed.
+Non-blocking: new test fakes only Date with useRealTimers in finally (no leak); 60 s tolerance against a 25-year offset. Carried: BotID standards gap, readOpenHeldSeats and B6, inline sha256, 20-candidate cap, U-014b on ip_hash.
+Unconfirmed: BotID soft navigation (needs a preview); e2e not run; the two holds db files not rerun together under contention.
