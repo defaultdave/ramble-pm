@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-10-29 00:35 by the lead (Prototype live and public at https://ramble-sand.vercel.app. Deep review under way: home pass 65 verified findings, nine clear fixes landed tonight as PRs 224 to 228 with before-and-after images, 19 owner decisions pending; browse and experience pass 21 items. PM chats run in lanes. Lane `critical-path`: U-005 in review rounds, U-014a building, both unpushed; PR 222 in `integration`.)
+**Updated:** 2026-10-29 00:35 by the lead (Prototype live and public at https://ramble-sand.vercel.app. Deep review under way: home pass 65 verified findings, nine clear fixes merged tonight as PRs 224 to 228 with before-and-after images, 19 owner decisions pending; browse and experience pass 21 items. PM chats run in lanes. Lane `critical-path`: U-005 in review rounds, U-014a building, both unpushed; PR 222 in `integration`.)
 
 ## Lanes
 
@@ -9,7 +9,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
 | `lead` | Shared status, `## Next`, roadmap, memory; the deep review decisions with Dave | Concurrent work chats | handed off | 2026-10-29 00:35 |
-| `home-fixes` | Home audit fix swarm, nine items as five PRs: 224, 225, 226, 227 merged; 228 (`unit/U-030-states`, head `c9e8cc0`) open with checks posted and auto-merge queued. Closes when 228 merges (the lead moves the row to closed and asks Dave to promote) | Concurrent work chats | handed off | 2026-10-29 00:35 |
+| `home-fixes` | Home audit fix swarm, nine items as five PRs: 224, 225, 226, 227, 228 all merged (H-19, H-20, H-21, H-24, H-27, H-29, H-30, H-31, H-32 closed, evidence in `evidence/pr/`). The lead removes this row at its next start. | Concurrent work chats | closed | 2026-10-29 01:00 |
 | `critical-path` | U-005 (review rounds on `wip/U-005-r<n>`), U-014a (`unit/U-014a`), PR 222 through the next promotion; both units unpushed until the deep review ends | Parallel work during audit | active | 2026-10-28 23:25 |
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
@@ -112,7 +112,7 @@ In this demo, the client facts have no one to ask. Where a fact blocks a decisio
 
 ## Blocked on Dave
 0. ~~Merge PR 223~~ merged by Dave 2026-10-29 00:55 (the lanes and evidence rules are on `main`).
-0. **Promote the newest production deployment** once PRs 225, 226, 227 (and the states PR) have merged, as after the last promotion.
+0. **Promote the newest production deployment** (PRs 224 to 228 are all in `main`), as after the last promotion.
 1. ~~Approval window~~ closed 2026-10-24 18:45.
 1. ~~`integration` branch deleted~~ recreated by Dave 2026-10-25 at `24ae4b3`; promotions now open from a `promote/<date>` branch (DECISIONS 2026-10-25).
 1. ~~PR 182~~ (Dependabot actions majors) merged by Dave 2026-10-25 (`cca9bfd`). Follow-up still open: skip the `expire preview branch` job on Dependabot PRs (no secrets there).
@@ -170,19 +170,19 @@ One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane
 
 ### lead
 
-**Before you start:** (1) Once PR 228 has merged, promote the newest production deployment, as after the last promotion. (2) `gh` still fails TLS inside the local sandbox (`x509: OSStatus -26276`), and reviewers' sandboxes refuse localhost Postgres, Chromium, and ports; `sandbox.network.allowLocalBinding: true` would let QA run its own browser checks.
+**Before you start:** (1) Promote the newest production deployment (PRs 224 to 228 are in `main`), as after the last promotion. (2) `gh` still fails TLS inside the local sandbox (`x509: OSStatus -26276`), and reviewers' sandboxes refuse localhost Postgres, Chromium, and ports; `sandbox.network.allowLocalBinding: true` would let QA run its own browser checks.
 
 **Run:** `/ramble-pm` in a new desktop chat on the main checkout (`/Users/davidfleming/Workspace/ramble`). **Model and effort:** Opus, high (owner decisions).
 
 **Prompt:**
 
 ```
-Read STATUS.md in the ramble-pm repo (bun scripts/plan/site.ts dir prints its path): the Lanes table, each lane's "For the lead" notes, and Next item 1(b); then audits/home-2026-10-28.md (the 19 rows marked "open (owner decision)" plus H-69 to H-84 raised by tonight's reviews) and audits/browse-experience-2026-10-28.md. Take the lead lane. Confirm PR 228 merged (gh pr view 228) and move the home-fixes row to closed; fold the lanes' notes into memory, Next, and the roadmap. Then walk Dave through the 19 owner decisions one group at a time (the H-18/H-42 src/lib layout first, then caching and H-1, then the smaller ones) and BE-21 (which Lighthouse throttling PRD-68 means), logging each answer in DECISIONS.md and the item's status; turn the H-18 decision into a planned DRY refactor that also absorbs H-25, H-69, H-76 to H-79. Every visible change gets before-and-after images in its PR (drafts/wave3-builder-rules.md, Evidence). Don't commit plan files; PM docs go out with bun scripts/plan/site.ts publish.
+Read STATUS.md in the ramble-pm repo (bun scripts/plan/site.ts dir prints its path): the Lanes table, each lane's "For the lead" notes, and Next item 1(b); then audits/home-2026-10-28.md (the 19 rows marked "open (owner decision)" plus H-69 to H-84 raised by tonight's reviews) and audits/browse-experience-2026-10-28.md. Take the lead lane. Remove the closed home-fixes row; fold the lanes' notes into memory, Next, and the roadmap. Then walk Dave through the 19 owner decisions one group at a time (the H-18/H-42 src/lib layout first, then caching and H-1, then the smaller ones) and BE-21 (which Lighthouse throttling PRD-68 means), logging each answer in DECISIONS.md and the item's status; turn the H-18 decision into a planned DRY refactor that also absorbs H-25, H-69, H-76 to H-79. Every visible change gets before-and-after images in its PR (drafts/wave3-builder-rules.md, Evidence). Don't commit plan files; PM docs go out with bun scripts/plan/site.ts publish.
 ```
 
 ### home-fixes
 
-Closed once PR 228 merges; nothing to run. If 228 did not merge, open `/ramble-pm lane: home-fixes` on the main checkout (Sonnet, medium) and read the PR's failing check: the branch is `unit/U-030-states` at `c9e8cc0`, its verdicts are posted as check runs, and a fix round goes on `wip/U-030-states-r4` in its own worktree, then push with agent-git and re-post the checks.
+Closed: PRs 224 to 228 merged. Nothing to run.
 
 ### critical-path
 
