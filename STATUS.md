@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-10-29 (Prototype click-through complete in `main`: U-039 merged (PR 214); production migrated and seeded; owner-reported fixes for browse and home in review; home audit pass queued)
+**Updated:** 2026-10-29 (Prototype click-through live and public at https://ramble-sand.vercel.app after Dave's promotion; browse next-day empty state and From $0 fix in review; home audit pass next; nightly audit scheduled)
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
 ## Done
