@@ -100,10 +100,6 @@
   ],
   "decisionsNeeded": [
     {
-      "what": "End-to-end tier for Monday: stub glue first, then the real chain on the fake payment adapter (PM recommends both, in that order)",
-      "effect": "Decides whether Monday shows fixture data or a booking that persists; opens the e2e-money lane."
-    },
-    {
       "what": "Deep-review owner decisions: 22 items in one document, drafts/owner-decisions-2026-10-29.md, with a recommendation each; approve all or name exceptions",
       "effect": "Unblocks the caching direction (H-1), the design departures, and PR D of the refactor (H-41)."
     },
@@ -122,8 +118,12 @@
   ],
   "actionsForDave": [
     {
-      "what": "Open the lane chats: /ramble-pm lane: critical-path, /ramble-pm lane: audit-fixes, then lane: e2e-money once the tier is confirmed, and lane: lib-refactor",
-      "when": "Now"
+      "what": "Answer drafts/owner-decisions-2026-10-29.md (28 rows): approve all or name exceptions; the H-41 rows gate the refactor's PR D",
+      "when": "Today"
+    },
+    {
+      "what": "Push and open the PM memory PR (pm/memory-2026-10-29) and run bun scripts/plan/board-dates.ts --run; both need your gh login",
+      "when": "Today"
     },
     {
       "what": "Promote integration to main when the critical-path lane reports U-005 and U-014a merged (daily this week, not weekly)",
@@ -154,6 +154,10 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Oct 29",
+      "what": "Four lane chats opened: critical-path, audit-fixes, e2e-money (stub glue first, then the real chain on the fake adapter), lib-refactor (you)"
+    },
     {
       "when": "Oct 29",
       "what": "End-to-end prototype by Monday Nov 2 on the fake payment adapter; Sprint 1 done by Oct 30; audit fixes run concurrently; the deep-review hold is lifted (you)"
