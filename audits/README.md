@@ -26,6 +26,11 @@ After each of these reaches `main`:
 
 Each finding is checked by an independent verifier before it reaches the report.
 
+## How a pass runs (lessons from the home pass, 2026-10-28)
+- **No barrier between lenses:** each lens's findings go to verification as soon as that lens returns. In the home pass, 70-odd findings from the fast lenses waited about 35 minutes on the performance lens.
+- **Performance is split:** one agent per page and per variant (baseline, each alternative), in parallel, each with its own port and database, time-boxed (15 minutes for a nightly pass). Never one agent running a long matrix in sequence: the home pass's single performance agent ran 48 Lighthouse passes back to back.
+- **Seeded production builds need a database the production driver can read:** production reads go through Neon's HTTP driver, which a local Postgres does not speak, so agents had to build a stand-in. A shared local stand-in (or a Neon branch per audit) belongs in the tooling.
+
 ## How an item is tracked
 
 Each pass file has one table. An item keeps its ID for life (`H-12` is item 12 of the home pass). Status is one of: **open** (raised, not yet decided), **fix** (the owner chose to fix it; names the unit or PR), **later** (deferred, with where it lands), **won't** (decided against, with the reason), **closed** (fixed and verified, with the PR).

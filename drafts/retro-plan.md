@@ -40,6 +40,7 @@ Seed evidence from the 2026-10-28 session (to verify against the logs, not assum
 - The browse "empty unless a future date" report cost three fix rounds before the owner confirmed it was a dated search (H-8); the question to the owner could have come first.
 - A PM-directed rewording outside the fixer's scope line failed review (U-021a round 4).
 - Sandbox refusals forced substitutes (`gitleaks detect` for `gitleaks git`, no `env -u`).
+- The home audit pass ran one performance agent through 48 Lighthouse passes in sequence (about 35 minutes), and the workflow waited for every lens before verifying any, so findings from the fast lenses sat idle. Split performance per variant and pipeline verification (owner, 2026-10-28).
 - Tokens per unit this session: U-030 5.42 M, U-021a 5.01 M, U-031 6.83 M (plus later rounds), U-010 2.16 M, U-039 1.98 M.
 
 Output: one ranked report: what to change in the agent rules, briefs, workflow scripts, permissions, and the PM's own behaviour, each with the evidence (log, session, or PR) behind it.
