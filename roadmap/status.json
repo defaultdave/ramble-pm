@@ -118,10 +118,6 @@
  ],
  "actionsForDave": [
   {
-   "what": "Promote the newest production deployment so the home fixes (PRs 224 to 228) reach the public site",
-   "when": "Now"
-  },
-  {
    "what": "Add an image port to the layers table in .claude/standards/architecture.md",
    "when": "Any time"
   },
@@ -146,6 +142,10 @@
   }
  ],
  "decisionsMade": [
+  {
+   "when": "Oct 29",
+   "what": "Production promoted: the home fixes are live at ramble-sand.vercel.app (you asked, the PM ran it)"
+  },
   {
    "when": "Oct 29",
    "what": "Home skeleton PR 228 merged: all nine clear home-audit fixes are in main"

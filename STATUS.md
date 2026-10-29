@@ -112,7 +112,7 @@ In this demo, the client facts have no one to ask. Where a fact blocks a decisio
 
 ## Blocked on Dave
 0. ~~Merge PR 223~~ merged by Dave 2026-10-29 00:55 (the lanes and evidence rules are on `main`).
-0. **Promote the newest production deployment** (PRs 224 to 228 are all in `main`), as after the last promotion.
+0. ~~Promote the newest production deployment~~ done 2026-10-29 01:05 (Dave asked; the PM promoted `main` at `9e4ed83`; DECISIONS).
 1. ~~Approval window~~ closed 2026-10-24 18:45.
 1. ~~`integration` branch deleted~~ recreated by Dave 2026-10-25 at `24ae4b3`; promotions now open from a `promote/<date>` branch (DECISIONS 2026-10-25).
 1. ~~PR 182~~ (Dependabot actions majors) merged by Dave 2026-10-25 (`cca9bfd`). Follow-up still open: skip the `expire preview branch` job on Dependabot PRs (no secrets there).
@@ -170,7 +170,7 @@ One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane
 
 ### lead
 
-**Before you start:** (1) Promote the newest production deployment (PRs 224 to 228 are in `main`), as after the last promotion. (2) `gh` still fails TLS inside the local sandbox (`x509: OSStatus -26276`), and reviewers' sandboxes refuse localhost Postgres, Chromium, and ports; `sandbox.network.allowLocalBinding: true` would let QA run its own browser checks.
+**Before you start:** (1) `gh` still fails TLS inside the local sandbox (`x509: OSStatus -26276`), and reviewers' sandboxes refuse localhost Postgres, Chromium, and ports; `sandbox.network.allowLocalBinding: true` would let QA run its own browser checks.
 
 **Run:** `/ramble-pm` in a new desktop chat on the main checkout (`/Users/davidfleming/Workspace/ramble`). **Model and effort:** Opus, high (owner decisions).
 
