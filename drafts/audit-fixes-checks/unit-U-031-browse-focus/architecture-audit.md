@@ -1,0 +1,29 @@
+FAIL
+
+## architecture-audit: U-031 "browse focus and announcements, BE-14" (head 222c8f2)
+
+Rules: `.claude/standards/architecture.md` (project, B1 to B17)
+
+### Blocking
+- B8, `src/components/FilterBar/WhenDetails.tsx:1` and `src/components/BrowseResults/ResultsHeading.tsx:1`: both carry `'use client'` and neither is on the client islands allowlist. The list names the date picker and calendar, the filter drawer, and the others; a `<details>` disclosure wrapper and a results heading are not on it. The standard says a new island needs Dave's approval first, logged in `docs/plan/delta-log.md`, and the scope manifest then names it. The allowlist needs Dave's update (or he rules these two out and the behaviour is built another way). Neither file was reachable through "the React Aria wrappers behind them", since neither uses React Aria.
+- B8 size, `WhenDetails.tsx` and `ResultsHeading.tsx`: each island is already a leaf (a details element and an h2) and takes the content as `children`/`summary`, so they are close to minimal. One cut remains. `ResultsHeading` is rendered in four branches of `BrowseResults`; the island could be a single focus-only component that renders no markup. Not required if Dave approves the two as written.
+- B2, `src/components/BrowseResults/ResultsHeading.tsx:21-26`: the focus rule (`focusLost` = active element is null or body, AND `arrived`) is decided inside the component and can only be tested through the DOM with `vi.resetModules()`. Fix: a pure `shouldTakeFocus({ arrived, activeIsPage })` in `src/lib/` with a unit test; the effect only reads the DOM and calls `.focus()`.
+- B2, `src/app/(guest)/new-york/browse/page.tsx:12-27`: an async shell builds slug-to-name Maps from the option rows (`bySlug`, a transform) and carries a try/catch fallback to empty Maps (a branch). Shells hold "a branch worth a unit test" never. Fix: `browseTitle` takes the option arrays (`readonly {slug,name}[]`) and builds the lookups itself, tested in `browse.test.ts`; the page then only awaits `getFilterOptions()`. The catch-and-degrade branch is the part to settle: either let the metadata read fail like `BrowseContent`'s read does (and handled by the error boundary), or put the fallback in `src/server/browse.ts` beside the read.
+
+### Non-blocking
+- B8, `ResultsHeading.tsx:7`: module-level `let arrived` is not covered by any standard rule (the standards ban `Date.now()`, `process.env` and I/O in `lib`, and say nothing on client module state). It is not a server leak: effects do not run during SSR, so the flag is only ever set in the browser. It is fragile: it survives client navigation away from and back to browse, so on the return visit the first heading can take focus when focus is on the body; and the test needs `vi.resetModules()` to reset it. A per-mount `useRef` plus a `lib` rule would remove it. Advisory A6 flavour (a client behaviour that wraps a pure decision).
+- B2 audit item (pre-existing), `BrowseResults.tsx` empty and outdated branches: the body copy next to each heading ("Try another day, or take a filter off.", "Nothing to browse yet" companion text, "The list changed while you were reading it.") is still decided in the component by `props.filtered`, while its heading moved to `browseHeading`. The heading and its body text now split across layers. Log as an audit item; fold the body text into the same lib function.
+- B2 audit item (pre-existing), `FilterBar.tsx`: `'Pick a date'` and the `filters.date ? dateChipLabel(...)` choice sit in the component. Not changed by this diff except for moving into the `summary` prop.
+- `WhenDetails.tsx:36`: the "date changed" check is `previous.current === date`, an equality, not a decision worth a lib function.
+- B6/B4 clear: `page.tsx` is in `src/app`, which may import any layer; `getFilterOptions` (`src/server/browse.ts:66`) is `'use cache'`, tagged `tags.catalog`, takes no caller, and returns guest-visible catalog rows only, so the guest-read exemption applies and B14 holds (no cookies, headers or caller read). `unstable_rethrow` is the correct handling for a prerender throw.
+- B17, no duplication found: `browseHeading` returns `view.summary` (built by `resultsSummary`) for results and holds the empty/outdated wording that previously lived inline in `BrowseResults`; it moves wording, it does not copy it. `browseTitle` calls `dateChipLabel` rather than restating it. No `Intl.ListFormat` or title builder exists elsewhere in `src`.
+- B17 placement (audit item, forward-looking): `browseTitle` and `browseHeading` are browse-only composition, so `browse.ts` is the right home today. Two general pieces inside them are not: the `titleList` conjunction formatter ("A, B, and C") and `dateChipLabel` (already general, already living in `browse.ts:259`). Under `drafts/lib-layout-refactor.md` the display-text/label helpers go to `displayText.ts` in PR F and the page modules move to `src/lib/pages/` in PR G. The builder should not move them now (PR C to F own those files, and the plan says one PR at a time). Tell the PR F builder that `titleList` and `dateChipLabel` exist, and that `browseHeading`/`browseTitle` import them from there once it lands.
+
+### Unconfirmed
+- Whether `ResultsHeading` and `WhenDetails` are named in this unit's scope manifest or in a `delta-log.md` entry; the diff touches neither, and I did not see the manifest.
+
+Files audited: `src/components/FilterBar/WhenDetails.tsx`, `src/components/FilterBar/FilterBar.tsx`, `src/components/BrowseResults/ResultsHeading.tsx`, `src/components/BrowseResults/BrowseResults.tsx`, `src/lib/browse.ts`, `src/app/(guest)/new-york/browse/page.tsx`, `src/app/(guest)/new-york/browse/BrowseContent.tsx`, `src/app/(guest)/new-york/browse/page.module.css`, plus tests.
+
+ARCH_VERDICT=REQUEST_CHANGES
+ARCH_SHORTCIRCUIT=0
+ARCH_BLOCKING_COUNT=3
