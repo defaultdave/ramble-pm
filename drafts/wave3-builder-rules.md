@@ -14,6 +14,16 @@ Up to five units are being built in parallel, each in its own worktree. You buil
 - No real third-party accounts or keys. Adapters for external services must work with none configured (fake or no-op), and tests never call the network.
 - The database client is lazy: importing it never connects, and a use without `DATABASE_URL` throws. Its Proxy has only a `get` trap, so in unit tests mock the module rather than spying on the client.
 
+## Reuse before writing (DRY; owner rule, 2026-10-28)
+Before you write any function, hook, component, constant, or Zod schema, look for one that already does the job or nearly does:
+1. **Search by concept, not just by name.** List what exists: `git grep -n -E "^export (async )?(function|const|class|type)" -- src/lib src/server src/components ':!*.test.*' ':!*.stories.*'`. Then grep for the idea in several words (for a duration label: `duration`, `minutes`, `hr`; for a price: `price`, `priceMinor`, `money`, `From`). Read the candidates, including page modules such as `src/lib/home.ts`, `browse.ts`, and `experiencePage.ts`, where general helpers have ended up before.
+2. **Use it, or extend it.** If something fits, call it. If it nearly fits, extend it (a parameter, an option, a variant) with a test for the new case, rather than writing a near copy. If extending would change what its current callers get, say so in the report instead.
+3. **Shared code lives in a shared module.** A helper that two pages need, or that is not about one page (formatting money, durations, dates, the New York day, addresses, read-or-refuse wrappers, card building), goes in a shared module named for what it does (`src/lib/money.ts`, `src/lib/text.ts`, or a new one such as `src/lib/duration.ts`), never in a page module. Page modules hold only what composes that page. If you find a general helper inside a page module and you need it, move it to a shared module (callers updated, tests moved) in a separate commit, and say so in the report.
+4. **Logic leaves components.** A component renders; any rule, label, formatting, or calculation it needs is a plain function in `src/lib` with a unit test, so it can be found and reused. No helpers defined inside component files beyond tiny render-only pieces.
+5. **Ask before inventing a new shared abstraction.** A new hook, a new shared component, or a new cross-cutting module (anything other pages would be expected to use) is named in the report under Decisions with the alternatives you checked, so the PM can confirm it is not a duplicate.
+
+Your final report gains a **Reuse** section: existing helpers you used, helpers you extended (and why), helpers you moved to a shared module, and each new export with the existing ones you checked and why none fit.
+
 ## Quality bar
 Waves 1 and 2 kept finding the same defect classes, one instance per round. Sweep your whole diff for each class before you finish, not only the obvious instance:
 1. **Unbounded work:** every input has a size limit, every loop and retry has a cap, every query that can grow has a limit. Regexes over user input are linear (no nested quantifiers; CodeQL flags them).
@@ -55,6 +65,7 @@ If you add a migration, generate it with `pnpm db:generate --name <name>` from t
   1. Branch and head SHA.
   2. What was built, by file group.
   3. Decisions you made where the manifest or design doc left room, each with its reason.
-  4. Gates run, with counts (tests passed, e2e passed).
-  5. Anything in IN SCOPE you did not do, and why.
-  6. Suggestions (adjacent work you noticed and did not build).
+  4. Reuse: existing helpers used, extended, or moved to a shared module, and each new export with what you checked first.
+  5. Gates run, with counts (tests passed, e2e passed).
+  6. Anything in IN SCOPE you did not do, and why.
+  7. Suggestions (adjacent work you noticed and did not build).

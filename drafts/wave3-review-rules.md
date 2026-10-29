@@ -36,3 +36,9 @@ FAIL if and only if there is at least one blocking finding.
 - Architecture audits: list EVERY B2 decision in the data layer and route handlers in round 1 (every comparison, threshold, or state rule that yields a domain result), not the first one found. A finding that existed in round 1 code and is reported only in a later round counts against the audit, not the builder.
 - Severity is fixed by the rule, not the round: a B2 decision is blocking whenever it is found.
 - Mutation testing runs in your own scratch worktree (`git -C <worktree> worktree add <scratch path> HEAD --detach`), removed when you finish. Never mutate the builder's worktree: other reviewers and the builder share it.
+
+## Added 2026-10-28: duplication (DRY; owner rule)
+- Every reviewer sweeps the diff for a fifth defect class, **duplication**, against the whole repository, not only the diff: for each new export, hook, component, constant, or schema, search `src/lib`, `src/server`, and `src/components` by concept (several words for the idea, not only the name) for one that already does the job or nearly does.
+- **Blocking:** a new function, hook, component, or schema that duplicates or nearly duplicates an existing one that could have been used or extended; a general helper (money, durations, dates, the New York day, addresses, labels, card building, read wrappers) added to a page module instead of a shared module; a rule, label, or calculation defined inside a component instead of a tested `src/lib` function. Name the existing code and say how to reuse or extend it.
+- **Non-blocking, logged:** duplication that existed before this diff. Report it under Non-blocking with "audit item" so the PM logs it in `audits/` in the ramble-pm repo.
+- Check the builder's **Reuse** section against what you find; a missing or wrong Reuse section is a finding.
