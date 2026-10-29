@@ -1,0 +1,5 @@
+PASS (round 4, merge head 68b178f). Focused re-check of the merge of `integration` (`820c38d`, PR 222) into round 3's head `50b1116`.
+Merge check: `diff 50b1116 68b178f` is byte-identical to `diff 4714de3 820c38d` (PR 222's 19 files), and `diff 820c38d 68b178f` to `diff 4714de3 50b1116` (U-005's 36 files). No overlap; 4714de3 to 68b178f is 55 files, exactly the union. No U-005 file changed in the merge.
+Round 3 anchors hold at the same lines: `src/lib/jobs.ts:124` partitionClaims, applied at `src/server/db/jobs.ts:69`; `src/lib/jobs.ts:206` claimFoundWork, used at `src/server/jobs/drain.ts:123`; `src/lib/jobs.ts:213` RunOutcome and DrainReport; `src/lib/jobs.ts:299` heartbeatDue; `src/server/db/rateLimits.ts:63` SKIP LOCKED purge; `src/server/jobs/drain.ts:31` `alerts.raise('job-dead', …)`; `src/lib/rateLimits.ts:13,69` the pulse_failed surface.
+PR 222 interaction: none of its files is imported by or matches a U-005 file; its `.gitignore` change ignores no U-005 file; no ESLint config changed.
+Non-blocking: round 3's items unchanged (database-wide lock-wait poll, claim-order assumption in the `held` test, three stale TODO(U-005) elsewhere).
