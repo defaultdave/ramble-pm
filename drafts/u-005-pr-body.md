@@ -21,7 +21,7 @@ REFERENCE CODE: docs/plan/01-design-doc.md 4.2, 4.2.1, 4.2.3 rule 8, 5.7; ADR 00
 - `last_error` holds the error name and a redacted message cut to 1,900 characters.
 
 ## Gates (on the merge head)
-format:check, lint, typecheck, knip; test 3,579; build with no `DATABASE_URL`; gitleaks over the branch range (no leaks). QA round 4: QA_LINE
+format:check, lint, typecheck, knip; test 3,579; build with no `DATABASE_URL`; gitleaks over the branch range (no leaks). QA round 4 on the merge head: test:db 769 (a known 5 s timeout in `email.db.test.ts`, not a U-005 file, in 1 of 4 runs), db:check and `db:generate` with no changes, e2e 153, storybook:test 154, and the real route on a production build (8 claimed: 7 succeeded, 1 lapsed row dead; no token and GET both 401).
 
 ## The pulse workflow (Dave)
 `.github/workflows/pulse.yml` is on `unit/U-005-pulse-workflow` (the App cannot push workflows). It needs its own push, PR, and bypass merge, then `PULSE_SECRET` in Vercel and in Actions secrets and the `PULSE_URL` repository variable. Until then the drain runs only when called.

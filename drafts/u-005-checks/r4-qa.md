@@ -1,0 +1,6 @@
+PASS (round 4, merge head 68b178f). Focused re-check of the merge of `integration` (`820c38d`, PR 222) into round 3's head `50b1116`, in a scratch copy.
+Merge check: `diff 50b1116 68b178f` equals `diff 4714de3 820c38d`, and `diff 820c38d 68b178f` equals `diff 4714de3 50b1116` (md5 compared). Exactly the union of both sides.
+pnpm test 3,579; test:db 769 in 14 files, clean in 3 of 4 full runs; CI schema check on a fresh database (db:migrate applied, db:check fine, db:generate no changes, migrations byte-identical); e2e 153 through the shared lock; storybook:build, storybook:test 154.
+Real route on a production build, fresh database, 7 noop jobs plus a lapsed running row at 3/3 attempts: POST without token 401; GET with token 401; POST with token {"claimed":8,"succeeded":7,"retried":0,"dead":1,"lost":0,"unrecorded":0,"left":0,"purged":0}, claimed = sum; the database then held 7 succeeded at attempts 1 and 1 dead at attempts 3; a second drain returned all zeros.
+Non-blocking: tests/db/email.db.test.ts "refuses the 601st verified request in a minute" timed out at 5 s in 1 of 4 full test:db runs (passes alone 79/79; seen in round 3 too, 2 of 7). Not a U-005 file; audit item.
+No UI change, so no before-and-after evidence.
