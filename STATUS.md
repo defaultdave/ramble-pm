@@ -190,7 +190,7 @@ One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane
 
 ### lead
 
-**Before you start:** (1) Answer `drafts/owner-decisions-2026-10-29.md` (approve all, or name the exceptions). (2) All four lane chats were opened on 2026-10-29 13:50; check their rows in `## Lanes` before opening another. (3) Push the memory branch and open its PR: `git -C /Users/davidfleming/Workspace/ramble push -u origin pm/memory-2026-10-29` then `gh pr create --repo defaultdave/ramble --base main --head pm/memory-2026-10-29 --title "PM bookkeeping: memory lessons from the lanes" --body "Lessons from the home-fixes, critical-path and lead lanes (2026-10-28 to 29)."` and bypass-merge it. (4) `bun scripts/plan/board-dates.ts --run` from the ramble checkout (gh cannot read the keychain inside the PM's sandbox).
+**Before you start:** (1) Answer `drafts/owner-decisions-2026-10-29.md` (approve all, or name the exceptions). (2) All four lane chats were opened on 2026-10-29 13:50; check their rows in `## Lanes` before opening another. (3) Bypass-merge PR 230 (the PM memory lessons; pushed and opened 2026-10-29): `gh pr merge 230 --repo defaultdave/ramble --merge --admin`. Board dates were synced by Dave on 2026-10-29.
 
 **Run:** `/ramble-pm` in a new desktop chat on the main checkout (`/Users/davidfleming/Workspace/ramble`). **Model and effort:** Opus or Fable, high (owner decisions, coordination of four lanes).
 
