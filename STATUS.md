@@ -8,7 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `lead` | Shared status, `## Next`, roadmap, memory; the deep review decisions with Dave | PM lead, 2026-10-29 (day) | handed off | 2026-10-29 14:40 |
+| `lead` | Shared status, `## Next`, roadmap, memory; the deep review decisions with Dave | PM lead, 2026-10-29 (roadmap decisions fix) | active | 2026-10-29 15:55 |
 | `critical-path` | U-005 then U-014a into `integration` (released 2026-10-29 12:10), PR 222 through the next promotion; then U-014b, U-048 (critical, holds and webhook side of the money path) | critical-path lane, 2026-10-29 (afternoon) | handed off | 2026-10-29 13:05 |
 | `audit-fixes` | Every open audit item that is a clear fix and not part of the `src/lib` refactor: home `open` rows, BE-13, BE-8, BE-7 (with a `src/lib`-owned predicate; PR D of the refactor consolidates it), BE-14, BE-1, nightly N1029-1 to 7, 10, 11; fix-rounds PRs with before-and-after evidence | PM audit-fixes, 2026-10-29 (afternoon) | active | 2026-10-29 13:50 |
 | `e2e-money` | The end-to-end prototype on the fake payment adapter: stub glue PR first, then U-019, U-015, U-045b, U-016, U-054, U-047a, U-047b, U-049, U-050, U-040, U-041 (U-014b and U-048 in `critical-path`) | e2e-money lane, 2026-10-29 (afternoon) | active | 2026-10-29 13:13 |
