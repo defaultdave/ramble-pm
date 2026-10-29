@@ -1,6 +1,6 @@
 {
  "asOf": "2026-10-29",
- "headline": "The Prototype is live and public at ramble-sand.vercel.app: home, browse, and the experience page. The first audit pass (home) found 65 verified items; nine clear fixes go out next, and 19 need your decision, led by the src/lib layout for the DRY refactor and the caching direction. A nightly audit now runs on days with merges.",
+ "headline": "The Prototype is live and public at ramble-sand.vercel.app. The deep review is under way: the home pass found 65 verified items (nine clear fixes next, 19 for your decision, led by the src/lib layout for the DRY refactor), and the browse and experience pass found 21 (one high: unstyled 404 and error pages). Beside it, U-005 is in review and U-014a is building, both unpushed until the review ends.",
  "recommended": "Plan, Dave 12.5 h",
  "phases": [
   {
@@ -102,6 +102,10 @@
   {
    "what": "Home audit: 19 items for your call (audits/home-2026-10-28.md), led by the src/lib layout (H-18, H-42) and the caching direction (H-22, H-34 to H-39)",
    "effect": "Sets the DRY refactor and how home loads before more pages copy the patterns."
+  },
+  {
+   "what": "PRD-68 lab method: simulated or applied Lighthouse throttling (audit BE-21)",
+   "effect": "None now; decides whether browse LCP 3.07 s is a fail or a pass."
   },
   {
    "what": "gh inside the sandbox: trust the proxy or allow api.github.com",
@@ -238,7 +242,7 @@
  "watch": [
   {
    "what": "Deep review under way",
-   "detail": "Home pass done (65 findings); browse and experience page pass next, then the retrospective and the agent-log audit."
+   "detail": "Home pass done (65 findings) and browse and experience pass reported (21); the critical path (U-005, U-014a) builds beside it, unpushed. Then the retrospective and the agent-log audit."
   },
   {
    "what": "Audit items are tracked, not kept in chat",

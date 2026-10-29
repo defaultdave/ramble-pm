@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 29, 2026.** The Prototype is live and public at ramble-sand.vercel.app: home, browse, and the experience page. The first audit pass (home) found 65 verified items; nine clear fixes go out next, and 19 need your decision, led by the src/lib layout for the DRY refactor and the caching direction. A nightly audit now runs on days with merges.
+**As of Oct 29, 2026.** The Prototype is live and public at ramble-sand.vercel.app. The deep review is under way: the home pass found 65 verified items (nine clear fixes next, 19 for your decision, led by the src/lib layout for the DRY refactor), and the browse and experience pass found 21 (one high: unstyled 404 and error pages). Beside it, U-005 is in review and U-014a is building, both unpushed until the review ends.
 
 | Milestone | Likely |
 |---|---|
@@ -25,6 +25,7 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Decisions needed**
 
+- undefined.
 - undefined.
 - undefined.
 - undefined.
