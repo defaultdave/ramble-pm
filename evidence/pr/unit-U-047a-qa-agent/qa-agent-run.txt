@@ -1,0 +1,9 @@
+ ✓ |db| tests/db/qa-agent.db.test.ts > qa-agent > fresh hold 57ms
+ ✓ |db| tests/db/qa-agent.db.test.ts > qa-agent > parallel twin calls (round 1) 30ms
+ ✓ |db| tests/db/qa-agent.db.test.ts > qa-agent > parallel twin calls (round 2) 22ms
+ ✓ |db| tests/db/qa-agent.db.test.ts > qa-agent > parallel twin calls (round 3) 26ms
+ ✓ |db| tests/db/qa-agent.db.test.ts > qa-agent > another device equals a missing hold, nothing written 14ms
+ ✓ |db| tests/db/qa-agent.db.test.ts > qa-agent > expired hold writes nothing 13ms
+ ✓ |db| tests/db/qa-agent.db.test.ts > qa-agent > sixth call 47ms
+ ✓ |db| tests/db/qa-agent.db.test.ts > qa-agent > provider failure then retry 23ms
+      Tests  8 passed (8)
