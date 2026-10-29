@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 29, 2026.** The Prototype click-through is in main and on the seeded production site: home, browse, and the experience page (U-039, with cover photos on cards). Two fixes from your review are in their rounds (browse showing nothing unfiltered, the search date defaulting to today), then the home audit pass runs as the first slice of the deep review.
+**As of Oct 29, 2026.** The Prototype click-through is in main and live. The deep review is under way: the home and the browse and experience audit passes run side by side. Beside it, the critical path restarts: U-005 (jobs and pulse) is building and U-014a (holds core) has its pattern note in draft for your approval; both stay unpushed until the review ends. Two small fixes (U-018 tests, U-024 focus) run as follow-up PRs.
 
 | Milestone | Likely |
 |---|---|
