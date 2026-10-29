@@ -1,6 +1,6 @@
 {
- "asOf": "2026-10-28",
- "headline": "Home, browse, seed data, and photos are in main: 20 of the 21 Prototype units are done. One answer is left: U-111's promotion from integration to main. Then the experience page (U-039, with cover photos on cards) completes the click-through, about two working days later.",
+ "asOf": "2026-10-29",
+ "headline": "The Prototype click-through is in main and on the seeded production site: home, browse, and the experience page (U-039, with cover photos on cards). Two fixes from your review are in their rounds (browse showing nothing unfiltered, the search date defaulting to today), then the home audit pass runs as the first slice of the deep review.",
  "recommended": "Plan, Dave 12.5 h",
  "phases": [
   {
@@ -104,10 +104,6 @@
    "effect": "None on dates; it is the rate the configured setting starts with."
   },
   {
-   "what": "U-111 promotion: the PM opens and merges the promotion PR under your login, or you run it",
-   "effect": "The last gate on the Prototype path: U-039 (experience page) starts as soon as U-111 is in main."
-  },
-  {
    "what": "Before holds and checkout start: whether B6 covers caller-less configuration reads and transaction-joined writes",
    "effect": "None now; decides how U-014a and U-047a read settings and record acceptances."
   }
@@ -138,6 +134,10 @@
   }
  ],
  "decisionsMade": [
+  {
+   "when": "Oct 29",
+   "what": "U-039 experience page merged (PR 214): the Prototype click-through is complete"
+  },
   {
    "when": "Oct 28",
    "what": "An audit pass after every section or major feature, tracked in audits/; the home pass is first (you)"
@@ -217,8 +217,8 @@
  ],
  "watch": [
   {
-   "what": "One answer gates the rest of the Prototype",
-   "detail": "U-111's promotion. Blob stores are not needed for the demo; card photos are decided (U-039)."
+   "what": "Prototype complete; deep review next",
+   "detail": "Home audit pass first, once the two review fixes merge; findings tracked in audits/."
   },
   {
    "what": "Audit items are tracked, not kept in chat",

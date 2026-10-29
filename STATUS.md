@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-10-28 (U-111 promoted (PR 211) and synced (PR 212); production migrated and seeded as the demo site (PR 213 plus Dave's runs); U-039 building)
+**Updated:** 2026-10-29 (Prototype click-through complete in `main`: U-039 merged (PR 214); production migrated and seeded; owner-reported fixes for browse and home in review; home audit pass queued)
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
 ## Done
@@ -127,13 +127,13 @@ Open item from the ADR 0007 measurement amendment (2026-10-18): what New York an
 Legal and vendor questions for the real job, logged, not blocking the demo: Ramble holding host money and the New York gift law (counsel, Q-16); card refund age limit at 12 months (ask Stripe); Stripe's Connect review time.
 
 ## Next
-P5 under way. Done in `main`: U-118, U-001, U-002, U-023, U-003, U-116, U-024, U-009, U-025, U-026, U-117, U-011, U-008b, U-027, U-007, U-008a, U-045a, U-006, U-012, U-018, U-030, U-021a, U-031, U-010; U-102 and U-119 partly. In `integration`, waiting for the next promotion: U-111. Third promotion done 2026-10-26 (PR 201, `e4c51b3`; sync back PR 203).
+P5 under way. Done in `main`: U-118, U-001, U-002, U-023, U-003, U-116, U-024, U-009, U-025, U-026, U-117, U-011, U-008b, U-027, U-007, U-008a, U-045a, U-006, U-012, U-018, U-030, U-021a, U-031, U-010, U-111, U-039; U-102 and U-119 partly. In `integration`, waiting for the next promotion: U-111. Third promotion done 2026-10-26 (PR 201, `e4c51b3`; sync back PR 203).
 
 1. **Finish the Prototype (PM), in this order:**
    (a) ~~PR 210 (U-021a S2 follow-up)~~ merged 2026-10-28.
    (b) ~~Done 2026-10-28~~ (all four checks pass at `ecf21d2`): on U-010's branch, retargeted the three `TODO(U-010)` markers (`src/components/BrowseResults/BrowseResults.tsx:44,54`, `src/components/HomeModules/HomeCardItem.tsx:7`) and `docs/runbooks/home.md:20` to U-039, in an isolated worktree on a `wip/` branch; rerun spec-compliance on the new head and post all four checks there.
    (c) ~~U-010~~ merged 2026-10-28 (PR 205, `3384caa`; fake storage allowed in production, DECISIONS).
-   (d) ~~U-111 promotion~~ done 2026-10-28 under Dave's login (PR 211, `91849a0`; sync back PR 212 merged). U-039 experience page, building since 2026-10-28, with cover photos on the home and browse cards added to its scope (DECISIONS 2026-10-28): builder in an isolated worktree, full fan-out with a11y and Figma (03 Experience 46:678, 03b 46:897, D03 65:358), fix rounds, PM pushes. Board In Progress at launch.
+   (d) ~~U-111 promotion~~ done 2026-10-28 under Dave's login (PR 211, `91849a0`; sync back PR 212 merged). U-039 experience page **merged 2026-10-29 (PR 214, `104dfca`, board Done, issue #45 closed)**, with cover photos on the home and browse cards added to its scope (DECISIONS 2026-10-28): builder in an isolated worktree, full fan-out with a11y and Figma (03 Experience 46:678, 03b 46:897, D03 65:358), fix rounds, PM pushes. Board In Progress at launch.
    (f) Now that U-010 has merged, a small seed follow-up: three lines still say "U-010 is not in main" (`docs/runbooks/seed.md:40`, `src/lib/seed/coverage.ts:664`, and the generated `docs/seed/coverage-matrix.md:16`); reword them to say the seed writes no photo rows yet (`TODO(U-021b)`).
    (g) Small test follow-up (QA, non-blocking): pin that `vercel-blob` still requires both tokens when `VERCEL_ENV=production` (`src/lib/storage.test.ts`); a mutation dropping that check survives today.
    (h) Production demo (Dave, DECISIONS 2026-10-28): PR 213 merged; production migrated (after the GitHub secret was pointed at Vercel's production database) and seeded 2026-10-28. Left: Dave redeploys production; check the stale database the first migrate run touched.

@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 28, 2026.** Home, browse, seed data, and photos are in main: 20 of the 21 Prototype units are done. One answer is left: U-111's promotion from integration to main. Then the experience page (U-039, with cover photos on cards) completes the click-through, about two working days later.
+**As of Oct 29, 2026.** The Prototype click-through is in main and on the seeded production site: home, browse, and the experience page (U-039, with cover photos on cards). Two fixes from your review are in their rounds (browse showing nothing unfiltered, the search date defaulting to today), then the home audit pass runs as the first slice of the deep review.
 
 | Milestone | Likely |
 |---|---|
@@ -25,7 +25,6 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Decisions needed**
 
-- undefined.
 - undefined.
 - undefined.
 
