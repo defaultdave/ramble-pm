@@ -8,8 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `lead` | Shared status, `## Next`, roadmap, memory; the deep review decisions with Dave | Concurrent work chats | handed off | 2026-10-29 00:35 |
-| `home-fixes` | Home audit fix swarm, nine items as five PRs: 224, 225, 226, 227, 228 all merged (H-19, H-20, H-21, H-24, H-27, H-29, H-30, H-31, H-32 closed, evidence in `evidence/pr/`). The lead removes this row at its next start. | Concurrent work chats | closed | 2026-10-29 01:00 |
+| `lead` | Shared status, `## Next`, roadmap, memory; the deep review decisions with Dave | PM lead, 2026-10-29 (day) | active | 2026-10-29 11:15 |
 | `critical-path` | U-005 (review rounds on `wip/U-005-r<n>`), U-014a (`unit/U-014a`), PR 222 through the next promotion; both units unpushed until the deep review ends | Parallel work during audit | handed off | 2026-10-29 00:20 |
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
