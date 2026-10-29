@@ -198,29 +198,29 @@ Options: none; an owner check.
 |---|---|---|---|
 | H-41 (a) | Session window edges | browse's: start >= from, start < to, both pages | yes (2026-10-29) |
 | H-41 (b) | Sold-out browse days | not offered, do not match | yes (2026-10-29) |
-| H-26 | One category address | `/new-york/things-to-do/<slug>`, rail switches in U-035 | |
-| H-61 | PageError title size | `display-m` | |
-| Zero price | Zero-price wording | "Free", never "From Free" or "$0"; a free lowest option reads "Free" | |
-| H-22 | Measure Neon round trip | yes, PM on a preview, p50 and p95 | |
-| H-1 | Home read shape | by H-22: under 150 ms p95 base, above it variant b; never a | |
-| H-34 | Blocking CSS and h1 | performance PR after H-22, no decision | |
-| H-35 | Cache handler comment | fix the comment now; verify stale and `updateTag` on a preview; remote only if it fails | |
-| H-36 | Week key width | keep one minute | |
-| H-37 | Fold the cold reads | yes, small data PR, home and browse | |
-| H-38 | Index and sold-out in SQL | index now; rule in SQL via a lib-owned predicate | |
-| H-39 | Variant b conditions | acceptance criteria, only if b | |
-| H-47 | Home cache tags | listing stops sending `home`; `catalog` off `getHomeContent` | |
-| H-28 | Fraunces optical size | record a departure (wght only) | |
-| H-33 | 44 px targets | logo, nav and footer links all to 44 px | |
-| H-65 | Try again width | content width from 768 px, via H-61 | |
-| H-66 | Section spacing | record a departure: 32 px phone, 48 px desktop | |
-| H-67 | Picks card width | match Figma: full column, 8 px peek | |
-| H-68 | Gift guide copy | fallback to the collection's title and summary; real count | |
-| H-70 | Field-height token | add `size/field-height` 52 in Figma; B16 unchanged | |
-| H-73 | `color-scheme` on other layouts | the three layouts import `base.css` | |
-| H-80 | Line-height units | unitless, computed by the token generator | |
-| N1029-7 | Page gutter | 24 px at every width, one `--gutter` token | |
-| H-23 | Live a11y sweep | close on the nightly run; PM runs the two gaps | |
-| H-50 | Cover read failure | B: cards without images, logged, home and browse | |
-| N1029-18 | Standards file | owner adds `image` (line 19) and `sharp` (line 38) | |
-| H-11 | Stray Neon database | owner checks the console and deletes it if stale | |
+| H-26 | One category address | `/new-york/things-to-do/<slug>`, rail switches in U-035 | yes (2026-10-29) |
+| H-61 | PageError title size | `display-m` | yes (2026-10-29) |
+| Zero price | Zero-price wording | "Free", never "From Free" or "$0"; a free lowest option reads "Free" | yes (2026-10-29) |
+| H-22 | Measure Neon round trip | yes, PM on a preview, p50 and p95 | yes (2026-10-29) |
+| H-1 | Home read shape | by H-22: under 150 ms p95 base, above it variant b; never a | yes (2026-10-29) |
+| H-34 | Blocking CSS and h1 | performance PR after H-22, no decision | yes (2026-10-29) |
+| H-35 | Cache handler comment | fix the comment now; verify stale and `updateTag` on a preview; remote only if it fails | yes (2026-10-29) |
+| H-36 | Week key width | keep one minute | yes (2026-10-29) |
+| H-37 | Fold the cold reads | yes, small data PR, home and browse | yes (2026-10-29) |
+| H-38 | Index and sold-out in SQL | index now; rule in SQL via a lib-owned predicate | yes (2026-10-29) |
+| H-39 | Variant b conditions | acceptance criteria, only if b | yes (2026-10-29) |
+| H-47 | Home cache tags | listing stops sending `home`; `catalog` off `getHomeContent` | yes (2026-10-29) |
+| H-28 | Fraunces optical size | record a departure (wght only) | yes (2026-10-29) |
+| H-33 | 44 px targets | logo, nav and footer links all to 44 px | yes (2026-10-29) |
+| H-65 | Try again width | content width from 768 px, via H-61 | yes (2026-10-29) |
+| H-66 | Section spacing | record a departure: 32 px phone, 48 px desktop | yes (2026-10-29) |
+| H-67 | Picks card width | match Figma: full column, 8 px peek | yes (2026-10-29) |
+| H-68 | Gift guide copy | fallback to the collection's title and summary; real count | yes (2026-10-29) |
+| H-70 | Field-height token | add `size/field-height` 52 in Figma; B16 unchanged | yes (2026-10-29) |
+| H-73 | `color-scheme` on other layouts | the three layouts import `base.css` | yes (2026-10-29) |
+| H-80 | Line-height units | unitless, computed by the token generator | yes (2026-10-29) |
+| N1029-7 | Page gutter | 24 px at every width, one `--gutter` token | yes (2026-10-29) |
+| H-23 | Live a11y sweep | close on the nightly run; PM runs the two gaps | yes (2026-10-29) |
+| H-50 | Cover read failure | B: cards without images, logged, home and browse | yes (2026-10-29) |
+| N1029-18 | Standards file | owner adds `image` (line 19) and `sharp` (line 38) | yes (2026-10-29) |
+| H-11 | Stray Neon database | owner checks the console and deletes it if stale | yes (2026-10-29) |

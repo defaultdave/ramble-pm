@@ -100,10 +100,6 @@
   ],
   "decisionsNeeded": [
     {
-      "what": "Deep-review owner decisions: 22 items in one document, drafts/owner-decisions-2026-10-29.md, with a recommendation each; approve all or name exceptions",
-      "effect": "Unblocks the caching direction (H-1), the design departures, and PR D of the refactor (H-41)."
-    },
-    {
       "what": "Builder limit: five agent builders machine-wide (one Postgres container, the e2e lock) is the binding constraint for Sprint 1 plus the money chain plus the audit fixes in two days",
       "effect": "Raising it needs a second database container; otherwise Sprint 1's remainder fills idle slots after the money chain."
     },
@@ -118,12 +114,12 @@
   ],
   "actionsForDave": [
     {
-      "what": "Answer drafts/owner-decisions-2026-10-29.md (28 rows): approve all or name exceptions; the H-41 rows gate the refactor's PR D",
+      "what": "Figma: add size/field-height = 52 and size/gutter = 24 as variables (H-70, N1029-7), then tell the lead",
       "when": "Today"
     },
     {
-      "what": "Push and open the PM memory PR (pm/memory-2026-10-29) and run bun scripts/plan/board-dates.ts --run; both need your gh login",
-      "when": "Today"
+      "what": "Neon console: delete the stray database from the first migrate run if it is stale (H-11)",
+      "when": "Any time"
     },
     {
       "what": "Promote integration to main when the critical-path lane reports U-005 and U-014a merged (daily this week, not weekly)",
@@ -154,6 +150,10 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Oct 29",
+      "what": "All 28 deep-review decisions approved as recommended: H-41 window rules, caching measured before changed (H-22, H-1), two Figma departures recorded, 44 px targets, one PageError, cards render without a failed cover (you)"
+    },
     {
       "when": "Oct 29",
       "what": "Four lane chats opened: critical-path, audit-fixes, e2e-money (stub glue first, then the real chain on the fake adapter), lib-refactor (you)"

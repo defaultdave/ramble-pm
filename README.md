@@ -31,7 +31,6 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 - undefined.
 - undefined.
 - undefined.
-- undefined.
 
 **Held up**
 

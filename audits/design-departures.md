@@ -7,3 +7,5 @@ Where the built site knowingly differs from the Figma file `Ramble Core Flow Wir
 | 2026-10-18 | Brand assets | Stand-in wordmark and illustrations instead of final brand assets | Tone checklist B3 waiver at the P3 gate | Owner |
 | 2026-10-18 | Photography | Placeholder photos until the seed photos (U-021b) | Tone checklist B4, deferred | Owner |
 | 2026-10-28 | Browse results | "Show more" replaces the grid rather than appending | U-031 round 3 made the FilterBar a server component; appending needs client state | PM, logged in DECISIONS |
+| 2026-10-29 | Display type | Self-hosted Fraunces carries the weight axis only, no optical size, so display headings set slightly wider than Figma and the desktop h1 wraps one word earlier | The opsz subset adds about 84 KB in front of the LCP heading (H-28) | Owner |
+| 2026-10-29 | Home sections | 32 px between sections on phones and 48 px on desktop, about 16 px more than the Figma frames at each boundary | Figma is inconsistent between frames; the chosen values keep the rail padding that gives the focus ring room (H-66) | Owner |
