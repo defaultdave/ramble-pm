@@ -69,3 +69,9 @@ If you add a migration, generate it with `pnpm db:generate --name <name>` from t
   5. Gates run, with counts (tests passed, e2e passed).
   6. Anything in IN SCOPE you did not do, and why.
   7. Suggestions (adjacent work you noticed and did not build).
+
+## Evidence (owner rule, 2026-10-29)
+Every change the owner can see gets pictures in the PR. Before you finish a UI change (a page, a component, a state, a layout or theme rule):
+1. Capture **before and after** PNGs of the same view at the widths that matter for the change (at least one phone width and one desktop width, light and dark when a colour or scheme rule changed), "before" from a scratch worktree at `origin/<BASE>` (`git worktree add <scratch> origin/<BASE> --detach` under `$TMPDIR`, removed afterwards). Name them `<view>-<width>-<scheme>-before.png` and `...-after.png`. Where the change is an interaction (focus, hover, a transition, a breakpoint switch), add one short recording: Playwright `recordVideo` to webm, converted to a GIF with `ffmpeg -i <webm> -vf "fps=10,scale=800:-1" <name>.gif` if `ffmpeg` is installed, else keep the webm.
+2. Copy them into the ramble-pm repo at `evidence/pr/<branch name with / replaced by ->/` (for example `evidence/pr/unit-U-030-hero/`), under 2 MB each, at most about 12 files. `bun scripts/plan/site.ts dir` prints the ramble-pm path. Do not publish ramble-pm; the PM does.
+3. List every file in your report under a **Evidence** heading with one line saying what each shows. The PM embeds them in the PR body as `![<what it shows>](https://raw.githubusercontent.com/defaultdave/ramble-pm/main/evidence/pr/<dir>/<file>)`.

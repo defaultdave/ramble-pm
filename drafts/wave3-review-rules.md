@@ -42,3 +42,6 @@ FAIL if and only if there is at least one blocking finding.
 - **Blocking:** a new function, hook, component, or schema that duplicates or nearly duplicates an existing one that could have been used or extended; a general helper (money, durations, dates, the New York day, addresses, labels, card building, read wrappers) added to a page module instead of a shared module; a rule, label, or calculation defined inside a component instead of a tested `src/lib` function. Name the existing code and say how to reuse or extend it.
 - **Non-blocking, logged:** duplication that existed before this diff. Report it under Non-blocking with "audit item" so the PM logs it in `audits/` in the ramble-pm repo.
 - Check the builder's **Reuse** section against what you find; a missing or wrong Reuse section is a finding.
+
+## Added 2026-10-29: evidence (owner rule)
+- The qa-agent check looks at the builder's before-and-after files in `evidence/pr/<dir>/` in the ramble-pm repo, adds its own where the builder's are missing or do not show the finding (same naming, same folder), and names each file it relied on in the verdict under a **Evidence** line, one file per line with what it shows. The PM embeds them in the posted check summary and the PR body, so the owner can see the change without running it.
