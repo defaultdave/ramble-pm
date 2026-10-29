@@ -102,6 +102,18 @@ ol.decisions li h3::before { content: counter(d) ". "; color: var(--tomato); }
 table { border-collapse: collapse; width: 100%; font-size: 14px; }
 th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-2); font-weight: 600; }
+.standup { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.standup > div { background: var(--sheet); border: 1px solid var(--rule); border-top: 4px solid var(--rule); padding: 12px 14px 14px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.standup ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; }
+.standup .done { border-top-color: var(--ok); }
+.standup .today { border-top-color: var(--agent); }
+.standup .decide { border-top-color: var(--tomato); }
+.standup .held-us { border-top-color: var(--marigold); }
+.standup-day { display: grid; gap: 10px; padding-top: 12px; }
+details summary { cursor: pointer; font-size: 14px; color: var(--ink-2); }
+@media (max-width: 860px) { .standup { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .standup { grid-template-columns: minmax(0, 1fr); } }
+section[hidden], details[hidden] { display: none; }
 .panel { background: var(--sheet); border: 1px solid var(--rule); padding: 4px 6px; }
 .scroll { overflow-x: auto; min-width: 0; }
 .actions { display: grid; gap: 8px; }
@@ -170,6 +182,15 @@ footer code { font-size: 12px; }
     <div class="phases" id="phases" aria-label="Phases"></div>
   </header>
 
+  <section aria-labelledby="standup-h" id="standup-section" hidden>
+    <div class="section-head">
+      <h2 id="standup-h">Daily standup</h2>
+      <p class="muted num" id="standup-date"></p>
+    </div>
+    <div class="standup" id="standup"></div>
+    <details id="standup-earlier" hidden><summary>Earlier standups</summary><div id="standup-older"></div></details>
+  </section>
+
   <section aria-labelledby="dates-h">
     <div class="section-head">
       <h2 id="dates-h">Key dates</h2>
@@ -185,7 +206,7 @@ footer code { font-size: 12px; }
 
   <section class="two">
     <div class="stack">
-      <h2>Decisions needed from you</h2>
+      <h2 id="decisions-h">Decisions needed from you</h2>
       <ol class="decisions" id="decisions"></ol>
     </div>
     <div class="stack">
@@ -273,6 +294,41 @@ footer code { font-size: 12px; }
     d.append(el("b", null, `${p.id} ${p.name}`), el("span", null, p.when), el("span", null, p.note));
     phases.append(d);
   }
+  // Earlier days keep only what they did and what held them; their decisions are under "Decisions made".
+  const standupColumn = (cls, heading, items, render) => {
+    const col = el("div", cls); col.append(el("h3", null, heading));
+    if (!items.length) { col.append(el("p", "muted", "Nothing")); return col; }
+    const ul = el("ul"); for (const it of items) { const li = el("li"); render(li, it); ul.append(li); } col.append(ul);
+    return col;
+  };
+  const renderStandup = (target, s, decisions) => {
+    const cols = [
+      standupColumn("done", "Done", s.done, (li, t) => li.append(t)),
+      standupColumn("today", "In the works today", s.today, (li, t) => li.append(t)),
+    ];
+    if (decisions) cols.push(standupColumn("decide", "Needs a decision", decisions, (li, d) => {
+      const a = el("a", null, d.title); a.href = "#decisions-h"; li.append(a, " ");
+      if (d.recommendation) li.append(el("span", "chip rec", `Recommend: ${d.recommendation}`));
+    }));
+    cols.push(standupColumn("held-us", "What held us up", s.heldUs, (li, h) => li.append(el("b", null, h.what), el("span", "muted", ` ${h.cost}`))));
+    target.append(...cols);
+  };
+  const standups = T.standups || [];
+  if (standups.length) {
+    const [latest, ...older] = standups;
+    document.getElementById("standup-section").hidden = false;
+    document.getElementById("standup-date").textContent = fmt(latest.date, true);
+    renderStandup(document.getElementById("standup"), latest, T.decisionsNeeded);
+    if (older.length) {
+      document.getElementById("standup-earlier").hidden = false;
+      const box = document.getElementById("standup-older");
+      for (const s of older) {
+        const day = el("div", "standup-day"); day.append(el("h3", "num", fmt(s.date, true)));
+        const grid = el("div", "standup"); renderStandup(grid, s); day.append(grid); box.append(day);
+      }
+    }
+  }
+
   const dec = document.getElementById("decisions");
   for (const x of T.decisionsNeeded) {
     const li = el("li");

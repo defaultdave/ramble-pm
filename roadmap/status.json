@@ -391,5 +391,47 @@
       "likely": "2027-03-08",
       "late": "2027-03-26"
     }
-  }
+  },
+  "standups": [
+    {
+      "date": "2026-10-29",
+      "done": [
+        "All 28 deep-review decisions approved; from today the PM decides on its recommendation and logs the call for you to overrule",
+        "Stub glue merged (PR 246) and promoted: the public click-through now runs experience, checkout, Pay (demo), confirmation",
+        "Money path into integration: U-005 (PR 231), U-019 (PR 247), U-045b (PR 249)",
+        "Audit fixes in main: PRs 236, 250 to 256 (browse focus and sold-out days, 44 px links, layout tokens, cover-photo failure, gift guide copy, line heights, Picks rail)",
+        "src/lib refactor: PRs A, B and C merged (232, 235, 244)",
+        "Four lane chats opened under one lead; roadmap decision and to-do cards render again"
+      ],
+      "today": [
+        "e2e-money: U-015 in review, then the next waves of the money chain toward Monday's end-to-end booking",
+        "critical-path: U-014a round 4 checks, then into integration",
+        "lib-refactor: PR E (248) waiting to merge, PR F building, PR D unblocked by BE-7",
+        "audit-fixes: the remaining decided home rows, BE-8, BE-1 and the nightly items",
+        "You: bypass-merge PR 233 and promote integration to main when U-014a lands"
+      ],
+      "heldUs": [
+        {
+          "what": "Weekly Claude Code limit",
+          "cost": "Every lane stopped at 14:40; U-014a's round 4 was left unchecked."
+        },
+        {
+          "what": "PR 233 bypass merge did not land",
+          "cost": "The web button cannot bypass; still open at 14:40 (second time after PR 200)."
+        },
+        {
+          "what": "Stub glue went into conflict",
+          "cost": "PRs 244 and 245 merged first, so PR 246 needed a merge of main and a re-check."
+        },
+        {
+          "what": "gh fails inside the sandbox",
+          "cost": "Board date sync and the nightly audit's merge list have to run outside it."
+        },
+        {
+          "what": "Roadmap cards blank since Oct 28",
+          "cost": "Decisions and to-dos showed \"undefined\" after a field-name drift; fixed today."
+        }
+      ]
+    }
+  ]
 }
