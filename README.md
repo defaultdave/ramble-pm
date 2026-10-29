@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 29, 2026.** The Prototype is live. The deep review is under way: the browse and experience audit reported 21 verified items (one high: unstyled 404 and error pages), and the home pass is still running. Beside it, the critical path has restarted: U-005 (jobs and pulse) is built and in review, and U-014a (holds core) is building from the pattern note you approved. Both stay unpushed until the review ends. One small fix merged (U-018); the other (U-024 focus) is in round 2 and needs your call on making Button a client component.
+**As of Oct 29, 2026.** The Prototype is live and public at ramble-sand.vercel.app: home, browse, and the experience page. The first audit pass (home) found 65 verified items; nine clear fixes go out next, and 19 need your decision, led by the src/lib layout for the DRY refactor and the caching direction. A nightly audit now runs on days with merges.
 
 | Milestone | Likely |
 |---|---|
@@ -25,6 +25,7 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Decisions needed**
 
+- undefined.
 - undefined.
 - undefined.
 
