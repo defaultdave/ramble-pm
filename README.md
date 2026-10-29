@@ -27,7 +27,6 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 - undefined.
 - undefined.
-- undefined.
 
 **Held up**
 

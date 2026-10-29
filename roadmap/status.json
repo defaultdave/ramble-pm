@@ -100,10 +100,6 @@
   ],
   "decisionsNeeded": [
     {
-      "what": "PR 222: approve Button as a client island (B8), so it can keep focus while loading",
-      "effect": "None on dates; blocks the U-024 follow-up merge until answered."
-    },
-    {
       "what": "PRD-68 lab method: simulated or applied Lighthouse throttling (audit BE-21)",
       "effect": "None now; decides whether browse LCP 3.07 s is a fail or a pass."
     },
@@ -138,6 +134,10 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Oct 28",
+      "what": "Button approved as a client island (B8) so a loading button keeps keyboard focus"
+    },
     {
       "when": "Oct 28",
       "what": "U-014a pattern note approved: all nine recommendations adopted, including the B6 exemption for the settings read and a Device proof for hold rows"
