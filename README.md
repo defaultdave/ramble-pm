@@ -18,19 +18,19 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
-- undefined.
-- undefined.
-- undefined.
-- undefined.
-- undefined.
-- undefined.
-- undefined.
+- Bypass-merge PR 233. The architecture standard (image port and sharp); the PM opened it as the App.
+- Neon console. Delete the stray database from the first migrate run if it is stale (H-11).
+- Promote integration to main when the critical-path lane reports U-005 and U-014a merged (daily this week, not weekly).
+- Add image and sharp to the ports and vendor-SDK lines in .claude/standards/architecture.md (N1029-18).
+- Vercel. Publish the beacon firewall rule (PR 193 has the commands), turn on BotID, set the Sentry DSNs.
+- Sentry. Create the projects, name the ops address, apply the three alert rules in docs/runbooks/alerting.md.
+- GitHub. Enable private vulnerability reporting.
 
 **Decisions needed**
 
-- undefined.
-- undefined.
-- undefined.
+- Builder limit: stay at five agent builders machine-wide, or add a second database container. Recommended: stay at five.
+- gh inside the sandbox: trust the proxy, or allow api.github.com. Recommended: allow api.github.com.
+- Tax-rate default: confirm 88,750 ppm (New York City 8.875%), or give the rate. Recommended: keep 88,750 ppm.
 
 **Held up**
 

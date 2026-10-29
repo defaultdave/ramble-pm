@@ -100,46 +100,62 @@
   ],
   "decisionsNeeded": [
     {
-      "what": "Builder limit: five agent builders machine-wide (one Postgres container, the e2e lock) is the binding constraint for Sprint 1 plus the money chain plus the audit fixes in two days",
-      "effect": "Raising it needs a second database container; otherwise Sprint 1's remainder fills idle slots after the money chain."
+      "title": "Builder limit: stay at five agent builders machine-wide, or add a second database container",
+      "impact": "Five builders (one Postgres container, the e2e lock) is the binding constraint for Sprint 1, the money chain and the audit fixes together.",
+      "detail": "Raising it needs a second database container; at five, Sprint 1's remainder fills idle slots after the money chain.",
+      "recommendation": "stay at five",
+      "blocks": "Nothing today; it sets how much slack the Monday target has"
     },
     {
-      "what": "gh inside the sandbox: trust the proxy or allow api.github.com",
-      "effect": "GitHub reads (and the nightly audit's merge list) fail until then."
+      "title": "gh inside the sandbox: trust the proxy, or allow api.github.com",
+      "impact": "GitHub reads fail inside the sandbox, so the board date sync and the nightly audit's merge list fail there.",
+      "detail": "A sandbox setting, so it is yours to change.",
+      "recommendation": "allow api.github.com",
+      "blocks": "Board date sync and the nightly audit's merge list"
     },
     {
-      "what": "Tax-rate default: 88,750 ppm (New York City 8.875%) pending Q-12; confirm or give the rate",
-      "effect": "None on dates; it is the rate the configured setting starts with."
+      "title": "Tax-rate default: confirm 88,750 ppm (New York City 8.875%), or give the rate",
+      "impact": "None on dates; it is the rate the configured setting starts with, pending Q-12.",
+      "detail": "U-018 seeds it.",
+      "recommendation": "keep 88,750 ppm",
+      "blocks": "Nothing"
     }
   ],
   "actionsForDave": [
     {
-      "what": "Bypass-merge PR 233 (architecture standard: image port and sharp); the PM opened it as the App",
-      "when": "Today"
+      "title": "Bypass-merge PR 233",
+      "detail": "The architecture standard (image port and sharp); the PM opened it as the App.",
+      "where": "Today"
     },
     {
-      "what": "Neon console: delete the stray database from the first migrate run if it is stale (H-11)",
-      "when": "Any time"
+      "title": "Neon console",
+      "detail": "Delete the stray database from the first migrate run if it is stale (H-11).",
+      "where": "Any time"
     },
     {
-      "what": "Promote integration to main when the critical-path lane reports U-005 and U-014a merged (daily this week, not weekly)",
-      "when": "Today and daily to Monday"
+      "title": "Promote integration to main when the critical-path lane reports U-005 and U-014a merged (daily this week, not weekly)",
+      "detail": "",
+      "where": "Today and daily to Monday"
     },
     {
-      "what": "Add image and sharp to the ports and vendor-SDK lines in .claude/standards/architecture.md (N1029-18)",
-      "when": "Any time"
+      "title": "Add image and sharp to the ports and vendor-SDK lines in .claude/standards/architecture.md (N1029-18)",
+      "detail": "",
+      "where": "Any time"
     },
     {
-      "what": "Vercel: publish the beacon firewall rule (PR 193 has the commands), turn on BotID, set the Sentry DSNs",
-      "when": "Before guest pages go public"
+      "title": "Vercel",
+      "detail": "Publish the beacon firewall rule (PR 193 has the commands), turn on BotID, set the Sentry DSNs.",
+      "where": "Before guest pages go public"
     },
     {
-      "what": "Sentry: create the projects, name the ops address, apply the three alert rules in docs/runbooks/alerting.md",
-      "when": "Before guest pages go public"
+      "title": "Sentry",
+      "detail": "Create the projects, name the ops address, apply the three alert rules in docs/runbooks/alerting.md.",
+      "where": "Before guest pages go public"
     },
     {
-      "what": "GitHub: enable private vulnerability reporting",
-      "when": "Any time"
+      "title": "GitHub",
+      "detail": "Enable private vulnerability reporting.",
+      "where": "Any time"
     }
   ],
   "heldUp": [
