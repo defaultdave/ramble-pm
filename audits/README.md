@@ -8,7 +8,7 @@ After each of these reaches `main`:
 
 | Pass | Covers | Status |
 |---|---|---|
-| Prototype: home | Home page, the shell it shares, the reads and helpers it shares with browse | Queued: runs once the U-030 "When defaults to today" fix merges ([home-2026-10-28.md](home-2026-10-28.md)) |
+| Prototype: home | Home page, the shell it shares, the reads and helpers it shares with browse | Running since 2026-10-29 on `main` at `48a1f6d` ([home-2026-10-28.md](home-2026-10-28.md)) |
 | Prototype: browse and experience page | Browse, the experience page, card photos | After the home pass, as the rest of the post-Prototype deep review |
 | Booking and checkout | Holds, booking bar, checkout, confirmation, emails | When the money core and checkout pages land |
 | Gifting | Gift purchase, delivery, redemption, exchange | When the gifting section lands |
