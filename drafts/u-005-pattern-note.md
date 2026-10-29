@@ -84,3 +84,4 @@ These bring the note in line with what the builder shipped, where the shipped be
 8. **Dedupe keys are permanent.** A key stays used after its job finishes; a retried action with the same key never enqueues again.
 9. **The alert kind is `job-dead`** (the alerts module refuses underscores), with the dedupe key `<kind cut to 40>:<jobId>`.
 10. **The pulse response adds `purged`** to its counts. Still counts only, never payloads.
+11. **No heartbeat when a failure could not be recorded** (PM ruling 2026-10-28, from round 2 spec-compliance). A drain that reports `unrecorded > 0` counts as not finishing cleanly for amendment 3: the heartbeat is skipped, so the monitor alarms. A failure write that fails points at the database, which is what the heartbeat exists to catch. The rule lives in `decidePulse` (or beside it in `src/lib/jobs.ts`) with a unit test.
