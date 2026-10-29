@@ -111,7 +111,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 In this demo, the client facts have no one to ask. Where a fact blocks a decision, the PM proposes a working assumption and logs it as one.
 
 ## Blocked on Dave
-0. **Merge PR 223 (`pm/lanes`, the lanes protocol in the agent file and skill)** with bypass, since it touches `.claude/` and `scope-manifest` fails by design: `gh pr merge 223 --merge --admin --repo defaultdave/ramble`. Review requested.
+0. ~~Merge PR 223~~ merged by Dave 2026-10-29 00:55 (the lanes and evidence rules are on `main`).
 0. **Promote the newest production deployment** once PRs 225, 226, 227 (and the states PR) have merged, as after the last promotion.
 1. ~~Approval window~~ closed 2026-10-24 18:45.
 1. ~~`integration` branch deleted~~ recreated by Dave 2026-10-25 at `24ae4b3`; promotions now open from a `promote/<date>` branch (DECISIONS 2026-10-25).
@@ -170,7 +170,7 @@ One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane
 
 ### lead
 
-**Before you start:** (1) Merge PR 223 (`pm/lanes`) with bypass: `gh pr merge 223 --merge --admin --repo defaultdave/ramble` (it touches `.claude/`, so `scope-manifest` fails by design). (2) Once PR 228 has merged, promote the newest production deployment, as after the last promotion. (3) `gh` still fails TLS inside the local sandbox (`x509: OSStatus -26276`), and reviewers' sandboxes refuse localhost Postgres, Chromium, and ports; `sandbox.network.allowLocalBinding: true` would let QA run its own browser checks.
+**Before you start:** (1) Once PR 228 has merged, promote the newest production deployment, as after the last promotion. (2) `gh` still fails TLS inside the local sandbox (`x509: OSStatus -26276`), and reviewers' sandboxes refuse localhost Postgres, Chromium, and ports; `sandbox.network.allowLocalBinding: true` would let QA run its own browser checks.
 
 **Run:** `/ramble-pm` in a new desktop chat on the main checkout (`/Users/davidfleming/Workspace/ramble`). **Model and effort:** Opus, high (owner decisions).
 

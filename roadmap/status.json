@@ -100,10 +100,6 @@
  ],
  "decisionsNeeded": [
   {
-   "what": "Merge PR 223 (pm/lanes: PM chats in lanes, and pictures in every PR) with bypass; it touches .claude/ so scope-manifest fails by design",
-   "effect": "Until then only STATUS carries the lanes rules; nothing on dates."
-  },
-  {
    "what": "Home audit: 19 items for your call (audits/home-2026-10-28.md), led by the src/lib layout (H-18, H-42) and the caching direction (H-22, H-34 to H-39)",
    "effect": "Sets the DRY refactor and how home loads before more pages copy the patterns."
   },
@@ -150,6 +146,10 @@
   }
  ],
  "decisionsMade": [
+  {
+   "when": "Oct 29",
+   "what": "PR 223 merged: the lanes and evidence rules are in the agent file (you)"
+  },
   {
    "when": "Oct 29",
    "what": "PM chats run in lanes: one lead owns the shared status, each chat claims a lane and writes only its own sections (you)"
