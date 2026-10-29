@@ -187,9 +187,9 @@ Closed: PRs 224 to 228 merged. Nothing to run.
 
 ### critical-path
 
-**State:** handed off 2026-10-29 00:20. U-005 and U-014a each pass all four checks at round 3 and wait, unpushed, for the end of the deep review. PR 222 is in `integration` for the next promotion.
+**State:** handed off 2026-10-29 00:45. U-005 and U-014a each pass all four checks at round 3 and wait, unpushed, for the end of the deep review. Their branches exist only in the local ramble repo on Dave's Mac: `unit/U-005` (`50b1116`), `unit/U-005-pulse-workflow` (`42d3247`), `unit/U-014a` (`6502a1d`); no worktrees left open. PR 222 is in `integration` for the next promotion. PR 229 (standards text Dave approved) waits for his bypass merge.
 
-**Before you start:** the deep review has ended (Dave says so).
+**Before you start:** Dave bypass-merges PR 229 (`gh pr merge 229 --merge --admin --repo defaultdave/ramble`), and says the deep review has ended.
 
 **Run:** `/ramble-pm lane: critical-path` in a desktop chat on the main checkout (`/Users/davidfleming/Workspace/ramble`), not a worktree. **Model and effort:** Sonnet, medium; architecture-audit on Sonnet.
 
