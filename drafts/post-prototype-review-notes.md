@@ -28,3 +28,5 @@
 - A fixer's scope manifest must name every item the PM directs it to change; reviewers fail anything outside the IN SCOPE line, including the PM's own additions.
 - Start PM sessions from the main checkout, not a worktree: from a worktree the PM cannot write its own memory files.
 - Launch workflows whose agents use isolated worktrees from the ramble checkout: the worktree is cut from the current directory, and a launch from the ramble-pm checkout gave the U-010 fixer a ramble-pm worktree (it stopped without changes).
+- Sync PR checks come from reviewer agents that verify the sync (head equals main, a fast-forward or a reviewed conflict resolution, every commit through a merged PR), never from verdicts the PM writes itself; auto mode refuses the latter as self-approval (2026-10-28, PR 212).
+- Audits: after each section or major feature reaches `main`, run an audit pass (architecture, code and DRY, accessibility, visual at six breakpoints against Figma, PRD-68 performance), findings only, and log every item raised anywhere in `audits/` in the ramble-pm repo with an ID and status (owner, 2026-10-28).

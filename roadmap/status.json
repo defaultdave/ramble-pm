@@ -140,6 +140,10 @@
  "decisionsMade": [
   {
    "when": "Oct 28",
+   "what": "An audit pass after every section or major feature, tracked in audits/; the home pass is first (you)"
+  },
+  {
+   "when": "Oct 28",
    "what": "U-010 photos merged to main on the fake storage provider (PR 205)"
   },
   {
@@ -215,6 +219,10 @@
   {
    "what": "One answer gates the rest of the Prototype",
    "detail": "U-111's promotion. Blob stores are not needed for the demo; card photos are decided (U-039)."
+  },
+  {
+   "what": "Audit items are tracked, not kept in chat",
+   "detail": "audits/home-2026-10-28.md lists 17 items raised so far; the home pass adds its findings there."
   },
   {
    "what": "Merging main can break a unit that passed review",
