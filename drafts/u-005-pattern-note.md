@@ -67,3 +67,20 @@ Secrets and settings (Dave, after merge)
 **Q3. The numbers.** 25 per claim, 60 seconds or 200 jobs per call, 5-minute lock, backoff 30 seconds doubling to 6 hours, 8 attempts by default (about 32 hours before a job goes dead), 16 KB payloads. These come from typical outbox practice, not a source in the plan. Change any you want.
 
 **Why this is critical tier:** every later unit that sends an email or moves money writes through `enqueue` and is retried by this drain. A wrong idempotency or lock rule here turns into double emails or double transfers later, which is why you read it in the promotion batch.
+
+---
+
+## Amendments (PM rulings, 2026-10-28, from U-005's round 1 spec-compliance check)
+
+These bring the note in line with what the builder shipped, where the shipped behaviour is the safer reading. Later units copy the note as amended. Dave can overrule any of them (DECISIONS 2026-10-28).
+
+1. **Each claim spends an attempt.** `attempts` increments when a row is claimed, not when it fails. Without this, a job that kills its runner every time is reclaimed after each lapsed lock forever. A lapsed `running` row with no attempts left is marked `dead` and alerted without running. Dead still means `attempts` reached `max_attempts`.
+2. **Locked re-check before running.** Each job's transaction first reads its row `FOR UPDATE` and runs the handler only if the row is still `running` with the same `attempts` and `locked_until` as the claim; otherwise the outcome is `lost` and nothing runs.
+3. **Order of a pulse: drain, then purge, then heartbeat.** The heartbeat goes out only when both the drain and the purge finish without error, so a failing purge also alarms the monitor.
+4. **No heartbeat on a manual `asOf` run.** A demo run says nothing about whether the schedule is healthy.
+5. **Wrong secrets are counted.** A missing or wrong secret answers a uniform 401 and counts on the `pulse_failed` surface per source address; past 20 in 10 minutes it answers 429. Good calls count on the `pulse` surface (30 per 10 minutes).
+6. **Kinds set their own `max_attempts`.** The registry requires it per kind (`noop` uses 3); 8 is only the column default. Each later unit picks its kind's number with its reason.
+7. **Correction to Q3's arithmetic:** with backoff from 30 seconds doubling, 8 attempts means 7 waits of 30 s to 1,920 s, about 64 minutes before jitter, not 32 hours. A kind that must survive a longer outage needs a higher `max_attempts` (up to 20, where the 6-hour cap applies).
+8. **Dedupe keys are permanent.** A key stays used after its job finishes; a retried action with the same key never enqueues again.
+9. **The alert kind is `job-dead`** (the alerts module refuses underscores), with the dedupe key `<kind cut to 40>:<jobId>`.
+10. **The pulse response adds `purged`** to its counts. Still counts only, never payloads.
