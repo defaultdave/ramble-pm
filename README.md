@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 29, 2026.** The Prototype click-through is in main and live. The deep review is under way: the home and the browse and experience audit passes run side by side. Beside it, the critical path restarts: U-005 (jobs and pulse) is building and U-014a (holds core) has its pattern note in draft for your approval; both stay unpushed until the review ends. Two small fixes (U-018 tests, U-024 focus) run as follow-up PRs.
+**As of Oct 29, 2026.** The Prototype is live. The deep review is under way: the browse and experience audit reported 21 verified items (one high: unstyled 404 and error pages), and the home pass is still running. Beside it, the critical path has restarted: U-005 (jobs and pulse) is built and in review, and U-014a (holds core) is building from the pattern note you approved. Both stay unpushed until the review ends. One small fix merged (U-018); the other (U-024 focus) is in round 2 and needs your call on making Button a client component.
 
 | Milestone | Likely |
 |---|---|
@@ -25,6 +25,7 @@ Forecast: Push: 20 h this week, then 12.5 h.
 
 **Decisions needed**
 
+- undefined.
 - undefined.
 - undefined.
 

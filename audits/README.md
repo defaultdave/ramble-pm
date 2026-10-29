@@ -9,7 +9,7 @@ After each of these reaches `main`:
 | Pass | Covers | Status |
 |---|---|---|
 | Prototype: home | Home page, the shell it shares, the reads and helpers it shares with browse | Running since 2026-10-29 on `main` at `48a1f6d` ([home-2026-10-28.md](home-2026-10-28.md)) |
-| Prototype: browse and experience page | Browse, the experience page, card photos | Running since 2026-10-28 on `main` at `5121048`, beside the home pass ([browse-experience-2026-10-28.md](browse-experience-2026-10-28.md)) |
+| Prototype: browse and experience page | Browse, the experience page, card photos | Reported 2026-10-28 on `main` at `5121048`: 21 items ([browse-experience-2026-10-28.md](browse-experience-2026-10-28.md)) |
 | Booking and checkout | Holds, booking bar, checkout, confirmation, emails | When the money core and checkout pages land |
 | Gifting | Gift purchase, delivery, redemption, exchange | When the gifting section lands |
 | Host and ops | Host pages, ops admin, editorial tools | When each lands |

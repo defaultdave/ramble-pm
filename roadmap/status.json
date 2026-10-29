@@ -1,6 +1,6 @@
 {
   "asOf": "2026-10-29",
-  "headline": "The Prototype click-through is in main and live. The deep review is under way: the home and the browse and experience audit passes run side by side. Beside it, the critical path restarts: U-005 (jobs and pulse) is building and U-014a (holds core) has its pattern note in draft for your approval; both stay unpushed until the review ends. Two small fixes (U-018 tests, U-024 focus) run as follow-up PRs.",
+  "headline": "The Prototype is live. The deep review is under way: the browse and experience audit reported 21 verified items (one high: unstyled 404 and error pages), and the home pass is still running. Beside it, the critical path has restarted: U-005 (jobs and pulse) is built and in review, and U-014a (holds core) is building from the pattern note you approved. Both stay unpushed until the review ends. One small fix merged (U-018); the other (U-024 focus) is in round 2 and needs your call on making Button a client component.",
   "recommended": "Plan, Dave 12.5 h",
   "phases": [
     {
@@ -100,12 +100,16 @@
   ],
   "decisionsNeeded": [
     {
-      "what": "Tax-rate default: 88,750 ppm (New York City 8.875%) pending Q-12; confirm or give the rate",
-      "effect": "None on dates; it is the rate the configured setting starts with."
+      "what": "PR 222: approve Button as a client island (B8), so it can keep focus while loading",
+      "effect": "None on dates; blocks the U-024 follow-up merge until answered."
     },
     {
-      "what": "Before holds and checkout start: whether B6 covers caller-less configuration reads and transaction-joined writes",
-      "effect": "None now; decides how U-014a and U-047a read settings and record acceptances."
+      "what": "PRD-68 lab method: simulated or applied Lighthouse throttling (audit BE-21)",
+      "effect": "None now; decides whether browse LCP 3.07 s is a fail or a pass."
+    },
+    {
+      "what": "Tax-rate default: 88,750 ppm (New York City 8.875%) pending Q-12; confirm or give the rate",
+      "effect": "None on dates; it is the rate the configured setting starts with."
     }
   ],
   "actionsForDave": [
@@ -134,6 +138,10 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Oct 28",
+      "what": "U-014a pattern note approved: all nine recommendations adopted, including the B6 exemption for the settings read and a Device proof for hold rows"
+    },
     {
       "when": "Oct 28",
       "what": "Work beside the deep review: browse and experience audit now, U-005 and U-014a build held unpushed, small fixes as follow-up PRs"

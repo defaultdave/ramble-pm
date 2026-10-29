@@ -1,0 +1,7 @@
+# Verifier verdicts: code, accessibility, visual, performance (`5121048`)
+
+Code (C1 to C7): all CONFIRMED. C1 reproduced with a db test (a full session still offered and matched); no PRD rule either way, low to medium. C2 reproduced (`mapsHref('Meet at W. 23rd St and 6th Ave')` gives `Meet at W, New York`). C6: 9 `img` for 6 photos. Recorded as BE-7 to BE-12; C5 as H-2 evidence.
+
+Accessibility and visual: X1 CONFIRMED (U-002) as BE-13; X2 CONFIRMED (U-031) as BE-14; X3 CONFIRMED, fixed by PR 222, with a focus-cue side effect on selected chips, as BE-15; X4 REFUTED (44 px rule is mobile only; breadcrumbs show from tablet); X5 CONFIRMED for the experience 404 title (U-039) as BE-16, guide title SEQUENCING (U-037); X6 CONFIRMED as BE-17; X7 SEQUENCING (U-040, U-041); V1 SEQUENCING (U-041, U-040); V2 DUPLICATE of X1; V3 SEQUENCING (U-033, U-035, U-036); V4 SEQUENCING (U-032) except the duplicate "Clear all filters" (U-031) as BE-18; V5 SEQUENCING (U-021b) except the "Ramble pick" badge (no unit); V6 REFUTED (matches Figma); V7 and setup note CONFIRMED as BE-19.
+
+Performance: P1 CONFIRMED with correction (4 queries per minute per filter combination steady state, 8 cold), folded into BE-3; P2 CONFIRMED, low, as BE-20; P3 REFUTED (Fraunces is in every first paint). Lighthouse medians (simulated): browse LCP 3,074 ms, filtered 3,078 ms, experience 2,624 ms, CLS 0, TBT 10 to 20 ms; applied throttling: browse 1,890 ms, experience 1,410 ms. Recorded as BE-21. Reports in `../perf/`.
