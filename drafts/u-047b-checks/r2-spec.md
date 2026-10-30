@@ -1,0 +1,6 @@
+PASS
+
+## spec-compliance: U-047b round 2 (head 8c8d1bb)
+
+Static check of `b2314f1..8c8d1bb` (63 files). All 12 scope-line clauses still met: contact and unticked opt-in (`checkoutForm.ts:36`); age and guardian via `ageRequirements` (`CheckoutPage.tsx:113`); waiver, terms, validation; `HoldTimer` in the island header (`:202`); order summary (`:208`); express area and card island with `startPayment` only from submit (`:138`); demo notice and maintenance; success to `/orders/<ref>?t=<token>` (`:240`, `:480`). Stray `0014_order_parent_foreign_keys.sql` gone; `git diff b2314f1 8c8d1bb -- src/server/db/migrations` empty. Round 2: `isLapsedHold` refusal (`src/server/db/rehold.ts:47`), `claimLapsedHold`, `tests/db/rehold.db.test.ts`; S7 copy exact (`checkoutFlow.ts:267`, test `:329`); B17 helpers moved; `useMinWidth` gone; sentry test and `errorMessage` present; `HoldTimer.module.css` and `LongTimerAt320`. Scope bounds kept (edits outside checkout only remove `TODO(U-047b)` in `Header`, `HoldTimer`, `OrderSummary`; the `(site)` move; `routes.ts` helper; `bookingEmails.ts` 6 lines for the shared label). Neither deviation fails a clause (race safety for review and QA; the toggle for a11y).
+Blocking: none.

@@ -1,0 +1,9 @@
+PASS
+
+## architecture-audit: U-047b round 2 (head 8c8d1bb)
+
+Read `b2314f1..8c8d1bb`. Round 1 all fixed: `childCount` reused (`src/lib/checkout.ts:139`); zone labels gone from `time.ts`, `zonedShortDayLabel`, `zonedClockLabel`, `zonedDeadlineNoZoneLabel` in `zonedLabels.ts:64-74` with tests; `holdDeadline`, `isCheckoutHold` (and `isLapsedHold`) in `src/lib/holds.ts:225,232`; `cancellationLine` calls `cancellationTermsLabel` (`checkoutPage.ts:122`); `ageRequirements` in `src/lib/checkout.ts:197`; `useMinWidth` deleted, CSS media query at 768 px; `useHoldCountdown` is a named allowlist hook; `var(--size-touch-target)` (`CheckoutPage.module.css:83,146`); sentry test tightened; `errorMessage` in `checkoutForm.ts:233`; migrations match integration; only `CheckoutPage.tsx` and `useHoldCountdown.ts` are client files; scope clean.
+Blocking: none.
+Deviation 1 (two-transaction re-hold) safe: releasing an active hold past expiry loses nothing (it takes no space; the sweep would do the same); no race into two holds (session then hold lock, clock re-read; a second call finds it released; `reserveSpaces` serializes per device and supersedes); residual on a failed reserve is the S6 state anyway; a B9 borderline in letter, log it as accepted.
+Deviation 2 (desktop toggle) not an architecture blocker but fix now: `pointer-events: none` does not stop keyboard focus or activation (4.1.2); the clean fix is a small shared `OrderSummary` change (the allowlist entry covers its expanded state).
+Advisory: `CheckoutPage.module.css` (~186-191) styles `.summary div[hidden]` and `.summary button[aria-controls]` inside another component's DOM (moving the 768 px behaviour into `OrderSummary` removes the coupling); literals `outline-offset: 2px`, `minmax(8rem, ...)`, `22rem`; A2 whole `view` to the island; one island fits the allowlist's spirit; `readDevice` no cookie; `readCheckoutView` B6.
