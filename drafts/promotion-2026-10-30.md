@@ -24,6 +24,6 @@ The experience page lists upcoming dates with spaces left and offers the booking
 
 ## Before merging
 - Nightly smoke on `integration`: no `nightly-smoke` status was reported on `integration` when this was written; check it first (runbook E1).
-- Migrations from `0010` to `0018` run on the production database with the deploy.
+- Ten migrations, `0009_jobs_outbox` to `0018_hold_limit_indexes`, run on the production database with the deploy.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
