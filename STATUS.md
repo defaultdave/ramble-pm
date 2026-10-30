@@ -8,7 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `lead` | Shared status, `## Next`, roadmap, memory; status update, audit tally, session token review | PM lead, 2026-10-30 (evening) | handed off | 2026-10-30 18:40 |
+| `lead` | Shared status, `## Next`, roadmap, memory; checkout perf feedback (hold timer re-renders, Profiler build) | PM lead, 2026-10-30 (night, checkout perf) | active | 2026-10-30 19:55 |
 | `critical-path` | U-005 then U-014a into `integration` (released 2026-10-29 12:10), PR 222 through the next promotion; then U-014b, U-048 (critical, holds and webhook side of the money path) | critical-path lane, 2026-10-29 (afternoon) | handed off | 2026-10-29 13:05 |
 | `audit-fixes` | Every open audit item that is a clear fix and not part of the `src/lib` refactor: home `open` rows, BE-13, BE-8, BE-7 (with a `src/lib`-owned predicate; PR D of the refactor consolidates it), BE-14, BE-1, nightly N1029-1 to 7, 10, 11; fix-rounds PRs with before-and-after evidence | PM audit-fixes, 2026-10-30 (evening) | active | 2026-10-30 18:25 |
 | `e2e-money` | The end-to-end prototype on the fake payment adapter: stub glue (merged), U-019 and U-045b (merged), U-015, U-016, U-054, U-047a, U-047b, U-049, U-050, U-040, U-041, and since 2026-10-29 16:30 the critical-path money units U-014a, U-014b, U-048 (Dave) | e2e-money lane, 2026-10-30 (evening: BC-37, BC-38 glue, click-through) | active | 2026-10-30 18:35 |
