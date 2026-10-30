@@ -24,6 +24,6 @@ The experience page lists upcoming dates with spaces left and offers the booking
 
 ## Before merging
 - Nightly smoke on `integration`: no `nightly-smoke` status was reported on `integration` when this was written; check it first (runbook E1).
-- Ten migrations, `0009_jobs_outbox` to `0018_hold_limit_indexes`, run on the production database with the deploy.
+- Ten migrations, `0009_jobs_outbox` to `0018_hold_limit_indexes`, must be run by hand on the production database before the deploy: `scripts/vercel-build.sh` migrates only previews.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
