@@ -1,20 +1,19 @@
-# QA verdict: U-030 home Picks read (head 0c89b4c8be668a271965c268455392b965a19817)
+# QA round 2: U-030 home Picks read (b80cd3f)
 
-**PASS** (checks 1 and 2 only; browser render not run)
+Verdict: PASS (with one non-blocking test gap)
 
-Ran in a detached scratch worktree of the head SHA, `pnpm install --frozen-lockfile`. Worktree removed afterwards.
-
-## Ran
-1. `pnpm vitest run src/lib/pages/home.test.ts src/server/home.test.ts 'src/app/(guest)/HomeContent.test.tsx'`: 3 files, 89 tests passed.
-2. Postgres on localhost:5432 was reachable. `pnpm vitest run --project db tests/db/editorial.db.test.ts tests/db/seed.db.test.ts tests/db/home.db.test.ts`: 3 files, 247 tests passed.
-   Mutation check: changed `.limit(homeLimits.picksCandidates)` (12) to `.limit(13)` in listHomePicks in src/server/db/editorial.ts. 1 test failed: "the home Picks read when many Picks are published > finds a named pick past the list limit, with the first entries and the full count, and no intro" (246 passed). Reverted with git checkout; worktree clean.
-
-## Not run
-3. Dev-server render of `/` and the "See all N" comparison with main: not run. `pnpm dev` started but Turbopack panicked with "unable to start FSEvent stream" (sandbox), same as the earlier QA run. No screenshots.
+## What ran (detached scratch worktree, frozen install)
+1. Unit: home.test.ts, server/home.test.ts, (guest)/HomeContent.test.tsx, lib/editorial.test.ts: 4 files, 177 tests passed.
+2. DB (localhost:5432 reachable): editorial.db, seed.db, home.db: 3 files, 247 passed. git grep found editorial.db and seed.db as the only db tests naming the shared readers; also ran editorial-races.db: 18 passed. Combined 265 passed.
+3. Mutations (each reverted, tree clean after):
+   - Entry cap +1 for home variant: unit 177 pass; db 1 failed ("finds a named pick past the list limit... no intro"). Caught.
+   - Forgot forGuest filter dropped (undefined): db 3 failed (guest-visible entries/count, empty pick, paused entry). Caught.
+   - `intro:false` changed to `intro:true`: unit 177 pass, db 265 pass. NOT CAUGHT.
+4. Dev-server render: not run. Worktree has only .env.example (no env), and a start attempt on port 3946 returned no response (sandbox nice() failure; `timeout` absent). No browser check done.
 
 ## Blocking
 None.
 
 ## Non-blocking
-- The 12 limit lives in `picksCandidates` (src/lib/idLookup.ts), so the mutation was applied at the `.limit()` call site; changing the constant would also move other code.
-- "See all N" count parity with main is covered only by the DB test (full count past the limit), not by a rendered page.
+- Mutation survived: nothing fails if the home read selects the intro. Output is mapped field by field into HomePick, so the extra column is dropped and the "no intro" test title cannot observe it. The guarantee that the intro is not read is untested; a test would need to inspect the query/columns (or the raw rows from readCollectionRows).
+- Worktree removed with `git worktree remove --force`.

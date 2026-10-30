@@ -1,27 +1,23 @@
-PASS
+# Review agent, U-030 round 2 (head b80cd3f)
 
-## review-agent: U-030 "Read only the Picks the home modules name" (head 0c89b4c)
+REVIEW_VERDICT=APPROVE_WITH_NITS (PASS)
 
-### Blocking
-None.
+Scope: round 2 diff touches only src/server/db/editorial.ts and tests/db/editorial.db.test.ts. In scope.
 
-### Non-blocking
-- src/server/db/editorial.ts (listHomePicks, `.limit(homeLimits.picksCandidates)`): the 12-entry cap is applied as a SQL LIMIT using the lib constant, and src/lib/pages/home.ts `pickModuleIds` still slices to the same cap. A LIMIT is a work bound, not a decision, so B2 is met; the lib slice stays the tested rule. No change needed.
-- src/server/home.ts: the Picks read now waits for listHomeModules (one extra sequential round trip inside the cached read). Unavoidable, since the modules name the Picks; the cache absorbs it.
-- seed.db.test.ts edit is acceptable: the "published Picks" list assertion now queries the collections table directly in the test, and the entries assertion uses the existing getPublishedPick. Same coverage, no export kept alive for a test (B7). Imports (and, eq, collections) already exist in that file.
+Test run: `pnpm vitest run --project db tests/db/editorial.db.test.ts` in a scratch detached worktree: 202/202 passed. Worktree removed.
 
-### Unconfirmed
-None.
+B17: cleared. `listHomePicks` now calls the single `readCollectionRows` (editorial.ts:101); the duplicate lateral join is gone. B2: cleared. The only new code in the mapper is `.map` to a field; the ordering, cap, and count are SQL.
 
-### Checked
-- Scope: files are editorial.ts, home.ts (server, minimal), lib/pages/home.ts, tests, one runbook line, the HomeContent test fixture type update. No cache tags, UI, migrations, docs/plan. lib/editorial helpers reused (collectionIdsOf, editorialLimits), none added.
-- Unbounded work: IDs validated with idListSchema(editorialLimits.homeModules=20), length checked before IDs; modules read is already limited to 20; entries limited to 12; no intro column selected; no 200-row list limit involved, so a pinned Pick cannot drop out past 200 published Picks (DB test with listed+1 published Picks passes and the named Pick sorts last by title).
-- itemCount: `count(*) over ()` is evaluated before LIMIT inside the guest-visible lateral subquery, so it is the full guest-visible count (previously `items.length`, also guest-visible); DB test: 15 entries gives itemCount 15 with 12 ids; Pick with no visible entry gives 0 and []. "See all N" uses itemCount (home.ts).
-- Ordering: entries by position then experienceId (stable, adds a tiebreak over the old query), json_agg re-orders by the same keys; Picks by title then id.
-- Gift guide excluded: SQL filters kind = 'pick'; homePickIds takes only modules of kind 'picks'; server test asserts the gift_guide module's collection and null collections are not requested and duplicates are collapsed.
-- Draft or missing Pick: omitted (DB test); module with a draft collection is already dropped by listHomeModules.
-- Failing open / logs: invalid IDs throw ZodError (tested); output parsed with HomePickSchema; no catch added, no logging added; read still wrapped by existing readOrRefuse.
-- B2: only SQL WHERE/ORDER/LIMIT in the data layer; module-kind filtering and ID dedupe are lib functions (homePickIds, collectionIdsOf) with tests. B3-B7 hold (server-only unchanged, imports point server -> lib, lib has no I/O, no test-only exports; HomePick types and schema live in lib).
-- Stale callers: no reference to listPublishedPicks remains in the branch (src, tests, docs).
-- Duplication: HomePickSchema/HomePickIdsSchema are home-specific and reuse idListSchema, EntityIdSchema, SlugSchema; no existing equivalent found.
-- Runs (scratch detached worktree, removed afterwards): `pnpm vitest run --project db tests/db/editorial.db.test.ts tests/db/seed.db.test.ts`: 2 files, 227 tests passed. Unit/components for home.test.ts (lib and server), HomeContent.test.tsx, editorial.test.ts: 177 passed. tsc: only the pre-existing PageProps typegen errors (generated types absent in the scratch tree), nothing from this diff.
+Regression checks on other callers:
+- Staff list / forGuest false (editorial.ts:119): `forGuest ? guestVisible : undefined` inside `and(...)` drops the undefined, so drafts and non-guest-visible experiences still appear. The inner join to experiences is unchanged from before. Covered by existing listCollectionsForEditing tests (db test 1154, 1842, 1951).
+- Gift guide and getPublishedPick: same `readCollections(..., true)` path, intro:true, no cap. Tests at 1148, 1192 and the new full-shape assertion (2613) pass.
+- Default cap: `editorialLimits.collectionItems` = 60 (src/lib/editorial.ts:38). The schema check `collection_items_position_in_range` (position >= 0 and < 60) plus the unique (collection, position) index caps rows at 60 per collection, so the default LIMIT never trims a row. Rows unchanged.
+- Window count with no cap: `count(*) over ()` is evaluated before LIMIT; with no rows the aggregate still yields one row (json_agg coalesced to '[]', total coalesced to 0), so the left lateral join keeps empty collections. `readCollections` does not spread `itemCount`, so the extra field cannot leak into CollectionSchema.
+- Entry ordering: the added experienceId tiebreak is a no-op in practice (position is unique per collection) and is applied identically in the inner ORDER BY and the json_agg ORDER BY.
+- Column list: `intro:true` uses `getTableColumns(collections)`, so a future column flows through to CollectionSchema automatically (z.object strips unknowns; no crash).
+
+Findings (nits, non-blocking):
+1. editorial.ts:84-93 `columnsWithoutIntro` is a hand-listed copy of the table columns and already omits `createdAt`. A column added later vanishes silently from the home-pick path only. It cannot crash anything today (HomePick reads id, slug, title, summary), and the typed union passes through the mapper. Safer: `const { intro: _intro, ...columnsWithoutIntro } = getTableColumns(collections)` so it cannot drift.
+2. No test pins the staff-list path against the new cap/window shape beyond the existing suite; acceptable since those tests pass, and the full-shape assertion at 2613 covers intro + all entries on the shared read.
+
+(tsc in the scratch worktree reports PageProps/typegen errors in src/app pages; these are unrelated to this diff and come from missing generated route types.)

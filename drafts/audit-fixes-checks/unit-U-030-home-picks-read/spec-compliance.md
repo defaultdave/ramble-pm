@@ -1,18 +1,17 @@
-# Spec Compliance: U-030 home Picks read (audit H-46)
+PASS
 
-Commit: 0c89b4c8be668a271965c268455392b965a19817 (branch unit/U-030-home-picks-read, base origin/main 6b572a3)
-Method: read-only `git diff origin/main 0c89b4c8...`; `git grep` at the commit for line references. Tests were not run.
+## spec-compliance: U-030 "home Picks read" H-46 (head b80cd3f, round 2)
 
-## Verdict: APPROVE
+All seven acceptance criteria PASS. Read-only static review; the db suites were not run by this check (the review-agent and qa-agent checks run them).
 
-| # | Criterion | Status | Evidence |
-|---|-----------|--------|----------|
-| AC1 | Home read loads only the collections its Picks modules name (at most 20, distinct, gift guide excluded) | PASS | `src/lib/pages/home.ts:77-79` `homePickIds` filters `module.kind === 'picks'`, so the gift guide is excluded. Distinctness comes from `collectionIdsOf` (`src/lib/editorial.ts:356-364`, a `Set`). The cap of 20 comes from `HomePickIdsSchema = idListSchema(editorialLimits.homeModules)` (`src/lib/pages/home.ts:74`, `homeModules: 20` at `src/lib/editorial.ts:39`). `src/server/home.ts:47-49` calls `listHomePicks(homePickIds(listed))`. Test: `src/server/home.test.ts:88-100` asserts one call with `[id(800), id(803)]`. |
-| AC2 | Each Pick carries at most 12 entries (`homeLimits.picksCandidates`) and the full guest-visible item count | PASS | Entries are capped by `.limit(homeLimits.picksCandidates)` at `src/server/db/editorial.ts:139`; `picksCandidates = 12` at `src/lib/idLookup.ts:6`. The count is `count(*) over ()` at `src/server/db/editorial.ts:133`, taken before the limit and filtered by `guestVisible` at `:137`. Output is `itemCount` (`src/lib/pages/home.ts:68`) and feeds the label at `src/lib/pages/home.ts:296` (`See all N picks`). Tests: `src/lib/pages/home.test.ts:368-378`, `tests/db/editorial.db.test.ts:1098-1110` (`itemCount: 2`, `experienceIds` of 2). |
-| AC3 | Rich-text intro and entries past 12 are never selected | PASS | The select list at `src/server/db/editorial.ts:129-171` has no `intro` or `items` column. The `HomePickSchema` (`src/lib/pages/home.ts:62-70`) has no `intro`. The db test at `tests/db/editorial.db.test.ts:1108` and `:2570-` (`not.toHaveProperty('intro')` and `'items'`) checks this. |
-| AC4 | A pinned Pick is found however many other Picks are published (db test with more than 200 other published Picks) | PASS | `tests/db/editorial.db.test.ts:2570-2622`. The test inserts `editorialLimits.listed + 1` (201, above 200) published crowd Picks, and the named Pick sorts last by title. It asserts `listHomePicks([named.value.id])` returns the named Pick. The query is `inArray(collections.id, ids)` at `src/server/db/editorial.ts:165`, with no list limit. |
-| AC5 | Tests cover: draft/unknown ID, empty IDs, more than 20 or malformed IDs refused, a Pick with no visible entries | PASS | Draft and unknown ID: `tests/db/editorial.db.test.ts:1112-1116`. Empty IDs: `:1118-1120`. More than 20 IDs and malformed `'nope'` refused: `:1122-1130`, plus `src/lib/pages/home.test.ts:252-261`. No visible entries: `:1132-1135`. The schema also refuses malformed IDs via `EntityIdSchema = z.guid()` (`src/lib/catalog.ts:55`). |
-| AC6 | Nothing outside scope (OUT: cache tags, H-48, UI, migrations, docs/plan; one runbook line and a seed test edit allowed) | PASS (with notes) | `git diff --name-status` lists 9 files: `docs/runbooks/home.md` (one paragraph line, allowed), `tests/db/seed.db.test.ts` (one test edit, allowed), `src/lib/pages/home.ts`, `src/server/db/editorial.ts`, `src/server/home.ts`, and their test files. The `cacheTag` and `cacheLife` lines in `src/server/home.ts` are unchanged. No migration, no `docs/plan` file, and no UI component change (`src/app/(guest)/HomeContent.test.tsx` is a fixture-shape test only). Notes: (a) `listPublishedPicks` was removed. The `git grep` at the commit finds no remaining references in `src` or `tests`. (b) `src/server/db/editorial.ts:52-58` now imports `homeLimits` and `HomePickSchema` from `@/lib/pages/home`, which is a new server-to-lib import. Layer rules are not in this audit's scope; flagging it for review. (c) H-48 is not identifiable from the diff; nothing in it reads as H-48 work. |
+- AC1 PASS: only the collections the Picks modules name are read, at most 20, distinct, gift guide excluded (`src/server/home.ts:45-48`, `src/lib/pages/home.ts:74-79`, `src/lib/editorial.ts:356-362`; tests `src/lib/pages/home.test.ts:234-262`, `src/server/home.test.ts:88`).
+- AC2 PASS: at most 12 entries (`picksCandidates`) and the full guest-visible count; the window count is taken before the limit (`src/server/db/editorial.ts:106,123,179`; tests `tests/db/editorial.db.test.ts:2570-2611`).
+- AC3 PASS: the intro and entries past 12 are never selected (`editorial.ts:85-94,138,179`; `HomePickSchema` has no intro; test `editorial.db.test.ts:1098-1110`).
+- AC4 PASS: a pinned Pick is found with 201 other Picks published (`editorial.ts:174` filters by id before the 200-row list limit; test `editorial.db.test.ts:2570-2600`).
+- AC5 PASS: draft or unknown ID, empty IDs, over 20 or malformed IDs refused, and a Pick with no visible entries are all tested (`editorial.db.test.ts:1112-1136`).
+- AC6 PASS (note): one guest-visibility join (`editorial.ts:119`); the staff list, gift guide and `getPublishedPick` go through `readCollections` with the intro and full entries, and their tests are unchanged. The old `listPublishedPicks` test was removed and its assertions moved to `listHomePicks`.
+- AC7 PASS (note): the changed files are inside the manifest. `HomeContent.test.tsx` changed two fixture lines forced by the `HomePick` type; the PM accepts that.
 
-## Blocking Issues
-None.
+Observation, not a spec failure: `editorial.ts:52-58` imports schemas from a lib page module (allowed by B4; the architecture audit passes it).
+
+No blocking issues.
