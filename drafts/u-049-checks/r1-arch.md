@@ -1,0 +1,7 @@
+PASS
+
+## architecture-audit: U-049 "confirmOrder" (head 81b8171)
+
+Static read of the 22-file diff against b2314f1.
+Blocking: none. B2: every domain decision in `src/lib/confirmOrder.ts` (already-confirmed, not-built, currency, amount, session status, open or lapsed hold, room, mismatch reason, `isSeatsSoldRefusal`, `isSimulatedPayment`), plus `transferReleaseAfter`, `holdTransitions`, `providerFeeEntries`, `bookingEmailKey`; `src/server/db/confirmOrder.ts` has only structural branches; `postProviderFee` checks `entries.length === 0`; the only SQL arithmetic is `seats_sold + seats`. B3 `server-only` on both new data-layer files; B4 one-way imports; B6 no `Caller` (the provider signature authorizes, as `postEntries`), commented; B7 no test-only exports; B9 one savepoint in the caller's transaction, jobs via `enqueue(tx, ...)`; B10 no locks of its own, `input.now`, `released -> converted` matches design doc lines 365 and 849 (`converted` stays terminal), ledger only after the provider's success event keyed on attempt and payment ids; B12 no float, `toFixed`, `Date.now()`; B13 the one catch rethrows except the seats-sold CHECK.
+Non-blocking: `src/server/db/confirmOrder.ts:308` invalidation inside the transaction (a rollback leaves a harmless extra refresh); `src/lib/transfers.ts:60` `millisecondsPerHour` repeats `MS_PER_HOUR` (`cancellation.ts:7`); duration helpers repeated across `cancellation.ts`, `transfers.ts`, `jobs.ts`, `formGuard.ts`, `rateLimits.ts` (audit item).
