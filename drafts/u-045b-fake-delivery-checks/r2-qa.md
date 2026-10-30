@@ -44,3 +44,7 @@ One thing to know about the run: at cleanup I ran `pkill -f "bun scripts/dev/neo
 **Cleanup.** The app and the shim are stopped, the scratch database is dropped, and the scratch directory is removed. The throwaway Postgres trigger was dropped along with the database.
 
 QA_VERDICT=PASS
+
+![Decline then success lands on You're booked](https://raw.githubusercontent.com/defaultdave/ramble-pm/main/evidence/pr/unit-U-045b-fake-delivery-qa-agent/r2-decline-then-booked-1280-light-after.png)
+![Restart, forged calls first, then Pay](https://raw.githubusercontent.com/defaultdave/ramble-pm/main/evidence/pr/unit-U-045b-fake-delivery-qa-agent/r2-restart-forged-first-booked-1280-light-after.png)
+![A hung drain releases the reply at 5 seconds](https://raw.githubusercontent.com/defaultdave/ramble-pm/main/evidence/pr/unit-U-045b-fake-delivery-qa-agent/r2-drain-hang-checking-390-light-after.png)

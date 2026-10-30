@@ -16,7 +16,7 @@ format:check, lint, typecheck, knip; test 6,448; test:db 1,595 with `--maxWorker
 ## Not done
 - Production needs migration `0019`, then a redeploy. Both are Dave's.
 - The pulse workflow is still unlanded, so a job that retries or is delayed waits for the next payment's drain.
-- Logged as limits: one row and one lock (BC-41), a delivery that fails after the confirm (BC-42), the same stale-page race under Stripe (BC-43), a failed drain's unredacted log line (BC-44), seeded hosts with no notification address (BC-45).
+- Logged as limits: one row and one lock (BC-44), a delivery that fails after the confirm (BC-45), the same stale-page race under Stripe (BC-46), a failed drain's unredacted log line (BC-47), seeded hosts with no notification address (BC-48).
 
 ## Evidence
 ![Before: the order stuck on Checking your payment after Pay, 390 light](https://raw.githubusercontent.com/defaultdave/ramble-pm/main/evidence/pr/unit-U-045b-fake-delivery-qa-agent/pay-stuck-checking-390-light-before.png)
