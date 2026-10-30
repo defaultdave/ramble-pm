@@ -80,3 +80,6 @@ Where reality departs from the frozen plan (`plan-frozen-2026-10-20`). One line 
 
 ## 2026-10-30 (lead): forecast refit
 Schedule regenerated with start 2026-10-30 and U-005 to U-041 marked done (`roadmap/schedule.json`, recommended scenario `Lever 4 too (money core to agents), Dave 12.5 h`): prototype P50 2026-11-13 (P10 11-12, P90 11-18), finish P50 2027-01-15 (P10 01-06, P90 01-27). The model prices units at estimate with review gates, so it is the slow case; merged agent units closed at 4 to 42 percent of estimate and the real Prototype lands on the fake-payment glue, targeted for Monday 2026-11-02.
+
+## 2026-10-30 (e2e-money): fake delivery glue has no unit
+`units.yaml` has no row for delivering the fake's events in the running app or keeping the fake's state across processes (U-045b scoped delivery to tests; the Prototype milestone assumed it). Built on carrier U-045b as `unit/U-045b-fake-delivery` (`ramble-pm/drafts/fake-delivery-pattern-note.md`). New table `fake_gateway_state`. The design doc's fake adapter gains a database row; the frozen plan is unchanged.
