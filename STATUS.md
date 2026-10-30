@@ -8,7 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `lead` | Shared status, `## Next`, roadmap, memory; status update, audit tally, session token review | PM lead, 2026-10-30 (status and token review) | handed off | 2026-10-30 00:45 |
+| `lead` | Shared status, `## Next`, roadmap, memory; status update, audit tally, session token review | PM lead, 2026-10-30 (what is left for the Prototype) | handed off | 2026-10-30 00:40 |
 | `critical-path` | U-005 then U-014a into `integration` (released 2026-10-29 12:10), PR 222 through the next promotion; then U-014b, U-048 (critical, holds and webhook side of the money path) | critical-path lane, 2026-10-29 (afternoon) | handed off | 2026-10-29 13:05 |
 | `audit-fixes` | Every open audit item that is a clear fix and not part of the `src/lib` refactor: home `open` rows, BE-13, BE-8, BE-7 (with a `src/lib`-owned predicate; PR D of the refactor consolidates it), BE-14, BE-1, nightly N1029-1 to 7, 10, 11; fix-rounds PRs with before-and-after evidence | PM audit-fixes, 2026-10-29 (afternoon) | handed off | 2026-10-29 17:30 |
 | `e2e-money` | The end-to-end prototype on the fake payment adapter: stub glue (merged), U-019 and U-045b (merged), U-015, U-016, U-054, U-047a, U-047b, U-049, U-050, U-040, U-041, and since 2026-10-29 16:30 the critical-path money units U-014a, U-014b, U-048 (Dave) | e2e-money lane, 2026-10-29 (afternoon) | active | 2026-10-29 16:04 |
@@ -272,6 +272,8 @@ Lessons from waves 1 and 2: builders commit and stop; the PM pushes and opens PR
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
 
 ### lead
+
+**Update 2026-10-30 00:40 (read first): what is left for the Prototype.** Checked against GitHub: `integration` is at `d2639e8` (U-040 merged as PR 279), 22 commits ahead of `main`; no PR is open. Left, in order: (1) **U-050** (`unit/U-050` at `d77312c`, worktree `agent-af73e271239da1a9e`) merged `integration` `44b4444`, not `d2639e8`: merge again, run its five checks (none run yet), PR into `integration`. (2) **U-041** (`unit/U-041` at `8f17f49`, worktree `agent-a5a42db9fcf0aab8b`) sits on U-040's pre-merge head `2dd8c1d`: merge `integration`, five checks, PR; it retires the demo click-through. (3) **Dave promotes `integration` to `main`** (the money chain U-005 to U-041) and redeploys production. (4) The PM books a seeded session end to end on production on the fake adapter and captures evidence. Both builders' worktrees were clean and idle at 00:40 with no check verdicts in `drafts/`; the `e2e-money` row still says active, so Dave confirms whether that chat is alive before another session resumes the lane. The 00:30 list below still stands.
 
 **Update 2026-10-30 00:45 (read first):** the 00:45 lead chat answered status and ran a token review (`drafts/token-review-2026-10-29.md`); it did none of the 00:30 list below, which still stands. Run the next lead on Sonnet, medium, and hand off once its context passes about 250K tokens (review finding 1). Publishing needs the sandbox off: `bun` exits silently inside it.
 
