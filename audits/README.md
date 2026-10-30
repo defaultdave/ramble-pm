@@ -15,6 +15,7 @@ After each of these reaches `main`:
 | Host and ops | Host pages, ops admin, editorial tools | When each lands |
 | Launch | Everything, with field data | Feeds U-104, launch readiness |
 | Nightly | The PRs merged to `main` in the last 24 hours (skipped when there were none) | Scheduled task `ramble-nightly-audit`, about 02:30 New York time; files `nightly-<date>.md`, item IDs `N<MMDD>-k` |
+| Agents (nightly) | The previous day's Claude Code sessions: tokens, context, model use, polling, review rounds, rulings (skipped when there were none) | Scheduled task `ramble-nightly-agent-review`, about 03:05 New York time; files `agents-<date>.md`, proposal IDs `A<MMDD>-k`; baseline [../drafts/token-review-2026-10-29.md](../drafts/token-review-2026-10-29.md) |
 | Nightly 2026-10-29 | PRs 205 to 229 (22 merged), `4959db0` to `5a595f1` | Reported 2026-10-29 on `main` at `5a595f1`: 18 items, N1029-1 to N1029-18, all open ([nightly-2026-10-29.md](nightly-2026-10-29.md)) |
 
 ## Lenses (the same every pass)
