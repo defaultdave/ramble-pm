@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-10-29",
-  "headline": "New targets from the owner on Oct 29: Sprint 1 work done by Oct 30, and a guest books a seeded session end to end (home, browse, experience, booking, checkout, confirmation) on the fake payment adapter by Monday Nov 2; no Stripe. The Prototype's 21 units are all live at ramble-sand.vercel.app; the checkout and confirmation stubs the plan listed were never built, so that glue goes first. The deep-review hold is lifted: U-005 and U-014a go into integration now, and the audit's fixes run in their own lane beside the build. All 28 deep-review decisions are approved as recommended, and from today the PM proceeds on its recommendation and logs the call rather than waiting; four lane chats are running. The src/lib layout (H-18) is adopted; its seven-PR refactor plan is written. The refit below puts the money core on agents (the owner's call for U-016, U-047a and U-049) and still says December for the confirmation page, because it prices every unit at its estimate with review rounds; agent actuals so far run well under that, which is what a Monday landing depends on.",
+  "asOf": "2026-10-30",
+  "headline": "Oct 30: the whole money chain (U-005 to U-041) is in main and on production at ramble-sand.vercel.app, and a guest can hold a real session and reach checkout. A booking cannot confirm yet: after the fake Pay nothing delivers the payment event to the webhook intake (BC-38), and the fake gateway keeps its state in one process, so a second Vercel instance refuses it (BC-37). That glue is the last piece before the Monday Nov 2 click-through and nobody has started it; the e2e-money lane opens next. The forecast below was refit on Oct 30 with the money chain done; it prices units at estimate, so it is the slow case against agent actuals of 4 to 42 percent of estimate.",
   "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
   "phases": [
     {
@@ -100,22 +100,22 @@
   ],
   "decisionsNeeded": [
     {
-      "title": "Builder limit: stay at five agent builders machine-wide, or add a second database container",
-      "impact": "Five builders (one Postgres container, the e2e lock) is the binding constraint for Sprint 1, the money chain and the audit fixes together.",
-      "detail": "Raising it needs a second database container; at five, Sprint 1's remainder fills idle slots after the money chain.",
-      "recommendation": "stay at five",
-      "blocks": "Nothing today; it sets how much slack the Monday target has"
+      "title": "Sandbox: allow api.github.com and local port binding",
+      "impact": "GitHub reads fail inside the sandbox (board dates, nightly merge list) and reviewers cannot run Postgres, Chromium or ports, so QA falls back to static checks.",
+      "detail": "Sandbox settings are yours to change.",
+      "recommendation": "allow both",
+      "blocks": "Board date sync; runtime QA by reviewers"
     },
     {
-      "title": "gh inside the sandbox: trust the proxy, or allow api.github.com",
-      "impact": "GitHub reads fail inside the sandbox, so the board date sync and the nightly audit's merge list fail there.",
-      "detail": "A sandbox setting, so it is yours to change.",
-      "recommendation": "allow api.github.com",
-      "blocks": "Board date sync and the nightly audit's merge list"
+      "title": "Fold the token review fixes 1 to 6 into the agent file",
+      "impact": "Every chat starts at 99K tokens and lane orchestrators on Opus ran at 400K average context; the fixes cut the largest cost.",
+      "detail": "drafts/token-review-2026-10-29.md; the nightly agent review task also waits on your yes.",
+      "recommendation": "yes",
+      "blocks": "The nightly agent review"
     },
     {
       "title": "Tax-rate default: confirm 88,750 ppm (New York City 8.875%), or give the rate",
-      "impact": "None on dates; it is the rate the configured setting starts with, pending Q-12.",
+      "impact": "None on dates; the rate the configured setting starts with, pending Q-12.",
       "detail": "U-018 seeds it.",
       "recommendation": "keep 88,750 ppm",
       "blocks": "Nothing"
@@ -123,9 +123,9 @@
   ],
   "actionsForDave": [
     {
-      "title": "Bypass-merge PR 233",
-      "detail": "The architecture standard (image port and sharp); the PM opened it as the App.",
-      "where": "Today"
+      "title": "Check the integration branch survives the next promotion",
+      "detail": "delete_branch_on_merge is on; the ruleset bypass is now pull_request. If it vanishes again, change the repo setting or the promotion step.",
+      "where": "At the next promotion"
     },
     {
       "title": "Neon console",
@@ -133,32 +133,27 @@
       "where": "Any time"
     },
     {
-      "title": "Promote integration to main when the critical-path lane reports U-005 and U-014a merged (daily this week, not weekly)",
-      "detail": "",
-      "where": "Today and daily to Monday"
-    },
-    {
-      "title": "Add image and sharp to the ports and vendor-SDK lines in .claude/standards/architecture.md (N1029-18)",
-      "detail": "",
+      "title": "Board dates sync",
+      "detail": "bun scripts/plan/board-dates.ts --run (gh cannot read the keychain in the sandbox).",
       "where": "Any time"
     },
     {
-      "title": "Vercel",
-      "detail": "Publish the beacon firewall rule (PR 193 has the commands), turn on BotID, set the Sentry DSNs.",
-      "where": "Before guest pages go public"
-    },
-    {
-      "title": "Sentry",
-      "detail": "Create the projects, name the ops address, apply the three alert rules in docs/runbooks/alerting.md.",
+      "title": "Vercel and Sentry",
+      "detail": "Beacon firewall rule (PR 193), BotID, Sentry DSNs and projects, alert rules in docs/runbooks/alerting.md.",
       "where": "Before guest pages go public"
     },
     {
       "title": "GitHub",
-      "detail": "Enable private vulnerability reporting.",
+      "detail": "Enable private vulnerability reporting; the BE-1 Vercel firewall rule from PR 263 is skipped by decision.",
       "where": "Any time"
     }
   ],
   "heldUp": [
+    {
+      "what": "Fake payment glue (BC-37, BC-38)",
+      "waitingOn": "The e2e-money lane to write the pattern note and build it",
+      "owner": "PM"
+    },
     {
       "what": "Real-job only: legal review, sponsor terms, Stripe review",
       "waitingOn": "Client facts with no one to ask in this demo; logged, not blocking",
@@ -313,28 +308,28 @@
     {
       "when": "Oct 26",
       "what": "Only a blocking finding from a required check starts a review round, for every unit alike"
+    },
+    {
+      "when": "Oct 30",
+      "what": "Integration recreated and its ruleset bypass set to pull_request; production deployed from main by the PM on the owner's word (DECISIONS 2026-10-30)"
     }
   ],
   "watch": [
     {
-      "what": "Monday is a stretch target",
-      "detail": "Thirteen money-path units plus the audit fixes and Sprint 1's remainder, five builders, critical units landing in integration. The chain is four waves deep; each wave is about half a day at the measured pace, if nothing bounces."
+      "what": "Monday is at risk",
+      "detail": "The glue is unbuilt and untested on Vercel; a pattern note, one builder, five checks and a preview click-through all have to land by Monday Nov 2."
+    },
+    {
+      "what": "Promotions delete integration",
+      "detail": "delete_branch_on_merge removed it once; the bypass change is untested."
+    },
+    {
+      "what": "QA time",
+      "detail": "A full UI unit took about 6 hours of QA under machine load; time-box QA briefs to 60 minutes."
     },
     {
       "what": "Audit items are tracked, not kept in chat",
-      "detail": "Home 84 rows, browse and experience 21, nightly 18. The audit-fixes lane takes the clear fixes; the lib-refactor lane takes the DRY items; 22 owner decisions wait in one document."
-    },
-    {
-      "what": "Seed guard (N1029-1)",
-      "detail": "The seed's staging and load-test targets guard against a production database only by a word match on the URL; first item in the audit-fixes lane."
-    },
-    {
-      "what": "Merging main can break a unit that passed review",
-      "detail": "U-031 deleted a read that U-021a's new seed test called; no textual conflict. Every merge of main gets gates and a focused re-check before checks are posted."
-    },
-    {
-      "what": "Review rounds are the cost",
-      "detail": "U-031 took 7 rounds plus a re-check; U-030 2, U-021a 3. Architecture audits still find B2 items late."
+      "detail": "186 raised, 73 closed, 81 open as of Oct 30 (home 29, browse and experience 11, nightly 13, booking and checkout 28)."
     }
   ],
   "milestones": [
@@ -381,7 +376,7 @@
     "Refit Oct 29 from today: the Prototype units done, U-005 and U-014a at review, and U-014a, U-016, U-047a, U-048 and U-049 built by agents under PM pattern notes (the owner's call, Oct 29).",
     "The frozen routing for comparison: the owner builds U-014a, U-016, U-047a, U-048 and U-049 himself at 12.5 hours a week."
   ],
-  "forecastNote": "Forecast from Oct 29. The model prices each unit at its three-point estimate with review gates and a WIP limit; it does not yet carry the measured agent actuals (most merged units closed at 10 to 40 percent of their estimate), so treat its dates as the slow case.",
+  "forecastNote": "Forecast from Oct 29. The model prices each unit at its three-point estimate with review gates and a WIP limit; it does not yet carry the measured agent actuals (most merged units closed at 10 to 40 percent of their estimate), so treat its dates as the slow case. Refit 2026-10-30: start moved to Oct 30 with U-005 to U-041 marked done; prototype P50 Nov 13, finish P50 Jan 15 2027.",
   "frozen": {
     "prototype": {
       "likely": "2026-11-30",
@@ -393,6 +388,40 @@
     }
   },
   "standups": [
+    {
+      "date": "2026-10-30",
+      "done": [
+        "U-050 (confirmation page) and U-041 (booking bar, sheet and panel) merged; the whole money chain U-005 to U-041 is in main",
+        "Sync PR 282 and promotion PR 283 merged; integration recreated level with main (ruleset bypass set to pull_request)",
+        "Production deployed from main at 15c6130; real dates and spaces show on an experience page and Continue opens /checkout with a real hold",
+        "Test photos live on production after the plan upgrade; PR 275 stops branch deployments that need none",
+        "Token review of 2026-10-29: 61 percent of about $580 went to lane orchestrator chats (drafts/token-review-2026-10-29.md)"
+      ],
+      "today": [
+        "e2e-money: write the pattern note for the fake-payment glue (BC-37, BC-38), one builder, five checks, PR into integration",
+        "Then a seeded click-through on a Vercel deployment with evidence, for Monday Nov 2",
+        "audit-fixes: H-54 first, then H-46 to H-49 and H-53 (handed off, ready to resume)",
+        "lib-refactor: PRs A to G merged; Components-2, 3, 6 next"
+      ],
+      "heldUs": [
+        {
+          "what": "integration branch deleted by the promotion merge",
+          "cost": "delete_branch_on_merge removed it; Dave had the PM recreate it and the ruleset bypass changed to pull_request. Check it survives the next promotion."
+        },
+        {
+          "what": "Production secrets missing",
+          "cost": "CAPABILITY_TOKEN_SECRET, FORM_GUARD_SECRET, PULSE_SECRET and APP_URL were unset, so the redeploy waited for Dave to add them."
+        },
+        {
+          "what": "A vercel env run mistake",
+          "cost": "It deployed a script as a stray project (dbhost); removed the same day with Dave's approval. Production migrations go through db-migrate-production."
+        },
+        {
+          "what": "Fake gateway state in memory",
+          "cost": "A booking cannot confirm on Vercel until the glue (BC-37, BC-38) lands; this is the Monday risk."
+        }
+      ]
+    },
     {
       "date": "2026-10-29",
       "done": [

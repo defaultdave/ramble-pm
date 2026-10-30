@@ -7,33 +7,32 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 29, 2026.** New targets from the owner on Oct 29: Sprint 1 work done by Oct 30, and a guest books a seeded session end to end (home, browse, experience, booking, checkout, confirmation) on the fake payment adapter by Monday Nov 2; no Stripe. The Prototype's 21 units are all live at ramble-sand.vercel.app; the checkout and confirmation stubs the plan listed were never built, so that glue goes first. The deep-review hold is lifted: U-005 and U-014a go into integration now, and the audit's fixes run in their own lane beside the build. All 28 deep-review decisions are approved as recommended, and from today the PM proceeds on its recommendation and logs the call rather than waiting; four lane chats are running. The src/lib layout (H-18) is adopted; its seven-PR refactor plan is written. The refit below puts the money core on agents (the owner's call for U-016, U-047a and U-049) and still says December for the confirmation page, because it prices every unit at its estimate with review rounds; agent actuals so far run well under that, which is what a Monday landing depends on.
+**As of Oct 30, 2026.** Oct 30: the whole money chain (U-005 to U-041) is in main and on production at ramble-sand.vercel.app, and a guest can hold a real session and reach checkout. A booking cannot confirm yet: after the fake Pay nothing delivers the payment event to the webhook intake (BC-38), and the fake gateway keeps its state in one process, so a second Vercel instance refuses it (BC-37). That glue is the last piece before the Monday Nov 2 click-through and nobody has started it; the e2e-money lane opens next. The forecast below was refit on Oct 30 with the money chain done; it prices units at estimate, so it is the slow case against agent actuals of 4 to 42 percent of estimate.
 
 | Milestone | Likely |
 |---|---|
-| Prototype | Nov 10, 2026 (late case Nov 11, 2026) |
-| Launch-ready | Jan 21, 2027 (late case Feb 3, 2027) |
+| Prototype | Nov 13, 2026 (late case Nov 18, 2026) |
+| Launch-ready | Jan 15, 2027 (late case Jan 27, 2027) |
 
 Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
-- Bypass-merge PR 233. The architecture standard (image port and sharp); the PM opened it as the App.
+- Check the integration branch survives the next promotion. delete_branch_on_merge is on; the ruleset bypass is now pull_request. If it vanishes again, change the repo setting or the promotion step.
 - Neon console. Delete the stray database from the first migrate run if it is stale (H-11).
-- Promote integration to main when the critical-path lane reports U-005 and U-014a merged (daily this week, not weekly).
-- Add image and sharp to the ports and vendor-SDK lines in .claude/standards/architecture.md (N1029-18).
-- Vercel. Publish the beacon firewall rule (PR 193 has the commands), turn on BotID, set the Sentry DSNs.
-- Sentry. Create the projects, name the ops address, apply the three alert rules in docs/runbooks/alerting.md.
-- GitHub. Enable private vulnerability reporting.
+- Board dates sync. bun scripts/plan/board-dates.ts --run (gh cannot read the keychain in the sandbox).
+- Vercel and Sentry. Beacon firewall rule (PR 193), BotID, Sentry DSNs and projects, alert rules in docs/runbooks/alerting.md.
+- GitHub. Enable private vulnerability reporting; the BE-1 Vercel firewall rule from PR 263 is skipped by decision.
 
 **Decisions needed**
 
-- Builder limit: stay at five agent builders machine-wide, or add a second database container. Recommended: stay at five.
-- gh inside the sandbox: trust the proxy, or allow api.github.com. Recommended: allow api.github.com.
+- Sandbox: allow api.github.com and local port binding. Recommended: allow both.
+- Fold the token review fixes 1 to 6 into the agent file. Recommended: yes.
 - Tax-rate default: confirm 88,750 ppm (New York City 8.875%), or give the rate. Recommended: keep 88,750 ppm.
 
 **Held up**
 
+- Fake payment glue (BC-37, BC-38): The e2e-money lane to write the pattern note and build it
 - Real-job only: legal review, sponsor terms, Stripe review: Client facts with no one to ask in this demo; logged, not blocking
 <!-- roadmap:status:end -->
 
