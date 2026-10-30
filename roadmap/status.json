@@ -395,7 +395,8 @@
         "Sync PR 282 and promotion PR 283 merged; integration recreated level with main (ruleset bypass set to pull_request)",
         "Production deployed from main at 15c6130; real dates and spaces show on an experience page and Continue opens /checkout with a real hold",
         "Test photos live on production after the plan upgrade; PR 275 stops branch deployments that need none",
-        "Token review of 2026-10-29: 61 percent of about $580 went to lane orchestrator chats (drafts/token-review-2026-10-29.md)"
+        "Token review of 2026-10-29: 61 percent of about $580 went to lane orchestrator chats (drafts/token-review-2026-10-29.md)",
+        "Checkout perf feedback: PR 286 stops timer ticks and keystrokes re-rendering the whole page and adds an opt-in profiling build; waits on Dave's approval"
       ],
       "today": [
         "e2e-money: write the pattern note for the fake-payment glue (BC-37, BC-38), one builder, five checks, PR into integration",

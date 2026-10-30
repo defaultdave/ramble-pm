@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-10-30 18:40 by the lead. The whole money chain (U-005 to U-041) is in `main` and on production (`ramble-sand.vercel.app`, from `15c6130`); no PR is open and no builder is running. A booking cannot confirm yet: nothing delivers the fake payment's event to the webhook intake (BC-38) and the fake gateway keeps its state in one process (BC-37). That glue is the next piece, in the `e2e-money` lane, and the last step before the Monday 2026-11-02 click-through. Roadmap refreshed and republished (artifact version 43).
+**Updated:** 2026-10-30 20:30 by the lead. Checkout perf feedback: PR 286 is open for Dave's approval (timer tick and keystroke re-renders, opt-in profiling build); it merges on approval once CI passes. The whole money chain (U-005 to U-041) is in `main` and on production (`ramble-sand.vercel.app`, from `15c6130`); no PR is open and no builder is running. A booking cannot confirm yet: nothing delivers the fake payment's event to the webhook intake (BC-38) and the fake gateway keeps its state in one process (BC-37). That glue is the next piece, in the `e2e-money` lane, and the last step before the Monday 2026-11-02 click-through. Roadmap refreshed and republished (artifact version 43).
 
 ## Lanes
 
@@ -8,7 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `lead` | Shared status, `## Next`, roadmap, memory; checkout perf feedback (hold timer re-renders, Profiler build) | PM lead, 2026-10-30 (night, checkout perf) | active | 2026-10-30 19:55 |
+| `lead` | Shared status, `## Next`, roadmap, memory; checkout perf feedback (hold timer re-renders, Profiler build) | PM lead, 2026-10-30 (night, checkout perf) | handed off | 2026-10-30 20:30 |
 | `critical-path` | U-005 then U-014a into `integration` (released 2026-10-29 12:10), PR 222 through the next promotion; then U-014b, U-048 (critical, holds and webhook side of the money path) | critical-path lane, 2026-10-29 (afternoon) | handed off | 2026-10-29 13:05 |
 | `audit-fixes` | Every open audit item that is a clear fix and not part of the `src/lib` refactor: home `open` rows, BE-13, BE-8, BE-7 (with a `src/lib`-owned predicate; PR D of the refactor consolidates it), BE-14, BE-1, nightly N1029-1 to 7, 10, 11; fix-rounds PRs with before-and-after evidence | PM audit-fixes, 2026-10-30 (evening) | active | 2026-10-30 18:25 |
 | `e2e-money` | The end-to-end prototype on the fake payment adapter: stub glue (merged), U-019 and U-045b (merged), U-015, U-016, U-054, U-047a, U-047b, U-049, U-050, U-040, U-041, and since 2026-10-29 16:30 the critical-path money units U-014a, U-014b, U-048 (Dave) | e2e-money lane, 2026-10-30 (evening: BC-37, BC-38 glue, click-through) | active | 2026-10-30 18:35 |
@@ -41,6 +41,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 ## In flight
 
 ### Lane: lead (test photos on Blob)
+- **2026-10-30 20:30, checkout perf feedback.** Dave's trace plus notes: PR 286 (`unit/U-047b-hold-timer-island`, `533d38f`) gives the hold timer and the form their own state, adds opt-in `REACT_PROFILING=1` and `pnpm build:profile`. BC-41 to BC-43 assigned to it. Four checks posted, review requested, auto-merge queued. Cost in the trace was small (16 to 20 ms a tick at 15.7x throttle; 55 ms of site script in 4.3 s), so this is cleanup. Not checked: a real hold on Postgres, the DevTools Profiler tab on a profiling build, an after-trace. After merge: mark BC-41 to BC-43 closed, remove worktree-free branch `unit/U-047b-hold-timer-island`.
 - **2026-10-30 18:40, roadmap refreshed.** Folded the lanes' notes into `## Next` and `## Blocked on Dave`; standup for 2026-10-30 written; schedule regenerated (start Oct 30, money chain done); `roadmap.ts` rebuilt; artifact republished (version 43). Memory lessons written. Board dates sync is Dave's. Audit tally unchanged from 00:45 (186 raised, 73 closed, 81 open) plus BC-34 to BC-40.
 - **2026-10-30 00:45, status, audit tally, token review.** Audit items across the four pass files: 186 raised, 73 closed, 5 assigned to a fix, 14 decided, 10 later, 3 won't, 81 open (home 29, browse and experience 11, nightly 13, booking and checkout 28). Prototype: `integration` holds U-047b, U-049, U-048 and U-040 (PR 279, `d2639e8`); U-050 (`d77312c`) and U-041 (`8f17f49`) are built on local branches, not pushed; then the seeded click-through, Dave's promotion of `integration`, and a production redeploy. The e2e-money row says `active` but its chat is archived (last activity 23:49). Token review of 2026-10-29 in `drafts/token-review-2026-10-29.md`: 61% of about $580 went to the lane orchestrator chats (Opus, 400K average context, up to 965K); every chat starts at 99K tokens; the nightly audits code only and checks nothing about the agents. **For the lead:** fold the review's fixes 1 to 6 into the agent file once Dave approves; the nightly agent review task waits on his yes.
 - **2026-10-30 00:20, test photos verified on production.** Dave upgraded Vercel (Hobby cap gone), ran the production redeploy (`dpl_JDRnu14eV9yshEkCccrk7LpBoufK`, from `main` at `9d5cb54`, aliased to `ramble-david-fleming.vercel.app`, READY in 1 min) and saw the photos load. No evidence captures taken: the Vercel connector could not fetch the deployment's pages (authorization scope), and Dave's check settled it. Deployments stay deliberate (DECISIONS 2026-10-29): PR 275's config is kept, agents never deploy, the `production` branch setup is optional. Production is on `9d5cb54`, behind `main`; it refreshes only when Dave redeploys. **For the lead:** the test-photos item is done; the connector authorization for page fetches needs re-extending if the PM is to fetch deployments again.
@@ -302,6 +303,8 @@ Lessons from waves 1 and 2: builders commit and stop; the PM pushes and opens PR
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
 
 ### lead
+
+**Update 2026-10-30 20:30 (read first):** PR 286 (checkout re-renders, profiling build) waits on Dave's approval and CI; after it merges, close BC-41 to BC-43. To profile a deployment, Dave sets `REACT_PROFILING=1` on it and redeploys. Otherwise the 18:40 note stands: `e2e-money` first. Run on Sonnet, medium.
 
 **Update 2026-10-30 18:40 (read first):** the roadmap fold-in, standup, schedule refit, rebuild and republish are done; memory lessons written. Next lead: open the `e2e-money` lane first (its block below) and check the `integration` branch after any promotion. Run on Sonnet, medium.
 
