@@ -392,7 +392,7 @@ Read STATUS.md in the ramble-pm repo: the Lanes table and the critical-path lane
 
 ### home-feedback
 
-Lane finished: all of Dave's 2026-10-31 feedback merged to `main` (PR 291 to 295). Nothing waits here. Production has all of it since 10:27. PF-7 is open for the lead to schedule.
+All of Dave's 2026-10-31 feedback merged to `main` (PR 291 to 295). Left: [PR 296](https://github.com/defaultdave/ramble/pull/296), a comment-only change, auto-merge queued, Dave's review requested; after it merges remove worktree `agent-a93001ef331917ea4` and branches `unit/U-033-focus-comment`, `worktree-agent-a93001ef331917ea4`. It needs no deploy. Production has all of it since 10:27. PF-7 is open for the lead to schedule.
 
 For the lead: U-033 stays In Progress on board #19 with issue 39 open; its second PR goes back to the planned slot after the Prototype, and the plan's filter list needs reconciling with Figma first. Roadmap: U-033 first PR pulled forward and merged. Memory lessons: measure on a seeded page, a placeholder database proves nothing; CLS does not see a replaced skeleton, so compare tops; font fallbacks tuned on a Mac do not hold on Linux or Android, so check `local()` resolved; the browse no-script promise is broken on `main` (PF-7), and home may be too.
 
