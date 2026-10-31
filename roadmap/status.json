@@ -1,6 +1,6 @@
 {
   "asOf": "2026-10-30",
-  "headline": "Oct 30: the whole money chain (U-005 to U-041) is in main and on production at ramble-sand.vercel.app, and a guest can hold a real session and reach checkout. A booking cannot confirm yet: after the fake Pay nothing delivers the payment event to the webhook intake (BC-38), and the fake gateway keeps its state in one process, so a second Vercel instance refuses it (BC-37). That glue is the last piece before the Monday Nov 2 click-through and nobody has started it; the e2e-money lane opens next. The forecast below was refit on Oct 30 with the money chain done; it prices units at estimate, so it is the slow case against agent actuals of 4 to 42 percent of estimate.",
+  "headline": "Oct 30: the Monday goal is met three days early. A guest booked Coffee cupping on production (ramble-sand.vercel.app, order RMB-QVCS9Y): panel, checkout, fake Apple Pay, confirmed after a reload at 1024 and 375 px. The glue (BC-37, BC-38) shipped as PR 287 and checkout re-render cleanup as PR 286. Two visible leftovers are in builders' hands: the unstyled frame on the order page (BC-1) and the host notice failing on seeded hosts (BC-48). Not run on production: card decline then success and 3-D Secure (proven locally only). Reminders, hold upkeep and retries do not run until the pulse workflow lands. The forecast prices units at estimate, so it is the slow case against agent actuals of 4 to 42 percent of estimate.",
   "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
   "phases": [
     {
@@ -122,6 +122,16 @@
     }
   ],
   "actionsForDave": [
+    {
+      "title": "Try a card decline then success on production",
+      "detail": "Use the Demo test cards on the payment step; the PM does not type card numbers there.",
+      "where": "Any time"
+    },
+    {
+      "title": "Push the pulse workflow",
+      "detail": "Push unit/U-005-pulse-workflow and add the Actions secret PULSE_SECRET (agents cannot push .github/workflows).",
+      "where": "Any time"
+    },
     {
       "title": "Check the integration branch survives the next promotion",
       "detail": "delete_branch_on_merge is on; the ruleset bypass is now pull_request. If it vanishes again, change the repo setting or the promotion step.",
@@ -316,8 +326,8 @@
   ],
   "watch": [
     {
-      "what": "Monday is at risk",
-      "detail": "The glue is unbuilt and untested on Vercel; a pattern note, one builder, five checks and a preview click-through all have to land by Monday Nov 2."
+      "what": "Pulse workflow unlanded",
+      "detail": "Reminders, hold upkeep and job retries do not run on production until unit/U-005-pulse-workflow is pushed and PULSE_SECRET is set."
     },
     {
       "what": "Promotions delete integration",
@@ -396,13 +406,16 @@
         "Production deployed from main at 15c6130; real dates and spaces show on an experience page and Continue opens /checkout with a real hold",
         "Test photos live on production after the plan upgrade; PR 275 stops branch deployments that need none",
         "Token review of 2026-10-29: 61 percent of about $580 went to lane orchestrator chats (drafts/token-review-2026-10-29.md)",
-        "Checkout perf feedback: PR 286 stops timer ticks and keystrokes re-rendering the whole page and adds an opt-in profiling build; waits on Dave's approval"
+        "Checkout perf feedback: PR 286 stops timer ticks and keystrokes re-rendering the whole page and adds an opt-in profiling build; waits on Dave's approval",
+        "PR 287 merged: the fake gateway's events reach the webhook intake and its state lives in Postgres (BC-37, BC-38 closed); production migrated and redeployed",
+        "A guest booked end to end on production (order RMB-QVCS9Y); Monday Nov 2 goal met",
+        "PR 286 merged; BC-41 to BC-43 closed",
+        "H-54 (PR 284) and H-46 (PR 285) merged"
       ],
       "today": [
-        "e2e-money: write the pattern note for the fake-payment glue (BC-37, BC-38), one builder, five checks, PR into integration",
-        "Then a seeded click-through on a Vercel deployment with evidence, for Monday Nov 2",
-        "audit-fixes: H-54 first, then H-46 to H-49 and H-53 (handed off, ready to resume)",
-        "lib-refactor: PRs A to G merged; Components-2, 3, 6 next"
+        "e2e-money: BC-1 (order page frame) and BC-48 (host addresses) in two builders",
+        "audit-fixes: U-031 cache tags next, then H-48",
+        "lib-refactor: handed off"
       ],
       "heldUs": [
         {
@@ -420,6 +433,10 @@
         {
           "what": "Fake gateway state in memory",
           "cost": "A booking cannot confirm on Vercel until the glue (BC-37, BC-38) lands; this is the Monday risk."
+        },
+        {
+          "what": "vercel deploy --prod left the production alias on the old deployment",
+          "cost": "Needed vercel promote; the refresh steps now include it."
         }
       ]
     },

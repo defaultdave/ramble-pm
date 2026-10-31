@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 30, 2026.** Oct 30: the whole money chain (U-005 to U-041) is in main and on production at ramble-sand.vercel.app, and a guest can hold a real session and reach checkout. A booking cannot confirm yet: after the fake Pay nothing delivers the payment event to the webhook intake (BC-38), and the fake gateway keeps its state in one process, so a second Vercel instance refuses it (BC-37). That glue is the last piece before the Monday Nov 2 click-through and nobody has started it; the e2e-money lane opens next. The forecast below was refit on Oct 30 with the money chain done; it prices units at estimate, so it is the slow case against agent actuals of 4 to 42 percent of estimate.
+**As of Oct 30, 2026.** Oct 30: the Monday goal is met three days early. A guest booked Coffee cupping on production (ramble-sand.vercel.app, order RMB-QVCS9Y): panel, checkout, fake Apple Pay, confirmed after a reload at 1024 and 375 px. The glue (BC-37, BC-38) shipped as PR 287 and checkout re-render cleanup as PR 286. Two visible leftovers are in builders' hands: the unstyled frame on the order page (BC-1) and the host notice failing on seeded hosts (BC-48). Not run on production: card decline then success and 3-D Secure (proven locally only). Reminders, hold upkeep and retries do not run until the pulse workflow lands. The forecast prices units at estimate, so it is the slow case against agent actuals of 4 to 42 percent of estimate.
 
 | Milestone | Likely |
 |---|---|
@@ -18,6 +18,8 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
+- Try a card decline then success on production. Use the Demo test cards on the payment step; the PM does not type card numbers there.
+- Push the pulse workflow. Push unit/U-005-pulse-workflow and add the Actions secret PULSE_SECRET (agents cannot push .github/workflows).
 - Check the integration branch survives the next promotion. delete_branch_on_merge is on; the ruleset bypass is now pull_request. If it vanishes again, change the repo setting or the promotion step.
 - Neon console. Delete the stray database from the first migrate run if it is stale (H-11).
 - Board dates sync. bun scripts/plan/board-dates.ts --run (gh cannot read the keychain in the sandbox).
