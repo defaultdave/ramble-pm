@@ -1,0 +1,1 @@
+Round 1 (head 66b345c): review, spec, architecture and qa FAIL. Blocking: B17 duplication of WhenDetails' dismiss wiring (all three), B8 client island (architecture), listener-cleanup mutation survivor (qa). Round 2 fixed all.
