@@ -39,6 +39,9 @@ def records(path):
                 continue
 
 
+starts = []
+
+
 def profile_session(path, day):
     first = None
     models, tools, results, agents = (collections.Counter() for _ in range(4))
@@ -88,8 +91,9 @@ def profile_session(path, day):
     print(f"\n### {os.path.basename(path)[:8]}  calls={len(ctx)} user_turns={user_turns} compactions={compacts}")
     print("  first prompt:", first)
     print("  models:", dict(models))
-    print(f"  context avg={sum(ctx) / len(ctx) / 1000:.0f}K peak={max(ctx) / 1000:.0f}K"
+    print(f"  context start={ctx[0] / 1000:.0f}K avg={sum(ctx) / len(ctx) / 1000:.0f}K peak={max(ctx) / 1000:.0f}K"
           f"  STATUS.md touches={status_touches}  polls={polls}")
+    starts.append(ctx[0])
     print("  tools:", tools.most_common(8))
     print("  agents:", dict(agents))
     print("  result chars by tool:", [(k, f"{v / 1000:.0f}K") for k, v in results.most_common(5)])
@@ -123,3 +127,6 @@ if __name__ == "__main__":
     for path in sorted(glob.glob(f"{ROOT}/*ramble*/*.jsonl")):
         profile_session(path, day)
     profile_subagents(day)
+    if starts:
+        print(f"\n### Fixed starting context: smallest first call {min(starts) / 1000:.0f}K,"
+              f" median {sorted(starts)[len(starts) // 2] / 1000:.0f}K over {len(starts)} sessions")

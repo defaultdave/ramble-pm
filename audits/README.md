@@ -19,7 +19,9 @@ After each of these reaches `main`:
 | Nightly 2026-10-29 | PRs 205 to 229 (22 merged), `4959db0` to `5a595f1` | Reported 2026-10-29 on `main` at `5a595f1`: 18 items, N1029-1 to N1029-18, all open ([nightly-2026-10-29.md](nightly-2026-10-29.md)) |
 | Nightly 2026-10-30 | PRs 230 to 273 merged in the 24 hours to 06:40 UTC (34), up to `5dd63e2`; architecture, code and DRY, accessibility (code reading) | Reported 2026-10-30 on `main` at `5dd63e2`: 28 items, N1030-1 to N1030-28, all open; visual, axe and performance not run (Docker socket denied in the sandbox) ([nightly-2026-10-30.md](nightly-2026-10-30.md)) |
 | Nightly 2026-10-31 | PRs 283 to 293 merged in the 24 hours to 06:33 UTC (11; 8 code, 1 promotion, 1 workflow), up to `93f494a`; architecture, code and DRY, accessibility (code reading) | Reported 2026-10-31 on `main` at `93f494a`: 26 items, N1031-1 to N1031-26, all open; visual, axe and performance not run (Docker socket denied in the sandbox) ([nightly-2026-10-31.md](nightly-2026-10-31.md)) |
+| Nightly 2026-11-01 | PRs 292, 294, 295, 296 merged in the 24 hours to 07:32 UTC (4), up to `1cbc6ae`; architecture, code and DRY, accessibility (code reading) | Reported 2026-11-01 on `main` at `1cbc6ae`: 6 items, N1101-1 to N1101-6, all open; visual, axe and performance not run (Docker unavailable in the sandbox) ([nightly-2026-11-01.md](nightly-2026-11-01.md)) |
 | Agents 2026-10-29 | Claude Code sessions of 2026-10-29: $549.80, 15 sessions | Reported 2026-10-30: 1 experiment (A1029-1, read budget for architecture-audit), failed, none shipped ([agents-2026-10-29.md](agents-2026-10-29.md)) |
+| Agents 2026-10-31 | Claude Code sessions of 2026-10-31: $72.76, 6 sessions | Reported 2026-11-01: 2 experiments (A1030-1 read budget rerun, failed; A1031-1 profiler shows fixed starting context, passed, published) ([agents-2026-10-31.md](agents-2026-10-31.md)) |
 
 ## Lenses (the same every pass)
 
