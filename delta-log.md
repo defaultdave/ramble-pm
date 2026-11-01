@@ -87,3 +87,6 @@ Schedule regenerated with start 2026-10-30 and U-005 to U-041 marked done (`road
 
 ## 2026-11-01 (lead): Figma click-through added
 Not in the frozen plan and no unit; no build unit changes. Page `Prototype (mobile)` (node `211:1949`) holds duplicates of 14 mobile and 10 state screens, 74 actions and 15 named flows. The signed-off pages are unchanged. Purpose: walk the gift and manage flows before their builders start, and supply evidence for the P6 question of what a P3 click-through would have caught.
+
+## 2026-11-01 (lead): Sprint 2 repurposed
+Sprint 2 moves from features to production-ready work (`drafts/sprint-2-production-ready.md`). Its feature units slip one sprint, about two weeks in the forecast's slow case; the forecast has not been rerun.

@@ -161,6 +161,10 @@
  "decisionsMade": [
   {
    "when": "Nov 1",
+   "what": "Sprint 2 becomes production-ready work: test audit, comment cleanup, text dictionary, tightening; feature units slip one sprint (you)"
+  },
+  {
+   "when": "Nov 1",
    "what": "Mobile Figma click-through wired on a duplicate page, outside the frozen plan; Fable stays stopped (you)"
   },
   {
@@ -326,6 +330,10 @@
  ],
  "watch": [
   {
+   "what": "Sprint 2 repurposed, forecast not rerun",
+   "detail": "Feature units slip one sprint, about two weeks in the slow case. Dates on this page do not reflect it yet."
+  },
+  {
    "what": "Promotions delete integration",
    "detail": "delete_branch_on_merge removed it once; the bypass change is untested."
   },
@@ -405,6 +413,7 @@
     "Figma click-through: 24 mobile screens wired into 15 named flows on Prototype (mobile)"
    ],
    "today": [
+    "Close Sprint 1, then open the production-ready lane",
     "Dave: rerun the production-demo seed (BC-48), then one more seeded booking on production",
     "audit-fixes: U-031 cache tags, then H-48",
     "browse-perf: JavaScript audit after PF-9b"
