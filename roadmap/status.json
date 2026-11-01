@@ -161,6 +161,10 @@
  "decisionsMade": [
   {
    "when": "Nov 1",
+   "what": "Mobile Figma click-through wired on a duplicate page, outside the frozen plan; Fable stays stopped (you)"
+  },
+  {
+   "when": "Nov 1",
    "what": "All as recommended: Fable trial stopped, 200 not-found pages accepted for the demo, Next.js stderr tracked for before real guests, tax 88,750 ppm, lane chats on Sonnet with token fixes in the agent file (you)"
   },
   {
@@ -397,7 +401,8 @@
     "Home feedback PF-1 to PF-6 merged and deployed (PRs 291 to 296)",
     "Browse feedback PF-8, PF-9a, PF-10 merged and deployed at 44dd004 (PR 297)",
     "Lead lane taken over; worktrees for merged branches removed",
-    "Six open decisions settled; lane history moved out of STATUS.md into lanes/"
+    "Six open decisions settled; lane history moved out of STATUS.md into lanes/",
+    "Figma click-through: 24 mobile screens wired into 15 named flows on Prototype (mobile)"
    ],
    "today": [
     "Dave: rerun the production-demo seed (BC-48), then one more seeded booking on production",

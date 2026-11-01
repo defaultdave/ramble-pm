@@ -84,3 +84,6 @@ Schedule regenerated with start 2026-10-30 and U-005 to U-041 marked done (`road
 ## 2026-10-30 (e2e-money): fake delivery glue has no unit
 `units.yaml` has no row for delivering the fake's events in the running app or keeping the fake's state across processes (U-045b scoped delivery to tests; the Prototype milestone assumed it). Built on carrier U-045b as `unit/U-045b-fake-delivery` (`ramble-pm/drafts/fake-delivery-pattern-note.md`). New table `fake_gateway_state`. The design doc's fake adapter gains a database row; the frozen plan is unchanged.
 | 2026-10-31 | U-033 (lane home-feedback) | Pulled forward from after the Prototype on owner feedback, in two PRs; `src/components/FilterBar/FilterDrawerHost.tsx` is a client island under the allowlisted filter drawer (B8, PM ruling). | Owner asked for Figma's one-row bar; the drawer needs client state |
+
+## 2026-11-01 (lead): Figma click-through added
+Not in the frozen plan and no unit; no build unit changes. Page `Prototype (mobile)` (node `211:1949`) holds duplicates of 14 mobile and 10 state screens, 74 actions and 15 named flows. The signed-off pages are unchanged. Purpose: walk the gift and manage flows before their builders start, and supply evidence for the P6 question of what a P3 click-through would have caught.
