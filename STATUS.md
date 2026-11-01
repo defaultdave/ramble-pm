@@ -399,7 +399,7 @@ Read STATUS.md in the ramble-pm repo: the Lanes table and the critical-path lane
 
 ### browse-perf
 
-Done: PR 297 merged, deployed 2026-11-01, PF-8, PF-9a, PF-10 closed. PF-9b is open for the lead to schedule; results in `audits/prototype-feedback-2026-10-31.md`.
+Done: PR 297 merged, deployed 2026-11-01, PF-8, PF-9a, PF-10 closed. PF-9b accepted by Dave; a JS audit follows; results in `audits/prototype-feedback-2026-10-31.md`.
 
 ### home-feedback
 
