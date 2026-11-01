@@ -49,3 +49,10 @@ One run. `ramble-sand.vercel.app`, `dpl_3jqGrbQqQBJP56QifYZ3ZKZo94gj`, `44dd004`
 | Filters works from | not measured clean | 3.7 s (PF-9b) |
 
 LCP did not improve, because the browser reports the blur placeholder, not the photo. Photo arrival is the number that moved. Not checked: a real touch device, Safari.
+
+## PF-9b findings, production, 2026-11-01
+
+One cold run, phone, Slow 4G, 4x CPU. Filters is visible at 2.43 s and works at 3.80 s, a dead window of about 1.4 s. Hydration itself is cheap: the only long task is 65 ms at 3.65 s. The wait is the download: 12 scripts requested at 0.79 s, and the last, a 73 KB framework chunk, finishes at 3.65 s. The two framework chunks are 123 of the page's 251 KB, so trimming app code cannot close the window. A later run reached 0.56 s, but its scripts were probably cached, so it is not a cold figure.
+
+Options: (1) a small inline script records a press on the three drawer buttons and `FilterRow` replays it on hydration; (2) a native popover rendered in the HTML, larger, and it would rework the drawer's focus handling; (3) cut JS, limited by the framework chunks; (4) accept it. PM recommends (1). The inline script runs on browse's report-only CSP tier and needs a nonce if that route's policy is ever enforced.
+
