@@ -98,34 +98,27 @@
    "when": "Oct 20"
   }
  ],
- "decisionsNeeded": [
-  {
-   "title": "Sandbox: allow api.github.com and local port binding",
-   "impact": "GitHub reads fail inside the sandbox (board dates, nightly merge list) and reviewers cannot run Postgres, Chromium or ports, so QA falls back to static checks.",
-   "detail": "Sandbox settings are yours to change.",
-   "recommendation": "allow both",
-   "blocks": "Board date sync; runtime QA by reviewers"
-  },
-  {
-   "title": "Tax-rate default: confirm 88,750 ppm (New York City 8.875%), or give the rate",
-   "impact": "None on dates; the rate the configured setting starts with, pending Q-12.",
-   "detail": "U-018 seeds it.",
-   "recommendation": "keep 88,750 ppm",
-   "blocks": "Nothing"
-  },
-  {
-   "title": "Move lane orchestrator chats from Opus to Sonnet",
-   "impact": "Opus was 33 percent of the Oct 31 night's measured cost; the nightly review can only propose this, since it changes the model tier.",
-   "detail": "audits/agents-2026-10-31.md, finding 4; drafts/token-review-2026-10-29.md for fixes 1 to 6.",
-   "recommendation": "yes",
-   "blocks": "Nothing"
-  }
- ],
+ "decisionsNeeded": [],
  "actionsForDave": [
   {
    "title": "Rerun the production-demo seed",
    "detail": "From a current main checkout (docs/runbooks/seed.md). The PM cannot: it needs the production env file. Closes BC-48 and lets the last seeded booking check run.",
    "where": "Before the click-through"
+  },
+  {
+   "title": "Bypass-merge the token rules PR",
+   "detail": "pm/token-rules changes .claude/agents/ramble-pm.md, a protected path.",
+   "where": "Any time"
+  },
+  {
+   "title": "Sandbox: allow api.github.com and local port binding",
+   "detail": "GitHub reads fail inside the sandbox (board dates, nightly merge list) and reviewers cannot run Postgres, Chromium or ports, so QA falls back to static checks.",
+   "where": "Sandbox settings"
+  },
+  {
+   "title": "Turn off unused connectors in Ramble chats",
+   "detail": "Token review fix 3: every chat starts at 99K tokens. Finance, Gmail, Drive, Docs, iOS simulator, computer use; Vercel only in deploy chats.",
+   "where": "App settings"
   },
   {
    "title": "Try a card decline then success on production",
@@ -140,11 +133,6 @@
   {
    "title": "Neon console",
    "detail": "Delete the stray database from the first migrate run if it is stale (H-11).",
-   "where": "Any time"
-  },
-  {
-   "title": "Board dates sync",
-   "detail": "bun scripts/plan/board-dates.ts --run (gh cannot read the keychain in the sandbox).",
    "where": "Any time"
   },
   {
@@ -171,6 +159,10 @@
   }
  ],
  "decisionsMade": [
+  {
+   "when": "Nov 1",
+   "what": "All as recommended: Fable trial stopped, 200 not-found pages accepted for the demo, Next.js stderr tracked for before real guests, tax 88,750 ppm, lane chats on Sonnet with token fixes in the agent file (you)"
+  },
   {
    "when": "Nov 1",
    "what": "PF-9b accepted: a delay before Filters works on the slowest connections may stand; a JavaScript audit follows instead of early-tap capture (you)"
@@ -404,7 +396,8 @@
     "PR 288, 289 and 290 merged: seeded host addresses, the order page frame, the pulse workflow (running every 30 minutes)",
     "Home feedback PF-1 to PF-6 merged and deployed (PRs 291 to 296)",
     "Browse feedback PF-8, PF-9a, PF-10 merged and deployed at 44dd004 (PR 297)",
-    "Lead lane taken over; worktrees for merged branches removed"
+    "Lead lane taken over; worktrees for merged branches removed",
+    "Six open decisions settled; lane history moved out of STATUS.md into lanes/"
    ],
    "today": [
     "Dave: rerun the production-demo seed (BC-48), then one more seeded booking on production",

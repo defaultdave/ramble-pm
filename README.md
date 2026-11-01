@@ -19,18 +19,18 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 **Next for Dave**
 
 - Rerun the production-demo seed. From a current main checkout (docs/runbooks/seed.md). The PM cannot: it needs the production env file. Closes BC-48 and lets the last seeded booking check run.
+- Bypass-merge the token rules PR. pm/token-rules changes .claude/agents/ramble-pm.md, a protected path.
+- Sandbox: allow api.github.com and local port binding. GitHub reads fail inside the sandbox (board dates, nightly merge list) and reviewers cannot run Postgres, Chromium or ports, so QA falls back to static checks.
+- Turn off unused connectors in Ramble chats. Token review fix 3: every chat starts at 99K tokens. Finance, Gmail, Drive, Docs, iOS simulator, computer use; Vercel only in deploy chats.
 - Try a card decline then success on production. Use the Demo test cards on the payment step; the PM does not type card numbers there.
 - Check the integration branch survives the next promotion. delete_branch_on_merge is on; the ruleset bypass is now pull_request. If it vanishes again, change the repo setting or the promotion step.
 - Neon console. Delete the stray database from the first migrate run if it is stale (H-11).
-- Board dates sync. bun scripts/plan/board-dates.ts --run (gh cannot read the keychain in the sandbox).
 - Vercel and Sentry. Beacon firewall rule (PR 193), BotID, Sentry DSNs and projects, alert rules in docs/runbooks/alerting.md.
 - GitHub. Enable private vulnerability reporting; the BE-1 Vercel firewall rule from PR 263 is skipped by decision.
 
 **Decisions needed**
 
-- Sandbox: allow api.github.com and local port binding. Recommended: allow both.
-- Tax-rate default: confirm 88,750 ppm (New York City 8.875%), or give the rate. Recommended: keep 88,750 ppm.
-- Move lane orchestrator chats from Opus to Sonnet. Recommended: yes.
+- None
 
 **Held up**
 
