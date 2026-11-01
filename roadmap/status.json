@@ -1,511 +1,512 @@
 {
- "asOf": "2026-11-01",
- "headline": "Nov 1: a guest books end to end on production, ahead of Monday's Nov 2 goal. Production runs main at 44dd004, no PRs are open, and the pulse workflow runs every 30 minutes. Dave's Oct 31 home and browse feedback is merged and deployed. One owner item is left for the click-through: rerunning the production-demo seed so host notices stop failing (BC-48). Card decline then success and 3-D Secure are proven locally only. The forecast prices units at estimate, so it is the slow case against agent actuals of 4 to 42 percent of estimate.",
- "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
- "phases": [
-  {
-   "id": "P0",
-   "name": "Setup",
-   "state": "done",
-   "when": "Sep 28",
-   "note": "Repo, PM agent, build plan"
-  },
-  {
-   "id": "P1",
-   "name": "Discovery and PRD",
-   "state": "done",
-   "when": "Oct 18",
-   "note": "PRD v1.0 signed: 78 requirements"
-  },
-  {
-   "id": "P2",
-   "name": "Research and ADRs",
-   "state": "done",
-   "when": "Oct 18",
-   "note": "10 architecture decisions accepted"
-  },
-  {
-   "id": "P3",
-   "name": "Design",
-   "state": "done",
-   "when": "Oct 18",
-   "note": "Mobile flow and error states signed off"
-  },
-  {
-   "id": "P4",
-   "name": "Plan",
-   "state": "done",
-   "when": "Oct 20",
-   "note": "Frozen: tag plan-frozen-2026-10-20"
-  },
-  {
-   "id": "P5",
-   "name": "Build",
-   "state": "now",
-   "when": "From Oct 20",
-   "note": "U-118 done Oct 21 (2 days against 3); agent auto-merge is on. Next: the architecture guardrails, then U-001"
-  },
-  {
-   "id": "P6",
-   "name": "Write-up",
-   "state": "later",
-   "when": "After launch",
-   "note": "Where the plan was wrong, and why"
-  }
- ],
- "artifacts": [
-  {
-   "n": 1,
-   "name": "Design doc",
-   "state": "approved",
-   "when": "Oct 18"
-  },
-  {
-   "n": 2,
-   "name": "Work breakdown",
-   "state": "approved",
-   "when": "Oct 18"
-  },
-  {
-   "n": 3,
-   "name": "Size and risk scores",
-   "state": "approved",
-   "when": "Oct 18"
-  },
-  {
-   "n": 4,
-   "name": "Dependency graph",
-   "state": "approved",
-   "when": "Oct 19"
-  },
-  {
-   "n": 5,
-   "name": "Who builds what",
-   "state": "approved",
-   "when": "Oct 19",
-   "note": "Updated for the new merge rule and the levers"
-  },
-  {
-   "n": 6,
-   "name": "Estimate",
-   "state": "approved",
-   "when": "Oct 20"
-  },
-  {
-   "n": 7,
-   "name": "Staffing and dates",
-   "state": "approved",
-   "when": "Oct 20"
-  }
- ],
- "decisionsNeeded": [],
- "actionsForDave": [
-  {
-   "title": "Rerun the production-demo seed",
-   "detail": "From a current main checkout (docs/runbooks/seed.md). The PM cannot: it needs the production env file. Closes BC-48 and lets the last seeded booking check run.",
-   "where": "Before the click-through"
-  },
-  {
-   "title": "Bypass-merge the token rules PR",
-   "detail": "pm/token-rules changes .claude/agents/ramble-pm.md, a protected path.",
-   "where": "Any time"
-  },
-  {
-   "title": "Sandbox: allow api.github.com and local port binding",
-   "detail": "GitHub reads fail inside the sandbox (board dates, nightly merge list) and reviewers cannot run Postgres, Chromium or ports, so QA falls back to static checks.",
-   "where": "Sandbox settings"
-  },
-  {
-   "title": "Turn off unused connectors in Ramble chats",
-   "detail": "Token review fix 3: every chat starts at 99K tokens. Finance, Gmail, Drive, Docs, iOS simulator, computer use; Vercel only in deploy chats.",
-   "where": "App settings"
-  },
-  {
-   "title": "Try a card decline then success on production",
-   "detail": "Use the Demo test cards on the payment step; the PM does not type card numbers there.",
-   "where": "Any time"
-  },
-  {
-   "title": "Check the integration branch survives the next promotion",
-   "detail": "delete_branch_on_merge is on; the ruleset bypass is now pull_request. If it vanishes again, change the repo setting or the promotion step.",
-   "where": "At the next promotion"
-  },
-  {
-   "title": "Neon console",
-   "detail": "Delete the stray database from the first migrate run if it is stale (H-11).",
-   "where": "Any time"
-  },
-  {
-   "title": "Vercel and Sentry",
-   "detail": "Beacon firewall rule (PR 193), BotID, Sentry DSNs and projects, alert rules in docs/runbooks/alerting.md.",
-   "where": "Before guest pages go public"
-  },
-  {
-   "title": "GitHub",
-   "detail": "Enable private vulnerability reporting; the BE-1 Vercel firewall rule from PR 263 is skipped by decision.",
-   "where": "Any time"
-  }
- ],
- "heldUp": [
-  {
-   "what": "BC-48 host notices on production",
-   "waitingOn": "Dave rerunning the production-demo seed",
-   "owner": "Dave"
-  },
-  {
-   "what": "Real-job only: legal review, sponsor terms, Stripe review",
-   "waitingOn": "Client facts with no one to ask in this demo; logged, not blocking",
-   "owner": "Client"
-  }
- ],
- "decisionsMade": [
-  {
-   "when": "Nov 1",
-   "what": "Sprint 2 becomes production-ready work: test audit, comment cleanup, text dictionary, tightening; feature units slip one sprint (you)"
-  },
-  {
-   "when": "Nov 1",
-   "what": "Mobile Figma click-through wired on a duplicate page, outside the frozen plan; Fable stays stopped (you)"
-  },
-  {
-   "when": "Nov 1",
-   "what": "All as recommended: Fable trial stopped, 200 not-found pages accepted for the demo, Next.js stderr tracked for before real guests, tax 88,750 ppm, lane chats on Sonnet with token fixes in the agent file (you)"
-  },
-  {
-   "when": "Nov 1",
-   "what": "PF-9b accepted: a delay before Filters works on the slowest connections may stand; a JavaScript audit follows instead of early-tap capture (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "The PM proceeds on its recommendation and logs it; work waits for you only on promotions, bypass merges, settings, secrets, deploys and spend (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "Decided for you: the two Figma size variables (field-height 52, gutter 24) added by the PM; refactor PRs ride carrier units; BE-7 fixed in audit-fixes first; zero price reads Free"
-  },
-  {
-   "when": "Oct 29",
-   "what": "All 28 deep-review decisions approved as recommended: H-41 window rules, caching measured before changed (H-22, H-1), two Figma departures recorded, 44 px targets, one PageError, cards render without a failed cover (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "Four lane chats opened: critical-path, audit-fixes, e2e-money (stub glue first, then the real chain on the fake adapter), lib-refactor (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "End-to-end prototype by Monday Nov 2 on the fake payment adapter; Sprint 1 done by Oct 30; audit fixes run concurrently; the deep-review hold is lifted (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "src/lib layout adopted (H-18, H-42): page modules move to src/lib/pages, shared helpers get named modules, seven PRs A to G (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "PM chats run as lanes with one lead coordinating; the money core's human-led units go to agent builders under pattern notes (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "Standards PR 229 merged: B6 exemptions for holds, Button as a client island, BotID wiring (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "Production promoted: the home fixes are live at ramble-sand.vercel.app (you asked, the PM ran it)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "Home skeleton PR 228 merged: all nine clear home-audit fixes are in main"
-  },
-  {
-   "when": "Oct 29",
-   "what": "PR 223 merged: the lanes and evidence rules are in the agent file (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "PM chats run in lanes: one lead owns the shared status, each chat claims a lane and writes only its own sections (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "Pictures of every visible change in the PR: before-and-after images, kept in ramble-pm/evidence, embedded in the PR body and the QA check (you)"
-  },
-  {
-   "when": "Oct 29",
-   "what": "Prototype promoted to the public production domain; home audit pass done; fix swarm approved (you)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Button approved as a client island (B8) so a loading button keeps keyboard focus"
-  },
-  {
-   "when": "Oct 28",
-   "what": "U-014a pattern note approved: all nine recommendations adopted, including the B6 exemption for the settings read and a Device proof for hold rows"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Work beside the deep review: browse and experience audit now, U-005 and U-014a build held unpushed, small fixes as follow-up PRs"
-  },
-  {
-   "when": "Oct 29",
-   "what": "U-039 experience page merged (PR 214): the Prototype click-through is complete"
-  },
-  {
-   "when": "Oct 28",
-   "what": "An audit pass after every section or major feature, tracked in audits/; the home pass is first (you)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "U-010 photos merged to main on the fake storage provider (PR 205)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "No Blob stores for the demo: production runs on the fake storage provider; the guard returns with U-021b (you)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "U-010 photos passes all four checks after its card-photo markers moved to U-039; it waits only on the Blob stores"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Cover photos on the home and browse cards go into U-039 (about +0.5 day) (you)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Merged to main: U-030 home (PR 208), U-021a seed data (PR 209), U-031 browse (PR 207); each ran well under its estimate"
-  },
-  {
-   "when": "Oct 28",
-   "what": "U-031's FilterBar question withdrawn: the island became a server component, so no allowlist change is needed (PM)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Session day for browse: the date match stays in SQL WHERE and the day list moves to a tested lib function; storing local_date for every session goes to the deep review (PM)"
-  },
-  {
-   "when": "Oct 28",
-   "what": "Fixers run in their own worktrees on wip branches; the PM moves the unit branch and pushes (PM, process)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Third promotion: U-045a payments and U-006 email are in main (PR 201; you asked the PM to finish it)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Rolling development to the end of the Prototype: at most 5 builders, Prototype units only, no filler; then a deep review of all work so far (you)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Data units own their tables' read and write contracts; page units own rendering (PM)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Two caller-less functions removed from U-018 until B6 is settled for them (PM)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "U-005 pattern note approved on the PM's recommendations (you delegated)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Prototype first with rolling starts: wave 3 is U-012, U-018, U-010, U-111 (plus U-037); pages start as soon as their inputs land; U-019, U-004a, U-091 wait (you)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "B3 exemption: the literal process.env.NEXT_RUNTIME guard in src/instrumentation.ts (you)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Fable trial result: builders stay on Sonnet by the rule set in advance; a larger trial is your call"
-  },
-  {
-   "when": "Oct 26",
-   "what": "U-003's database client made lazy so CI can build with no database (PM authorization)"
-  },
-  {
-   "when": "Oct 26",
-   "what": "Only a blocking finding from a required check starts a review round, for every unit alike"
-  },
-  {
-   "when": "Oct 30",
-   "what": "Integration recreated and its ruleset bypass set to pull_request; production deployed from main by the PM on the owner's word (DECISIONS 2026-10-30)"
-  }
- ],
- "watch": [
-  {
-   "what": "Sprint 2 repurposed, forecast not rerun",
-   "detail": "Feature units slip one sprint, about two weeks in the slow case. Dates on this page do not reflect it yet."
-  },
-  {
-   "what": "Promotions delete integration",
-   "detail": "delete_branch_on_merge removed it once; the bypass change is untested."
-  },
-  {
-   "what": "QA time",
-   "detail": "A full UI unit took about 6 hours of QA under machine load; time-box QA briefs to 60 minutes."
-  },
-  {
-   "what": "Audit items are tracked, not kept in chat",
-   "detail": "186 raised, 73 closed, 81 open as of Oct 30 (home 29, browse and experience 11, nightly 13, booking and checkout 28)."
-  }
- ],
- "milestones": [
-  {
-   "id": "desk",
-   "label": "Agents can merge",
-   "unit": "U-118"
-  },
-  {
-   "id": "prototype",
-   "label": "Prototype"
-  },
-  {
-   "id": "money",
-   "label": "Money core done",
-   "unit": "U-049"
-  },
-  {
-   "id": "launch",
-   "label": "Launch-ready",
-   "unit": "U-104"
-  }
- ],
- "workstreams": {
-  "platform": "Platform and merge desk",
-  "design-system": "Design system",
-  "data": "Data and holds",
-  "catalog": "Catalog and browse",
-  "experience": "Experience page",
-  "checkout": "Checkout and payments",
-  "post-booking": "After booking",
-  "gifting": "Gifts",
-  "host": "Host tools",
-  "ops": "Ops tools",
-  "measurement": "Measurement",
-  "seo": "SEO and old-site move",
-  "launch": "Launch readiness"
- },
- "scenarioLabels": [
-  "Money core on agents, 12.5 h",
-  "Plan as frozen, 12.5 h"
- ],
- "scenarioNotes": [
-  "Refit Oct 29 from today: the Prototype units done, U-005 and U-014a at review, and U-014a, U-016, U-047a, U-048 and U-049 built by agents under PM pattern notes (the owner's call, Oct 29).",
-  "The frozen routing for comparison: the owner builds U-014a, U-016, U-047a, U-048 and U-049 himself at 12.5 hours a week."
- ],
- "forecastNote": "Forecast from Oct 29. The model prices each unit at its three-point estimate with review gates and a WIP limit; it does not yet carry the measured agent actuals (most merged units closed at 10 to 40 percent of their estimate), so treat its dates as the slow case. Refit 2026-10-30: start moved to Oct 30 with U-005 to U-041 marked done; prototype P50 Nov 13, finish P50 Jan 15 2027.",
- "frozen": {
-  "prototype": {
-   "likely": "2026-11-30",
-   "late": "2026-12-07"
-  },
-  "launch": {
-   "likely": "2027-03-08",
-   "late": "2027-03-26"
-  }
- },
- "standups": [
-  {
-   "date": "2026-11-01",
-   "done": [
-    "PR 288, 289 and 290 merged: seeded host addresses, the order page frame, the pulse workflow (running every 30 minutes)",
-    "Home feedback PF-1 to PF-6 merged and deployed (PRs 291 to 296)",
-    "Browse feedback PF-8, PF-9a, PF-10 merged and deployed at 44dd004 (PR 297)",
-    "Lead lane taken over; worktrees for merged branches removed",
-    "Six open decisions settled; lane history moved out of STATUS.md into lanes/",
-    "Figma click-through: 24 mobile screens wired into 15 named flows on Prototype (mobile)"
-   ],
-   "today": [
-    "Close Sprint 1, then open the production-ready lane",
-    "Dave: rerun the production-demo seed (BC-48), then one more seeded booking on production",
-    "audit-fixes: U-031 cache tags, then H-48",
-    "browse-perf: JavaScript audit after PF-9b"
-   ],
-   "heldUs": [
+  "asOf": "2026-11-01",
+  "headline": "Nov 1: a guest books end to end on production, ahead of Monday's Nov 2 goal. Production runs main at 44dd004, no PRs are open, and the pulse workflow runs every 30 minutes. Dave's Oct 31 home and browse feedback is merged and deployed. One owner item is left for the click-through: rerunning the production-demo seed so host notices stop failing (BC-48). Card decline then success and 3-D Secure are proven locally only. The forecast prices units at estimate, so it is the slow case against agent actuals of 4 to 42 percent of estimate.",
+  "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
+  "phases": [
     {
-     "what": "Roadmap not refreshed since Oct 30",
-     "cost": "It still listed the pulse workflow as Dave's after it landed on Oct 31."
+      "id": "P0",
+      "name": "Setup",
+      "state": "done",
+      "when": "Sep 28",
+      "note": "Repo, PM agent, build plan"
+    },
+    {
+      "id": "P1",
+      "name": "Discovery and PRD",
+      "state": "done",
+      "when": "Oct 18",
+      "note": "PRD v1.0 signed: 78 requirements"
+    },
+    {
+      "id": "P2",
+      "name": "Research and ADRs",
+      "state": "done",
+      "when": "Oct 18",
+      "note": "10 architecture decisions accepted"
+    },
+    {
+      "id": "P3",
+      "name": "Design",
+      "state": "done",
+      "when": "Oct 18",
+      "note": "Mobile flow and error states signed off"
+    },
+    {
+      "id": "P4",
+      "name": "Plan",
+      "state": "done",
+      "when": "Oct 20",
+      "note": "Frozen: tag plan-frozen-2026-10-20"
+    },
+    {
+      "id": "P5",
+      "name": "Build",
+      "state": "now",
+      "when": "From Oct 20",
+      "note": "U-118 done Oct 21 (2 days against 3); agent auto-merge is on. Next: the architecture guardrails, then U-001"
+    },
+    {
+      "id": "P6",
+      "name": "Write-up",
+      "state": "later",
+      "when": "After launch",
+      "note": "Where the plan was wrong, and why"
     }
-   ]
-  },
-  {
-   "date": "2026-10-30",
-   "done": [
-    "U-050 (confirmation page) and U-041 (booking bar, sheet and panel) merged; the whole money chain U-005 to U-041 is in main",
-    "Sync PR 282 and promotion PR 283 merged; integration recreated level with main (ruleset bypass set to pull_request)",
-    "Production deployed from main at 15c6130; real dates and spaces show on an experience page and Continue opens /checkout with a real hold",
-    "Test photos live on production after the plan upgrade; PR 275 stops branch deployments that need none",
-    "Token review of 2026-10-29: 61 percent of about $580 went to lane orchestrator chats (drafts/token-review-2026-10-29.md)",
-    "Checkout perf feedback: PR 286 stops timer ticks and keystrokes re-rendering the whole page and adds an opt-in profiling build; waits on Dave's approval",
-    "PR 287 merged: the fake gateway's events reach the webhook intake and its state lives in Postgres (BC-37, BC-38 closed); production migrated and redeployed",
-    "A guest booked end to end on production (order RMB-QVCS9Y); Monday Nov 2 goal met",
-    "PR 286 merged; BC-41 to BC-43 closed",
-    "H-54 (PR 284) and H-46 (PR 285) merged"
-   ],
-   "today": [
-    "e2e-money: BC-1 (order page frame) and BC-48 (host addresses) in two builders",
-    "audit-fixes: U-031 cache tags next, then H-48",
-    "lib-refactor: handed off"
-   ],
-   "heldUs": [
+  ],
+  "artifacts": [
     {
-     "what": "integration branch deleted by the promotion merge",
-     "cost": "delete_branch_on_merge removed it; Dave had the PM recreate it and the ruleset bypass changed to pull_request. Check it survives the next promotion."
+      "n": 1,
+      "name": "Design doc",
+      "state": "approved",
+      "when": "Oct 18"
     },
     {
-     "what": "Production secrets missing",
-     "cost": "CAPABILITY_TOKEN_SECRET, FORM_GUARD_SECRET, PULSE_SECRET and APP_URL were unset, so the redeploy waited for Dave to add them."
+      "n": 2,
+      "name": "Work breakdown",
+      "state": "approved",
+      "when": "Oct 18"
     },
     {
-     "what": "A vercel env run mistake",
-     "cost": "It deployed a script as a stray project (dbhost); removed the same day with Dave's approval. Production migrations go through db-migrate-production."
+      "n": 3,
+      "name": "Size and risk scores",
+      "state": "approved",
+      "when": "Oct 18"
     },
     {
-     "what": "Fake gateway state in memory",
-     "cost": "A booking cannot confirm on Vercel until the glue (BC-37, BC-38) lands; this is the Monday risk."
+      "n": 4,
+      "name": "Dependency graph",
+      "state": "approved",
+      "when": "Oct 19"
     },
     {
-     "what": "vercel deploy --prod left the production alias on the old deployment",
-     "cost": "Needed vercel promote; the refresh steps now include it."
+      "n": 5,
+      "name": "Who builds what",
+      "state": "approved",
+      "when": "Oct 19",
+      "note": "Updated for the new merge rule and the levers"
+    },
+    {
+      "n": 6,
+      "name": "Estimate",
+      "state": "approved",
+      "when": "Oct 20"
+    },
+    {
+      "n": 7,
+      "name": "Staffing and dates",
+      "state": "approved",
+      "when": "Oct 20"
     }
-   ]
-  },
-  {
-   "date": "2026-10-29",
-   "done": [
-    "All 28 deep-review decisions approved; from today the PM decides on its recommendation and logs the call for you to overrule",
-    "Stub glue merged (PR 246) and promoted: the public click-through now runs experience, checkout, Pay (demo), confirmation",
-    "Money path into integration: U-005 (PR 231), U-019 (PR 247), U-045b (PR 249)",
-    "Audit fixes in main: PRs 236, 250 to 256 (browse focus and sold-out days, 44 px links, layout tokens, cover-photo failure, gift guide copy, line heights, Picks rail)",
-    "src/lib refactor: PRs A, B and C merged (232, 235, 244)",
-    "Four lane chats opened under one lead; roadmap decision and to-do cards render again"
-   ],
-   "today": [
-    "e2e-money: U-015 in review, then the next waves of the money chain toward Monday's end-to-end booking",
-    "critical-path: U-014a round 4 checks, then into integration",
-    "lib-refactor: PR E (248) waiting to merge, PR F building, PR D unblocked by BE-7",
-    "audit-fixes: the remaining decided home rows, BE-8, BE-1 and the nightly items",
-    "You: bypass-merge PR 233 and promote integration to main when U-014a lands"
-   ],
-   "heldUs": [
+  ],
+  "decisionsNeeded": [],
+  "actionsForDave": [
     {
-     "what": "Weekly Claude Code limit",
-     "cost": "Every lane stopped at 14:40; U-014a's round 4 was left unchecked."
+      "title": "Rerun the production-demo seed",
+      "detail": "From a current main checkout (docs/runbooks/seed.md). The PM cannot: it needs the production env file. Closes BC-48 and lets the last seeded booking check run.",
+      "where": "Before the click-through"
     },
     {
-     "what": "PR 233 bypass merge did not land",
-     "cost": "The web button cannot bypass; still open at 14:40 (second time after PR 200)."
+      "title": "Bypass-merge the token rules PR",
+      "detail": "pm/token-rules changes .claude/agents/ramble-pm.md, a protected path.",
+      "where": "Any time"
     },
     {
-     "what": "Stub glue went into conflict",
-     "cost": "PRs 244 and 245 merged first, so PR 246 needed a merge of main and a re-check."
+      "title": "Sandbox: allow api.github.com and local port binding",
+      "detail": "GitHub reads fail inside the sandbox (board dates, nightly merge list) and reviewers cannot run Postgres, Chromium or ports, so QA falls back to static checks.",
+      "where": "Sandbox settings"
     },
     {
-     "what": "gh fails inside the sandbox",
-     "cost": "Board date sync and the nightly audit's merge list have to run outside it."
+      "title": "Turn off unused connectors in Ramble chats",
+      "detail": "Token review fix 3: every chat starts at 99K tokens. Finance, Gmail, Drive, Docs, iOS simulator, computer use; Vercel only in deploy chats.",
+      "where": "App settings"
     },
     {
-     "what": "Roadmap cards blank since Oct 28",
-     "cost": "Decisions and to-dos showed \"undefined\" after a field-name drift; fixed today."
+      "title": "Try a card decline then success on production",
+      "detail": "Use the Demo test cards on the payment step; the PM does not type card numbers there.",
+      "where": "Any time"
+    },
+    {
+      "title": "Check the integration branch survives the next promotion",
+      "detail": "delete_branch_on_merge is on; the ruleset bypass is now pull_request. If it vanishes again, change the repo setting or the promotion step.",
+      "where": "At the next promotion"
+    },
+    {
+      "title": "Neon console",
+      "detail": "Delete the stray database from the first migrate run if it is stale (H-11).",
+      "where": "Any time"
+    },
+    {
+      "title": "Vercel and Sentry",
+      "detail": "Beacon firewall rule (PR 193), BotID, Sentry DSNs and projects, alert rules in docs/runbooks/alerting.md.",
+      "where": "Before guest pages go public"
+    },
+    {
+      "title": "GitHub",
+      "detail": "Enable private vulnerability reporting; the BE-1 Vercel firewall rule from PR 263 is skipped by decision.",
+      "where": "Any time"
     }
-   ]
-  }
- ]
+  ],
+  "heldUp": [
+    {
+      "what": "BC-48 host notices on production",
+      "waitingOn": "Dave rerunning the production-demo seed",
+      "owner": "Dave"
+    },
+    {
+      "what": "Real-job only: legal review, sponsor terms, Stripe review",
+      "waitingOn": "Client facts with no one to ask in this demo; logged, not blocking",
+      "owner": "Client"
+    }
+  ],
+  "decisionsMade": [
+    {
+      "when": "Nov 1",
+      "what": "Sprint 2 becomes production-ready work: test audit, comment cleanup, text dictionary, tightening; feature units slip one sprint (you)"
+    },
+    {
+      "when": "Nov 1",
+      "what": "Mobile Figma click-through wired on a duplicate page, outside the frozen plan; Fable stays stopped (you)"
+    },
+    {
+      "when": "Nov 1",
+      "what": "All as recommended: Fable trial stopped, 200 not-found pages accepted for the demo, Next.js stderr tracked for before real guests, tax 88,750 ppm, lane chats on Sonnet with token fixes in the agent file (you)"
+    },
+    {
+      "when": "Nov 1",
+      "what": "PF-9b accepted: a delay before Filters works on the slowest connections may stand; a JavaScript audit follows instead of early-tap capture (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "The PM proceeds on its recommendation and logs it; work waits for you only on promotions, bypass merges, settings, secrets, deploys and spend (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Decided for you: the two Figma size variables (field-height 52, gutter 24) added by the PM; refactor PRs ride carrier units; BE-7 fixed in audit-fixes first; zero price reads Free"
+    },
+    {
+      "when": "Oct 29",
+      "what": "All 28 deep-review decisions approved as recommended: H-41 window rules, caching measured before changed (H-22, H-1), two Figma departures recorded, 44 px targets, one PageError, cards render without a failed cover (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Four lane chats opened: critical-path, audit-fixes, e2e-money (stub glue first, then the real chain on the fake adapter), lib-refactor (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "End-to-end prototype by Monday Nov 2 on the fake payment adapter; Sprint 1 done by Oct 30; audit fixes run concurrently; the deep-review hold is lifted (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "src/lib layout adopted (H-18, H-42): page modules move to src/lib/pages, shared helpers get named modules, seven PRs A to G (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "PM chats run as lanes with one lead coordinating; the money core's human-led units go to agent builders under pattern notes (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Standards PR 229 merged: B6 exemptions for holds, Button as a client island, BotID wiring (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Production promoted: the home fixes are live at ramble-sand.vercel.app (you asked, the PM ran it)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Home skeleton PR 228 merged: all nine clear home-audit fixes are in main"
+    },
+    {
+      "when": "Oct 29",
+      "what": "PR 223 merged: the lanes and evidence rules are in the agent file (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "PM chats run in lanes: one lead owns the shared status, each chat claims a lane and writes only its own sections (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Pictures of every visible change in the PR: before-and-after images, kept in ramble-pm/evidence, embedded in the PR body and the QA check (you)"
+    },
+    {
+      "when": "Oct 29",
+      "what": "Prototype promoted to the public production domain; home audit pass done; fix swarm approved (you)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Button approved as a client island (B8) so a loading button keeps keyboard focus"
+    },
+    {
+      "when": "Oct 28",
+      "what": "U-014a pattern note approved: all nine recommendations adopted, including the B6 exemption for the settings read and a Device proof for hold rows"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Work beside the deep review: browse and experience audit now, U-005 and U-014a build held unpushed, small fixes as follow-up PRs"
+    },
+    {
+      "when": "Oct 29",
+      "what": "U-039 experience page merged (PR 214): the Prototype click-through is complete"
+    },
+    {
+      "when": "Oct 28",
+      "what": "An audit pass after every section or major feature, tracked in audits/; the home pass is first (you)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "U-010 photos merged to main on the fake storage provider (PR 205)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "No Blob stores for the demo: production runs on the fake storage provider; the guard returns with U-021b (you)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "U-010 photos passes all four checks after its card-photo markers moved to U-039; it waits only on the Blob stores"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Cover photos on the home and browse cards go into U-039 (about +0.5 day) (you)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Merged to main: U-030 home (PR 208), U-021a seed data (PR 209), U-031 browse (PR 207); each ran well under its estimate"
+    },
+    {
+      "when": "Oct 28",
+      "what": "U-031's FilterBar question withdrawn: the island became a server component, so no allowlist change is needed (PM)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Session day for browse: the date match stays in SQL WHERE and the day list moves to a tested lib function; storing local_date for every session goes to the deep review (PM)"
+    },
+    {
+      "when": "Oct 28",
+      "what": "Fixers run in their own worktrees on wip branches; the PM moves the unit branch and pushes (PM, process)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Third promotion: U-045a payments and U-006 email are in main (PR 201; you asked the PM to finish it)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Rolling development to the end of the Prototype: at most 5 builders, Prototype units only, no filler; then a deep review of all work so far (you)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Data units own their tables' read and write contracts; page units own rendering (PM)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Two caller-less functions removed from U-018 until B6 is settled for them (PM)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "U-005 pattern note approved on the PM's recommendations (you delegated)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Prototype first with rolling starts: wave 3 is U-012, U-018, U-010, U-111 (plus U-037); pages start as soon as their inputs land; U-019, U-004a, U-091 wait (you)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "B3 exemption: the literal process.env.NEXT_RUNTIME guard in src/instrumentation.ts (you)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Fable trial result: builders stay on Sonnet by the rule set in advance; a larger trial is your call"
+    },
+    {
+      "when": "Oct 26",
+      "what": "U-003's database client made lazy so CI can build with no database (PM authorization)"
+    },
+    {
+      "when": "Oct 26",
+      "what": "Only a blocking finding from a required check starts a review round, for every unit alike"
+    },
+    {
+      "when": "Oct 30",
+      "what": "Integration recreated and its ruleset bypass set to pull_request; production deployed from main by the PM on the owner's word (DECISIONS 2026-10-30)"
+    }
+  ],
+  "watch": [
+    {
+      "what": "Sprint 2 repurposed, forecast not rerun",
+      "detail": "Feature units slip one sprint, about two weeks in the slow case. Dates on this page do not reflect it yet."
+    },
+    {
+      "what": "Promotions delete integration",
+      "detail": "delete_branch_on_merge removed it once; the bypass change is untested."
+    },
+    {
+      "what": "QA time",
+      "detail": "A full UI unit took about 6 hours of QA under machine load; time-box QA briefs to 60 minutes."
+    },
+    {
+      "what": "Audit items are tracked, not kept in chat",
+      "detail": "186 raised, 73 closed, 81 open as of Oct 30 (home 29, browse and experience 11, nightly 13, booking and checkout 28)."
+    }
+  ],
+  "milestones": [
+    {
+      "id": "desk",
+      "label": "Agents can merge",
+      "unit": "U-118"
+    },
+    {
+      "id": "prototype",
+      "label": "Prototype"
+    },
+    {
+      "id": "money",
+      "label": "Money core done",
+      "unit": "U-049"
+    },
+    {
+      "id": "launch",
+      "label": "Launch-ready",
+      "unit": "U-104"
+    }
+  ],
+  "workstreams": {
+    "platform": "Platform and merge desk",
+    "design-system": "Design system",
+    "data": "Data and holds",
+    "catalog": "Catalog and browse",
+    "experience": "Experience page",
+    "checkout": "Checkout and payments",
+    "post-booking": "After booking",
+    "gifting": "Gifts",
+    "host": "Host tools",
+    "ops": "Ops tools",
+    "measurement": "Measurement",
+    "seo": "SEO and old-site move",
+    "launch": "Launch readiness"
+  },
+  "scenarioLabels": [
+    "Money core on agents, 12.5 h",
+    "Plan as frozen, 12.5 h"
+  ],
+  "scenarioNotes": [
+    "Refit Oct 29 from today: the Prototype units done, U-005 and U-014a at review, and U-014a, U-016, U-047a, U-048 and U-049 built by agents under PM pattern notes (the owner's call, Oct 29).",
+    "The frozen routing for comparison: the owner builds U-014a, U-016, U-047a, U-048 and U-049 himself at 12.5 hours a week."
+  ],
+  "forecastNote": "Forecast from Oct 29. The model prices each unit at its three-point estimate with review gates and a WIP limit; it does not yet carry the measured agent actuals (most merged units closed at 10 to 40 percent of their estimate), so treat its dates as the slow case. Refit 2026-10-30: start moved to Oct 30 with U-005 to U-041 marked done; prototype P50 Nov 13, finish P50 Jan 15 2027.",
+  "frozen": {
+    "prototype": {
+      "likely": "2026-11-30",
+      "late": "2026-12-07"
+    },
+    "launch": {
+      "likely": "2027-03-08",
+      "late": "2027-03-26"
+    }
+  },
+  "standups": [
+    {
+      "date": "2026-11-01",
+      "done": [
+        "PR 288, 289 and 290 merged: seeded host addresses, the order page frame, the pulse workflow (running every 30 minutes)",
+        "Home feedback PF-1 to PF-6 merged and deployed (PRs 291 to 296)",
+        "Browse feedback PF-8, PF-9a, PF-10 merged and deployed at 44dd004 (PR 297)",
+        "Lead lane taken over; worktrees for merged branches removed",
+        "Six open decisions settled; lane history moved out of STATUS.md into lanes/",
+        "Figma click-through: 24 mobile screens wired into 15 named flows on Prototype (mobile)",
+        "Booking panel keeps Continue a short scroll away on desktop (PR 300, your feedback); merged, waiting on a deploy"
+      ],
+      "today": [
+        "Close Sprint 1, then open the production-ready lane",
+        "Dave: rerun the production-demo seed (BC-48), then one more seeded booking on production",
+        "audit-fixes: U-031 cache tags, then H-48",
+        "browse-perf: JavaScript audit after PF-9b"
+      ],
+      "heldUs": [
+        {
+          "what": "Roadmap not refreshed since Oct 30",
+          "cost": "It still listed the pulse workflow as Dave's after it landed on Oct 31."
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "done": [
+        "U-050 (confirmation page) and U-041 (booking bar, sheet and panel) merged; the whole money chain U-005 to U-041 is in main",
+        "Sync PR 282 and promotion PR 283 merged; integration recreated level with main (ruleset bypass set to pull_request)",
+        "Production deployed from main at 15c6130; real dates and spaces show on an experience page and Continue opens /checkout with a real hold",
+        "Test photos live on production after the plan upgrade; PR 275 stops branch deployments that need none",
+        "Token review of 2026-10-29: 61 percent of about $580 went to lane orchestrator chats (drafts/token-review-2026-10-29.md)",
+        "Checkout perf feedback: PR 286 stops timer ticks and keystrokes re-rendering the whole page and adds an opt-in profiling build; waits on Dave's approval",
+        "PR 287 merged: the fake gateway's events reach the webhook intake and its state lives in Postgres (BC-37, BC-38 closed); production migrated and redeployed",
+        "A guest booked end to end on production (order RMB-QVCS9Y); Monday Nov 2 goal met",
+        "PR 286 merged; BC-41 to BC-43 closed",
+        "H-54 (PR 284) and H-46 (PR 285) merged"
+      ],
+      "today": [
+        "e2e-money: BC-1 (order page frame) and BC-48 (host addresses) in two builders",
+        "audit-fixes: U-031 cache tags next, then H-48",
+        "lib-refactor: handed off"
+      ],
+      "heldUs": [
+        {
+          "what": "integration branch deleted by the promotion merge",
+          "cost": "delete_branch_on_merge removed it; Dave had the PM recreate it and the ruleset bypass changed to pull_request. Check it survives the next promotion."
+        },
+        {
+          "what": "Production secrets missing",
+          "cost": "CAPABILITY_TOKEN_SECRET, FORM_GUARD_SECRET, PULSE_SECRET and APP_URL were unset, so the redeploy waited for Dave to add them."
+        },
+        {
+          "what": "A vercel env run mistake",
+          "cost": "It deployed a script as a stray project (dbhost); removed the same day with Dave's approval. Production migrations go through db-migrate-production."
+        },
+        {
+          "what": "Fake gateway state in memory",
+          "cost": "A booking cannot confirm on Vercel until the glue (BC-37, BC-38) lands; this is the Monday risk."
+        },
+        {
+          "what": "vercel deploy --prod left the production alias on the old deployment",
+          "cost": "Needed vercel promote; the refresh steps now include it."
+        }
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "done": [
+        "All 28 deep-review decisions approved; from today the PM decides on its recommendation and logs the call for you to overrule",
+        "Stub glue merged (PR 246) and promoted: the public click-through now runs experience, checkout, Pay (demo), confirmation",
+        "Money path into integration: U-005 (PR 231), U-019 (PR 247), U-045b (PR 249)",
+        "Audit fixes in main: PRs 236, 250 to 256 (browse focus and sold-out days, 44 px links, layout tokens, cover-photo failure, gift guide copy, line heights, Picks rail)",
+        "src/lib refactor: PRs A, B and C merged (232, 235, 244)",
+        "Four lane chats opened under one lead; roadmap decision and to-do cards render again"
+      ],
+      "today": [
+        "e2e-money: U-015 in review, then the next waves of the money chain toward Monday's end-to-end booking",
+        "critical-path: U-014a round 4 checks, then into integration",
+        "lib-refactor: PR E (248) waiting to merge, PR F building, PR D unblocked by BE-7",
+        "audit-fixes: the remaining decided home rows, BE-8, BE-1 and the nightly items",
+        "You: bypass-merge PR 233 and promote integration to main when U-014a lands"
+      ],
+      "heldUs": [
+        {
+          "what": "Weekly Claude Code limit",
+          "cost": "Every lane stopped at 14:40; U-014a's round 4 was left unchecked."
+        },
+        {
+          "what": "PR 233 bypass merge did not land",
+          "cost": "The web button cannot bypass; still open at 14:40 (second time after PR 200)."
+        },
+        {
+          "what": "Stub glue went into conflict",
+          "cost": "PRs 244 and 245 merged first, so PR 246 needed a merge of main and a re-check."
+        },
+        {
+          "what": "gh fails inside the sandbox",
+          "cost": "Board date sync and the nightly audit's merge list have to run outside it."
+        },
+        {
+          "what": "Roadmap cards blank since Oct 28",
+          "cost": "Decisions and to-dos showed \"undefined\" after a field-name drift; fixed today."
+        }
+      ]
+    }
+  ]
 }
