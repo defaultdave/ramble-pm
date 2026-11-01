@@ -11,9 +11,9 @@ The owner's click-through notes. IDs are `PF-<n>`. Figma: D01 Home `63:6`, hero 
 | PF-5 | Home skeleton to loaded page: below the heading, everything moves up 36 px at 390 and 4 px at 1440 when the data arrives, and the Guests field makes this worse. Layout-shift entries read 0 because the nodes are replaced, which is why every audit measured CLS 0. Probably most of what the owner saw as a jump: under the font swap the h1 box never moved and the logo moved about 2 px. Figures in `evidence/pr/unit-U-030-font-swap/`. | Delayed-read measurement, 2026-10-31 | `home-feedback` | done, PR 293 and 294 |
 | PF-6 | The hero copy renders at 16 px where Figma has 18: `RichText` beats `.body` in `HomeHero.module.css`. Being confirmed by skeleton QA. | Skeleton build | `home-feedback` | done, PR 294 |
 | PF-7 | With JavaScript off, browse never leaves its skeleton: Suspense swaps the streamed content in by inline script, so results and filters stay hidden. True on `main`. Earlier no-script promises and tests render components alone and miss it. Home is probably the same; not checked. | U-033 QA, raw streamed HTML; not seen in a real JS-off browser | later | open |
-| PF-8 | Browse LCP: the first card photo is lazy. `ExperienceCardItem` never passes `preload` to `Photo`. In the owner's trace the seven photos were first requested at 2917 ms, after layout, at Low priority, where the document was parsed by 1500 ms. The photo was not reported as LCP only because the owner's tap at 3761 ms stopped LCP candidates; reported LCP (2385 ms, lede text) understates it. | Trace `browse-load-and-filter-click`, code read | `browse-perf` | PR 297 |
-| PF-9 | Filter button slow to work. Two causes: (a) the drawer chunk loads on first hover or press, in three round trips (7576, 8119, 8703 ms, finished 9368 ms on Slow 4G), so the first press took about 1.8 s; (b) tapping before hydration (about 6.1 s here) does nothing: taps at 3.7 s and 5.0 s were lost. (b) is inflated by a 2.5 s LastPass content script on the main thread plus smaller extensions, at 15.7x CPU. | Trace | `browse-perf` | (a) PR 297; (b) open, needs a clean timing |
-| PF-10 | Double tap closes the filter drawer: with the chunk loaded the first tap opens it, and the second tap (200 ms later, 14219 ms) lands on the overlay, which `isDismissable` treats as outside press. Shared `Dialog`, so the booking sheet can do the same. | Trace, `Dialog.tsx` | `browse-perf` | PR 297 |
+| PF-8 | Browse LCP: the first card photo is lazy. `ExperienceCardItem` never passes `preload` to `Photo`. In the owner's trace the seven photos were first requested at 2917 ms, after layout, at Low priority, where the document was parsed by 1500 ms. The photo was not reported as LCP only because the owner's tap at 3761 ms stopped LCP candidates; reported LCP (2385 ms, lede text) understates it. | Trace `browse-load-and-filter-click`, code read | `browse-perf` | closed: PR 297, verified on production 2026-11-01 |
+| PF-9 | Filter button slow to work. Two causes: (a) the drawer chunk loads on first hover or press, in three round trips (7576, 8119, 8703 ms, finished 9368 ms on Slow 4G), so the first press took about 1.8 s; (b) tapping before hydration (about 6.1 s here) does nothing: taps at 3.7 s and 5.0 s were lost. (b) is inflated by a 2.5 s LastPass content script on the main thread plus smaller extensions, at 15.7x CPU. | Trace | `browse-perf` | (a) closed: PR 297, verified on production 2026-11-01; (b) open: Filters hydrates at 3.7 s in a clean run, a press before that does nothing |
+| PF-10 | Double tap closes the filter drawer: with the chunk loaded the first tap opens it, and the second tap (200 ms later, 14219 ms) lands on the overlay, which `isDismissable` treats as outside press. Shared `Dialog`, so the booking sheet can do the same. | Trace, `Dialog.tsx` | `browse-perf` | closed: PR 297, verified on production 2026-11-01 |
 
 ## Browse baseline, clean profile (2026-10-31)
 Production `5f5843c`-era build on `ramble-sand.vercel.app`, phone emulation 390 x 844 at 3x, Slow 4G, 4x CPU, no extensions, cache bypassed. Text LCP 1.8 s; an IMG candidate at 2.1 s, which is the blur placeholder, because the photo's own fetch started at 2.1 s and finished at 3.0 s. So Chrome's reported LCP passes while the real photo arrives near 3 s, and the after-run must compare photo arrival, not only reported LCP. First-card image: `loading=lazy`, `fetchpriority=auto`, top 327 px at 340 x 227, in the first viewport. A CLS of 1.00 on BODY appeared only on reloads right after an emulation change and not on a plain navigation: an emulation artifact, not a defect.
@@ -34,3 +34,18 @@ Production `5f5843c`-era build on `ramble-sand.vercel.app`, phone emulation 390 
 - Visually hidden CSS is copied in 13 modules.
 - U-033 second PR, Should tier, back in its planned slot after the Prototype. Data checked on `main`: Setting can use `experiences.outdoor`; no Good for column exists, so it needs schema and seed work; the plan's list (price, age, indoor or outdoor, group size, access) differs from Figma's chips and needs reconciling first.
 - Party size into the booking panel; skeletons on other pages unchecked.
+
+## After PR 297, production, 2026-11-01
+
+One run. `ramble-sand.vercel.app`, `dpl_3jqGrbQqQBJP56QifYZ3ZKZo94gj`, `44dd004`; phone, Slow 4G, 4x CPU, no extensions.
+
+| Measure | Baseline | After |
+|---|---|---|
+| First photo fetch starts | 2.1 s | 0.66 s |
+| First photo arrives | 3.0 s | 2.36 s |
+| LCP | 2.1 s (blur placeholder) | 2.3 s (blur placeholder; text at 2.0 s) |
+| Drawer on press | about 1.8 s in three round trips | no fetch on press, chunks warmed first |
+| Double tap, 200 ms apart | drawer closes | drawer stays open (synthetic events) |
+| Filters works from | not measured clean | 3.7 s (PF-9b) |
+
+LCP did not improve, because the browser reports the blur placeholder, not the photo. Photo arrival is the number that moved. Not checked: a real touch device, Safari.
