@@ -1,8 +1,12 @@
 PASS
 
-## architecture-audit: U-030 checkout not-found and error states (head 41ff370)
+## architecture-audit: U-030 (head b1f3b19), round 2
 
 ### Blocking
-- None. B2 sweep: no decisions added (a shell swap). B4, B8, B16, B17 clean; no new exports.
+- None. Client closures of the two 'use client' error files reach no siteNav, GuestShell or zod module; B4, B8 (framework error boundaries) clean.
 
-ARCH_VERDICT=PASS
+### Non-blocking
+- (site)/error.tsx is a fourth copy of the shared two-line error shim (audit item).
+- SiteShell remains a second guest frame while client error boundaries cannot reach GuestShell (audit item).
+
+ARCH_VERDICT=APPROVE
