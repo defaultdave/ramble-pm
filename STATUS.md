@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-10-30 19:54 by the lead. Checkout perf feedback: PR 286 is open for Dave's approval (timer tick and keystroke re-renders, opt-in profiling build); it merges on approval once CI passes. The whole money chain (U-005 to U-041) is in `main` and on production (`ramble-sand.vercel.app`, from `15c6130`); no PR is open and no builder is running. A booking cannot confirm yet: nothing delivers the fake payment's event to the webhook intake (BC-38) and the fake gateway keeps its state in one process (BC-37). That glue is the next piece, in the `e2e-money` lane, and the last step before the Monday 2026-11-02 click-through. Roadmap refreshed and republished (artifact version 43).
+**Updated:** 2026-11-01 by the lead. A guest books end to end on production (`ramble-sand.vercel.app`, `44dd004`), ahead of Monday's goal. No PR is open. Pulse runs every 30 minutes. The one item held on Dave is the `production-demo` seed rerun (BC-48). Roadmap refreshed.
 
 ## Lanes
 
@@ -246,6 +246,8 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 In this demo, the client facts have no one to ask. Where a fact blocks a decision, the PM proposes a working assumption and logs it as one.
 
 ## Blocked on Dave
+**Now (2026-11-01):** rerun the `production-demo` seed from a current `main` checkout (`docs/runbooks/seed.md`); it closes BC-48 and lets the e2e-money lane's last seeded booking run. Everything below blocks nothing. The pulse item (`PULSE_SECRET`, `PULSE_URL`, PR 290) is done.
+
 0. ~~Merge PR 223~~ merged by Dave 2026-10-29 00:55 (the lanes and evidence rules are on `main`).
 0. ~~Promote the newest production deployment~~ done 2026-10-29 01:05 (Dave asked; the PM promoted `main` at `9e4ed83`; DECISIONS).
 1. ~~Approval window~~ closed 2026-10-24 18:45.
@@ -297,6 +299,8 @@ Open item from the ADR 0007 measurement amendment (2026-10-18): what New York an
 Legal and vendor questions for the real job, logged, not blocking the demo: Ramble holding host money and the New York gift law (counsel, Q-16); card refund age limit at 12 months (ask Stripe); Stripe's Connect review time.
 
 ## Next
+**Folded 2026-11-01 (lead):** (1) `audit-fixes` resumes with `unit/U-031-home-cache-tags` (`cbe65ea`, kept with its worktree `agent-a82f5cc719e5a7cc2`): merge `main`, resolve `src/server/home.ts` and `home.test.ts`, four checks on the final head; then H-48. (2) After the seed: e2e-money's last booking on production. (3) PF-7 (no-script browse) still needs a slot; PF-9b is accepted by Dave and `browse-perf` runs the JavaScript audit. (4) New audit items BC-50 to BC-53 are open for `audit-fixes`; BC-51 touches every guest page. (5) `site.ts dir` exits 1 silently inside the sandbox; run it, and `publish`, with the sandbox off, from the main checkout. (6) The public PM memory in the main checkout has uncommitted lessons; they go in the next `PM bookkeeping:` PR.
+
 **Folded 2026-10-30 (lead):** (1) e2e-money opens next: pattern note and one builder for BC-37 and BC-38 (the fake's state in Postgres or an in-process confirm; the event reaching the intake), then a seeded click-through on a Vercel deployment with evidence, by Monday 2026-11-02. (2) Production flow: migrations run through the `db-migrate-production` workflow (`vercel env run` cannot read production secrets and deployed a stray project once); refreshing production is `vercel deploy --prod` from a clean `origin/main` copy, since `main` deployments are off. Put both in `docs/runbooks`. (3) New audit items BC-34 to BC-40 and the lane notes' DRY items (local-host list written twice in `env.ts` and `scripts/dev/neon-http.ts`; `withItems` test-only; `photos.ts` restates the guest-visible filter; `.env.example` line 52 names U-021b; `BC-40` the `expire preview branch` job fails on branches that get no preview) go to `audit-fixes`. (4) Time-box QA briefs to 60 minutes (a full UI unit took about 6 hours under load 12 to 36). (5) Forecast refit 2026-10-30 (delta-log): start Oct 30, money chain done; prototype P50 Nov 13, finish P50 2027-01-15, the slow case against agent actuals.
 
 **Remind Dave (he asked, 2026-10-29):** a PM chat started without a lane opens by telling Dave that `audit-fixes` is handed off and ready to resume: run `/ramble-pm lane: audit-fixes` from the ramble checkout (`/Users/davidfleming/Workspace/ramble`); it starts with H-54, then H-46, H-47, H-48, H-49, H-53. Drop this line once that lane is picked up again.
@@ -324,6 +328,8 @@ Lessons from waves 1 and 2: builders commit and stop; the PM pushes and opens PR
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
 
 ### lead
+
+**Update 2026-11-01 (read first):** the 2026-11-01 lead folded the lanes, refreshed the roadmap and removed worktrees for merged branches. Kept on purpose: `unit/U-031-home-cache-tags`, `unit/U-001-preview-skip`, `unit/U-037`, `browse-perf`'s worktrees, and detached scratch trees (`r1`, `r2`, `perf-home-18106`, `sb-*`, `docs-storage-strategy-1a2e80`, `e2e-money-ramble-60a4ce`). Next lead: open `/ramble-pm lane: audit-fixes` first (Sonnet, medium). Older updates below are history.
 
 **Update 2026-10-30 19:54 (read first):** PR 286 (checkout re-renders, profiling build) waits on Dave's approval and CI; after it merges, close BC-41 to BC-43. To profile a deployment, Dave sets `REACT_PROFILING=1` on it and redeploys. Otherwise the 18:40 note stands: `e2e-money` first. Run on Sonnet, medium.
 

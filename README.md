@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Oct 30, 2026.** Oct 30: the Monday goal is met three days early. A guest booked Coffee cupping on production (ramble-sand.vercel.app, order RMB-QVCS9Y): panel, checkout, fake Apple Pay, confirmed after a reload at 1024 and 375 px. The glue (BC-37, BC-38) shipped as PR 287 and checkout re-render cleanup as PR 286. Two visible leftovers are in builders' hands: the unstyled frame on the order page (BC-1) and the host notice failing on seeded hosts (BC-48). Not run on production: card decline then success and 3-D Secure (proven locally only). Reminders, hold upkeep and retries do not run until the pulse workflow lands. The forecast prices units at estimate, so it is the slow case against agent actuals of 4 to 42 percent of estimate.
+**As of Nov 1, 2026.** Nov 1: a guest books end to end on production, ahead of Monday's Nov 2 goal. Production runs main at 44dd004, no PRs are open, and the pulse workflow runs every 30 minutes. Dave's Oct 31 home and browse feedback is merged and deployed. One owner item is left for the click-through: rerunning the production-demo seed so host notices stop failing (BC-48). Card decline then success and 3-D Secure are proven locally only. The forecast prices units at estimate, so it is the slow case against agent actuals of 4 to 42 percent of estimate.
 
 | Milestone | Likely |
 |---|---|
@@ -18,8 +18,8 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
+- Rerun the production-demo seed. From a current main checkout (docs/runbooks/seed.md). The PM cannot: it needs the production env file. Closes BC-48 and lets the last seeded booking check run.
 - Try a card decline then success on production. Use the Demo test cards on the payment step; the PM does not type card numbers there.
-- Push the pulse workflow. Push unit/U-005-pulse-workflow and add the Actions secret PULSE_SECRET (agents cannot push .github/workflows).
 - Check the integration branch survives the next promotion. delete_branch_on_merge is on; the ruleset bypass is now pull_request. If it vanishes again, change the repo setting or the promotion step.
 - Neon console. Delete the stray database from the first migrate run if it is stale (H-11).
 - Board dates sync. bun scripts/plan/board-dates.ts --run (gh cannot read the keychain in the sandbox).
@@ -29,12 +29,12 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 **Decisions needed**
 
 - Sandbox: allow api.github.com and local port binding. Recommended: allow both.
-- Fold the token review fixes 1 to 6 into the agent file. Recommended: yes.
 - Tax-rate default: confirm 88,750 ppm (New York City 8.875%), or give the rate. Recommended: keep 88,750 ppm.
+- Move lane orchestrator chats from Opus to Sonnet. Recommended: yes.
 
 **Held up**
 
-- Fake payment glue (BC-37, BC-38): The e2e-money lane to write the pattern note and build it
+- BC-48 host notices on production: Dave rerunning the production-demo seed
 - Real-job only: legal review, sponsor terms, Stripe review: Client facts with no one to ask in this demo; logged, not blocking
 <!-- roadmap:status:end -->
 
