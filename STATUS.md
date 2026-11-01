@@ -62,6 +62,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 ### Lane: audit-fixes
 - **2026-10-30 19:25, PR 285 open (H-46), all four checks posted on round 2, auto-merge queued, Dave's review requested.** [PR 285](https://github.com/defaultdave/ramble/pull/285) `unit/U-030-home-picks-read` at `b80cd3f`. Round 1 architecture REJECT (B17) fixed by folding the home read into one `readCollectionRows`; round 2 review, architecture, spec, qa PASS (round 1 verdicts in `drafts/audit-fixes-checks/unit-U-030-home-picks-read/r1/`). H-46 marked `fix:`; new H-106 to H-108. Mistake to note: I posted the check runs before pushing the branch, GitHub refused them (HTTP 422); push first, then post. **Next: `unit/U-031-home-cache-tags` (`cbe65ea`) merges `main` after PR 285 lands, resolves `src/server/home.ts` and `home.test.ts`, and gets its four checks on the final head.** H-48 after that.
+- **2026-11-01 11:40, resumed; three builders running.** PR 285 is merged. Running: a merge-and-gates builder in the kept worktree for `unit/U-031-home-cache-tags` (`cbe65ea`, merging `main`, conflicts in `home.ts` and `home.test.ts`), `unit/U-030-menu-dismiss` (BC-51) and `unit/U-030-checkout-notfound` (BC-50), both cut from `main` at `307b606`. Next: checks on each final head, push, PR, auto-merge; then H-48.
 - Older entries: `lanes/audit-fixes.md`.
 
 ### Lane: e2e-money
