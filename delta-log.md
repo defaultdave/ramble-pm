@@ -90,3 +90,5 @@ Not in the frozen plan and no unit; no build unit changes. Page `Prototype (mobi
 
 ## 2026-11-01 (lead): Sprint 2 repurposed
 Sprint 2 moves from features to production-ready work (`drafts/sprint-2-production-ready.md`). Its feature units slip one sprint, about two weeks in the forecast's slow case; the forecast has not been rerun.
+
+- 2026-11-01 (lead): new client island `StickyAside` on the experience page, approved by the owner on the local run: the booking panel follows the page scroll and sticks at both ends when taller than the window. It replaces a pinned-footer build the owner rejected for scrolling inside the panel.
