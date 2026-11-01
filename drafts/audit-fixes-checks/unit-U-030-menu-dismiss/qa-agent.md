@@ -16,3 +16,10 @@ None.
 - menu-375-light-after-after-escape.png: Escape after the fix; menu closed, focus ring on Menu.
 - menu-375-light-after-outside-press.png: a press outside closes the menu.
 - NOTE.md: why there is no before shot for the outside press.
+
+### Evidence images
+Escape before / after (375 px):
+
+![before](https://raw.githubusercontent.com/defaultdave/ramble-pm/main/evidence/pr/unit-U-030-menu-dismiss/menu-375-light-before-after-escape.png) ![after](https://raw.githubusercontent.com/defaultdave/ramble-pm/main/evidence/pr/unit-U-030-menu-dismiss/menu-375-light-after-after-escape.png)
+
+Outside press, after: ![outside](https://raw.githubusercontent.com/defaultdave/ramble-pm/main/evidence/pr/unit-U-030-menu-dismiss/menu-375-light-after-outside-press.png)
