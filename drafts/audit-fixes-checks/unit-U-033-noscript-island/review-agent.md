@@ -33,3 +33,5 @@ None.
 - /Users/davidfleming/Workspace/ramble-pm/evidence/pr/unit-U-033-noscript-island/counts.txt: round 1 JS-off card counts and JS cost.
 - /Users/davidfleming/Workspace/ramble-pm/evidence/pr/unit-U-033-noscript-island/round2/counts-round2.txt: Show more and the way back visible JS off, paging by hand, JS-on rects identical.
 - /Users/davidfleming/Workspace/ramble-pm/evidence/pr/unit-U-033-noscript-island/round2/after2-paging.json: page 2 has no overlap with page 1, Back returns to the first page.
+
+Carried to head bc3f06b83f49a99dcfe5ecc8c7ea10897e36446c by the PM: that head is 35488df with origin/main merged in (Next 16.4.3 and the allowlist line). No file under src/ differs. QA reran on it.

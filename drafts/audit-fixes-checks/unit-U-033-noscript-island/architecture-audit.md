@@ -16,3 +16,5 @@ Non-blocking:
 2. `fit` on `TargetButton` is a layout flag on a non-primitive; noted only.
 3. Pre-existing near-duplicate: `FilterBar.tsx:147-150` and `TargetButton.tsx:35-44` map fields to hidden inputs the same way. An audit item, not introduced here.
 4. The island receives whole `ExperienceCard` records but reads most of the fields, so there is no real over-sending.
+
+Carried to head bc3f06b83f49a99dcfe5ecc8c7ea10897e36446c by the PM: that head is 35488df with origin/main merged in (Next 16.4.3 and the allowlist line). No file under src/ differs. QA reran on it.

@@ -50,8 +50,10 @@ P02 `db-reads` | N1029-8, N1030-13, N1030-14, H-106, N1031-9, H-108 | 1S 5XS | p
 P03 `lib-constants` | N1029-3, N1029-9, H-88, H-95, N1029-15, N1030-12 | 1S 5XS | cancellation.ts bounds with .max() and a CHECK migration; shared time constants; HttpUrlSchema. Carries this wave's migration.
 P04 `fake-delivery` | N1031-1, N1031-2, BC-47, BC-49 | 1M 3XS | Fake gateway redelivers the stored event on confirm, tests outcome.kind, logs failed drains, reads method back.
 P05 `checkout-form` | N1031-10, N1031-12, BC-30, N1031-25, BC-34, N1031-3 | 3S 3XS | CheckoutForm DRY (ExternalLink, one field wrapper), focus the details notice, autocomplete on the fake form, fitParty notice, draft dispatch outside try.
-P06 `browse-ui` | H-101, H-102, SC-6, SC-14, SC-2 | 3S 2XS | BrowseResults and FilterBar: shared error block, shared chip groups and hidden-field helper, one page-shell CSS module with LandingPage, settle the 20 px offset in a browser.
+P06 `browse-ui` | H-101, H-102, SC-6, SC-14 | 2S 2XS | BrowseResults and FilterBar: shared error block, shared chip groups and hidden-field helper, settle the 20 px offset in a browser. (SC-2 moved to P16, see the dated line below.)
 P07 `tooling-smalls` | N1030-27, N1030-3, SC-26, SC-27, SC-1 | 1S 4XS | global-error title, vercel.json patterns and test, osv overrides, schema enum comment plus db:generate gate in CLAUDE.md, coverPhotos uses tagExperiences.
+
+**2026-11-01 23:55 overlap re-check (maint-wave-1, `origin/main` `1e55875`):** P01 edits `src/app/(guest)/new-york/browse/page.module.css` (a visually-hidden copy) and SC-2 in P06 rewrites that same file plus `LandingPage.module.css`. SC-2 moves to P16 (`guest-page-loaders`, wave 3, beside H-99's page shell), so P06 loses it and P16 gains it. No other file is shared across P01 to P07. The wave's migration stays in P03 only.
 
 ### Wave 2
 
@@ -70,7 +72,7 @@ P14 `consents-guard` | BC-2 | 1S | Append-only trigger on consents like the ledg
 PR | Rows | Size | Scope
 --- | --- | --- | ---
 P15 `home-modules` | H-59, H-60, H-26, H-97, N1031-16, H-104, H-105 | 1S 6XS | ButtonLink for the gift action, Badge tone, rail hrefs through categoryPath, aria-current test, picksCandidates and idListSchema in lib/idLookup.
-P16 `guest-page-loaders` | H-79, H-99, SC-3, SC-5, SC-16 | 3S 2XS | Brand constant and PageHeading in HomeStates; HomeContent, BrowseContent, LandingRoute read systemClock and name the landing error.
+P16 `guest-page-loaders` | H-79, H-99, SC-2, SC-3, SC-5, SC-16 | 4S 2XS | Brand constant and PageHeading in HomeStates; HomeContent, BrowseContent, LandingRoute read systemClock and name the landing error.
 P17 `error-kind` | H-89, H-90, N1031-4 | 3XS | errorKind beside errorDigest; rethrowOrLog, readOrRefuse, checkout and the remote cache log stop interpolating error.message.
 P18 `ports-dry` | N1029-12, N1029-13 | 2S | Storage rules into lib, one error base and requireEnv across the ports.
 P19 `experience-gallery` | BE-11, BE-17, BE-16 | 1S 2XS | Gallery renders See-all photos from one source, conditional tab stop, real fallback titles.

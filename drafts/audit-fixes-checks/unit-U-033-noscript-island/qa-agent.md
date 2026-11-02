@@ -71,3 +71,26 @@ Browse and landing, JS on and off, 390 and 1280: the "We couldn't load experienc
 - Real image delivery (all `/_next/image` calls 400 on this fixture), so first-card LCP behaviour and the preload being consumed were not observed, only the attributes.
 - Dev-server hydration warnings.
 - Behaviour on any Chromium other than the Playwright 1.64.1 headless shell, and any engine other than Chromium.
+
+## Rerun on bc3f06b
+
+Head bc3f06b83f49a99dcfe5ecc8c7ea10897e36446c (merge of origin/main into 35488df; Next 16.4.3, was 16.4.2). Same worktree, no code changed. Fresh production build, fresh database migrated and seeded with `SEED_TARGET=local pnpm db:seed --scale`, one photo row per experience inserted by SQL as before (image host returns 400 from `/_next/image`, expected), `pnpm db:http` on 4611, `next start` restarted before every JS-off load. Verdict for this head: PASS. No base comparison was needed because nothing failed.
+
+Check 1, JS off, 5 cold runs each (cards visible of 12 sent, Show more visible, cards left in hidden S: divs, horizontal scroll):
+
+| Page | Width | Visible / sent | Show more visible | Cards in hidden S: divs | Horizontal scroll |
+|---|---|---|---|---|---|
+| `/new-york/browse` | 1280 | 12 / 12 on 5 of 5 | 5 of 5 | 0 | none |
+| `/new-york/browse` | 320 | 12 / 12 on 5 of 5 | 5 of 5 | 0 | none |
+| `/new-york/things-to-do/cooking` | 1280 | 12 / 12 on 5 of 5 | 5 of 5 | 0 | none |
+| `/new-york/things-to-do/cooking` | 320 | 12 / 12 on 5 of 5 | 5 of 5 | 0 | none |
+
+No bare hidden S: div held any content on any run. Screenshots: `cold-bc3-{browse,landing}-jsoff-light-{1280,320}-run1.png`.
+
+Check 2, JS off, browse and landing at 1280 and 320, mouse and keyboard: Show more reaches page 2 (12 cards, first card differs from page 1: "Bagel and lox tasting at Ivy Yard" on browse, "Fresh cheese making at Granite Society" on landing), and "Back to the first results" returns to page 1 (12 cards, original first card). Keyboard path works (Tab to Show more in 52 or 54 tabs on browse and 28 or 30 on landing, focus ring visible, Enter, Tab to back link, Enter). Same URLs as before (landing goes through `/new-york/browse?category=cooking`). Screenshots: `c2-*` (overwritten with this run).
+
+Check 4, JS on, 390 and 1280, browse and landing: Show more works (browse shows page 2 with 12 cards and focus stays on the Show more button; landing navigates to the browse route with focus on body, the pre-existing behaviour noted above). Exactly one image preload link, matching the first card image's srcset, and the first image alone has `fetchpriority="high"` (1 of 12). The only console errors are the 22 to 24 expected 400s from `/_next/image` per page; no other errors or warnings, no hydration errors. Screenshots: `c4p-*`.
+
+Not rerun on this head: checks 3 (dark/light contrast), 5 (error state), 6 (zero results), and cold loads in dark scheme. Unverified items from the first run still apply.
+
+Teardown: shim (86859) and `next start` (86999) stopped by PID (unsandboxed `kill`, own PIDs only), ports 4611 and 3187 to 3190 clear, database `ramble_qa_u033_r2_*` dropped (no `ramble_qa%` databases remain), worktree clean.

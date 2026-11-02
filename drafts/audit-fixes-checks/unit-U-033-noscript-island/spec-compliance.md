@@ -16,3 +16,5 @@ Observations, not failures:
 - `BrowseResults.test.tsx` checks the plain-data handoff through a JSON round trip, a reasonable proxy but not a render test.
 - `audits/prototype-feedback-2026-10-31.md` line 27 says the U-033 PF-7 fix restores the no-script filter layer. That was PR 680, not this diff.
 - This agent did not check that `ExperienceCardItem` is client-safe; the architecture audit covers it.
+
+Carried to head bc3f06b83f49a99dcfe5ecc8c7ea10897e36446c by the PM: that head is 35488df with origin/main merged in (Next 16.4.3 and the allowlist line). No file under src/ differs. QA reran on it.
