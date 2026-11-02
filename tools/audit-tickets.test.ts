@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { classify, lensOf, parseItems, shippedBy, titleOf, uniqueById } from "./audit-tickets";
+import { classify, lensOf, parseItems, shippedBy, ticketOf, titleOf, uniqueById } from "./audit-tickets";
 
 const pass = `Intro.
 
@@ -65,6 +65,13 @@ describe("shippedBy", () => {
     ["fix: audit-fixes lane", false],
     ["open: the rest; the first half shipped in PR 301", false],
   ])("%s is %s", (status, want) => expect(shippedBy(status, new Set([301]))).toBe(want));
+});
+
+describe("ticketOf", () => {
+  test.each([
+    ["open · ticket [#12](https://x/12)", 12],
+    ["open", null],
+  ])("%s is %s", (status, want) => expect(ticketOf(status)).toBe(want));
 });
 
 describe("titleOf", () => {

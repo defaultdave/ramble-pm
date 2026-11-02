@@ -90,6 +90,12 @@ export function shippedBy(status: string, merged: Set<number>): boolean {
   return named.length > 0 && named.every((n) => merged.has(n));
 }
 
+/** The ticket recorded on an item's row. The row is the record of filing, because GitHub can drop labels without an error. */
+export function ticketOf(status: string): number | null {
+  const m = status.match(/ticket \[#(\d+)\]/);
+  return m ? Number(m[1]) : null;
+}
+
 function body(item: Item): string {
   return [
     item.text.replaceAll("\\|", "|"),
@@ -115,7 +121,7 @@ export function lensOf(lens: string, file = ""): string {
   return "other";
 }
 
-const labelsOf = (item: Item) => [LABEL, `lens: ${lensOf(item.lens, item.file)}`, ...(/owner/i.test(item.status) ? [OWNER_LABEL] : [])];
+export const labelsOf = (item: Item) => [LABEL, `lens: ${lensOf(item.lens, item.file)}`, ...(/owner/i.test(item.status) ? [OWNER_LABEL] : [])];
 
 function gh(args: string[]): string {
   const p = Bun.spawnSync(["gh", ...args], { stdout: "pipe", stderr: "pipe" });
@@ -168,12 +174,14 @@ async function fileIssues(items: Item[], overrides: Record<string, string>): Pro
     if (!r.ok) throw new Error(`issue ${item.id}: HTTP ${r.status} ${await r.text()}`);
     const number = ((await r.json()) as { number: number }).number;
     linkRow(item, number);
+    const labelled = await api(token, `/issues/${number}/labels`, { labels: labelsOf(item) });
+    if (!labelled.ok) throw new Error(`labels on #${number}: HTTP ${labelled.status} ${await labelled.text()}`);
     console.log(`${item.id} #${number}`);
     await Bun.sleep(PAUSE_MS);
   }
 }
 
-type Issue = { number: number; title: string; url: string; state: string };
+type Issue = { number: number; id: string; url: string };
 type BoardItem = { id: string; sprint?: string; content?: { number?: number; repository?: string } };
 
 /** Puts every audit ticket on the board in the Maintenance sprint. */
@@ -195,7 +203,7 @@ function syncBoard(issues: Issue[]): void {
     const id = gh(["project", "item-add", String(BOARD), "--owner", OWNER, "--url", issue.url, "--format", "json", "-q", ".id"]);
     const edit = (...args: string[]) => gh(["project", "item-edit", "--id", id, "--project-id", projectId, ...args]);
     edit("--field-id", sprint.id, "--single-select-option-id", option.id);
-    edit("--field-id", unit.id, "--text", issue.title.split(" ")[0]);
+    edit("--field-id", unit.id, "--text", issue.id);
   }
   console.log(`${todo.length} tickets added to ${SPRINT}`);
 }
@@ -205,16 +213,16 @@ if (import.meta.main) {
   const overrides: Record<string, string> = await Bun.file(TITLES).json().catch(() => ({}));
   const items = uniqueById(loadItems());
   const merged = mergedPrs();
-  const list = () =>
-    JSON.parse(
-      gh(["issue", "list", "--repo", REPO, "--label", LABEL, "--state", "all", "--limit", "2000", "--json", "number,title,url,state"]),
-    ) as Issue[];
-  const filed = new Set(list().map((i) => i.title.split(" ")[0]));
-  const shipped = items.filter((i) => classify(i.status) === "live" && shippedBy(i.status, merged));
+  const tickets = (list: Item[]): Issue[] =>
+    list.flatMap((i) => {
+      const number = ticketOf(i.status);
+      return number === null ? [] : [{ number, id: i.id, url: `https://github.com/${REPO}/issues/${number}` }];
+    });
+  const shipped = items.filter((i) => classify(i.status) === "live" && ticketOf(i.status) === null && shippedBy(i.status, merged));
   const live = items.filter((i) => classify(i.status) === "live" && !shipped.includes(i));
   const unknown = items.filter((i) => classify(i.status) === "unknown");
-  const todo = live.filter((i) => !filed.has(i.id));
-  console.error(`${items.length} items, ${live.length} live, ${filed.size} already ticketed, ${todo.length} to file`);
+  const todo = live.filter((i) => ticketOf(i.status) === null);
+  console.error(`${items.length} items, ${live.length} live, ${live.length - todo.length} already ticketed, ${todo.length} to file`);
   for (const i of shipped) console.error(`names merged PRs, not filed, close the row: ${i.id} (${i.file}): ${i.status.slice(0, 80)}`);
   for (const i of unknown) console.error(`status not recognised, not filed: ${i.id} (${i.file}): ${i.status.slice(0, 70)}`);
   if (!run) {
@@ -222,6 +230,6 @@ if (import.meta.main) {
     console.error("Dry run. Apply with: bun tools/audit-tickets.ts --run");
   } else {
     await fileIssues(todo, overrides);
-    syncBoard(list());
+    syncBoard(tickets(uniqueById(loadItems())));
   }
 }
