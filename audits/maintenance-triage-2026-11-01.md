@@ -295,3 +295,16 @@ Answer sheet with a recommendation per row: `drafts/owner-decisions-2026-11-02.m
 - Several rows have grown since they were raised: H-62 has 13 `visuallyHidden` copies (was 7), `pulse` is in four modules, H-89's ternary is in checkout and pulse too, and H-26 shrank to one line now that `categoryPath` exists.
 - Order of two fixes matters: N1031-7 (store only an event count) conflicts with N1031-1 (redelivery keeps the last event); N1031-1 ships first (P04), N1031-7 waits in the tighten track.
 - Verifier doubts to settle in a browser before closing: SC-6 (the 20 px may be the Button inset by design), H-87 (320 px price wrap), N1031-26 (hero row widths), SC-23 (duplicate `main` after re-hold).
+
+## Owner answers (2026-11-01 night)
+
+Dave: all 30 rows as recommended. Effects on the buckets:
+
+- Close as won't: H-15, H-92, H-103, H-107, N1031-6 (fix the comment first, in P09), SC-25.
+- H-1 and H-39 close as duplicates of H-22; H-22 and H-34 stay open behind the PM's Neon measurement.
+- Close as later, carried by a unit: H-16 (U-039 follow-up), BC-19 (U-105), BC-22 (U-051; the pill, desktop-only badge and full footer are recorded in `design-departures.md`), BC-32 (U-051; the stale TODO goes in P23), N1101-2 (dictionary track), SC-8 and SC-13 (audit-store adapter unit, which gates U-055's first production deploy).
+- BC-40 closes as a duplicate of N1030-1.
+- Two rows move to B: **P25 `limiter-idempotent`** (wave 2, S): BC-9, idempotent refreshes and confirmed orders stop spending `payment_tries`; **N1030-10** joins P10 `seed`: refuse a non-fake storage provider on a local target.
+- N1030-2: manual `vercel deploy --prod` from a clean `origin/main` copy is the deploy policy; `drafts/production-deploy-policy.md` records it and the ticket closes.
+- Still open on Dave's side, actions not decisions: H-11, BC-48, N1030-1, and the one standards-file edit (BC-15, N1030-7, N1030-8).
+- PM actions: H-22, H-23, H-35, SC-7.

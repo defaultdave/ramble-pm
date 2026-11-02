@@ -1053,5 +1053,53 @@
   "SC-25"
  ],
  "file_first": [],
- "duplicates_off_board": "done by the ticket session 2026-11-01 night: duplicates closed, SC-1 to SC-27 filed (#685 to #711)"
+ "duplicates_off_board": "done by the ticket session 2026-11-01 night: duplicates closed, SC-1 to SC-27 filed (#685 to #711)",
+ "owner_sheet_answered_2026-11-01": {
+  "answer": "all 30 as recommended (Dave)",
+  "close_wont": {
+   "H-15": 364,
+   "H-92": 390,
+   "H-103": 400,
+   "H-107": 404,
+   "N1031-6": 460,
+   "SC-25": 711
+  },
+  "close_duplicate_of_H-22": {
+   "H-1": 362,
+   "H-39": 374
+  },
+  "keep_open": {
+   "H-22": 366,
+   "H-34": 370,
+   "H-23": 367,
+   "H-35": 371,
+   "SC-7": 691,
+   "H-11": 363,
+   "BC-48": 345,
+   "N1030-1": 427,
+   "N1030-2": 428,
+   "BC-15": 320,
+   "N1030-7": 433,
+   "N1030-8": 434
+  },
+  "close_later_carried_by_unit": {
+   "H-16": "U-039 follow-up",
+   "BC-19": "U-105",
+   "BC-22": "U-051 (departures recorded)",
+   "BC-32": "U-051",
+   "N1101-2": "dictionary track",
+   "SC-8": "audit-store adapter unit",
+   "SC-13": "audit-store adapter unit"
+  },
+  "close_duplicate": {
+   "BC-40": "duplicate of N1030-1 (#427)"
+  },
+  "now_fix_rows": {
+   "BC-9": "wave 2, P25 limiter-idempotent",
+   "N1030-10": "wave 2, joins P10 seed"
+  },
+  "policy": {
+   "N1030-2": "record manual `vercel deploy --prod` as the deploy policy (drafts/production-deploy-policy.md), then close"
+  }
+ }
 }

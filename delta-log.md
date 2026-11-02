@@ -98,3 +98,5 @@ Sprint 2 moves from features to production-ready work (`drafts/sprint-2-producti
 - 2026-11-01 (lead): U-035 scope reads "Prerendered"; the pages render on first request and stay cached (DECISIONS), a departure from ADR 0001 that the frozen plan keeps as written. U-020's locked export store moves to a follow-up on Dave's account (DECISIONS).
 
 - 2026-11-01 (lead): design doc's `StoragePort` row lists only public photos and private host documents; U-020 adds an `audit` visibility and key prefix (ndjson only, no signed link, no delete), per ADR 0002. No adapter holds it yet (SC-13).
+
+- 2026-11-01 (pf7-island): the client islands allowlist gains `BrowseResultsList`, owner approved, so browse and landing results show with scripting off (#487).

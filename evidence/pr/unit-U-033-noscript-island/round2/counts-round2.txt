@@ -1,0 +1,42 @@
+U-033 round 2: Show more and the way back inside the client list. Head 1c10ce1 on 119c21d (round 1) on origin/main 3a414b6.
+Fresh database u033_island_2 (seed --scale, 400 experiences, cover photo row for each), fresh `next start` per run, Chromium
+--single-process --no-zygote, sandbox on, JavaScript off, 1280x800, first load. "prev" = 119c21d, "after" = 1c10ce1.
+
+JS off, /new-york/browse, 5 fresh-server first loads (12 cards sent, 8 Category chips sent, 1 Show more sent)
+  run  cards prev  cards after  Show more prev  Show more after  Category chips prev  Category chips after
+  1    12/12       12/12        0/1             1/1              8/8                  8/8
+  2    12/12       12/12        0/1             1/1              8/8                  8/8
+  3    12/12       12/12        0/1             1/1              8/8                  8/8
+  4    12/12       12/12        0/1             1/1              8/8                  8/8
+  5    12/12       12/12        0/1             1/1              8/8                  8/8
+  Cards, Show more or Back to the first results in a bare hidden segment (DOM and raw HTML), after: 0 on all 5 runs.
+  Before (119c21d): Show more stranded in a bare hidden segment on all 5 runs.
+  Remaining hidden segments after: S:0, S:1, S:3 (framework scripts only) and S:2 (the revealed #browse-results section,
+  which holds the filters, all cards and Show more).
+
+Category chips (measure only): none cut. 8 of 8 visible on all 5 runs at 119c21d and at 1c10ce1. On origin/main (round 1
+HTML) all 8 chip anchors also precede the first bare segment. Raw HTML count is the chip links inside the no-script
+filter layer; visible is the DOM anchors under the Category legend with checkVisibility().
+
+JS off, landing /new-york/neighborhoods/williamsburg, 5 runs: 12/12 cards, Show more 1/1 visible, 0 stranded, before and after.
+
+JS off, paging by hand (fresh server): Show more on the first load is visible; clicking it goes to
+/new-york/browse?after=0e6e277b-a63f-4f1f-b0ea-fecc20c8b3f2, which shows 12 cards, none of them on page 1 (0 overlap),
+Show more and Back to the first results both visible; Back goes to /new-york/browse with 12 cards.
+At 119c21d Show more and the way back are not visible on either page (page 2 reached by address only).
+
+JS cost, /new-york/browse, gzip level 9 over the scripts in the document
+                       origin/main   119c21d     1c10ce1
+  JS gzip              201443        203070      203822   (+2379 over main, +752 over 119c21d)
+  JS raw               641592        646563      648130
+  HTML raw             126254        113902      113232
+  inline flight chars  72352         60900       60556
+  RSC request raw      62611         52713       52422    (-10189 over main)
+  RSC request gzip     10208         9505        9443
+ landing: JS gzip 198571 / 200202 / 200667; RSC request raw 50462 / 41039 / 40646.
+Growth is the list's own markup (the Show more form and ButtonLink now ship in the client bundle with the cards).
+
+JS on, page 1 and page 2 (?after=...), browse and landing page 1, at 320 / 390 / 768 / 1280: element rectangles identical
+between 119c21d and 1c10ce1 (page 2 also lists the Show more button and the Back link, 14 rects), 24 full-page screenshots
+byte-identical (same SHA-1); page 1 screenshots also equal the round 1 ones. Console: one 400 per load from /_next/image
+(seeded photo addresses point at no store), same before and after; no hydration warning.

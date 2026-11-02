@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 1, 2026.** Nov 1, night: Sprint 1 is closed. The promotion landed (PR 684): the audit log (U-020) and the sync are on main. The Maintenance sprint was triaged against main: of 206 open findings, 18 close with no code, 92 are clear fixes planned as 24 grouped PRs in 4 waves, 46 belong to Sprint 2 tracks, 20 are carried by units, and 30 wait on your answer sheet. Duplicate tickets are closed and the Sprint 1 close items are filed. Production still serves 44dd004.
+**As of Nov 1, 2026.** Nov 1, night: Sprint 1 is closed and the promotion landed (PR 684). The Maintenance sprint was triaged against main: of 206 open findings, 24 close with no code, 94 are clear fixes planned as 25 grouped PRs in 4 waves, 46 belong to Sprint 2 tracks, 27 are carried by units, and you answered all 30 owner rows as recommended. Duplicate tickets are closed. Production still serves 44dd004.
 
 | Milestone | Likely |
 |---|---|
@@ -18,7 +18,8 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
-- Answer the Maintenance owner sheet (30 rows). drafts/owner-decisions-2026-11-02.md: one recommendation per row, 'all as recommended' works. Ten rows are yours to do, not decide: Neon console, seed rerun, push unit/U-001-neon-skip, one standards-file edit, deploy branch or policy, the second Neon role and the R2 bucket.
+- Push unit/U-001-neon-skip and bypass-merge it. Local branch f548962 adds the head_ref filter so the expire-preview job stops failing on branches with no preview (N1030-1, BC-40). Workflow files need your login.
+- One edit to .claude/standards/architecture.md. B6 exemption for system money paths (BC-15), B13 names presentation-only log-and-degrade reads (N1030-7), lib/pages zone in the diagram and B4 plus the client-island allowlist (N1030-8).
 - Give the ramble-agents App Issues read and write. Set the permission and accept it on the installation. Ticket labels dropped silently without it and a first run double-filed 181. The PM then labels the 187 tickets, closes the duplicates and files SC-1 to SC-26.
 - Decide the PF-7 client island. With JavaScript off, the first load of a large browse result shows only 5 cards. One client component fed plain data fixes it, and needs your approval under B8. Recommended.
 - Confirm MFA for U-102. U-102 stays In Progress until you confirm MFA is on.
