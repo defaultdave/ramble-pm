@@ -1,6 +1,6 @@
 {
   "asOf": "2026-11-01",
-  "headline": "Nov 1, late evening: Sprint 1 is closing. Cache fixes, category and neighborhood pages (U-035) and the checkout audit fixes are on main; the no-script browse fix (PF-7) is a partial fix; the audit log (U-020) has passed its checks and goes into integration after a sync. Audit findings are now 187 tickets in a Maintenance sprint, 179 open. Production still runs 44dd004: none of tonight's work is deployed.",
+  "headline": "Nov 1, late evening: Sprint 1 is closing. Cache fixes, category and neighborhood pages (U-035) and the checkout audit fixes are on main; so is the no-script browse fix (PF-7), as a partial fix. The audit log (U-020) has passed its checks and goes into integration after a sync. Audit findings are now 187 tickets in a Maintenance sprint, 179 open. Production still runs 44dd004: none of tonight's work is deployed.",
   "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
   "phases": [
     {
@@ -104,6 +104,11 @@
       "title": "Give the ramble-agents App Issues read and write",
       "detail": "Set the permission and accept it on the installation. Ticket labels dropped silently without it and a first run double-filed 181. The PM then labels the 187 tickets, closes the duplicates and files SC-1 to SC-26.",
       "where": "Next"
+    },
+    {
+      "title": "Bypass-merge PR 681",
+      "detail": "gh pr merge 681 --repo defaultdave/ramble --merge --admin. The B14 line and PM memory, protected paths, no product code.",
+      "where": "Any time"
     },
     {
       "title": "Decide the PF-7 client island",
@@ -452,7 +457,7 @@
         "PR 677 cache fixes merged",
         "PR 678 U-035 category and neighborhood pages merged",
         "PR 679 checkout and booking audit fixes merged (BC-29, BC-35, BC-39, BC-58)",
-        "PF-7 no-script browse passed review round 4 and went out as PR 680, partial",
+        "PR 680 PF-7 no-script browse merged as a partial fix, ticket left open",
         "U-020 audit log passed all four checks after five review rounds"
       ],
       "today": [
