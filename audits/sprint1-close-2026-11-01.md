@@ -31,3 +31,4 @@
 | SC-23 | After an in-page re-hold the previous header and `main` stay in the DOM with `display: none`, so the page has two `main#main`. | Accessibility | Checkout QA | open |
 | SC-24 | The bare `Composites/BookingSheet` story still shows 38.8 px cells at 320 px; the shipped sheet is 44 px. | Visual | Checkout QA | open |
 | SC-25 | Browse's first load with JavaScript off shows only the first 5 cards (PF-7's known limit); landing pages past about 3 KB of results cut the same way. Home and the experience page keep their skeletons with JavaScript off. | Accessibility | PF-7 QA | open |
+| SC-26 | `osv-scanner` fails on every push to `main` (at least since `22cbe55`): four Medium advisories in `pnpm-lock.yaml`, deepmerge 4.3.1 (no fix), glob 13.0.6, minimatch 10.2.6 and 3.1.5. The PR scan passes, so it blocks nothing and is easy to miss. Bump or record an exception. | Code | Merge desk, PR 679 | open |
