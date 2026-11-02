@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 1, 2026.** Nov 1, night: Sprint 1 is closed and the promotion landed (PR 684). The Maintenance sprint was triaged against main: of 206 open findings, 24 close with no code, 94 are clear fixes planned as 25 grouped PRs in 4 waves, 46 belong to Sprint 2 tracks, 27 are carried by units, and you answered all 30 owner rows as recommended. Duplicate tickets are closed. Production still serves 44dd004.
+**As of Nov 2, 2026.** Nov 2, early morning: Maintenance wave 1 is merged, seven grouped PRs (714, 716 to 721) closing 32 audit tickets. Wave 2 (P08 to P14, P25, one migration) is next. Of 206 open findings: 18 close with no code, 92 are clear fixes in 24 PRs over 4 waves, 46 belong to Sprint 2 tracks, 20 are carried by units, and you answered all 30 owner rows as recommended. Production still serves 44dd004; the next deploy needs db-migrate-production for migration 0022.
 
 | Milestone | Likely |
 |---|---|

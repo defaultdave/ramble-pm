@@ -45,15 +45,17 @@ Each wave's PRs touch disjoint files, so up to five builders run at once (machin
 
 PR | Rows | Size | Scope
 --- | --- | --- | ---
-P01 `visually-hidden` | H-62 | 1S | One shared VisuallyHidden class replaces 13 module copies (mechanical, wide).
-P02 `db-reads` | N1029-8, N1030-13, N1030-14, H-106, N1031-9, H-108 | 1S 5XS | photos.ts, home.ts, editorial.ts: derive column lists, guestVisible in one place, coverImage, narrow gift-guide read.
-P03 `lib-constants` | N1029-3, N1029-9, H-88, H-95, N1029-15, N1030-12 | 1S 5XS | cancellation.ts bounds with .max() and a CHECK migration; shared time constants; HttpUrlSchema. Carries this wave's migration.
-P04 `fake-delivery` | N1031-1, N1031-2, BC-47, BC-49 | 1M 3XS | Fake gateway redelivers the stored event on confirm, tests outcome.kind, logs failed drains, reads method back.
-P05 `checkout-form` | N1031-10, N1031-12, BC-30, N1031-25, BC-34, N1031-3 | 3S 3XS | CheckoutForm DRY (ExternalLink, one field wrapper), focus the details notice, autocomplete on the fake form, fitParty notice, draft dispatch outside try.
-P06 `browse-ui` | H-101, H-102, SC-6, SC-14 | 2S 2XS | BrowseResults and FilterBar: shared error block, shared chip groups and hidden-field helper, settle the 20 px offset in a browser. (SC-2 moved to P16, see the dated line below.)
-P07 `tooling-smalls` | N1030-27, N1030-3, SC-26, SC-27, SC-1 | 1S 4XS | global-error title, vercel.json patterns and test, osv overrides, schema enum comment plus db:generate gate in CLAUDE.md, coverPhotos uses tagExperiences.
+P01 `visually-hidden` (PR 714) | H-62 | 1S | One shared VisuallyHidden class replaces 13 module copies (mechanical, wide).
+P02 `db-reads` (PR 716) | N1029-8, N1030-13, N1030-14, H-106, N1031-9, H-108 | 1S 5XS | photos.ts, home.ts, editorial.ts: derive column lists, guestVisible in one place, coverImage, narrow gift-guide read.
+P03 `lib-constants` (PR 717) | N1029-3, N1029-9, H-88, H-95, N1029-15, N1030-12 | 1S 5XS | cancellation.ts bounds with .max() and a CHECK migration; shared time constants; HttpUrlSchema. Carries this wave's migration.
+P04 `fake-delivery` (PR 718) | N1031-1, N1031-2, BC-47, BC-49 | 1M 3XS | Fake gateway redelivers the stored event on confirm, tests outcome.kind, logs failed drains, reads method back.
+P05 `checkout-form` (PR 719) | N1031-10, N1031-12, BC-30, N1031-25, BC-34, N1031-3 | 3S 3XS | CheckoutForm DRY (ExternalLink, one field wrapper), focus the details notice, autocomplete on the fake form, fitParty notice, draft dispatch outside try.
+P06 `browse-ui` (PR 720) | H-101, H-102, SC-6, SC-14 | 2S 2XS | BrowseResults and FilterBar: shared error block, shared chip groups and hidden-field helper, settle the 20 px offset in a browser. (SC-2 moved to P16, see the dated line below.)
+P07 `tooling-smalls` (PR 721) | N1030-27, N1030-3, SC-26, SC-27, SC-1 | 1S 4XS | global-error title, vercel.json patterns and test, osv overrides, schema enum comment plus db:generate gate in CLAUDE.md, coverPhotos uses tagExperiences.
 
 **2026-11-01 23:55 overlap re-check (maint-wave-1, `origin/main` `1e55875`):** P01 edits `src/app/(guest)/new-york/browse/page.module.css` (a visually-hidden copy) and SC-2 in P06 rewrites that same file plus `LandingPage.module.css`. SC-2 moves to P16 (`guest-page-loaders`, wave 3, beside H-99's page shell), so P06 loses it and P16 gains it. No other file is shared across P01 to P07. The wave's migration stays in P03 only.
+
+**2026-11-02 wave 1 status:** P01 to P06 merged (PRs 714, 716 to 720). P07 (PR 721) has four checks and auto-merge queued. Notes: P05 also finished BC-30 part 3; SC-27's CLAUDE.md bullet is Dave's (protected path); one `db` job flake in `tests/db/audit.db.test.ts` (claimed 0, expected 1) on PR 721, not reproduced in 5 reruns.
 
 ### Wave 2
 
@@ -91,35 +93,35 @@ P24 `home-sessions-limit` | H-38 | 1M | Sold-out filtered in SQL with a partial 
 
 ID | Ticket | PR | Size | Files | Note
 --- | --- | --- | --- | --- | ---
-H-62 | [#378](https://github.com/defaultdave/ramble/issues/378) | P01 | S | 13 CSS modules (e.g. `src/components/Button/Button.module.css`) + one shared class | Now 13 copies, not seven (Chip, CheckoutPage, FakePaymentForm, UpcomingSessions added).
-N1029-8 | [#419](https://github.com/defaultdave/ramble/issues/419) | P02 | XS | src/server/db/photos.ts | listGuestPhotos (:288) still hand-writes inArray; the other read (:312) already uses guestVisible.
+H-62 | [#378](https://github.com/defaultdave/ramble/issues/378) | P01 (PR 714) | S | 13 CSS modules (e.g. `src/components/Button/Button.module.css`) + one shared class | Now 13 copies, not seven (Chip, CheckoutPage, FakePaymentForm, UpcomingSessions added).
+N1029-8 | [#419](https://github.com/defaultdave/ramble/issues/419) | P02 (PR 716) | XS | src/server/db/photos.ts | listGuestPhotos (:288) still hand-writes inArray; the other read (:312) already uses guestVisible.
 N1030-13 | [#439](https://github.com/defaultdave/ramble/issues/439) | P02 | XS | src/server/db/photos.ts | photoColumns, coverWith.columns, coverSelection still three nine-column lists; derive from photoColumns.
 N1030-14 | [#440](https://github.com/defaultdave/ramble/issues/440) | P02 | XS | src/server/db/home.ts, src/server/db/photos.ts | home.ts:60 still inlines photoView(GuestPhotoSchema.parse(cover)); call coverImage with null adjustment.
 H-106 | [#403](https://github.com/defaultdave/ramble/issues/403) | P02 | XS | `src/server/db/editorial.ts` | `columnsWithoutIntro` still hand-listed; db tests assert no `intro` on pick but mutation survival unverified.
 N1031-9 | [#463](https://github.com/defaultdave/ramble/issues/463) | P02 | XS | src/server/db/editorial.ts | columnsWithoutIntro still hand-listed; derive from getTableColumns (already imported) omitting intro.
 H-108 | [#405](https://github.com/defaultdave/ramble/issues/405) | P02 | S | `src/server/db/editorial.ts`, `src/server/home.ts` | `getPublishedGiftGuide` still reads full entries and intro via `readCollections`.
-N1029-3 | [#416](https://github.com/defaultdave/ramble/issues/416) | P03 | S | src/lib/catalog.ts, src/lib/cancellation.ts, src/server/db/schema/policies.ts | Schemas and CHECKs still have no max; define bounds once, add .max(), CHECK migration. Note experiencePage now lib/pages/experience.ts.
+N1029-3 | [#416](https://github.com/defaultdave/ramble/issues/416) | P03 (PR 717) | S | src/lib/catalog.ts, src/lib/cancellation.ts, src/server/db/schema/policies.ts | Schemas and CHECKs still have no max; define bounds once, add .max(), CHECK migration. Note experiencePage now lib/pages/experience.ts.
 N1029-9 | [#420](https://github.com/defaultdave/ramble/issues/420) | P03 | XS | src/lib/cancellation.ts, src/lib/sessions.ts | formatterFor still has its own TIME_ZONE_NAME; call TimeZoneSchema/isKnownTimeZone, keep RangeError.
 H-88 | [#386](https://github.com/defaultdave/ramble/issues/386) | P03 | XS | `tests/db/seed.db.test.ts`, `tests/db/browse.db.test.ts`, `src/lib/cancellation.ts` | Hand day math remains at seed.db:244-251, browse.db:245; MS_PER_HOUR in cancellation.ts; browse.test.ts 86_400_000 gone.
 H-95 | [#393](https://github.com/defaultdave/ramble/issues/393) | P03 | XS | `src/lib/seed/coverage.ts`, `src/lib/cancellation.ts` | `kayak-other-dates` still `> now + msPerDay` inline.
 N1029-15 | [#425](https://github.com/defaultdave/ramble/issues/425) | P03 | XS | src/lib/seed/plan.ts, src/lib/sessions.ts | time.ts now has msPerDay/isoDateOf; coverage.ts uses them. plan.ts dayMs/isoDate and sessions.ts:156,309,311 remain.
 N1030-12 | [#438](https://github.com/defaultdave/ramble/issues/438) | P03 | XS | src/lib/experienceCards.ts, src/lib/catalog.ts, src/lib/seed/plan.ts | linkOutUrl still z.string() (HttpUrlSchema unexported); defaultTimeZone still dup. Unexport part is FIXED (both have non-test importers).
-N1031-1 | [#455](https://github.com/defaultdave/ramble/issues/455) | P04 | M | src/server/fakePaymentDelivery.ts, src/server/ports/payments/fake.ts, src/server/ports/payments/gateway.ts | No lastEventFor or redeliver exists; retry still hits invalid_state, refused. Runbook still says nothing retries.
+N1031-1 | [#455](https://github.com/defaultdave/ramble/issues/455) | P04 (PR 718) | M | src/server/fakePaymentDelivery.ts, src/server/ports/payments/fake.ts, src/server/ports/payments/gateway.ts | No lastEventFor or redeliver exists; retry still hits invalid_state, refused. Runbook still says nothing retries.
 N1031-2 | [#456](https://github.com/defaultdave/ramble/issues/456) | P04 | XS | src/server/fakePaymentDelivery.ts, src/lib/providerEvents.ts, src/server/paymentWebhook.ts | isDeliveryTaken(response.status) still used at fakePaymentDelivery.ts; export outcome body, test kind accepted.
 BC-47 | [#344](https://github.com/defaultdave/ramble/issues/344) | P04 | XS | src/server/fakePaymentDelivery.ts | after(drained) leaves a failed drain to Next's console.error; catch and log through logger
 BC-49 | [#529](https://github.com/defaultdave/ramble/issues/529) | P04 | XS | src/server/ports/payments/fake.test.ts | Fake stores payment.method but no test reads it back; assert retrieve().method after confirm
-N1031-10 | [#464](https://github.com/defaultdave/ramble/issues/464) | P05 | S | src/components/CheckoutPage/CheckoutForm.tsx, src/components/Card/Card.tsx | Three hand-written target=_blank copies remain (Card, CheckoutForm, ButtonLink); add ExternalLink component.
+N1031-10 | [#464](https://github.com/defaultdave/ramble/issues/464) | P05 (PR 719) | S | src/components/CheckoutPage/CheckoutForm.tsx, src/components/Card/Card.tsx | Three hand-written target=_blank copies remain (Card, CheckoutForm, ButtonLink); add ExternalLink component.
 N1031-12 | [#466](https://github.com/defaultdave/ramble/issues/466) | P05 | S | src/components/CheckoutPage/CheckoutForm.tsx, src/components/Input/Input.tsx | TextField/AgeField still twin memo wrappers; optionalError still local. Keep stable-prop contract.
 BC-30 | [#334](https://github.com/defaultdave/ramble/issues/334) | P05 | S | src/components/CheckoutPage/CheckoutForm.tsx, src/components/OrderSummary/OrderSummary.tsx | Details-step notice Alert never focused; summary toggle is a button with no no-script path; third part unverified
 N1031-25 | [#479](https://github.com/defaultdave/ramble/issues/479) | P05 | XS | src/components/FakePaymentForm/FakePaymentForm.tsx | Four fields still autoComplete="off", type forbids tokens; use cc-number, cc-exp, cc-csc, postal-code (no design-departures file exists).
 BC-34 | [#338](https://github.com/defaultdave/ramble/issues/338) | P05 | XS | src/lib/bookingDraft.ts | fitParty trims children then adults with no notice set; add a BookingNotice
 N1031-3 | [#457](https://github.com/defaultdave/ramble/issues/457) | P05 | XS | src/components/BookingChoices/useBookingDraft.ts | Dispatch and router.push still inside the try; bare catch sends held guest to error notice.
-H-101 | [#398](https://github.com/defaultdave/ramble/issues/398) | P06 | S | `src/components/BrowseResults/BrowseResults.tsx` | Browse error block still hand-built Alert + retry form beside PageError.
+H-101 | [#398](https://github.com/defaultdave/ramble/issues/398) | P06 (PR 720) | S | `src/components/BrowseResults/BrowseResults.tsx` | Browse error block still hand-built Alert + retry form beside PageError.
 H-102 | [#399](https://github.com/defaultdave/ramble/issues/399) | P06 | XS | `src/components/BrowseResults/BrowseResults.module.css` | Comment at line 101 still says "as PageError's does".
 SC-6 | [#690](https://github.com/defaultdave/ramble/issues/690) | P06 | XS | src/components/BrowseResults/BrowseResults.module.css | Unverified. Notice box is flush left; 20px equals Button padding-inline, so may be label inset by design. Check in browser first.
 SC-14 | [#698](https://github.com/defaultdave/ramble/issues/698) | P06 | S | src/components/FilterBar/FilterBar.tsx, src/components/BrowseResults/BrowseResults.tsx | NoScriptFilters repeats the three ChipGroups of the drawer; hidden-input loop repeated in TargetButton.
 SC-2 | [#686](https://github.com/defaultdave/ramble/issues/686) | P06 | S | src/components/LandingPage/LandingPage.module.css, src/app/(guest)/new-york/browse/page.module.css | .page and .title identical in both files; move to one shared module.
-N1030-27 | [#453](https://github.com/defaultdave/ramble/issues/453) | P07 | XS | src/app/global-error.tsx | Still no <head><title>; add one.
+N1030-27 | [#453](https://github.com/defaultdave/ramble/issues/453) | P07 (PR 721) | XS | src/app/global-error.tsx | Still no <head><title>; add one.
 N1030-3 | [#429](https://github.com/defaultdave/ramble/issues/429) | P07 | XS | vercel.json, tests/vercel-config.test.ts | revert/* and dependabot/* still unlisted; add patterns, extend test matcher. Vercel glob semantics unverified.
 SC-26 | [#710](https://github.com/defaultdave/ramble/issues/710) | P07 | S | package.json, pnpm-lock.yaml, osv-scanner.toml (new) | No overrides or exception file for deepmerge 4.3.1, glob 13.0.6, minimatch; push scan on main still runs.
 SC-27 | [#711](https://github.com/defaultdave/ramble/issues/711) | P07 | XS | src/server/db/schema/operations.ts, CLAUDE.md | auditActorKindEnum has no comment; add one line, and list pnpm db:generate in the local gates.
