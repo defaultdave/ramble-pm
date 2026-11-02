@@ -1,6 +1,6 @@
 # Maintenance triage (2026-11-01)
 
-**Scope:** every live audit row (`open`, `fix`, `decided`, `assigned`) across the pass files, 206 items once two duplicated rows are merged: 178 have a Todo ticket in the Maintenance sprint on board #19, and 28 (SC-1 to SC-27, H-7) are not filed yet. Each was checked against `origin/main` at `f196dbb` (after the 2026-11-01 promotion) by six read-only verifiers, one per pass file, then grouped by shared file or root cause. Verdict and bucket per row are below; the ticket holds the status once the ticket-writer applies this triage. The Owner column of the pass files is unchanged.
+**Scope:** every live audit row (`open`, `fix`, `decided`, `assigned`) across the pass files, 206 items once two duplicated rows are merged: 178 had a Todo ticket in the Maintenance sprint on board #19 when the check started, and the other 28 (SC-1 to SC-27, H-7) were filed by the ticket session during it, as #685 to #711 and #548. Each was checked against `origin/main` at `f196dbb` (after the 2026-11-01 promotion) by six read-only verifiers, one per pass file, then grouped by shared file or root cause. Verdict and bucket per row are below; the ticket holds the status once the ticket-writer applies this triage. The Owner column of the pass files is unchanged.
 
 **Not done here:** no ticket, label, board or audit-row write. A separate session owns those; `drafts/maintenance-triage-actions.json` lists what to apply.
 
@@ -114,14 +114,14 @@ BC-34 | [#338](https://github.com/defaultdave/ramble/issues/338) | P05 | XS | sr
 N1031-3 | [#457](https://github.com/defaultdave/ramble/issues/457) | P05 | XS | src/components/BookingChoices/useBookingDraft.ts | Dispatch and router.push still inside the try; bare catch sends held guest to error notice.
 H-101 | [#398](https://github.com/defaultdave/ramble/issues/398) | P06 | S | `src/components/BrowseResults/BrowseResults.tsx` | Browse error block still hand-built Alert + retry form beside PageError.
 H-102 | [#399](https://github.com/defaultdave/ramble/issues/399) | P06 | XS | `src/components/BrowseResults/BrowseResults.module.css` | Comment at line 101 still says "as PageError's does".
-SC-6 | unfiled | P06 | XS | src/components/BrowseResults/BrowseResults.module.css | Unverified. Notice box is flush left; 20px equals Button padding-inline, so may be label inset by design. Check in browser first.
-SC-14 | unfiled | P06 | S | src/components/FilterBar/FilterBar.tsx, src/components/BrowseResults/BrowseResults.tsx | NoScriptFilters repeats the three ChipGroups of the drawer; hidden-input loop repeated in TargetButton.
-SC-2 | unfiled | P06 | S | src/components/LandingPage/LandingPage.module.css, src/app/(guest)/new-york/browse/page.module.css | .page and .title identical in both files; move to one shared module.
+SC-6 | [#690](https://github.com/defaultdave/ramble/issues/690) | P06 | XS | src/components/BrowseResults/BrowseResults.module.css | Unverified. Notice box is flush left; 20px equals Button padding-inline, so may be label inset by design. Check in browser first.
+SC-14 | [#698](https://github.com/defaultdave/ramble/issues/698) | P06 | S | src/components/FilterBar/FilterBar.tsx, src/components/BrowseResults/BrowseResults.tsx | NoScriptFilters repeats the three ChipGroups of the drawer; hidden-input loop repeated in TargetButton.
+SC-2 | [#686](https://github.com/defaultdave/ramble/issues/686) | P06 | S | src/components/LandingPage/LandingPage.module.css, src/app/(guest)/new-york/browse/page.module.css | .page and .title identical in both files; move to one shared module.
 N1030-27 | [#453](https://github.com/defaultdave/ramble/issues/453) | P07 | XS | src/app/global-error.tsx | Still no <head><title>; add one.
 N1030-3 | [#429](https://github.com/defaultdave/ramble/issues/429) | P07 | XS | vercel.json, tests/vercel-config.test.ts | revert/* and dependabot/* still unlisted; add patterns, extend test matcher. Vercel glob semantics unverified.
-SC-26 | unfiled | P07 | S | package.json, pnpm-lock.yaml, osv-scanner.toml (new) | No overrides or exception file for deepmerge 4.3.1, glob 13.0.6, minimatch; push scan on main still runs.
-SC-27 | unfiled | P07 | XS | src/server/db/schema/operations.ts, CLAUDE.md | auditActorKindEnum has no comment; add one line, and list pnpm db:generate in the local gates.
-SC-1 | unfiled | P07 | XS | src/server/coverPhotos.ts, src/server/cache/tagExperiences.ts | Loop still inline at coverPhotos.ts; call tagExperiences(ids.map(toLowerCase)); helper takes ids as given.
+SC-26 | [#710](https://github.com/defaultdave/ramble/issues/710) | P07 | S | package.json, pnpm-lock.yaml, osv-scanner.toml (new) | No overrides or exception file for deepmerge 4.3.1, glob 13.0.6, minimatch; push scan on main still runs.
+SC-27 | [#711](https://github.com/defaultdave/ramble/issues/711) | P07 | XS | src/server/db/schema/operations.ts, CLAUDE.md | auditActorKindEnum has no comment; add one line, and list pnpm db:generate in the local gates.
+SC-1 | [#685](https://github.com/defaultdave/ramble/issues/685) | P07 | XS | src/server/coverPhotos.ts, src/server/cache/tagExperiences.ts | Loop still inline at coverPhotos.ts; call tagExperiences(ids.map(toLowerCase)); helper takes ids as given.
 H-77 | [#383](https://github.com/defaultdave/ramble/issues/383) | P08 | S | `src/components/Skeleton/Skeleton.module.css`, `src/components/HomeStates/HomeStates.module.css` | `@keyframes pulse` now in four modules (also UpcomingSessions, BookingPanelSkeleton).
 H-78 | [#572](https://github.com/defaultdave/ramble/issues/572) | P08 | S | `src/components/HomeStates/HomeStates.module.css`, `src/components/HomeModules/HomeHero.module.css` | `.band/.skeletonInner/.copy/.art/.pills/.cards` still copied; no `composes`.
 N1030-20 | [#446](https://github.com/defaultdave/ramble/issues/446) | P08 | XS | src/components/HomeModules/HomeModules.module.css | .empty at :259 still unused by any HomeModules component (UpcomingSessions has its own); delete.
@@ -142,12 +142,12 @@ H-69 | [#381](https://github.com/defaultdave/ramble/issues/381) | P10 | S | `src
 N1029-5 | [#418](https://github.com/defaultdave/ramble/issues/418) | P10 | XS | src/server/db/seed/run.ts | seats_sold read outside tx, update by id only; add lt(seatsSold, planned) guard, count from returning().
 N1031-13 | [#467](https://github.com/defaultdave/ramble/issues/467) | P11 | XS | src/server/formGuard.ts, src/server/ports/payments/fake.ts | formGuard.ts:31 and fake.ts:579 still call timingSafeEqual directly; use secureEqual.
 N1031-14 | [#468](https://github.com/defaultdave/ramble/issues/468) | P11 | XS | src/server/hash.ts (new), src/server/device.ts, src/server/tokens.ts | Four createHash sha256 hex copies remain (device, tokens, rate-limit, fake.ts); add sha256Hex.
-SC-17 | unfiled | P12 | XS | src/components/CheckoutPage/CheckoutPage.module.css | .payment:focus and .state:focus set outline none on tabindex -1 containers; use :focus-visible ring like .title.
-SC-18 | unfiled | P12 | XS | src/components/BookingSheet/BookingSheetIsland.tsx, src/components/BookingChoices/focusBookingNotice.ts | Passes '[role="dialog"]'; scope to the sheet with a data attribute.
-SC-24 | unfiled | P12 | XS | src/components/BookingSheet/BookingSheet.stories.tsx | Story wraps bare DatePicker; the 320px calendar padding borrow lives in BookingChoices.module.css, not the story.
-SC-9 | unfiled | P13 | S | src/server/db/client.ts, src/app/api/pulse/route.ts | No idle_in_transaction_session_timeout, transaction_timeout or maxDuration anywhere in src. Set on the pool and the route.
-SC-10 | unfiled | P13 | S | src/server/pulse.ts, src/server/jobs/auditSchedule.ts | queueAuditExports only logger.error; add alerts.raise now. Skip and old-day alerts only make sense once store exists (SC-13).
-SC-11 | unfiled | P13 | XS | src/lib/jobs.ts, src/server/ports/storage/index.ts | isPermanentFailure checks 'permanent' in error; replace with a symbol marker StorageError sets.
+SC-17 | [#701](https://github.com/defaultdave/ramble/issues/701) | P12 | XS | src/components/CheckoutPage/CheckoutPage.module.css | .payment:focus and .state:focus set outline none on tabindex -1 containers; use :focus-visible ring like .title.
+SC-18 | [#702](https://github.com/defaultdave/ramble/issues/702) | P12 | XS | src/components/BookingSheet/BookingSheetIsland.tsx, src/components/BookingChoices/focusBookingNotice.ts | Passes '[role="dialog"]'; scope to the sheet with a data attribute.
+SC-24 | [#708](https://github.com/defaultdave/ramble/issues/708) | P12 | XS | src/components/BookingSheet/BookingSheet.stories.tsx | Story wraps bare DatePicker; the 320px calendar padding borrow lives in BookingChoices.module.css, not the story.
+SC-9 | [#693](https://github.com/defaultdave/ramble/issues/693) | P13 | S | src/server/db/client.ts, src/app/api/pulse/route.ts | No idle_in_transaction_session_timeout, transaction_timeout or maxDuration anywhere in src. Set on the pool and the route.
+SC-10 | [#694](https://github.com/defaultdave/ramble/issues/694) | P13 | S | src/server/pulse.ts, src/server/jobs/auditSchedule.ts | queueAuditExports only logger.error; add alerts.raise now. Skip and old-day alerts only make sense once store exists (SC-13).
+SC-11 | [#695](https://github.com/defaultdave/ramble/issues/695) | P13 | XS | src/lib/jobs.ts, src/server/ports/storage/index.ts | isPermanentFailure checks 'permanent' in error; replace with a symbol marker StorageError sets.
 BC-2 | [#308](https://github.com/defaultdave/ramble/issues/308) | P14 | S | src/server/db/migrations (new), tests/db/guests.db.test.ts | No guard trigger on consents; add BEFORE UPDATE/DELETE/TRUNCATE guard like 0016/0021, plus db test
 H-59 | [#375](https://github.com/defaultdave/ramble/issues/375) | P15 | XS | `src/components/HomeModules/GiftGuideSection.tsx`, `src/components/HomeModules/HomeModules.module.css` | Gift action still hand-built `Link` with `.action`; swap to `ButtonLink variant=secondary`.
 H-60 | [#376](https://github.com/defaultdave/ramble/issues/376) | P15 | S | `src/components/Badge/Badge.tsx`, `src/components/Card/Card.tsx`, `src/components/HomeModules/Eyebrow.tsx` | Card.module.css:172 and HomeModules.module.css:39 still say Badge has no highlight tone.
@@ -158,9 +158,9 @@ H-104 | [#401](https://github.com/defaultdave/ramble/issues/401) | P15 | XS | `s
 H-105 | [#402](https://github.com/defaultdave/ramble/issues/402) | P15 | XS | `src/lib/idLookup.test.ts` | No `expect(cardLookupLimit).toBe(240)`; only derived-value checks.
 H-79 | [#384](https://github.com/defaultdave/ramble/issues/384) | P16 | XS | `src/lib/pages/siteNav.ts`, `src/components/HomeStates/HomeSkeleton.tsx`, `src/app/(guest)/HomeContent.tsx` | Literal "Ramble" h1 in Skeleton, Empty, Title, HomeContent, SiteShell; no brand constant.
 H-99 | [#396](https://github.com/defaultdave/ramble/issues/396) | P16 | S | `src/components/HomeStates/HomeStates.module.css`, `src/components/HomeStates/HomeEmpty.tsx` | `.page/.pageInner/.title` still repeat PageHeading's shell.
-SC-3 | unfiled | P16 | S | src/app/(guest)/new-york/_landing/LandingRoute.tsx, src/app/(guest)/new-york/browse/BrowseContent.tsx, src/app/(guest)/HomeContent.tsx | Three try/rethrowOrLog/error-view blocks; error views differ, so helper value is low. Could close as won't-fix.
-SC-5 | unfiled | P16 | XS | src/lib/pages/landing.ts, src/app/(guest)/new-york/_landing/LandingRoute.tsx | PageError still passes landingFallbackTitle; derive a name from kind and slug.
-SC-16 | unfiled | P16 | S | src/app/(guest)/HomeContent.tsx, src/app/(guest)/new-york/browse/BrowseContent.tsx, src/app/(guest)/new-york/_landing/LandingRoute.tsx | systemClock exists in server/ports/clock. Also still TODO in UpcomingSessionsContent, BookingContent, webhooks/email route.
+SC-3 | [#687](https://github.com/defaultdave/ramble/issues/687) | P16 | S | src/app/(guest)/new-york/_landing/LandingRoute.tsx, src/app/(guest)/new-york/browse/BrowseContent.tsx, src/app/(guest)/HomeContent.tsx | Three try/rethrowOrLog/error-view blocks; error views differ, so helper value is low. Could close as won't-fix.
+SC-5 | [#689](https://github.com/defaultdave/ramble/issues/689) | P16 | XS | src/lib/pages/landing.ts, src/app/(guest)/new-york/_landing/LandingRoute.tsx | PageError still passes landingFallbackTitle; derive a name from kind and slug.
+SC-16 | [#700](https://github.com/defaultdave/ramble/issues/700) | P16 | S | src/app/(guest)/HomeContent.tsx, src/app/(guest)/new-york/browse/BrowseContent.tsx, src/app/(guest)/new-york/_landing/LandingRoute.tsx | systemClock exists in server/ports/clock. Also still TODO in UpcomingSessionsContent, BookingContent, webhooks/email route.
 H-89 | [#387](https://github.com/defaultdave/ramble/issues/387) | P17 | XS | `src/lib/errorDigest.ts`, `src/server/monitoring/rethrowOrLog.ts`, `src/server/cache/readOrRefuse.ts` | No `errorKind` exists; same ternary also in checkout.ts:72 and pulse/drain/heartbeat variants.
 H-90 | [#388](https://github.com/defaultdave/ramble/issues/388) | P17 | XS | `src/server/cache/remote.ts` | `console.error` still interpolates `error.message`; log `errorKind` through logger.
 N1031-4 | [#458](https://github.com/defaultdave/ramble/issues/458) | P17 | XS | src/server/cache/remote.ts | readRemoteOrFallback still logs error.message; log error.name only.
@@ -175,8 +175,8 @@ H-87 | [#385](https://github.com/defaultdave/ramble/issues/385) | P20 | S | `src
 H-74 | [#568](https://github.com/defaultdave/ramble/issues/568) | P21 | S | `src/styles/base.css`, `src/components/GuestShell/GuestShell.module.css` | `body > main` still element rule in base.css; other layouts import base.css, check them first.
 H-75 | [#569](https://github.com/defaultdave/ramble/issues/569) | P21 | S | `.storybook/preview.tsx` | Preview imports tokens and forced-colors only, not base.css; may shift story visuals.
 N1101-4 | [#484](https://github.com/defaultdave/ramble/issues/484) | P21 | XS | src/app/fonts.ts, src/styles/base.css, e2e/font-swap.spec.ts | 'Fraunces Fallback' still typed in three places; add shared constant and base.css platform note.
-SC-15 | unfiled | P21 | XS | src/components/CheckoutPage/CheckoutFrame.module.css, src/components/GuestShell/GuestShell.module.css | .skip rules identical line for line; extract a SkipLink component.
-SC-22 | unfiled | P21 | S | src/app/(checkout)/error.tsx, src/components/SiteShell.tsx | By design: error file is a client module, cannot use GuestShell. Needs a styled client-safe frame with footer.
+SC-15 | [#699](https://github.com/defaultdave/ramble/issues/699) | P21 | XS | src/components/CheckoutPage/CheckoutFrame.module.css, src/components/GuestShell/GuestShell.module.css | .skip rules identical line for line; extract a SkipLink component.
+SC-22 | [#706](https://github.com/defaultdave/ramble/issues/706) | P21 | S | src/app/(checkout)/error.tsx, src/components/SiteShell.tsx | By design: error file is a client module, cannot use GuestShell. Needs a styled client-safe frame with footer.
 N1030-17 | [#443](https://github.com/defaultdave/ramble/issues/443) | P22 | S | src/lib/pages/siteNav.ts, src/components/GuestShell/GuestShell.tsx, src/components/CheckoutPage/CheckoutFrame.tsx | siteNav still in lib/pages, also used by CheckoutFrame; '© 2026' hard-coded. Year needs a clock arg (B12).
 N1030-18 | [#444](https://github.com/defaultdave/ramble/issues/444) | P22 | S | src/lib/time.ts, src/lib/pages/browse.ts, src/components/FilterBar/FilterBar.tsx | FilterBar still imports dateChipLabel and db/browse.ts splitPage from lib/pages/browse; move to shared modules.
 BC-21 | [#326](https://github.com/defaultdave/ramble/issues/326) | P23 | S | src/server/db/checkout.ts, src/lib/checkout.ts | startPayment never reads checkoutMaintenance; only CheckoutPage hides the form; add a refusal
@@ -229,7 +229,7 @@ N1031-19 | [#473](https://github.com/defaultdave/ramble/issues/473) | S | Partia
 N1101-1 | [#481](https://github.com/defaultdave/ramble/issues/481) | XS | WhenDetails now covered via the PR 303 hook sentence; FilterDrawerHost and LazyDatePicker are 'use client' but not named.
 N1101-5 | [#485](https://github.com/defaultdave/ramble/issues/485) | M | close() still uses nested requestAnimationFrame, no unmount guard, no real-dialog browser test.
 N1101-6 | [#486](https://github.com/defaultdave/ramble/issues/486) | XS | DrawerButton still uses openers?.open silently; drawerLoadFailedMessage() still a function.
-SC-23 | unfiled | M | router.push under cacheComponents keeps old page hidden, duplicate #main; likely app-wide, so unverified fix.
+SC-23 | [#707](https://github.com/defaultdave/ramble/issues/707) | M | router.push under cacheComponents keeps old page hidden, duplicate #main; likely app-wide, so unverified fix.
 
 ### test-audit (8)
 
@@ -242,7 +242,7 @@ N1030-15 | [#441](https://github.com/defaultdave/ramble/issues/441) | M | id() s
 N1030-16 | [#442](https://github.com/defaultdave/ramble/issues/442) | XS | Both still import pages/experience.fixtures; experienceCards.test.ts import already fixed. Move helpers with N1030-15.
 N1030-24 | [#450](https://github.com/defaultdave/ramble/issues/450) | XS | No guestCovers test exists; only HomeContent reaches it. Add if the test audit keeps it.
 N1031-18 | [#472](https://github.com/defaultdave/ramble/issues/472) | S | waitUntilBlocked still duplicated; uuid copy in fakeState.test.ts; browser mount boilerplate and class-substring selectors remain.
-SC-19 | unfiled | S | importsOf regex has no ^ or m flag; two other tests have their own file walkers beside listFiles.
+SC-19 | [#703](https://github.com/defaultdave/ramble/issues/703) | S | importsOf regex has no ^ or m flag; two other tests have their own file walkers beside listFiles.
 
 ### dictionary (2)
 
@@ -263,7 +263,7 @@ The audits README already says a `later` item is carried by the unit it names an
 
 ID | Ticket | Unit | Note
 --- | --- | --- | ---
-H-7 | unfiled | U-012 follow-up (write path) | `sessionLocalDate` coalesce still in SQL beside lib rule; carried by U-012 write path (store local_date).
+H-7 | [#548](https://github.com/defaultdave/ramble/issues/548) | U-012 follow-up (write path) | `sessionLocalDate` coalesce still in SQL beside lib rule; carried by U-012 write path (store local_date).
 BE-2 | [#352](https://github.com/defaultdave/ramble/issues/352) | U-021b | No servable-URL check in addPhoto or GuestPhotoSchema; storage.ts still allows fake in prod, TODO(U-021b) stands.
 BE-4 | [#354](https://github.com/defaultdave/ramble/issues/354) | U-074b | addPhoto calls no updateTagsForChanges; no photo CacheChange kind exists. Latent, no caller until U-074b.
 PF-7 | [#487](https://github.com/defaultdave/ramble/issues/487) | PF-7 island PR (approved 2026-11-01) | Partial fix landed (data-reveal-without-script, base.css). First load still cut to 5 cards; island not yet on allowlist. Home unfixed.
@@ -279,10 +279,10 @@ BC-52 | [#346](https://github.com/defaultdave/ramble/issues/346) | U-055 | Still
 BC-53 | [#531](https://github.com/defaultdave/ramble/issues/531) | U-074a | Hosts upsert still sets notificationEmail from excluded; fill only when null once real hosts exist
 N1029-4 | [#417](https://github.com/defaultdave/ramble/issues/417) | first ops editing unit | Seed still upserts experiences/prices; no ops edit path yet. Carried by first ops edit unit (unnamed).
 N1031-11 | [#465](https://github.com/defaultdave/ramble/issues/465) | no unit: reopen when a second <select> consumer appears | SelectField still sole <select> in src; no Select component. Wait for second consumer.
-SC-4 | unfiled | U-092 | Behaviour is Next's, not our code. Crawler-view test sits in U-092 scope; U-091 is slug history.
-SC-12 | unfiled | audit-store adapter unit (new, with SC-13) | StoragePort has no read or head, so putOnce cannot compare. Needs a port method; do with the R2 adapter.
-SC-20 | unfiled | U-103 | Nothing warms pages. U-103 scope already says "warm published pages after promotion"; U-104 only reviews.
-SC-21 | unfiled | U-098 | R2 entry reads hourly dump as live; only the audit export is marked not switched on. Reword when U-098 lands.
+SC-4 | [#688](https://github.com/defaultdave/ramble/issues/688) | U-092 | Behaviour is Next's, not our code. Crawler-view test sits in U-092 scope; U-091 is slug history.
+SC-12 | [#696](https://github.com/defaultdave/ramble/issues/696) | audit-store adapter unit (new, with SC-13) | StoragePort has no read or head, so putOnce cannot compare. Needs a port method; do with the R2 adapter.
+SC-20 | [#704](https://github.com/defaultdave/ramble/issues/704) | U-103 | Nothing warms pages. U-103 scope already says "warm published pages after promotion"; U-104 only reviews.
+SC-21 | [#705](https://github.com/defaultdave/ramble/issues/705) | U-098 | R2 entry reads hourly dump as live; only the audit export is marked not switched on. Reword when U-098 lands.
 
 ## E: owner decisions (30)
 
@@ -290,8 +290,8 @@ Answer sheet with a recommendation per row: `drafts/owner-decisions-2026-11-02.m
 
 ## Also found
 
-- 113 open duplicate tickets (#488 to #607) are off the board from the double filing; `drafts/repair-audit-tickets.ts` closes them once the App has Issues write, or the ticket-writer closes them under your login.
-- Board tickets carry labels after all (`audit`, `lens: ...` on all 178); the earlier report of dropped labels applies to the duplicates, not the kept tickets.
+- The 113 duplicate tickets from the double filing (#488 to #607) were closed by the ticket session while this triage ran, and SC-1 to SC-27 filed; open audit issues now equal the 206 live rows.
+- The 178 kept tickets carry their labels (`audit`, `lens: ...`); the dropped labels were on the duplicates.
 - Several rows have grown since they were raised: H-62 has 13 `visuallyHidden` copies (was 7), `pulse` is in four modules, H-89's ternary is in checkout and pulse too, and H-26 shrank to one line now that `categoryPath` exists.
 - Order of two fixes matters: N1031-7 (store only an event count) conflicts with N1031-1 (redelivery keeps the last event); N1031-1 ships first (P04), N1031-7 waits in the tighten track.
 - Verifier doubts to settle in a browser before closing: SC-6 (the 20 px may be the Button inset by design), H-87 (320 px price wrap), N1031-26 (hero row widths), SC-23 (duplicate `main` after re-hold).

@@ -1,6 +1,6 @@
 {
   "asOf": "2026-11-01",
-  "headline": "Nov 1, late evening: Sprint 1 is closing. Cache fixes, category and neighborhood pages (U-035) and the checkout audit fixes are on main; so is the no-script browse fix (PF-7), as a partial fix. The audit log (U-020) is in integration and reaches main at the next promotion. Audit findings are now 187 tickets in a Maintenance sprint, 179 open. Production still runs 44dd004: none of tonight's work is deployed.",
+  "headline": "Nov 1, night: Sprint 1 is closed. The promotion landed (PR 684): the audit log (U-020) and the sync are on main. The Maintenance sprint was triaged against main: of 206 open findings, 18 close with no code, 92 are clear fixes planned as 24 grouped PRs in 4 waves, 46 belong to Sprint 2 tracks, 20 are carried by units, and 30 wait on your answer sheet. Duplicate tickets are closed and the Sprint 1 close items are filed. Production still serves 44dd004.",
   "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
   "phases": [
     {
@@ -101,19 +101,14 @@
   "decisionsNeeded": [],
   "actionsForDave": [
     {
+      "title": "Answer the Maintenance owner sheet (30 rows)",
+      "detail": "drafts/owner-decisions-2026-11-02.md: one recommendation per row, 'all as recommended' works. Ten rows are yours to do, not decide: Neon console, seed rerun, push unit/U-001-neon-skip, one standards-file edit, deploy branch or policy, the second Neon role and the R2 bucket.",
+      "where": "ramble-pm, drafts/"
+    },
+    {
       "title": "Give the ramble-agents App Issues read and write",
       "detail": "Set the permission and accept it on the installation. Ticket labels dropped silently without it and a first run double-filed 181. The PM then labels the 187 tickets, closes the duplicates and files SC-1 to SC-26.",
       "where": "Next"
-    },
-    {
-      "title": "Bypass-merge PR 681",
-      "detail": "gh pr merge 681 --repo defaultdave/ramble --merge --admin. The B14 line and PM memory, protected paths, no product code.",
-      "where": "Any time"
-    },
-    {
-      "title": "Promote integration to main",
-      "detail": "Two commits: the sync and U-020. The promotion PR's body carries Closes #26.",
-      "where": "Any time"
     },
     {
       "title": "Decide the PF-7 client island",
@@ -151,11 +146,6 @@
       "where": "Any time"
     },
     {
-      "title": "Check the integration branch survives the next promotion",
-      "detail": "delete_branch_on_merge is on; the ruleset bypass is now pull_request. If it vanishes again, change the repo setting or the promotion step.",
-      "where": "At the next promotion"
-    },
-    {
       "title": "Neon console",
       "detail": "Delete the stray database from the first migrate run if it is stale (H-11).",
       "where": "Any time"
@@ -189,6 +179,10 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Nov 1",
+      "what": "Maintenance is worked by triage bucket: close what later PRs already fixed, ship the clear fixes as 24 grouped PRs in 4 waves, leave track rows to Sprint 2's carrier PRs, close unit-carried rows as later (PM, you can overrule)"
+    },
     {
       "when": "Nov 1",
       "what": "PF-7 ships as a partial fix with its ticket open; U-035 renders on first request; U-020 narrowed to the log, the export job and an honest refusal, with the locked store on your account (PM, you can overrule)"
@@ -463,17 +457,21 @@
         "PR 678 U-035 category and neighborhood pages merged",
         "PR 679 checkout and booking audit fixes merged (BC-29, BC-35, BC-39, BC-58)",
         "PR 680 PF-7 no-script browse merged as a partial fix, ticket left open",
-        "PR 683 U-020 audit log merged into integration after six review rounds"
+        "PR 683 U-020 audit log merged into integration after six review rounds",
+        "PR 681 merged; integration promoted to main (PR 684): U-020 audit log and the sync are on main, integration survived",
+        "Maintenance triage: all 206 open findings checked against main by six verifiers in about five minutes; 18 can close with no code, 92 are clear fixes grouped into 24 PRs in 4 waves, 46 go to Sprint 2 tracks, 20 to units, 30 to your answer sheet",
+        "Sprint 1 close items filed (#685 to #711) and the 113 duplicate tickets closed"
       ],
       "today": [
-        "Label the tickets and close the duplicates once the App has Issues write",
-        "Open the production-ready lane",
-        "Promote integration to main when you are ready"
+        "You answer the 30-row owner sheet",
+        "Ticket session applies the triage: 38 closures and the track and PR labels",
+        "Maintenance wave 1: seven grouped PRs, five builders at a time",
+        "Open the production-ready lane after the forecast refit"
       ],
       "heldUs": [
         {
-          "what": "App Issues permission",
-          "cost": "Ticket labels, 26 new tickets and the duplicate cleanup wait"
+          "what": "Two sessions on the same tickets",
+          "cost": "The lead paused to agree who writes tickets; ticket writes stayed with the filing session, the lead stayed read-only"
         },
         {
           "what": "PF-7 client island decision",

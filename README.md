@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 1, 2026.** Nov 1, late evening: Sprint 1 is closing. Cache fixes, category and neighborhood pages (U-035) and the checkout audit fixes are on main; so is the no-script browse fix (PF-7), as a partial fix. The audit log (U-020) is in integration and reaches main at the next promotion. Audit findings are now 187 tickets in a Maintenance sprint, 179 open. Production still runs 44dd004: none of tonight's work is deployed.
+**As of Nov 1, 2026.** Nov 1, night: Sprint 1 is closed. The promotion landed (PR 684): the audit log (U-020) and the sync are on main. The Maintenance sprint was triaged against main: of 206 open findings, 18 close with no code, 92 are clear fixes planned as 24 grouped PRs in 4 waves, 46 belong to Sprint 2 tracks, 20 are carried by units, and 30 wait on your answer sheet. Duplicate tickets are closed and the Sprint 1 close items are filed. Production still serves 44dd004.
 
 | Milestone | Likely |
 |---|---|
@@ -18,9 +18,8 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
+- Answer the Maintenance owner sheet (30 rows). drafts/owner-decisions-2026-11-02.md: one recommendation per row, 'all as recommended' works. Ten rows are yours to do, not decide: Neon console, seed rerun, push unit/U-001-neon-skip, one standards-file edit, deploy branch or policy, the second Neon role and the R2 bucket.
 - Give the ramble-agents App Issues read and write. Set the permission and accept it on the installation. Ticket labels dropped silently without it and a first run double-filed 181. The PM then labels the 187 tickets, closes the duplicates and files SC-1 to SC-26.
-- Bypass-merge PR 681. gh pr merge 681 --repo defaultdave/ramble --merge --admin. The B14 line and PM memory, protected paths, no product code.
-- Promote integration to main. Two commits: the sync and U-020. The promotion PR's body carries Closes #26.
 - Decide the PF-7 client island. With JavaScript off, the first load of a large browse result shows only 5 cards. One client component fed plain data fixes it, and needs your approval under B8. Recommended.
 - Confirm MFA for U-102. U-102 stays In Progress until you confirm MFA is on.
 - Stop stray local servers. kill 7104 8217 9069 6395 and kill 7626. The last one holds port 3100.
@@ -28,7 +27,6 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 - Sandbox: allow api.github.com and local port binding. GitHub reads fail inside the sandbox (board dates, nightly merge list) and reviewers cannot run Postgres, Chromium or ports, so QA falls back to static checks.
 - Turn off unused connectors in Ramble chats. Token review fix 3: every chat starts at 99K tokens. Finance, Gmail, Drive, Docs, iOS simulator, computer use; Vercel only in deploy chats.
 - Try a card decline then success on production. Use the Demo test cards on the payment step; the PM does not type card numbers there.
-- Check the integration branch survives the next promotion. delete_branch_on_merge is on; the ruleset bypass is now pull_request. If it vanishes again, change the repo setting or the promotion step.
 - Neon console. Delete the stray database from the first migrate run if it is stale (H-11).
 - Vercel and Sentry. Beacon firewall rule (PR 193), BotID, Sentry DSNs and projects, alert rules in docs/runbooks/alerting.md.
 - GitHub. Enable private vulnerability reporting; the BE-1 Vercel firewall rule from PR 263 is skipped by decision.

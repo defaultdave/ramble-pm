@@ -115,7 +115,7 @@
  "close_later_carried_by_unit": [
   {
    "id": "H-7",
-   "ticket": null,
+   "ticket": 548,
    "unit": "U-012 follow-up (write path)",
    "comment_for_unit_issue": "`sessionLocalDate` coalesce still in SQL beside lib rule; carried by U-012 write path (store local_date)."
   },
@@ -211,25 +211,25 @@
   },
   {
    "id": "SC-4",
-   "ticket": null,
+   "ticket": 688,
    "unit": "U-092",
    "comment_for_unit_issue": "Behaviour is Next's, not our code. Crawler-view test sits in U-092 scope; U-091 is slug history."
   },
   {
    "id": "SC-12",
-   "ticket": null,
+   "ticket": 696,
    "unit": "audit-store adapter unit (new, with SC-13)",
    "comment_for_unit_issue": "StoragePort has no read or head, so putOnce cannot compare. Needs a port method; do with the R2 adapter."
   },
   {
    "id": "SC-20",
-   "ticket": null,
+   "ticket": 704,
    "unit": "U-103",
    "comment_for_unit_issue": "Nothing warms pages. U-103 scope already says \"warm published pages after promotion\"; U-104 only reviews."
   },
   {
    "id": "SC-21",
-   "ticket": null,
+   "ticket": 705,
    "unit": "U-098",
    "comment_for_unit_issue": "R2 entry reads hourly dump as live; only the audit export is marked not switched on. Reword when U-098 lands."
   }
@@ -457,12 +457,12 @@
   },
   {
    "id": "SC-19",
-   "ticket": null,
+   "ticket": 703,
    "label": "track: test-audit"
   },
   {
    "id": "SC-23",
-   "ticket": null,
+   "ticket": 707,
    "label": "track: client-islands-review"
   }
  ],
@@ -619,19 +619,19 @@
   },
   {
    "id": "SC-6",
-   "ticket": null,
+   "ticket": 690,
    "label": "maint-pr: P06",
    "wave": 1
   },
   {
    "id": "SC-14",
-   "ticket": null,
+   "ticket": 698,
    "label": "maint-pr: P06",
    "wave": 1
   },
   {
    "id": "SC-2",
-   "ticket": null,
+   "ticket": 686,
    "label": "maint-pr: P06",
    "wave": 1
   },
@@ -649,19 +649,19 @@
   },
   {
    "id": "SC-26",
-   "ticket": null,
+   "ticket": 710,
    "label": "maint-pr: P07",
    "wave": 1
   },
   {
    "id": "SC-27",
-   "ticket": null,
+   "ticket": 711,
    "label": "maint-pr: P07",
    "wave": 1
   },
   {
    "id": "SC-1",
-   "ticket": null,
+   "ticket": 685,
    "label": "maint-pr: P07",
    "wave": 1
   },
@@ -787,37 +787,37 @@
   },
   {
    "id": "SC-17",
-   "ticket": null,
+   "ticket": 701,
    "label": "maint-pr: P12",
    "wave": 2
   },
   {
    "id": "SC-18",
-   "ticket": null,
+   "ticket": 702,
    "label": "maint-pr: P12",
    "wave": 2
   },
   {
    "id": "SC-24",
-   "ticket": null,
+   "ticket": 708,
    "label": "maint-pr: P12",
    "wave": 2
   },
   {
    "id": "SC-9",
-   "ticket": null,
+   "ticket": 693,
    "label": "maint-pr: P13",
    "wave": 2
   },
   {
    "id": "SC-10",
-   "ticket": null,
+   "ticket": 694,
    "label": "maint-pr: P13",
    "wave": 2
   },
   {
    "id": "SC-11",
-   "ticket": null,
+   "ticket": 695,
    "label": "maint-pr: P13",
    "wave": 2
   },
@@ -883,19 +883,19 @@
   },
   {
    "id": "SC-3",
-   "ticket": null,
+   "ticket": 687,
    "label": "maint-pr: P16",
    "wave": 3
   },
   {
    "id": "SC-5",
-   "ticket": null,
+   "ticket": 689,
    "label": "maint-pr: P16",
    "wave": 3
   },
   {
    "id": "SC-16",
-   "ticket": null,
+   "ticket": 700,
    "label": "maint-pr: P16",
    "wave": 3
   },
@@ -985,13 +985,13 @@
   },
   {
    "id": "SC-15",
-   "ticket": null,
+   "ticket": 699,
    "label": "maint-pr: P21",
    "wave": 4
   },
   {
    "id": "SC-22",
-   "ticket": null,
+   "ticket": 706,
    "label": "maint-pr: P21",
    "wave": 4
   },
@@ -1052,35 +1052,6 @@
   "SC-13",
   "SC-25"
  ],
- "file_first": [
-  "H-7",
-  "SC-1",
-  "SC-2",
-  "SC-3",
-  "SC-4",
-  "SC-5",
-  "SC-6",
-  "SC-7",
-  "SC-8",
-  "SC-9",
-  "SC-10",
-  "SC-11",
-  "SC-12",
-  "SC-13",
-  "SC-14",
-  "SC-15",
-  "SC-16",
-  "SC-17",
-  "SC-18",
-  "SC-19",
-  "SC-20",
-  "SC-21",
-  "SC-22",
-  "SC-23",
-  "SC-24",
-  "SC-25",
-  "SC-26",
-  "SC-27"
- ],
- "duplicates_off_board": "113 open issues #488-#607 not on board 19; close as not planned (drafts/repair-audit-tickets.ts)"
+ "file_first": [],
+ "duplicates_off_board": "done by the ticket session 2026-11-01 night: duplicates closed, SC-1 to SC-27 filed (#685 to #711)"
 }
