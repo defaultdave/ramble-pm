@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 1, 2026.** Nov 1, late evening: Sprint 1 is closing. Cache fixes, category and neighborhood pages (U-035) and the checkout audit fixes are on main; so is the no-script browse fix (PF-7), as a partial fix. The audit log (U-020) has passed its checks and goes into integration after a sync. Audit findings are now 187 tickets in a Maintenance sprint, 179 open. Production still runs 44dd004: none of tonight's work is deployed.
+**As of Nov 1, 2026.** Nov 1, late evening: Sprint 1 is closing. Cache fixes, category and neighborhood pages (U-035) and the checkout audit fixes are on main; so is the no-script browse fix (PF-7), as a partial fix. The audit log (U-020) is in integration and reaches main at the next promotion. Audit findings are now 187 tickets in a Maintenance sprint, 179 open. Production still runs 44dd004: none of tonight's work is deployed.
 
 | Milestone | Likely |
 |---|---|
@@ -20,6 +20,7 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 - Give the ramble-agents App Issues read and write. Set the permission and accept it on the installation. Ticket labels dropped silently without it and a first run double-filed 181. The PM then labels the 187 tickets, closes the duplicates and files SC-1 to SC-26.
 - Bypass-merge PR 681. gh pr merge 681 --repo defaultdave/ramble --merge --admin. The B14 line and PM memory, protected paths, no product code.
+- Promote integration to main. Two commits: the sync and U-020. The promotion PR's body carries Closes #26.
 - Decide the PF-7 client island. With JavaScript off, the first load of a large browse result shows only 5 cards. One client component fed plain data fixes it, and needs your approval under B8. Recommended.
 - Confirm MFA for U-102. U-102 stays In Progress until you confirm MFA is on.
 - Stop stray local servers. kill 7104 8217 9069 6395 and kill 7626. The last one holds port 3100.

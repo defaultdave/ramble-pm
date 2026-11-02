@@ -37,3 +37,5 @@ Roadmap (2026-10-29 16:10): the page now opens with a Daily standup (Dave's ask)
 ```
 
 - **2026-11-01 late evening, Sprint 1 close.** PR 677 (cache, H-109 to H-111), PR 678 (U-035), PR 679 (checkout, BC-29, BC-35, BC-39, BC-58) merged. BC-54 closed as stale. PF-7 at `88916da` passed review round 4 and went out as PR 680 with `Refs #487`. PRs 679 and 680 were pushed without merging the latest `main` into the branch: their files did not overlap with what `main` had gained, and CI ran on the PR merge ref. SC-22 to SC-26 raised.
+
+- **2026-11-01 22:35, Sprint 1 close done on the agent side.** PR 680 merged at `f726504`, sync PR 682 merged, PR 683 (U-020) merged into `integration` at `20ff357`, `Refs #26`. CI's `db` job caught a round 2 clean-up that dropped `export` from the audit enum; fixed at `d9743ef`, re-checked as review r6, full db suite 1671 passing. PR 683's body says five review rounds; there were six.
