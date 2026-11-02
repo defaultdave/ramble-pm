@@ -94,3 +94,5 @@ Sprint 2 moves from features to production-ready work (`drafts/sprint-2-producti
 - 2026-11-01 (lead): new client island `StickyAside` on the experience page, approved by the owner on the local run: the booking panel follows the page scroll and sticks at both ends when taller than the window. It replaces a pinned-footer build the owner rejected for scrolling inside the panel.
 
 - 2026-11-01 (lead): the audit process changes from status in pass files to tickets (DECISIONS). The GitHub App gains Issues: Read and write, a departure from the permission list in the frozen `merge-desk-runbook.md`, and the "never create or close issues" hard line gains an exception for audit tickets. The Sprint field gains a `Maintenance` value outside the forecast's calendar.
+
+- 2026-11-01 (lead): U-035 scope reads "Prerendered"; the pages render on first request and stay cached (DECISIONS), a departure from ADR 0001 that the frozen plan keeps as written. U-020's locked export store moves to a follow-up on Dave's account (DECISIONS).
