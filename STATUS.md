@@ -9,6 +9,8 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
 | `lead` | Shared status, `## Next`, roadmap, memory; worktree cleanup; audit findings become tickets in a Maintenance sprint | PM lead, 2026-11-01 (evening: audit tickets) | active | 2026-11-01 19:20 |
+| `u-035` | Sprint 1 close: U-035 category and neighborhood pages, standard tier | PM u-035, 2026-11-01 | handed off | 2026-11-01 19:30 |
+| `u-020` | Sprint 1 close: U-020 audit log, critical tier, into `integration` | PM u-020, 2026-11-01 | handed off | 2026-11-01 19:30 |
 | `critical-path` | U-005 then U-014a into `integration` (released 2026-10-29 12:10), PR 222 through the next promotion; then U-014b, U-048 (critical, holds and webhook side of the money path) | critical-path lane, 2026-10-29 (afternoon) | handed off | 2026-10-29 13:05 |
 | `audit-fixes` | Every open audit item that is a clear fix and not part of the `src/lib` refactor: home `open` rows, BE-13, BE-8, BE-7 (with a `src/lib`-owned predicate; PR D of the refactor consolidates it), BE-14, BE-1, nightly N1029-1 to 7, 10, 11; fix-rounds PRs with before-and-after evidence | PM audit-fixes, 2026-11-01 (late morning) | handed off | 2026-11-01 13:50 |
 | `e2e-money` | The end-to-end prototype on the fake payment adapter: stub glue (merged), U-019 and U-045b (merged), U-015, U-016, U-054, U-047a, U-047b, U-049, U-050, U-040, U-041, and since 2026-10-29 16:30 the critical-path money units U-014a, U-014b, U-048 (Dave) | e2e-money lane, 2026-10-30 (evening: BC-37, BC-38 glue, click-through, BC-1, BC-48) | handed off | 2026-10-30 21:00 |
@@ -178,6 +180,14 @@ P5 under way. Done in `main`: U-118, U-001, U-002, U-023, U-003, U-116, U-024, U
 Lessons from waves 1 and 2: builders commit and stop; the PM pushes and opens PRs (`agent-git.ts pr` from the unit's worktree); never rebase a pushed branch; review-round notes live in the check summaries. Only a blocking finding from a required check starts a new round, for every unit alike. Launch reviewers from the main checkout, not a unit's worktree, or `token-audit` mixes reviewer cost into the builder's. The wave 1 and wave 2 lessons are in the public PM memory in the main checkout, uncommitted; they go out in the next `PM bookkeeping:` PR.
 
 ## Next chat
+### u-035
+
+**Run:** `/ramble-pm lane: u-035` on the main checkout. **Model and effort:** Sonnet, medium. **Prompt:** build U-035 (`docs/plan/units.yaml`) from `origin/main`: pattern from browse, builder in an isolated worktree, the usual four checks and QA with evidence, auto-merge to `main`. Files overlapping `audit-fixes`: browse pages; PF-7 belongs to `audit-fixes`.
+
+### u-020
+
+**Run:** `/ramble-pm lane: u-020` on the main checkout. **Model and effort:** Sonnet, medium; a pattern note first, since this is critical tier. **Prompt:** build U-020 (`docs/plan/units.yaml`) into `integration`: insert-only audit table, restricted role, a trigger blocking changes, nightly export to locked storage. Any storage account or secret the export needs goes to Dave as a batched ask; a fake provider behind the port is fine until then.
+
 
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
 
