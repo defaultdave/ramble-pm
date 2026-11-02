@@ -8,7 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `pf7-island` | Sprint 1 close follow-ups: PF-7 client island, PRs 489 and 520, U-102 | continuation of the earlier lead chat, 2026-11-01 (night) | active | 2026-11-01 23:20 |
+| `pf7-island` | Sprint 1 close follow-ups: PF-7 client island, PRs 489 and 520, U-102 | continuation of the earlier lead chat, 2026-11-01 (night) | active | 2026-11-02 00:05 |
 | `maint-wave-1` | Maintenance wave 1: PRs P01 to P07 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-1, 2026-11-01 (night) | active | 2026-11-01 23:50 |
 | `lead` | Shared status, `## Next`, roadmap, memory; Maintenance ticket audit and prioritisation | PM maint-wave-1, 2026-11-01 (night; took lead, no other lead running) | active | 2026-11-01 23:50 |
 | `u-035` | Sprint 1 close: U-035 category and neighborhood pages, standard tier | run by the lead chat, 2026-11-01 | closed: PR 678 merged at `39e18b4` | 2026-11-01 20:15 |
@@ -47,6 +47,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 ## In flight
 
 ### Lane: pf7-island
+- **2026-11-02 00:05, for the lead to fold in.** PF-7 island: [PR 715](https://github.com/defaultdave/ramble/pull/715) open into `main` at `bc3f06b` with auto-merge on, `Closes #487`; all four agent checks posted. Cold JS-off first load, photo fixture: browse at 1280 went from 4 of 12 to 12 of 12 cards, 5 of 5 runs, Next 16.4.3 included. The defect does not show on the plain `--scale` seed or a warm server, so a rerun needs photo rows and a cold `next start`. After merge: check #487 closed and Done on the board (tests whether `Closes #n` now works with the App's Issues write), trim SC-25 to home and the experience page. PRs 712, 489 and 713 merged by Dave; PR 520 closed; `@types/node` majors are ignored. U-102 waits on Dave's account list. Island follow-ups for the client islands review: `BrowseResultsList.test.ts` only checks the directive, and no committed test catches the JS-off regression. Clean up after merge: worktree `u033-island`, `ramble-pm/.claude/worktrees/agent-aca76c4ae2ebc31e3` and its branch, clone `/private/tmp/claude-501/u033`, worktree `/private/tmp/claude-501/ramble-dependabot-wt`.
 - **2026-11-01 23:20, for the lead to fold in.** Promotion done on Dave's word: PR 684 merged at `f196dbb` with `--merge --admin` after a dispatched smoke passed on both branches; U-020 is on `main`, #26 closed, `integration` 0 ahead and survived. No deploy; production has no 0020 or 0021 yet, so the next deploy needs `db-migrate-production`. PR 681 merged. Production-demo seed rerun by Dave: BC-48 row closed. Ticket repair finished: 187 labelled, 181 duplicates closed as not planned, SC-1 to SC-27 filed, 206 open audit tickets. PF-7 island: round 1 at `119c21d`, browse 3 of 12 to 12 of 12 cards on 5 JS-off first loads, about 1.6 KB of JS; round 2 brings Show more into the island. U-102 waits on Dave's account list. PR 489 waits on Dependabot's rebase; PR 520 recommended closed. The allowlist line goes in a `pm/` bypass PR.
 
 ### Lane: lead (Maintenance triage)
