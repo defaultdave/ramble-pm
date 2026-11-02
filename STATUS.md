@@ -8,7 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `lead` | Shared status, `## Next`, roadmap, memory; worktree cleanup; audit tickets; Sprint 1 close | PM lead, 2026-11-01 (late evening) | active | 2026-11-01 22:20 |
+| `lead` | Shared status, `## Next`, roadmap, memory; worktree cleanup; audit tickets; Sprint 1 close | PM lead, 2026-11-01 (late evening) | handed off | 2026-11-01 22:40 |
 | `u-035` | Sprint 1 close: U-035 category and neighborhood pages, standard tier | run by the lead chat, 2026-11-01 | closed: PR 678 merged at `39e18b4` | 2026-11-01 20:15 |
 | `u-020` | Sprint 1 close: U-020 audit log, critical tier, into `integration` | run by the lead chat, 2026-11-01 | closed: PR 683 merged into `integration` at `20ff357` | 2026-11-01 22:20 |
 | `critical-path` | U-005 then U-014a into `integration` (released 2026-10-29 12:10), PR 222 through the next promotion; then U-014b, U-048 (critical, holds and webhook side of the money path) | critical-path lane, 2026-10-29 (afternoon) | handed off | 2026-10-29 13:05 |
@@ -100,7 +100,7 @@ Moved to `lanes/earlier.md`.
 In this demo, the client facts have no one to ask. Where a fact blocks a decision, the PM proposes a working assumption and logs it as one.
 
 ## Blocked on Dave
-**Now (2026-11-01, late evening):** (1) on the `ramble-agents` App, set Issues to Read and write, and accept it on the installation; the next lead then runs `repair.ts` (labels the 187 kept tickets and closes the duplicates) and files SC-1 to SC-27; (2) bypass-merge PR 681: `gh pr merge 681 --repo defaultdave/ramble --merge --admin`; then decide the PF-7 client island (B8): one client component fed plain data is the real fix for the no-script first-load cut; (3) rerun the `production-demo` seed from a current `main` checkout (`docs/runbooks/seed.md`); it closes BC-48 and lets the e2e-money lane's last seeded booking run; (4) U-102: MFA confirmation; (5) SC-13: the locked audit store on your account before U-055 deploys; (6) stop stray local servers: `kill 7104 8217 9069 6395` and `kill 7626` (7626 holds port 3100); (7) sandbox: allow `api.github.com` and `allowLocalBinding`. Everything below blocks nothing.
+**Now (2026-11-01, late evening):** (1) on the `ramble-agents` App, set Issues to Read and write, and accept it on the installation; the next lead then runs `repair.ts` (labels the 187 kept tickets and closes the duplicates) and files SC-1 to SC-27; (2) bypass-merge PR 681: `gh pr merge 681 --repo defaultdave/ramble --merge --admin`; promote `integration` to `main` (the sync and U-020; the promotion PR's body carries `Closes #26`); decide the PF-7 client island (B8): one client component fed plain data is the real fix for the no-script first-load cut; (3) rerun the `production-demo` seed from a current `main` checkout (`docs/runbooks/seed.md`); it closes BC-48 and lets the e2e-money lane's last seeded booking run; (4) U-102: MFA confirmation; (5) SC-13: the locked audit store on your account before U-055 deploys; (6) stop stray local servers: `kill 7104 8217 9069 6395` and `kill 7626` (7626 holds port 3100); (7) sandbox: allow `api.github.com` and `allowLocalBinding`. Everything below blocks nothing.
 
 0. ~~Merge PR 223~~ merged by Dave 2026-10-29 00:55 (the lanes and evidence rules are on `main`).
 0. ~~Promote the newest production deployment~~ done 2026-10-29 01:05 (Dave asked; the PM promoted `main` at `9e4ed83`; DECISIONS).
