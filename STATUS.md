@@ -8,7 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `lead` | Shared status, `## Next`, roadmap, memory; worktree cleanup; audit tickets; Sprint 1 close | PM lead, 2026-11-01 (late evening) | handed off | 2026-11-01 22:40 |
+| `lead` | Shared status, `## Next`, roadmap, memory; Maintenance ticket audit and prioritisation | PM lead, 2026-11-01 (night, Maintenance audit) | active | 2026-11-01 23:00 |
 | `u-035` | Sprint 1 close: U-035 category and neighborhood pages, standard tier | run by the lead chat, 2026-11-01 | closed: PR 678 merged at `39e18b4` | 2026-11-01 20:15 |
 | `u-020` | Sprint 1 close: U-020 audit log, critical tier, into `integration` | run by the lead chat, 2026-11-01 | closed: PR 683 merged into `integration` at `20ff357` | 2026-11-01 22:20 |
 | `critical-path` | U-005 then U-014a into `integration` (released 2026-10-29 12:10), PR 222 through the next promotion; then U-014b, U-048 (critical, holds and webhook side of the money path) | critical-path lane, 2026-10-29 (afternoon) | handed off | 2026-10-29 13:05 |
@@ -154,6 +154,8 @@ Legal and vendor questions for the real job, logged, not blocking the demo: Ramb
 
 ## Next
 **Audit tickets, 2026-11-01 (lead):** 187 tickets filed and in the Maintenance sprint; `gh project item-list` shows 186 because it omits #548. Labels dropped silently and a first run double-filed 181, so `repair.ts` (kept in `drafts/repair-audit-tickets.ts`) labels the kept tickets and closes duplicates once Dave's item 1 is done. Then `bun tools/audit-tickets.ts --run` files SC-1 to SC-27. **Closing rule:** `Closes #n` in an App-merged PR does not close the issue, because the App has no Issues write; set Status Done on the board and the issue closes. The nightly task is unchanged: the PM's session-end step files new rows.
+
+**Client islands review (Dave, 2026-11-01):** at the end of this sprint, a review of every client island against the allowlist, including the PF-7 island: what each costs in JS, and whether it still earns its place.
 
 **Sprint 2 repurposed 2026-11-01 (Dave):** production-ready work, in `drafts/sprint-2-production-ready.md`. Sprint 1 close: U-035, cache, checkout and PF-7 (partial, #487 open) merged; U-020 into `integration` next; U-102 stays In Progress on Dave's MFA confirmation. U-004a moved to S3 on the board by hand: `board-dates.ts --run` will put it back, so redo it after any refit. The lane `production-ready` opens after that; the dictionary needs a short design first. Refit the forecast and the board's sprints when the lane opens.
 
