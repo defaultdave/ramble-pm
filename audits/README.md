@@ -24,6 +24,7 @@ After each of these reaches `main`:
 | Sprint 1 close | Non-blocking items from the check rounds on the Sprint 1 fixes | Reported 2026-11-01: 27 items, SC-1 to SC-27, all open ([sprint1-close-2026-11-01.md](sprint1-close-2026-11-01.md)) |
 | Agents 2026-10-29 | Claude Code sessions of 2026-10-29: $549.80, 15 sessions | Reported 2026-10-30: 1 experiment (A1029-1, read budget for architecture-audit), failed, none shipped ([agents-2026-10-29.md](agents-2026-10-29.md)) |
 | Agents 2026-10-31 | Claude Code sessions of 2026-10-31: $72.76, 6 sessions | Reported 2026-11-01: 2 experiments (A1030-1 read budget rerun, failed; A1031-1 profiler shows fixed starting context, passed, published) ([agents-2026-10-31.md](agents-2026-10-31.md)) |
+| Agents 2026-11-01 | Claude Code sessions of 2026-11-01: $36.90 under the project filter (about $82.74 across every project key), 6 to 8 sessions | Reported 2026-11-02: 2 experiments (A1101-1 rounds tool `tools/check-rounds.py`, passed, published; A1101-2 Figma and browser inspection out of the PM chat, trial, PR 722) ([agents-2026-11-01.md](agents-2026-11-01.md)) |
 
 ## Lenses (the same every pass)
 
