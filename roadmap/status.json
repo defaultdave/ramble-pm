@@ -1,6 +1,6 @@
 {
   "asOf": "2026-11-01",
-  "headline": "Nov 1: a guest books end to end on production, ahead of Monday's Nov 2 goal. Production runs main at 44dd004, no PRs are open, and the pulse workflow runs every 30 minutes. Dave's Oct 31 home and browse feedback is merged and deployed. One owner item is left for the click-through: rerunning the production-demo seed so host notices stop failing (BC-48). Card decline then success and 3-D Secure are proven locally only. The forecast prices units at estimate, so it is the slow case against agent actuals of 4 to 42 percent of estimate.",
+  "headline": "Nov 1, late evening: Sprint 1 is closing. Cache fixes, category and neighborhood pages (U-035) and the checkout audit fixes are on main; the no-script browse fix (PF-7) is a partial fix; the audit log (U-020) has passed its checks and goes into integration after a sync. Audit findings are now 187 tickets in a Maintenance sprint, 179 open. Production still runs 44dd004: none of tonight's work is deployed.",
   "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
   "phases": [
     {
@@ -101,14 +101,29 @@
   "decisionsNeeded": [],
   "actionsForDave": [
     {
+      "title": "Give the ramble-agents App Issues read and write",
+      "detail": "Set the permission and accept it on the installation. Ticket labels dropped silently without it and a first run double-filed 181. The PM then labels the 187 tickets, closes the duplicates and files SC-1 to SC-26.",
+      "where": "Next"
+    },
+    {
+      "title": "Decide the PF-7 client island",
+      "detail": "With JavaScript off, the first load of a large browse result shows only 5 cards. One client component fed plain data fixes it, and needs your approval under B8. Recommended.",
+      "where": "Any time"
+    },
+    {
+      "title": "Confirm MFA for U-102",
+      "detail": "U-102 stays In Progress until you confirm MFA is on.",
+      "where": "Sprint 1 close"
+    },
+    {
+      "title": "Stop stray local servers",
+      "detail": "kill 7104 8217 9069 6395 and kill 7626. The last one holds port 3100.",
+      "where": "Any time"
+    },
+    {
       "title": "Rerun the production-demo seed",
       "detail": "From a current main checkout (docs/runbooks/seed.md). The PM cannot: it needs the production env file. Closes BC-48 and lets the last seeded booking check run.",
       "where": "Before the click-through"
-    },
-    {
-      "title": "Bypass-merge the token rules PR",
-      "detail": "pm/token-rules changes .claude/agents/ramble-pm.md, a protected path.",
-      "where": "Any time"
     },
     {
       "title": "Sandbox: allow api.github.com and local port binding",
@@ -148,6 +163,11 @@
   ],
   "heldUp": [
     {
+      "what": "Audit ticket labels, 26 new tickets and closing the duplicates",
+      "waitingOn": "Issues permission on the ramble-agents App",
+      "owner": "Dave"
+    },
+    {
       "what": "BC-48 host notices on production",
       "waitingOn": "Dave rerunning the production-demo seed",
       "owner": "Dave"
@@ -159,6 +179,14 @@
     }
   ],
   "decisionsMade": [
+    {
+      "when": "Nov 1",
+      "what": "PF-7 ships as a partial fix with its ticket open; U-035 renders on first request; U-020 narrowed to the log, the export job and an honest refusal, with the locked store on your account (PM, you can overrule)"
+    },
+    {
+      "when": "Nov 1",
+      "what": "Audit findings become tickets in a Maintenance sprint (you)"
+    },
     {
       "when": "Nov 1",
       "what": "Sprint 2 becomes production-ready work: test audit, comment cleanup, text dictionary, tightening; feature units slip one sprint (you)"
@@ -330,6 +358,14 @@
   ],
   "watch": [
     {
+      "what": "Tonight's merges are not deployed",
+      "detail": "main is ahead of production (44dd004). A deploy waits for your word."
+    },
+    {
+      "what": "OSV scan fails on main",
+      "detail": "Four Medium advisories in the lockfile; the PR scan passes, so nothing blocks. Ticketed as SC-26."
+    },
+    {
       "what": "Sprint 2 repurposed, forecast not rerun",
       "detail": "Feature units slip one sprint, about two weeks in the slow case. Dates on this page do not reflect it yet."
     },
@@ -411,15 +447,28 @@
         "Lead lane taken over; worktrees for merged branches removed",
         "Six open decisions settled; lane history moved out of STATUS.md into lanes/",
         "Figma click-through: 24 mobile screens wired into 15 named flows on Prototype (mobile)",
-        "Booking panel keeps Continue a short scroll away on desktop (PR 300, your feedback); merged, waiting on a deploy"
+        "Booking panel keeps Continue a short scroll away on desktop (PR 300, your feedback); merged, waiting on a deploy",
+        "Audit findings became 187 tickets in a Maintenance sprint on board 19, 179 open",
+        "PR 677 cache fixes merged",
+        "PR 678 U-035 category and neighborhood pages merged",
+        "PR 679 checkout and booking audit fixes merged (BC-29, BC-35, BC-39, BC-58)",
+        "PF-7 no-script browse passed review round 4 and went out as PR 680, partial",
+        "U-020 audit log passed all four checks after five review rounds"
       ],
       "today": [
-        "Close Sprint 1, then open the production-ready lane",
-        "Dave: rerun the production-demo seed (BC-48), then one more seeded booking on production",
-        "audit-fixes: U-031 cache tags, then H-48",
-        "browse-perf: JavaScript audit after PF-9b"
+        "Sync main into integration, then U-020 into integration",
+        "Label the tickets and close the duplicates once the App has Issues write",
+        "Open the production-ready lane"
       ],
       "heldUs": [
+        {
+          "what": "App Issues permission",
+          "cost": "Ticket labels, 26 new tickets and the duplicate cleanup wait"
+        },
+        {
+          "what": "PF-7 client island decision",
+          "cost": "With JavaScript off, large browse results stop at 5 cards on first load"
+        },
         {
           "what": "Roadmap not refreshed since Oct 30",
           "cost": "It still listed the pulse workflow as Dave's after it landed on Oct 31."
