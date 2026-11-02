@@ -211,5 +211,6 @@
   "SC-23": "Remove the hidden duplicate frame after a re-hold",
   "SC-24": "Fix the BookingSheet story cell width",
   "SC-25": "Finish no-script streaming on browse, home and experience",
-  "SC-26": "Clear the OSV failures on main"
+  "SC-26": "Clear the OSV failures on main",
+  "SC-27": "Guard schema exports and run db:generate locally"
 }
