@@ -24,7 +24,7 @@ Production `5f5843c`-era build on `ramble-sand.vercel.app`, phone emulation 390 
 - **"This weekend" stays out of both searches.** H-9 set the hero's When to today, and browse takes one date, not a range. The header sits in the static shell, so it cannot know today: the pill reads "Anywhere · Any day · 2 guests" and links to browse with `guests=2`, so the label stays true. A weekend range would be its own unit.
 - **The hero button keeps "Find something to do"** (H-29), against Figma's "Find something".
 - **U-033 is pulled forward in two PRs.** First the one-row bar and the drawer, on the filters that exist today. Then Price, Good for and Setting, each with a real filter, once their data is checked. A chip that filters nothing does not ship, so the first PR leaves those three chips out.
-- **Browse's no-script filter layer is dropped** from U-033: it could never be reached (PF-7).
+- **Browse's no-script filter layer is dropped** from U-033: it could never be reached (PF-7). Reversed 2026-11-01: the U-033 PF-7 fix restores it for browse.
 - **`FilterDrawerHost` counts as the allowlisted filter drawer island** (B8), lazy-loaded.
 - **Phone filter row scrolls inside its box**, as Figma's phone does, against the a11y audit's WCAG 1.4.10 reading. The owner asked for one row. From 768 it wraps.
 - **Heading rows in the skeleton were fixed with the hero copy** in PR 294, because 401 to 430 px are common phones and it was the owner's jump.
