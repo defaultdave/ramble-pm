@@ -1,6 +1,6 @@
 # Audits
 
-An audit pass runs after each section or major feature ships (DECISIONS 2026-10-28). It reports findings only; the owner picks which become work. Every item raised, by an audit or along the way, is tracked in that pass's file until it is closed.
+An audit pass runs after each section or major feature ships (DECISIONS 2026-10-28). It reports findings only. Every item raised, by an audit or along the way, is logged in that pass's file and becomes a ticket in the Maintenance sprint on board #19 (DECISIONS 2026-11-01), which is the place to see what is left.
 
 ## When a pass runs
 
@@ -40,6 +40,17 @@ Each finding is checked by an independent verifier before it reaches the report.
 
 ## How an item is tracked
 
-Each pass file has one table. An item keeps its ID for life (`H-12` is item 12 of the home pass). Status is one of: **open** (raised, not yet decided), **fix** (the owner chose to fix it; names the unit or PR), **later** (deferred, with where it lands), **won't** (decided against, with the reason), **closed** (fixed and verified, with the PR).
+Each pass file has one table, and it is the record of what was found. An item keeps its ID for life (`H-12` is item 12 of the home pass). The status it was raised with is one of: **open** (raised, not yet decided), **fix** (the owner chose to fix it; names the unit or PR), **later** (deferred, with where it lands), **won't** (decided against, with the reason), **closed** (fixed and verified, with the PR).
 
 Items raised outside a pass (in review rounds, by the owner on the live site, by the PM) go into the next pass's file for the area, marked with where they came from.
+
+## Tickets and the Maintenance sprint
+
+Once an item has a ticket, the ticket holds its status and its row links to it; do not keep both up to date.
+
+- **What gets a ticket:** every item that is `open`, `fix` or `decided`. `later` items are carried by the unit they name, and `closed` and `won't` items are history, so neither gets one. A row whose status names only merged PRs is reported for closing rather than filed.
+- **Filing:** `bun tools/audit-tickets.ts` prints what it would file; `--run` files the new items and links their rows. It is safe to rerun. A short title for each new item goes in `ticket-titles.json`; without one the ticket uses the item's first sentence.
+- **The sprint:** `Maintenance` is a value of the board's Sprint field with no dates, so it never ends and stays out of the forecast. The `Maintenance` board view shows it by Status.
+- **Labels:** `audit`, one `lens: <lens>`, and `needs-owner` where the owner has to decide.
+- **Working a ticket:** the lane moves it to In Progress, and the fix PR's body carries `Closes #n`. GitHub honours that only on `main`, so a PR into `integration` says `Refs #n` and the promotion PR's body carries the `Closes`.
+- **Closing without a PR:** a ticket that turns out stale or decided against is closed with a one-line reason, and `won't` goes on its row.

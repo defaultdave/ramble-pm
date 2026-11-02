@@ -92,3 +92,5 @@ Not in the frozen plan and no unit; no build unit changes. Page `Prototype (mobi
 Sprint 2 moves from features to production-ready work (`drafts/sprint-2-production-ready.md`). Its feature units slip one sprint, about two weeks in the forecast's slow case; the forecast has not been rerun.
 
 - 2026-11-01 (lead): new client island `StickyAside` on the experience page, approved by the owner on the local run: the booking panel follows the page scroll and sticks at both ends when taller than the window. It replaces a pinned-footer build the owner rejected for scrolling inside the panel.
+
+- 2026-11-01 (lead): the audit process changes from status in pass files to tickets (DECISIONS). The GitHub App gains Issues: Read and write, a departure from the permission list in the frozen `merge-desk-runbook.md`, and the "never create or close issues" hard line gains an exception for audit tickets. The Sprint field gains a `Maintenance` value outside the forecast's calendar.

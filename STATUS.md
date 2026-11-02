@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-01 by the lead. A guest books end to end on production (`ramble-sand.vercel.app`, `44dd004`), ahead of Monday's goal. No PR is open. Pulse runs every 30 minutes. The one item held on Dave is the `production-demo` seed rerun (BC-48). Roadmap refreshed.
+**Updated:** 2026-11-01 by the lead. A guest books end to end on production (`ramble-sand.vercel.app`, `44dd004`), ahead of Monday's goal. Audit findings are becoming tickets in a Maintenance sprint (DECISIONS 2026-11-01): 181 are ready to file, held on Dave's two items below. PRs 305 and 306 are open, both waiting on a bypass merge. Pulse runs every 30 minutes.
 
 ## Lanes
 
@@ -8,7 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `lead` | Shared status, `## Next`, roadmap, memory; worktree cleanup; audit findings become tickets in a Maintenance sprint | PM lead, 2026-11-01 (evening: audit tickets) | active | 2026-11-01 19:10 |
+| `lead` | Shared status, `## Next`, roadmap, memory; worktree cleanup; audit findings become tickets in a Maintenance sprint | PM lead, 2026-11-01 (evening: audit tickets) | handed off | 2026-11-01 19:40 |
 | `critical-path` | U-005 then U-014a into `integration` (released 2026-10-29 12:10), PR 222 through the next promotion; then U-014b, U-048 (critical, holds and webhook side of the money path) | critical-path lane, 2026-10-29 (afternoon) | handed off | 2026-10-29 13:05 |
 | `audit-fixes` | Every open audit item that is a clear fix and not part of the `src/lib` refactor: home `open` rows, BE-13, BE-8, BE-7 (with a `src/lib`-owned predicate; PR D of the refactor consolidates it), BE-14, BE-1, nightly N1029-1 to 7, 10, 11; fix-rounds PRs with before-and-after evidence | PM audit-fixes, 2026-11-01 (late morning) | handed off | 2026-11-01 13:50 |
 | `e2e-money` | The end-to-end prototype on the fake payment adapter: stub glue (merged), U-019 and U-045b (merged), U-015, U-016, U-054, U-047a, U-047b, U-049, U-050, U-040, U-041, and since 2026-10-29 16:30 the critical-path money units U-014a, U-014b, U-048 (Dave) | e2e-money lane, 2026-10-30 (evening: BC-37, BC-38 glue, click-through, BC-1, BC-48) | handed off | 2026-10-30 21:00 |
@@ -98,7 +98,7 @@ Moved to `lanes/earlier.md`.
 In this demo, the client facts have no one to ask. Where a fact blocks a decision, the PM proposes a working assumption and logs it as one.
 
 ## Blocked on Dave
-**Now (2026-11-01):** (1) bypass-merge `pm/token-rules` (`.claude/` is protected); (2) sandbox: allow `api.github.com` and `allowLocalBinding`; (3) rerun the `production-demo` seed from a current `main` checkout (`docs/runbooks/seed.md`); it closes BC-48 and lets the e2e-money lane's last seeded booking run. Everything below blocks nothing. The pulse item (`PULSE_SECRET`, `PULSE_URL`, PR 290) is done.
+**Now (2026-11-01, evening):** (1) on the `ramble-agents` App, set Issues to Read and write, and accept it on the installation; (2) bypass-merge PR 306 (audit tickets) and PR 305 (client islands allowlist); (3) rerun the `production-demo` seed from a current `main` checkout (`docs/runbooks/seed.md`); it closes BC-48 and lets the e2e-money lane's last seeded booking run; (4) sandbox: allow `api.github.com` and `allowLocalBinding`. Everything below blocks nothing.
 
 0. ~~Merge PR 223~~ merged by Dave 2026-10-29 00:55 (the lanes and evidence rules are on `main`).
 0. ~~Promote the newest production deployment~~ done 2026-10-29 01:05 (Dave asked; the PM promoted `main` at `9e4ed83`; DECISIONS).
@@ -151,6 +151,8 @@ Open item from the ADR 0007 measurement amendment (2026-10-18): what New York an
 Legal and vendor questions for the real job, logged, not blocking the demo: Ramble holding host money and the New York gift law (counsel, Q-16); card refund age limit at 12 months (ask Stripe); Stripe's Connect review time.
 
 ## Next
+**Audit tickets, 2026-11-01 (lead):** once Dave's items 1 and 2 are done, the next lead files the 181 live items; steps in `### lead` under Next chat. Until then new audit rows pile up in the pass files as before and the next `--run` picks them up. The nightly task is unchanged: an edit letting it file tickets unattended was refused by auto mode, so the PM's session-end step files them.
+
 **Sprint 2 repurposed 2026-11-01 (Dave):** production-ready work, in `drafts/sprint-2-production-ready.md`. First close Sprint 1: `audit-fixes` running; then U-035, U-020, PF-7, and board cleanup (U-003, U-116, U-005, U-102). The lane `production-ready` opens after that; the dictionary needs a short design first. Refit the forecast and the board's sprints when the lane opens.
 
 **Folded 2026-11-01 (lead):** (1) `audit-fixes` resumes with `unit/U-031-home-cache-tags` (`cbe65ea`, kept with its worktree `agent-a82f5cc719e5a7cc2`): merge `main`, resolve `src/server/home.ts` and `home.test.ts`, four checks on the final head; then H-48. (2) After the seed: e2e-money's last booking on production. (3) PF-7 (no-script browse) still needs a slot; PF-9b is accepted by Dave and `browse-perf` runs the JavaScript audit. (4) New audit items BC-50 to BC-53 are open for `audit-fixes`; BC-51 touches every guest page. (5) `site.ts dir` exits 1 silently inside the sandbox; run it, and `publish`, with the sandbox off, from the main checkout. (7) Follow-up before real guests: Next.js prints unredacted error lines to stderr in the Vercel log stream (decided 2026-11-01; add a unit through `units.yaml` when the launch units are next). (6) The public PM memory in the main checkout has uncommitted lessons; they go in the next `PM bookkeeping:` PR.
@@ -180,6 +182,8 @@ Lessons from waves 1 and 2: builders commit and stop; the PM pushes and opens PR
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
 
 ### lead
+
+**Update 2026-11-01 evening (read first):** audit tickets are built and waiting. **Before you start:** Dave has set the App's Issues permission and PR 306 has merged. **Run:** `/ramble-pm` on the main checkout. **Model and effort:** Sonnet, medium. **Prompt:** confirm `git ls-remote` shows PR 306 on `main`, then in a checkout at `origin/main` run `bun scripts/plan/board-dates.ts --run` (rebuilds Sprint with `Maintenance`), then in `ramble-pm` run `bun tools/audit-tickets.ts`, read the dry run, run it with `--run` in the background (about 15 minutes for 181 tickets; rerun if it stops), publish `ramble-pm`, and confirm the Maintenance view (https://github.com/users/defaultdave/projects/19/views/2) shows the count. The roadmap page was not refreshed on 2026-11-01 evening: refresh it after the run, with the Maintenance open and closed counts in the standup. Remove the worktree `ramble-audit-tickets-wt` once PR 306 has merged.
 
 **Update 2026-11-01 (read first):** the 2026-11-01 lead folded the lanes, refreshed the roadmap and removed worktrees for merged branches. Kept on purpose: `unit/U-031-home-cache-tags`, `unit/U-001-preview-skip`, `unit/U-037`, `browse-perf`'s worktrees, and detached scratch trees (`r1`, `r2`, `perf-home-18106`, `sb-*`, `docs-storage-strategy-1a2e80`, `e2e-money-ramble-60a4ce`). Next lead: open `/ramble-pm lane: audit-fixes` first (Sonnet, medium). Older updates below are history.
 
