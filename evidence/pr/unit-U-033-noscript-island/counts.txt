@@ -1,0 +1,37 @@
+U-033 noscript island, head 119c21d on origin/main 3a414b6
+Database: u033_island_1 (seed --scale: 400 experiences, cover photo row for each), fresh `next start` per run, Chromium
+--single-process --no-zygote, sandbox on, JavaScript off, 1280x800, first load.
+
+JS off, /new-york/browse (12 cards sent in the HTML)
+  run  base visible  after visible   base cards in bare hidden segments (DOM / raw HTML)  after
+  1    3             12              9 / 5                                                  0 / 0
+  2    3             12              9 / 5                                                  0 / 0
+  3    3             12              9 / 5                                                  0 / 0
+  4    3             12              9 / 5                                                  0 / 0
+  5    3             12              9 / 5                                                  0 / 0
+
+JS off, /new-york/neighborhoods/williamsburg (82 results, 12 cards sent; also tried things-to-do/kids and neighborhoods/tribeca)
+  base: 12 of 12 visible on all 5 runs and on the two other pages. The cut did not reproduce on a landing page here.
+  after: 12 of 12 visible on all 5 runs, 0 cards in bare hidden segments.
+
+Show more (pagination, out of scope): not visible JS off on /new-york/browse before (0) or after (0); it sits in a bare
+hidden segment (S:e before, S:4 after). Visible on the landing page before and after.
+
+Reveal rule (base.css, scripting: none) still needed: with it neutralised, 0 cards visible on both pages, before and after.
+
+JS cost (gzip level 9 over the scripts in the document, /new-york/browse)
+  JS raw      641592 -> 646563   (+4971)
+  JS gzip     201443 -> 203070   (+1627)
+  HTML raw    126254 -> 113902   (-12352)
+  HTML gzip    15686 ->  15854   (+168)
+  inline flight chars 72352 -> 60900 (-11452)
+  RSC request (RSC: 1) raw  62611 -> 52713 (-9898), gzip 10208 -> 9504 (-704)
+ landing (williamsburg)
+  JS gzip     198571 -> 200202   (+1631)
+  HTML raw    106242 -> 95345    (-10897)
+  RSC request raw 50462 -> 41039 (-9423), gzip 8524 -> 5587 (-2937)
+
+JS on, 320 / 390 / 768 / 1280, browse and landing: element rectangles (articles, h1, h2, images, footer, list items), page
+width and height, first image priority and image preload links are identical before and after; the 16 full-page
+screenshots are byte-identical (same SHA-1). Console warnings and errors: one per load in both, the 400 from /_next/image
+for the seeded photo addresses, which point at no real store. No hydration warning.

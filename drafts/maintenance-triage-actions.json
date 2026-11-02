@@ -1,0 +1,1086 @@
+{
+ "source": "audits/maintenance-triage-2026-11-01.md",
+ "generated": "2026-11-01",
+ "rules": "Apply under the owner's login or the App once it has Issues write. Row statuses in audits/ follow the ticket.",
+ "close_fixed_or_stale": [
+  {
+   "id": "H-28",
+   "ticket": 369,
+   "verdict": "STALE",
+   "reason": "Departure recorded in ramble-pm audits/design-departures.md line 10; no code per owner."
+  },
+  {
+   "id": "H-36",
+   "ticket": 372,
+   "verdict": "STALE",
+   "reason": "Owner decided keep one-minute cut (`minuteAsOf` still used); no code."
+  },
+  {
+   "id": "H-61",
+   "ticket": 377,
+   "verdict": "FIXED",
+   "reason": "One PageError on PageHeading (display-m title); used by HomeContent, LandingRoute, experience page."
+  },
+  {
+   "id": "H-65",
+   "ticket": 379,
+   "verdict": "FIXED",
+   "reason": "Retry form `justify-self: start` from 768 px via `:has(> button:only-child)`."
+  },
+  {
+   "id": "H-66",
+   "ticket": 380,
+   "verdict": "STALE",
+   "reason": "Departure recorded in ramble-pm audits/design-departures.md line 11; no code per owner."
+  },
+  {
+   "id": "H-76",
+   "ticket": 382,
+   "verdict": "DUP",
+   "reason": "Same root cause as H-62 (visually-hidden copies)."
+  },
+  {
+   "id": "H-98",
+   "ticket": 395,
+   "verdict": "FIXED",
+   "reason": "Meta comment now a single clean line (line 26); no trailing comma."
+  },
+  {
+   "id": "BE-18",
+   "ticket": 360,
+   "verdict": "FIXED",
+   "reason": "FilterBar has no Clear all filters link; FilterBar.test.tsx asserts it never offers one. Only BrowseResults empty state does."
+  },
+  {
+   "id": "BE-20",
+   "ticket": 361,
+   "verdict": "FIXED",
+   "reason": "Picker loaded via dynamic import() on first open (or chip hover/focus prefetch); no static react-aria import in bar."
+  },
+  {
+   "id": "BC-1",
+   "ticket": 307,
+   "verdict": "FIXED",
+   "reason": "/orders now sits in GuestShell via (site)/layout.tsx; only group error.tsx keeps plain SiteShell, by design"
+  },
+  {
+   "id": "BC-4",
+   "ticket": 310,
+   "verdict": "FIXED",
+   "reason": "focusTarget() plus focus effect moves to sheet heading, notice, or Pay on each view change"
+  },
+  {
+   "id": "BC-7",
+   "ticket": 313,
+   "verdict": "FIXED",
+   "reason": "hostRow sets notificationEmail via hostNotificationEmail(slug) for every seeded host"
+  },
+  {
+   "id": "BC-8",
+   "ticket": 314,
+   "verdict": "FIXED",
+   "reason": "maxMoneyLines gone; query limits on MAX_LINES from lib/pricing"
+  },
+  {
+   "id": "BC-18",
+   "ticket": 323,
+   "verdict": "FIXED",
+   "reason": "One lockOrderRow/lockOrderById and one readHoldSettings serve checkout and providerEvents"
+  },
+  {
+   "id": "BC-20",
+   "ticket": 325,
+   "verdict": "FIXED",
+   "reason": "metadata referrer 'no-referrer'; e2e shows token redirected into a path-scoped cookie"
+  },
+  {
+   "id": "BC-27",
+   "ticket": 331,
+   "verdict": "FIXED",
+   "reason": "dueClock (+5 s) used by provider-events, bookingEmails, fake-payment-delivery tests; audit.db.test still systemClock, see BC-28"
+  },
+  {
+   "id": "N1030-25",
+   "ticket": 451,
+   "verdict": "STALE",
+   "reason": "Process note already recorded in ramble-pm DECISIONS.md 2026-10-29 (duplicate PR 265/267 entries); no code action."
+  },
+  {
+   "id": "N1030-28",
+   "ticket": 454,
+   "verdict": "FIXED",
+   "reason": "Chip.module.css:114 forced-colors rule covers aria-pressed/aria-current; ChipLink and dateChip compose .chip; BE-15 closed."
+  }
+ ],
+ "close_later_carried_by_unit": [
+  {
+   "id": "H-7",
+   "ticket": null,
+   "unit": "U-012 follow-up (write path)",
+   "comment_for_unit_issue": "`sessionLocalDate` coalesce still in SQL beside lib rule; carried by U-012 write path (store local_date)."
+  },
+  {
+   "id": "BE-2",
+   "ticket": 352,
+   "unit": "U-021b",
+   "comment_for_unit_issue": "No servable-URL check in addPhoto or GuestPhotoSchema; storage.ts still allows fake in prod, TODO(U-021b) stands."
+  },
+  {
+   "id": "BE-4",
+   "ticket": 354,
+   "unit": "U-074b",
+   "comment_for_unit_issue": "addPhoto calls no updateTagsForChanges; no photo CacheChange kind exists. Latent, no caller until U-074b."
+  },
+  {
+   "id": "PF-7",
+   "ticket": 487,
+   "unit": "PF-7 island PR (approved 2026-11-01)",
+   "comment_for_unit_issue": "Partial fix landed (data-reveal-without-script, base.css). First load still cut to 5 cards; island not yet on allowlist. Home unfixed."
+  },
+  {
+   "id": "BC-5",
+   "ticket": 311,
+   "unit": "U-046",
+   "comment_for_unit_issue": "confirmFakePayment has no limiter (secret is the capability); fake-only, Stripe confirms client-side"
+  },
+  {
+   "id": "BC-11",
+   "ticket": 316,
+   "unit": "U-106",
+   "comment_for_unit_issue": "providerPayment uses retrieved payment without a canceled check; latent, no cancelPayment caller until U-106"
+  },
+  {
+   "id": "BC-12",
+   "ticket": 317,
+   "unit": "U-056",
+   "comment_for_unit_issue": "Unique index covers cash events only; refundRequested/refundFailed/giftRedeemed have no callers yet"
+  },
+  {
+   "id": "BC-13",
+   "ticket": 318,
+   "unit": "U-071",
+   "comment_for_unit_issue": "Units unbuilt; add boundary statement to both scopes"
+  },
+  {
+   "id": "BC-16",
+   "ticket": 321,
+   "unit": "U-068",
+   "comment_for_unit_issue": "updateTagsForChanges post-commit; today's callers are all Server Actions; U-068 must keep it so"
+  },
+  {
+   "id": "BC-17",
+   "ticket": 322,
+   "unit": "U-055",
+   "comment_for_unit_issue": "confirmOrder runs under the events lock; cancel/refund paths (U-055, U-056) must take it first"
+  },
+  {
+   "id": "BC-26",
+   "ticket": 330,
+   "unit": "U-109",
+   "comment_for_unit_issue": "confirmDecision throws on terminal order; takeRefundPath is still the U-109 stub"
+  },
+  {
+   "id": "BC-46",
+   "ticket": 343,
+   "unit": "U-046",
+   "comment_for_unit_issue": "pollStep stops on any non-pending state; payment_failed maps to 'failed'; Stripe unbuilt"
+  },
+  {
+   "id": "BC-52",
+   "ticket": 346,
+   "unit": "U-055",
+   "comment_for_unit_issue": "Still a RoutePlaceholder: no referrer metadata, no overflow-wrap on the token"
+  },
+  {
+   "id": "BC-53",
+   "ticket": 531,
+   "unit": "U-074a",
+   "comment_for_unit_issue": "Hosts upsert still sets notificationEmail from excluded; fill only when null once real hosts exist"
+  },
+  {
+   "id": "N1029-4",
+   "ticket": 417,
+   "unit": "first ops editing unit",
+   "comment_for_unit_issue": "Seed still upserts experiences/prices; no ops edit path yet. Carried by first ops edit unit (unnamed)."
+  },
+  {
+   "id": "N1031-11",
+   "ticket": 465,
+   "unit": "no unit: reopen when a second <select> consumer appears",
+   "comment_for_unit_issue": "SelectField still sole <select> in src; no Select component. Wait for second consumer."
+  },
+  {
+   "id": "SC-4",
+   "ticket": null,
+   "unit": "U-092",
+   "comment_for_unit_issue": "Behaviour is Next's, not our code. Crawler-view test sits in U-092 scope; U-091 is slug history."
+  },
+  {
+   "id": "SC-12",
+   "ticket": null,
+   "unit": "audit-store adapter unit (new, with SC-13)",
+   "comment_for_unit_issue": "StoragePort has no read or head, so putOnce cannot compare. Needs a port method; do with the R2 adapter."
+  },
+  {
+   "id": "SC-20",
+   "ticket": null,
+   "unit": "U-103",
+   "comment_for_unit_issue": "Nothing warms pages. U-103 scope already says \"warm published pages after promotion\"; U-104 only reviews."
+  },
+  {
+   "id": "SC-21",
+   "ticket": null,
+   "unit": "U-098",
+   "comment_for_unit_issue": "R2 entry reads hourly dump as live; only the audit export is marked not switched on. Reword when U-098 lands."
+  }
+ ],
+ "label_track": [
+  {
+   "id": "H-91",
+   "ticket": 389,
+   "label": "track: tighten"
+  },
+  {
+   "id": "H-93",
+   "ticket": 391,
+   "label": "track: tighten"
+  },
+  {
+   "id": "H-94",
+   "ticket": 392,
+   "label": "track: tighten"
+  },
+  {
+   "id": "H-100",
+   "ticket": 397,
+   "label": "track: tighten"
+  },
+  {
+   "id": "BE-5",
+   "ticket": 355,
+   "label": "track: tighten"
+  },
+  {
+   "id": "JS-2",
+   "ticket": 409,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "JS-3",
+   "ticket": 410,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "JS-4",
+   "ticket": 411,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "JS-5",
+   "ticket": 412,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "JS-6",
+   "ticket": 413,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "JS-7",
+   "ticket": 414,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "JS-8",
+   "ticket": 415,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "BC-3",
+   "ticket": 309,
+   "label": "track: tighten"
+  },
+  {
+   "id": "BC-6",
+   "ticket": 312,
+   "label": "track: test-audit"
+  },
+  {
+   "id": "BC-14",
+   "ticket": 319,
+   "label": "track: tighten"
+  },
+  {
+   "id": "BC-25",
+   "ticket": 329,
+   "label": "track: tighten"
+  },
+  {
+   "id": "BC-28",
+   "ticket": 332,
+   "label": "track: test-audit"
+  },
+  {
+   "id": "BC-33",
+   "ticket": 337,
+   "label": "track: tighten"
+  },
+  {
+   "id": "BC-36",
+   "ticket": 340,
+   "label": "track: tighten"
+  },
+  {
+   "id": "BC-55",
+   "ticket": 348,
+   "label": "track: test-audit"
+  },
+  {
+   "id": "BC-56",
+   "ticket": 349,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "BC-57",
+   "ticket": 350,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "N1030-9",
+   "ticket": 435,
+   "label": "track: dictionary"
+  },
+  {
+   "id": "N1030-15",
+   "ticket": 441,
+   "label": "track: test-audit"
+  },
+  {
+   "id": "N1030-16",
+   "ticket": 442,
+   "label": "track: test-audit"
+  },
+  {
+   "id": "N1030-22",
+   "ticket": 448,
+   "label": "track: dictionary"
+  },
+  {
+   "id": "N1030-24",
+   "ticket": 450,
+   "label": "track: test-audit"
+  },
+  {
+   "id": "N1030-26",
+   "ticket": 452,
+   "label": "track: tighten"
+  },
+  {
+   "id": "N1031-5",
+   "ticket": 459,
+   "label": "track: tighten"
+  },
+  {
+   "id": "N1031-7",
+   "ticket": 461,
+   "label": "track: tighten"
+  },
+  {
+   "id": "N1031-8",
+   "ticket": 462,
+   "label": "track: tighten"
+  },
+  {
+   "id": "N1031-15",
+   "ticket": 469,
+   "label": "track: comment-cleanup"
+  },
+  {
+   "id": "N1031-18",
+   "ticket": 472,
+   "label": "track: test-audit"
+  },
+  {
+   "id": "N1031-19",
+   "ticket": 473,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "N1031-20",
+   "ticket": 474,
+   "label": "track: tighten"
+  },
+  {
+   "id": "N1031-21",
+   "ticket": 475,
+   "label": "track: tighten"
+  },
+  {
+   "id": "N1031-22",
+   "ticket": 476,
+   "label": "track: tighten"
+  },
+  {
+   "id": "N1031-23",
+   "ticket": 477,
+   "label": "track: tighten"
+  },
+  {
+   "id": "N1031-24",
+   "ticket": 478,
+   "label": "track: tighten"
+  },
+  {
+   "id": "N1031-26",
+   "ticket": 480,
+   "label": "track: tighten"
+  },
+  {
+   "id": "N1101-1",
+   "ticket": 481,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "N1101-3",
+   "ticket": 483,
+   "label": "track: tighten"
+  },
+  {
+   "id": "N1101-5",
+   "ticket": 485,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "N1101-6",
+   "ticket": 486,
+   "label": "track: client-islands-review"
+  },
+  {
+   "id": "SC-19",
+   "ticket": null,
+   "label": "track: test-audit"
+  },
+  {
+   "id": "SC-23",
+   "ticket": null,
+   "label": "track: client-islands-review"
+  }
+ ],
+ "label_pr": [
+  {
+   "id": "H-62",
+   "ticket": 378,
+   "label": "maint-pr: P01",
+   "wave": 1
+  },
+  {
+   "id": "N1029-8",
+   "ticket": 419,
+   "label": "maint-pr: P02",
+   "wave": 1
+  },
+  {
+   "id": "N1030-13",
+   "ticket": 439,
+   "label": "maint-pr: P02",
+   "wave": 1
+  },
+  {
+   "id": "N1030-14",
+   "ticket": 440,
+   "label": "maint-pr: P02",
+   "wave": 1
+  },
+  {
+   "id": "H-106",
+   "ticket": 403,
+   "label": "maint-pr: P02",
+   "wave": 1
+  },
+  {
+   "id": "N1031-9",
+   "ticket": 463,
+   "label": "maint-pr: P02",
+   "wave": 1
+  },
+  {
+   "id": "H-108",
+   "ticket": 405,
+   "label": "maint-pr: P02",
+   "wave": 1
+  },
+  {
+   "id": "N1029-3",
+   "ticket": 416,
+   "label": "maint-pr: P03",
+   "wave": 1
+  },
+  {
+   "id": "N1029-9",
+   "ticket": 420,
+   "label": "maint-pr: P03",
+   "wave": 1
+  },
+  {
+   "id": "H-88",
+   "ticket": 386,
+   "label": "maint-pr: P03",
+   "wave": 1
+  },
+  {
+   "id": "H-95",
+   "ticket": 393,
+   "label": "maint-pr: P03",
+   "wave": 1
+  },
+  {
+   "id": "N1029-15",
+   "ticket": 425,
+   "label": "maint-pr: P03",
+   "wave": 1
+  },
+  {
+   "id": "N1030-12",
+   "ticket": 438,
+   "label": "maint-pr: P03",
+   "wave": 1
+  },
+  {
+   "id": "N1031-1",
+   "ticket": 455,
+   "label": "maint-pr: P04",
+   "wave": 1
+  },
+  {
+   "id": "N1031-2",
+   "ticket": 456,
+   "label": "maint-pr: P04",
+   "wave": 1
+  },
+  {
+   "id": "BC-47",
+   "ticket": 344,
+   "label": "maint-pr: P04",
+   "wave": 1
+  },
+  {
+   "id": "BC-49",
+   "ticket": 529,
+   "label": "maint-pr: P04",
+   "wave": 1
+  },
+  {
+   "id": "N1031-10",
+   "ticket": 464,
+   "label": "maint-pr: P05",
+   "wave": 1
+  },
+  {
+   "id": "N1031-12",
+   "ticket": 466,
+   "label": "maint-pr: P05",
+   "wave": 1
+  },
+  {
+   "id": "BC-30",
+   "ticket": 334,
+   "label": "maint-pr: P05",
+   "wave": 1
+  },
+  {
+   "id": "N1031-25",
+   "ticket": 479,
+   "label": "maint-pr: P05",
+   "wave": 1
+  },
+  {
+   "id": "BC-34",
+   "ticket": 338,
+   "label": "maint-pr: P05",
+   "wave": 1
+  },
+  {
+   "id": "N1031-3",
+   "ticket": 457,
+   "label": "maint-pr: P05",
+   "wave": 1
+  },
+  {
+   "id": "H-101",
+   "ticket": 398,
+   "label": "maint-pr: P06",
+   "wave": 1
+  },
+  {
+   "id": "H-102",
+   "ticket": 399,
+   "label": "maint-pr: P06",
+   "wave": 1
+  },
+  {
+   "id": "SC-6",
+   "ticket": null,
+   "label": "maint-pr: P06",
+   "wave": 1
+  },
+  {
+   "id": "SC-14",
+   "ticket": null,
+   "label": "maint-pr: P06",
+   "wave": 1
+  },
+  {
+   "id": "SC-2",
+   "ticket": null,
+   "label": "maint-pr: P06",
+   "wave": 1
+  },
+  {
+   "id": "N1030-27",
+   "ticket": 453,
+   "label": "maint-pr: P07",
+   "wave": 1
+  },
+  {
+   "id": "N1030-3",
+   "ticket": 429,
+   "label": "maint-pr: P07",
+   "wave": 1
+  },
+  {
+   "id": "SC-26",
+   "ticket": null,
+   "label": "maint-pr: P07",
+   "wave": 1
+  },
+  {
+   "id": "SC-27",
+   "ticket": null,
+   "label": "maint-pr: P07",
+   "wave": 1
+  },
+  {
+   "id": "SC-1",
+   "ticket": null,
+   "label": "maint-pr: P07",
+   "wave": 1
+  },
+  {
+   "id": "H-77",
+   "ticket": 383,
+   "label": "maint-pr: P08",
+   "wave": 2
+  },
+  {
+   "id": "H-78",
+   "ticket": 572,
+   "label": "maint-pr: P08",
+   "wave": 2
+  },
+  {
+   "id": "N1030-20",
+   "ticket": 446,
+   "label": "maint-pr: P08",
+   "wave": 2
+  },
+  {
+   "id": "N1030-4",
+   "ticket": 430,
+   "label": "maint-pr: P09",
+   "wave": 2
+  },
+  {
+   "id": "N1030-5",
+   "ticket": 431,
+   "label": "maint-pr: P09",
+   "wave": 2
+  },
+  {
+   "id": "N1030-6",
+   "ticket": 432,
+   "label": "maint-pr: P09",
+   "wave": 2
+  },
+  {
+   "id": "BE-3",
+   "ticket": 353,
+   "label": "maint-pr: P09",
+   "wave": 2
+  },
+  {
+   "id": "BE-9",
+   "ticket": 356,
+   "label": "maint-pr: P09",
+   "wave": 2
+  },
+  {
+   "id": "N1030-21",
+   "ticket": 447,
+   "label": "maint-pr: P09",
+   "wave": 2
+  },
+  {
+   "id": "N1031-17",
+   "ticket": 471,
+   "label": "maint-pr: P09",
+   "wave": 2
+  },
+  {
+   "id": "N1029-10",
+   "ticket": 421,
+   "label": "maint-pr: P10",
+   "wave": 2
+  },
+  {
+   "id": "N1029-11",
+   "ticket": 422,
+   "label": "maint-pr: P10",
+   "wave": 2
+  },
+  {
+   "id": "N1030-11",
+   "ticket": 437,
+   "label": "maint-pr: P10",
+   "wave": 2
+  },
+  {
+   "id": "N1030-19",
+   "ticket": 445,
+   "label": "maint-pr: P10",
+   "wave": 2
+  },
+  {
+   "id": "N1029-17",
+   "ticket": 426,
+   "label": "maint-pr: P10",
+   "wave": 2
+  },
+  {
+   "id": "N1030-23",
+   "ticket": 449,
+   "label": "maint-pr: P10",
+   "wave": 2
+  },
+  {
+   "id": "H-69",
+   "ticket": 381,
+   "label": "maint-pr: P10",
+   "wave": 2
+  },
+  {
+   "id": "N1029-5",
+   "ticket": 418,
+   "label": "maint-pr: P10",
+   "wave": 2
+  },
+  {
+   "id": "N1031-13",
+   "ticket": 467,
+   "label": "maint-pr: P11",
+   "wave": 2
+  },
+  {
+   "id": "N1031-14",
+   "ticket": 468,
+   "label": "maint-pr: P11",
+   "wave": 2
+  },
+  {
+   "id": "SC-17",
+   "ticket": null,
+   "label": "maint-pr: P12",
+   "wave": 2
+  },
+  {
+   "id": "SC-18",
+   "ticket": null,
+   "label": "maint-pr: P12",
+   "wave": 2
+  },
+  {
+   "id": "SC-24",
+   "ticket": null,
+   "label": "maint-pr: P12",
+   "wave": 2
+  },
+  {
+   "id": "SC-9",
+   "ticket": null,
+   "label": "maint-pr: P13",
+   "wave": 2
+  },
+  {
+   "id": "SC-10",
+   "ticket": null,
+   "label": "maint-pr: P13",
+   "wave": 2
+  },
+  {
+   "id": "SC-11",
+   "ticket": null,
+   "label": "maint-pr: P13",
+   "wave": 2
+  },
+  {
+   "id": "BC-2",
+   "ticket": 308,
+   "label": "maint-pr: P14",
+   "wave": 2
+  },
+  {
+   "id": "H-59",
+   "ticket": 375,
+   "label": "maint-pr: P15",
+   "wave": 3
+  },
+  {
+   "id": "H-60",
+   "ticket": 376,
+   "label": "maint-pr: P15",
+   "wave": 3
+  },
+  {
+   "id": "H-26",
+   "ticket": 368,
+   "label": "maint-pr: P15",
+   "wave": 3
+  },
+  {
+   "id": "H-97",
+   "ticket": 394,
+   "label": "maint-pr: P15",
+   "wave": 3
+  },
+  {
+   "id": "N1031-16",
+   "ticket": 470,
+   "label": "maint-pr: P15",
+   "wave": 3
+  },
+  {
+   "id": "H-104",
+   "ticket": 401,
+   "label": "maint-pr: P15",
+   "wave": 3
+  },
+  {
+   "id": "H-105",
+   "ticket": 402,
+   "label": "maint-pr: P15",
+   "wave": 3
+  },
+  {
+   "id": "H-79",
+   "ticket": 384,
+   "label": "maint-pr: P16",
+   "wave": 3
+  },
+  {
+   "id": "H-99",
+   "ticket": 396,
+   "label": "maint-pr: P16",
+   "wave": 3
+  },
+  {
+   "id": "SC-3",
+   "ticket": null,
+   "label": "maint-pr: P16",
+   "wave": 3
+  },
+  {
+   "id": "SC-5",
+   "ticket": null,
+   "label": "maint-pr: P16",
+   "wave": 3
+  },
+  {
+   "id": "SC-16",
+   "ticket": null,
+   "label": "maint-pr: P16",
+   "wave": 3
+  },
+  {
+   "id": "H-89",
+   "ticket": 387,
+   "label": "maint-pr: P17",
+   "wave": 3
+  },
+  {
+   "id": "H-90",
+   "ticket": 388,
+   "label": "maint-pr: P17",
+   "wave": 3
+  },
+  {
+   "id": "N1031-4",
+   "ticket": 458,
+   "label": "maint-pr: P17",
+   "wave": 3
+  },
+  {
+   "id": "N1029-12",
+   "ticket": 423,
+   "label": "maint-pr: P18",
+   "wave": 3
+  },
+  {
+   "id": "N1029-13",
+   "ticket": 424,
+   "label": "maint-pr: P18",
+   "wave": 3
+  },
+  {
+   "id": "BE-11",
+   "ticket": 357,
+   "label": "maint-pr: P19",
+   "wave": 3
+  },
+  {
+   "id": "BE-17",
+   "ticket": 359,
+   "label": "maint-pr: P19",
+   "wave": 3
+  },
+  {
+   "id": "BE-16",
+   "ticket": 358,
+   "label": "maint-pr: P19",
+   "wave": 3
+  },
+  {
+   "id": "BC-23",
+   "ticket": 328,
+   "label": "maint-pr: P20",
+   "wave": 3
+  },
+  {
+   "id": "BC-31",
+   "ticket": 335,
+   "label": "maint-pr: P20",
+   "wave": 3
+  },
+  {
+   "id": "H-87",
+   "ticket": 385,
+   "label": "maint-pr: P20",
+   "wave": 3
+  },
+  {
+   "id": "H-74",
+   "ticket": 568,
+   "label": "maint-pr: P21",
+   "wave": 4
+  },
+  {
+   "id": "H-75",
+   "ticket": 569,
+   "label": "maint-pr: P21",
+   "wave": 4
+  },
+  {
+   "id": "N1101-4",
+   "ticket": 484,
+   "label": "maint-pr: P21",
+   "wave": 4
+  },
+  {
+   "id": "SC-15",
+   "ticket": null,
+   "label": "maint-pr: P21",
+   "wave": 4
+  },
+  {
+   "id": "SC-22",
+   "ticket": null,
+   "label": "maint-pr: P21",
+   "wave": 4
+  },
+  {
+   "id": "N1030-17",
+   "ticket": 443,
+   "label": "maint-pr: P22",
+   "wave": 4
+  },
+  {
+   "id": "N1030-18",
+   "ticket": 444,
+   "label": "maint-pr: P22",
+   "wave": 4
+  },
+  {
+   "id": "BC-21",
+   "ticket": 326,
+   "label": "maint-pr: P23",
+   "wave": 4
+  },
+  {
+   "id": "H-38",
+   "ticket": 373,
+   "label": "maint-pr: P24",
+   "wave": 4
+  }
+ ],
+ "owner_sheet": [
+  "H-15",
+  "H-16",
+  "H-1",
+  "H-11",
+  "H-22",
+  "H-23",
+  "H-34",
+  "H-35",
+  "H-39",
+  "H-92",
+  "H-103",
+  "H-107",
+  "BC-9",
+  "BC-15",
+  "BC-19",
+  "BC-22",
+  "BC-32",
+  "BC-40",
+  "BC-48",
+  "N1030-1",
+  "N1030-2",
+  "N1030-7",
+  "N1030-8",
+  "N1030-10",
+  "N1031-6",
+  "N1101-2",
+  "SC-7",
+  "SC-8",
+  "SC-13",
+  "SC-25"
+ ],
+ "file_first": [
+  "H-7",
+  "SC-1",
+  "SC-2",
+  "SC-3",
+  "SC-4",
+  "SC-5",
+  "SC-6",
+  "SC-7",
+  "SC-8",
+  "SC-9",
+  "SC-10",
+  "SC-11",
+  "SC-12",
+  "SC-13",
+  "SC-14",
+  "SC-15",
+  "SC-16",
+  "SC-17",
+  "SC-18",
+  "SC-19",
+  "SC-20",
+  "SC-21",
+  "SC-22",
+  "SC-23",
+  "SC-24",
+  "SC-25",
+  "SC-26",
+  "SC-27"
+ ],
+ "duplicates_off_board": "113 open issues #488-#607 not on board 19; close as not planned (drafts/repair-audit-tickets.ts)"
+}

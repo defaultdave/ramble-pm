@@ -8,6 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
+| `pf7-island` | Sprint 1 close follow-ups: PF-7 client island, PRs 489 and 520, U-102 | continuation of the earlier lead chat, 2026-11-01 (night) | active | 2026-11-01 23:20 |
 | `lead` | Shared status, `## Next`, roadmap, memory; Maintenance ticket audit and prioritisation | PM lead, 2026-11-01 (night, Maintenance audit) | active | 2026-11-01 23:00 |
 | `u-035` | Sprint 1 close: U-035 category and neighborhood pages, standard tier | run by the lead chat, 2026-11-01 | closed: PR 678 merged at `39e18b4` | 2026-11-01 20:15 |
 | `u-020` | Sprint 1 close: U-020 audit log, critical tier, into `integration` | run by the lead chat, 2026-11-01 | closed: PR 683 merged into `integration` at `20ff357` | 2026-11-01 22:20 |
@@ -43,6 +44,9 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 - 2026-10-26: **Prototype wave 2** (one night, six parallel `senior` builders, two on Fable 5.1 as a trial): U-008b (PR 193), U-027 (PR 194), U-007 (PR 196), U-008a (PR 198) merged into `main`; U-045a (PR 195), U-006 (PR 199) merged into `integration`. Sync PRs 192 and 197 brought `main` into `integration`. Issues close as each unit is set to Done on board #19.
 
 ## In flight
+
+### Lane: pf7-island
+- **2026-11-01 23:20, for the lead to fold in.** Promotion done on Dave's word: PR 684 merged at `f196dbb` with `--merge --admin` after a dispatched smoke passed on both branches; U-020 is on `main`, #26 closed, `integration` 0 ahead and survived. No deploy; production has no 0020 or 0021 yet, so the next deploy needs `db-migrate-production`. PR 681 merged. Production-demo seed rerun by Dave: BC-48 row closed. Ticket repair finished: 187 labelled, 181 duplicates closed as not planned, SC-1 to SC-27 filed, 206 open audit tickets. PF-7 island: round 1 at `119c21d`, browse 3 of 12 to 12 of 12 cards on 5 JS-off first loads, about 1.6 KB of JS; round 2 brings Show more into the island. U-102 waits on Dave's account list. PR 489 waits on Dependabot's rebase; PR 520 recommended closed. The allowlist line goes in a `pm/` bypass PR.
 
 ### Lane: lead (test photos on Blob)
 - **2026-11-01 12:05, deployed on Dave's "deploy it".** `dpl_5t7uzaRwi6iH1XyuPd7wp65xTWoE` from a clean copy of `8d733c020829e4294cc88150c7890a37f1ce7c36`, so production also takes PR 302 (home cache tags) and the U-030 phone menu change; no migration since the last deploy. `vercel deploy --prod` aliased only `ramble-david-fleming.vercel.app`; `ramble-sand.vercel.app` moved only after `vercel promote`, so a deploy needs both. Live panel checked at 1440x827 on `ramble-sand`. **For the lead:** add the promote step to `docs/runbooks`. The roadmap artifact still needs republishing.
