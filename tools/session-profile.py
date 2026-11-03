@@ -122,9 +122,19 @@ def profile_subagents(day):
         print(f"  {kind}: {dict(counts)} context avg={sum(sizes) / len(sizes) / 1000:.0f}K peak={max(sizes) / 1000:.0f}K")
 
 
+def root_chats():
+    """Chats opened at the workspace root that moved into a ramble checkout (token-audit counts them)."""
+    keep = []
+    for path in glob.glob(f"{ROOT}/-Users-davidfleming-Workspace/*.jsonl"):
+        with open(path) as f:
+            if any('"cwd":"/Users/davidfleming/Workspace/ramble' in line for line in f):
+                keep.append(path)
+    return keep
+
+
 if __name__ == "__main__":
     day = dt.date.fromisoformat(sys.argv[1])
-    for path in sorted(glob.glob(f"{ROOT}/*ramble*/*.jsonl")):
+    for path in sorted(glob.glob(f"{ROOT}/*ramble*/*.jsonl") + root_chats()):
         profile_session(path, day)
     profile_subagents(day)
     if starts:
