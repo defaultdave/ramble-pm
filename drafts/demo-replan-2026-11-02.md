@@ -28,16 +28,17 @@ The chain, in dependency order. U-002, U-020 and U-025 are already on `main`.
 
 | Unit | What | Proposal |
 |---|---|---|
-| U-004a | Sign-in links, roles and sessions | Keep |
-| U-004b | Passkeys and step-up | Keep. The plan has ops and admin sign in with passkeys only; email links for staff would be simpler but weaker. Dave's call |
-| U-022 | Authorization matrix test | Keep; it proves each role sees only what it should |
-| U-073 | Ops shell, passkey sign-in screen, audit rows | Keep |
-| U-112 | Staff and roles admin, including the first admin by seed or CLI | Keep; without it nobody is admin |
+| U-004a | Sign-in links, roles and sessions | Keep. Email links for every role, staff included (Dave, 2026-11-02) |
+| U-022 | Authorization matrix test | Keep; it proves each role sees only what it should. Depends on U-004a instead of U-004b |
+| U-073 | Ops shell, email sign-in screen, audit rows | Keep, without the passkey screen and the step-up prompt. Moves the dev mailbox behind the ops role |
+| U-112 | Staff and roles admin, including the first admin by seed or CLI | Keep; without it nobody is admin. Invites are email sign-in links; no passkey enrolment, reset or step-up |
 | U-076a | Edit and publish editorial copy | Keep: the start of the CMS |
 | U-076b | Home and collections admin | Keep |
 | U-076c | Pages and documents admin | Keep |
 | U-074a, U-074b | Host setup and the experience editor | Keep: editing experiences is the other half of the CMS |
 | U-107 | Guest account: my bookings | Keep: the guest side of login |
+
+U-004b (passkeys and step-up) is cut, below. Units that depended on it now depend on U-004a.
 
 Probably more than one sprint at the old pace; agent actuals have run at 4 to 42 percent of estimate, so the forecast refit decides.
 
@@ -79,6 +80,7 @@ What makes the site useful for performance work and experiments.
 
 | Unit | What | Why it goes |
 |---|---|---|
+| U-004b | Passkeys and step-up | Dave, 2026-11-02: email links for staff too. One admin on a demo; saves about 2 days and the preview-domain problem |
 | U-046 | Stripe Connect adapter | The demo runs on the fake payment adapter (ADR 0003) |
 | U-053 | Checkout script inventory and PCI | No real card data |
 | U-071 | Host statements and payouts | No real hosts paid |
