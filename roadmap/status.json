@@ -1,6 +1,6 @@
 {
- "asOf": "2026-11-02",
- "headline": "Nov 2, early morning: Maintenance wave 1 is merged, seven grouped PRs (714, 716 to 721) closing 32 audit tickets. Wave 2 (P08 to P14, P25, one migration) is next. Of 206 open findings: 18 close with no code, 92 are clear fixes in 24 PRs over 4 waves, 46 belong to Sprint 2 tracks, 20 are carried by units, and you answered all 30 owner rows as recommended. Production still serves 44dd004; the next deploy needs db-migrate-production for migration 0022.",
+ "asOf": "2026-11-03",
+ "headline": "Nov 3: open PRs cleared (729 to 732 merged; P13 and P25 sit in integration for your promotion). Forecast refit for the demo re-plan: 67 parked and cut units dropped, 43 done. Unit work fits by about Dec 1 on paper; the plan of record is the board's sprints: Sprint 2 (stabilization, to Nov 30), Sprint 3 (login and admin, Dec 1 to 14), test bed after, by Dec 30. The launch milestone is gone.",
  "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
  "phases": [
   {
@@ -98,7 +98,15 @@
    "when": "Oct 20"
   }
  ],
- "decisionsNeeded": [],
+ "decisionsNeeded": [
+  {
+   "title": "Test audit and comment cleanup sooner?",
+   "impact": "Neither has started; both queue after maintenance waves 3 and 4 in Sprint 2. Pulling them forward moves no unit date.",
+   "detail": "Test audit: 3,798 cases and 71,209 test lines against 44,190 source lines, 8 tickets; its size target comes from a first pass over the largest test files. Comment cleanup: 1 ticket, N1031-15, still open (six ticket-number comments on main, three naming parked or cut units).",
+   "recommendation": "Start the test audit's first pass now as a findings-only lane beside wave 3 (no file overlap), and fold N1031-15 into wave 3 as one XS PR.",
+   "blocks": "Nothing waits on it"
+  }
+ ],
  "actionsForDave": [
   {
    "title": "Push unit/U-001-neon-skip and bypass-merge it",
@@ -411,9 +419,9 @@
    "unit": "U-049"
   },
   {
-   "id": "launch",
-   "label": "Launch-ready",
-   "unit": "U-104"
+   "id": "demo",
+   "label": "Demo and test bed done",
+   "unit": "U-100"
   }
  ],
  "workstreams": {
@@ -439,7 +447,7 @@
   "Refit Oct 29 from today: the Prototype units done, U-005 and U-014a at review, and U-014a, U-016, U-047a, U-048 and U-049 built by agents under PM pattern notes (the owner's call, Oct 29).",
   "The frozen routing for comparison: the owner builds U-014a, U-016, U-047a, U-048 and U-049 himself at 12.5 hours a week."
  ],
- "forecastNote": "Forecast from Oct 29. The model prices each unit at its three-point estimate with review gates and a WIP limit; it does not yet carry the measured agent actuals (most merged units closed at 10 to 40 percent of their estimate), so treat its dates as the slow case. Refit 2026-10-30: start moved to Oct 30 with U-005 to U-041 marked done; prototype P50 Nov 13, finish P50 Jan 15 2027.",
+ "forecastNote": "Refit 2026-11-03 for the demo re-plan: start Oct 30, the 43 done units at zero, U-037 and U-102 partly done, 67 Parked and Cut units dropped with the new --drop flag (PR 733), Should units included. U-119 is left out: it has no solo estimate in the frozen panel and is mostly done. Two limits: the model ignores the board's sprint order (it starts Sprint 3 units in Sprint 2), and it does not count Sprint 2's non-unit tracks (maintenance waves 3 and 4, test audit, comment cleanup, architecture drift and dead code, client islands review). So its Dec 1 is the unit work alone; the board's Sprint values, set by hand, are the plan, and board-dates --run stays off until the model honours sprint order.",
  "frozen": {
   "prototype": {
    "likely": "2026-11-30",
@@ -451,6 +459,29 @@
   }
  },
  "standups": [
+  {
+   "date": "2026-11-03",
+   "done": [
+    "Sync PR 732 and agent experiment PR 731 merged (your bypass); P13 (729) and P25 (730) auto-merged into integration",
+    "Forecast tooling PR 733 opened: --drop for parked and cut units, board-dates skips them, board-plan prints the lists; review passed",
+    "Forecast refit for the demo re-plan; roadmap drops the launch milestone"
+   ],
+   "today": [
+    "Your merge of PR 733",
+    "Maintenance wave 3 (P15 to P20) after a file-overlap check against main",
+    "Your promotion of integration (P13, P25) when convenient"
+   ],
+   "heldUs": [
+    {
+     "what": "integration 26 commits behind main",
+     "cost": "729 and 730 failed scope-manifest overnight until the sync landed; open the sync before critical-tier PRs"
+    },
+    {
+     "what": "Auto mode refuses the PM posting sync checks",
+     "cost": "each sync needs your bypass merge"
+    }
+   ]
+  },
   {
    "date": "2026-11-02",
    "done": [

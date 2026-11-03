@@ -385,10 +385,10 @@ footer code { font-size: 12px; }
       dates.append(d);
     };
     tile("Prototype", sc.prototype.dates.p50, sc.prototype.dates.p90, "Clickable guest flow on seed data", true, T.frozen.prototype);
-    tile("Launch-ready", sc.finish.dates.p50, sc.finish.dates.p90, `Full build, about ${Math.round(sc.finish.weeks.p50)} weeks from ${fmt(S.start)}`, true, T.frozen.launch);
+    tile("Demo unit work", sc.finish.dates.p50, sc.finish.dates.p90, "Kept units only; the board's sprints run Sprint 3 to Dec 14 and the test bed after", true);
     tile("Fastest possible", S.floor.dates.p50, S.floor.dates.p90, "Unlimited people; nobody waits");
     const c = document.getElementById("client"); c.replaceChildren();
-    c.append("The client asked for ", el("b", null, "Dec 1"), `. The full build cannot make it under any staffing; the Prototype lands ${fmt(sc.prototype.dates.p50)} (late case ${fmt(sc.prototype.dates.p90)}).`);
+    c.append("Re-planned Nov 2 as a demo and test bed, not a launch: ", el("b", null, "67 units parked or cut"), `. Kept unit work finishes ${fmt(sc.finish.dates.p50)} (late case ${fmt(sc.finish.dates.p90)}) before the non-unit Sprint 2 tracks.`);
 
     // Gantt
     const last = Math.max(...sc.units.map((u) => u.end));
@@ -419,7 +419,7 @@ footer code { font-size: 12px; }
       { label: "Agents can merge", day: ms("U-118").end },
       { label: "Prototype", day: Math.max(...S.units.filter((u) => u.prototype).map((u) => units.get(u.id).end)), proto: true },
       { label: "Money core", day: ms("U-049").end },
-      { label: "Launch-ready", day: ms("U-104").end },
+      { label: "Demo and test bed", day: ms("U-100").end },
     ].sort((a, b) => a.day - b.day);
     milestones.forEach((m, i) => {
       const d = el("div", "ms" + (i % 2 ? " low" : "") + (m.proto ? " proto" : "")); d.style.left = pct(m.day);

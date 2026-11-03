@@ -7,12 +7,12 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 2, 2026.** Nov 2, early morning: Maintenance wave 1 is merged, seven grouped PRs (714, 716 to 721) closing 32 audit tickets. Wave 2 (P08 to P14, P25, one migration) is next. Of 206 open findings: 18 close with no code, 92 are clear fixes in 24 PRs over 4 waves, 46 belong to Sprint 2 tracks, 20 are carried by units, and you answered all 30 owner rows as recommended. Production still serves 44dd004; the next deploy needs db-migrate-production for migration 0022.
+**As of Nov 3, 2026.** Nov 3: open PRs cleared (729 to 732 merged; P13 and P25 sit in integration for your promotion). Forecast refit for the demo re-plan: 67 parked and cut units dropped, 43 done. Unit work fits by about Dec 1 on paper; the plan of record is the board's sprints: Sprint 2 (stabilization, to Nov 30), Sprint 3 (login and admin, Dec 1 to 14), test bed after, by Dec 30. The launch milestone is gone.
 
 | Milestone | Likely |
 |---|---|
 | Prototype | Nov 13, 2026 (late case Nov 18, 2026) |
-| Launch-ready | Jan 15, 2027 (late case Jan 27, 2027) |
+| Launch-ready | Dec 2, 2026 (late case Dec 8, 2026) |
 
 Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
@@ -34,7 +34,7 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Decisions needed**
 
-- None
+- Test audit and comment cleanup sooner?. Recommended: Start the test audit's first pass now as a findings-only lane beside wave 3 (no file overlap), and fold N1031-15 into wave 3 as one XS PR..
 
 **Held up**
 
