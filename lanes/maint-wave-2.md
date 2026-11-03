@@ -7,7 +7,7 @@
 - PRs: 723 P08, 724 P09, 725 P12, 726 P10, 727 P14 (all merged), 728 P11 (merged after a `db` rerun), 729 P13 and 730 P25 (into `integration`).
 - Departures from the triage:
   - P08: H-78 only `.copy` and `.art` composed; `.band`, `.skeletonInner`, `.pills`, `.cards` are not copies. #572 stays open (Refs).
-  - P09: added `isDateInWindow` (sessionWindow.ts) for the N1030-4 clamp. BE-9 copy "No experiences on this page" approved by Dave 2026-11-03; the N1031-17 "Anywhere" label still waits for Dave; #471 stays open.
+  - P09: added `isDateInWindow` (sessionWindow.ts) for the N1030-4 clamp. BE-9 copy "No experiences on this page" approved by Dave 2026-11-03; Dave kept the N1031-17 "Anywhere" label as is (2026-11-03); #471 stays open for its code cleanups only.
   - P10: N1029-17 skipped `storageSettingIssues`; #426 stays open. N1030-10 (#436) done: local target refuses non-fake storage.
   - P11: `src/server/secureEqual.ts` moved to `hash.ts`, nine importers repointed.
   - P13: SC-9 pool timeouts dropped (a per-connection SET made `test:db` flaky, 5 of 8 clean runs against 3 of 3; Neon pooler behaviour with startup options unverified). Only `maxDuration = 300` kept. #693 stays open.
