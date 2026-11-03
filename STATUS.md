@@ -10,6 +10,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 |---|---|---|---|---|
 | `pf7-island` | Sprint 1 close follow-ups: PF-7 client island, PRs 489 and 520, U-102 | continuation of the earlier lead chat, 2026-11-01 (night) | handed off: PR 715 merged, 489 and 713 merged, 520 closed; U-102's rest is in Next | 2026-11-02 14:20 |
 | `maint-wave-1` | Maintenance wave 1: PRs P01 to P07 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-1, 2026-11-01 (night) | handed off: all seven PRs merged | 2026-11-02 02:00 |
+| `maint-wave-2` | Maintenance wave 2: PRs P08 to P14, P25, N1030-10 in P10 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-2, 2026-11-02 (evening) | active | 2026-11-02 22:30 |
 | `lead` | Shared status, `## Next`, roadmap, memory; the demo re-plan (Dave, 2026-11-02) | continuation of the pf7-island chat, 2026-11-02 (took lead; the last lead handed off at 02:00) | handed off: re-plan approved and on the board | 2026-11-02 15:30 |
 | `u-035` | Sprint 1 close: U-035 category and neighborhood pages, standard tier | run by the lead chat, 2026-11-01 | closed: PR 678 merged at `39e18b4` | 2026-11-01 20:15 |
 | `u-020` | Sprint 1 close: U-020 audit log, critical tier, into `integration` | run by the lead chat, 2026-11-01 | closed: PR 683 merged into `integration` at `20ff357` | 2026-11-01 22:20 |
@@ -45,6 +46,9 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 - 2026-10-26: **Prototype wave 2** (one night, six parallel `senior` builders, two on Fable 5.1 as a trial): U-008b (PR 193), U-027 (PR 194), U-007 (PR 196), U-008a (PR 198) merged into `main`; U-045a (PR 195), U-006 (PR 199) merged into `integration`. Sync PRs 192 and 197 brought `main` into `integration`. Issues close as each unit is set to Done on board #19.
 
 ## In flight
+
+### Lane: maint-wave-2
+- **2026-11-02 22:30, claimed.** Reading the triage doc; no PR cut yet.
 
 ### Lane: maint-wave-1
 - **2026-11-02 02:00, wave 1 done, handed off.** All seven PRs merged (714, 716 to 721; head `9eff5b9`); every ticket closed and Status Done on board #19 (the merge closed them: the App has Issues write now). Worktrees and local branches removed. Gates per branch: gitleaks range, build without `DATABASE_URL`, unit, db, and e2e for P05 and P06 (P01 too), all re-run after merging `main`. Branch names are `unit/U-xxx-maint-Pnn` under the owning standard unit (DECISIONS 2026-11-01). Round counts: P01, P02, P04, P05 (after a BC-30 part 3 fix), P03 (a missing db-refusal test), P06 (a 768 px regression), P07 (wrong dependency reasons, then CLAUDE.md out of the PR).
