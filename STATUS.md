@@ -12,7 +12,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | `maint-wave-1` | Maintenance wave 1: PRs P01 to P07 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-1, 2026-11-01 (night) | handed off: all seven PRs merged | 2026-11-02 02:00 |
 | `maint-wave-2` | Maintenance wave 2: PRs P08 to P14, P25, N1030-10 in P10 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-2, 2026-11-02 (evening) | handed off: 8 of 9 PRs merged or queued (see lane entry) | 2026-11-02 23:55 |
 | `lead` | Shared status, `## Next`, roadmap, memory; test audit decision, wave 3 | PM lead, 2026-11-03 (midday) | active | 2026-11-03 |
-| `maint-wave-3` | Maintenance wave 3: P15 to P20 plus P26 `ticket-comments` (N1031-15) from `audits/maintenance-triage-2026-11-01.md` | not started (opened by the lead 2026-11-03) | handed off: ready to start | 2026-11-03 |
+| `maint-wave-3` | Maintenance wave 3: P15 to P20 plus P26 `ticket-comments` (N1031-15) from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-3, 2026-11-03 (night) | active | 2026-11-03 21:50 |
 | `test-audit` | Test audit first pass, findings only: the largest test files and the 8 `test-audit` track rows in `audits/maintenance-triage-2026-11-01.md`; sets the test size target; no code | PM test-audit, 2026-11-03 | active | 2026-11-03 |
 | `u-035` | Sprint 1 close: U-035 category and neighborhood pages, standard tier | run by the lead chat, 2026-11-01 | closed: PR 678 merged at `39e18b4` | 2026-11-01 20:15 |
 | `u-020` | Sprint 1 close: U-020 audit log, critical tier, into `integration` | run by the lead chat, 2026-11-01 | closed: PR 683 merged into `integration` at `20ff357` | 2026-11-01 22:20 |
