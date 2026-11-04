@@ -12,3 +12,9 @@
 - First CI pass: `storybook` failed on 820 (BE-17 tabindex removal, axe `scrollable-region-focusable`) and on 837 (HomeEmpty Empty Mobile, axe `landmark-no-duplicate-banner`), `e2e` on 837 (`landing.spec.ts:20` expected the old fallback title), `db` flake on 825, 838, 840, `scope-manifest` on 839 (`integration` behind `main`). `expire preview branch` failed on all (Neon preview branch missing).
 - Fix rounds, wip branches fast-forwarded into the unit branches, re-reviewed, checks re-posted on the new heads: 820 head `e35a972` (BE-17 reverted), 837 head `fd607dd` (story rule disabled, spec updated). Both then merged.
 - Lesson: the first reviewers could not run Storybook or Playwright in their sandbox and said so, but the PM queued auto-merge on those checks anyway. UI PRs now need `pnpm storybook:test` and the e2e specs run before checks are posted.
+
+2026-11-04 early: finish.
+- `db` flake: diagnosed as a sub-millisecond race between `jobs.run_after` (database `clock_timestamp()`) and a millisecond JavaScript `Date` in `drainJobs(systemClock)`; fixed in PR 846 by draining with the repo's `dueClock`. It also failed on `main` itself four times. Not reproduced locally (40 runs), cause verified from the code and 1000 `clock_timestamp()` samples.
+- Sync 845 (`sync/2026-11-04`): prepared by a builder agent in its own worktree (two conflicts, `src/server/ports/storage/index.ts` and `src/server/pulse.ts`, resolved keeping both sides), verified by a second agent (parents, merged-PR provenance, blob-hash comparison of all other changed files, migration check, gates including the db suite), four checks posted, Dave admin-merged it. 839's `scope-manifest` then passed on rerun.
+- 838: `main` merged into the branch after 846 (clean), gates rerun, a reviewer re-posted the four checks.
+- Gap noted: storybook was not run by any sync or flake-fix reviewer; Chromium needs the sandbox bypassed.
