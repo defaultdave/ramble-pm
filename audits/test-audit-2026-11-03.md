@@ -1,0 +1,84 @@
+# Test audit, first pass (2026-11-03)
+
+Lane `test-audit`. Findings only, at `origin/main` `5c7c36a`. No code, tickets or ramble commits; no DB test was run. Five read-only Sonnet agents read about 24 files (the 20 largest within their groups plus the files the eight `test-audit` rows name) and grepped the rest. Agents read most test bodies, not all, so each "weak" or "duplicate" row is a candidate the fix PR confirms before cutting. Money, holds, webhook, race and authorization tests are off every cut list.
+
+## What the counts say
+
+336 test files, 77,737 lines, about 3,364 tests (about 23 lines each on average). The median file is 122 lines; the problem is the tail.
+
+| Threshold | Files over it | Lines in them | Share of all test lines |
+|---|---|---|---|
+| 300 lines | 71 | 48,605 | 63% |
+| 500 lines | 38 | 35,802 | 46% |
+| 700 lines | 24 | 27,059 | 35% |
+| 1,000 lines | 12 | 16,727 | 22% |
+
+- Of the 20 largest files, 13 are `tests/db`, which share one Postgres and one harness. Most of their bulk is setup, helpers and constraint matrices, not redundant assertions.
+- Real redundancy is small. The two agents that sized it found about 150 to 250 lines in the unit group and "6 to 8 merges" in the browse/guests group. Cutting tests will not shrink the suite by much (my estimate: under 2%). The wins are shared helpers (35 `id()` copies, 11 `driverError`, 8+ `unique()`, 4 `waitUntilBlocked`) and splitting files by describe block.
+- The mutation sample the production-ready draft asks for was not run (needs the DB and a tool; out of scope for a findings pass). It is the one gate to add before any deletion PR: run it on the touched module before and after.
+
+## Size target (proposal)
+
+| Measure | Target | Evidence |
+|---|---|---|
+| Lines per test file | 500 soft, 800 hard (a CI check later, warning first) | 38 files exceed 500; every split point the agents found yields files of 150 to 500 lines, so 500 is reachable without cutting a test. Files under 500 are 298 of 336 (89%). |
+| Lines per test body | 60, fixture tables and `it.each` rows exempt | Average is 23. Longest bodies are 77 to 155 lines and are mostly fixture (`ledger.test.ts:961-1115`, `editorial.db.test.ts:2461-2538`). |
+| Shared helpers | One definition each in `tests/support/` (pure) or `tests/db/harness.ts` (DB); a second copy fails review | Counts above. |
+| Real sleeps | None; wait on a condition | 15 fixed 300 ms waits in `holds-races.db.test.ts` alone (about 4.5 s and a vacuous-pass risk). |
+
+## Findings
+
+Size: XS under 30 minutes, S one small PR, M a PR with many files or a judgment call.
+
+| ID | File | Finding | Size | Fix |
+|---|---|---|---|---|
+| TA-1 | 15 files (`HomeContent.test.tsx:39`, `BrowseContent.test.tsx:40`, `src/server/{upcomingSessions,home,coverPhotos,experiencePage}.test.ts`, `HomeModules.fixtures.tsx:25`, `src/lib/{transfers,orders,catalog,experienceCards,photoViews,refunds,payments}.test.ts`, `src/lib/pages/{home,browse}.test.ts`) | Identical `id(n)` copies (N1030-15, #441). The `tests/db` files have no `id()`. `idLookup.test.ts:7` (hex) and `ledger.property.test.ts:64` (two args) differ and stay local. `experience.fixtures.ts:3` already exports `id`. | M | `tests/support/ids.ts` exports `id`; `experience.fixtures` re-exports it; `fakeState.test.ts:17` `uuid` uses it (N1031-18). |
+| TA-2 | 11 files (`HomeContent.test.tsx:67`, `LandingRoute.test.tsx:81`, `experiences/[slugAndId]/page.test.tsx:66`, `BrowseContent.test.tsx:62`, `src/server/{landing,filterOptions,home,browse,coverPhotos,experiencePage}.test.ts`, `readOrRefuse.test.ts:12`) | `driverError` in two shapes (plain `Error`, or with `cause`); the secret strings are asserted per file. | M | `tests/support/driverError.ts` factory taking the secret and `withCause`. Overlaps TA-1 on 5 files, so after TA-1. |
+| TA-3 | 10 importers of `pages/experience.fixtures` (list in the wave 1 row) | Test fixtures live in `src/lib/pages` (N1030-16, #442). | S | Move to `tests/support/fixtures/experience.ts` with TA-1. |
+| TA-4 | `tests/db/harness.ts:196`, used by `holds-races` (15 calls), `editorial-races`, `provider-events`, `confirm-order` | `aFewMoments` is a fixed 300 ms `setTimeout`; a slow box lets the challenger not block yet, so "waited" can pass vacuously. About 3 to 5 s of sleep per race file. | M | One polling helper in `harness.ts` on `pg_stat_activity` / `pg_blocking_pids` with a timeout. |
+| TA-5 | `provider-events.db:819`, `confirm-order.db:540`, `sessions.db:1353` (`waitUntilBlockedBy`), `jobs.db:681` | Four `waitUntilBlocked` variants (N1031-18, #472). `sessions.db:1332` uses a fixed 150 ms sleep before asserting a wait. | S | Same helper as TA-4 (one PR). |
+| TA-6 | `holds-races.db:86, 103-139` | Local copies of `aFewMoments`, `raceAgainstOpenTransaction` that add `whileWaiting` / `beforeCommit` hooks. `editorial-races:92-97, 517-566` hand-rolls a `gate`/`held` pair. | S | Add the hooks and a `deferred()` to the harness; delete the copies. With TA-4. |
+| TA-7 | `browse:83`, `catalog:61`, `editorial:101`, `editorial-races:77`, `home:55`, `photos:66`, `sessions:73`, `upcomingSessions:52`, `holdFixtures:36` (all `tests/db`) | `unique(prefix)` copied 8+ times; `insertHost/Category/Neighborhood/Experience/Session` copied across browse, catalog, editorial, sessions (`sessions:176` duplicates `holdFixtures.ts:120`). | M | `tests/db/catalogFixtures.ts` shared by all; `browseFixtures.ts` and `editorialFixtures.ts` for the 245- and 127-line helper blocks. |
+| TA-8 | `orders.db` (about 50), `guests:123`, `audit:97`, `browse:364`, `catalog:727/829`, `email:796-840`, `blank-text:53`, `sessions:1470` | `rejects.toMatchObject({cause:{constraint}})` and local `constraint()` repeated; tied to the driver's `cause` shape. | S | `expectConstraint(promise, name)` in the harness. |
+| TA-9 | `src/lib/seed/run.ts:296-325` (via `src/server/db/seed/run.ts`) | Seat guard (`lt(seatsSold, planned)`) is tested only by setting the count before the run (`seed.db.test.ts:554-583`). Missing: equal value untouched, below value raised, no plan not written, a booking landing between read and write. | S (cases), M (race) | Add cases to `seed.db.test.ts`; race last. |
+| TA-10 | `src/server/guestCovers.ts` (caller `HomeContent.tsx:28`) | No test (N1030-24, #450). | S | New `guestCovers.test.ts`: success map, ids passed are `coverLookupIds` output, empty list, error with `rethrowOrLog` returning gives an empty `Map`, rethrow propagates. Keep (the row said "if the audit keeps it"). |
+| TA-11 | `tests/support/importGraph.ts:54` | `importsOf` regex has no `^` or `m` flag, so imports in comments and strings match (SC-19, #703). No test for it. | XS | Anchor on line start or strip comments; add `importGraph.test.ts` with a commented import. |
+| TA-12 | `tests/bot-check-scope.test.ts:11`, `tests/cache/conventions.test.ts:223`, `tests/security-headers.test.ts:21,43` | Test-local file walkers beside `listFiles` (`importGraph.ts:9`). The migration-file `readdirSync` calls elsewhere are fine. | S | Use `listFiles`. With TA-11. |
+| TA-13 | `e2e/routes.spec.ts`, `e2e/order-confirmation.spec.ts:36-52` | Tokenless `/orders` and `/gift` are listed only in `perRequestFallbackPaths` (headers spec). Nothing asserts heading and `main` for them; `order-confirmation` asserts the heading but not `main` (BC-55, #348). | XS | Loop over those paths asserting the not-found heading and visible `main`; add `main` to the confirmation test. |
+| TA-14 | `vitest.config.ts`, `docker-compose.yml` | No worker cap for the `db` project; Postgres runs at the default `max_connections` of 100 (BC-6, #312). One schema per file. | XS | `maxWorkers` for the `db` project, or `-c max_connections`. Unverified under load, so also run once with the cap. |
+| TA-15 | `src/server/db/jobs.ts:23,30,57`, migration `0009:10`, `jobs.db.test.ts:229` | `run_after` defaults to the DB `clock_timestamp()` but claims compare against the JS `Clock` (BC-28, #332). `insertRaw` always sets it, so the default is untested. A skewed clock makes a fresh job look not due. | S | Stamp `runAfter` from the clock port in `insertJob`, plus a DB test inserting without it. This is a code fix, not just a test, so it needs the owning unit's tier. |
+| TA-16 | `audit.db.test.ts:600-635` (dead letter), `652-667` (pulse) | Dead letter is not slow (dies at attempt 1) but does four dynamic `await import`s inside the test, mutates shared `store.locked`, and clears `raiseAlert` by hand. Pulse depends on the wall clock (grace hour) and on earlier rows. | S | Hoist imports to `beforeAll`, reset mocks in `beforeEach`, freeze `Date` as at `:561`. |
+| TA-17 | `FilterBar.test.tsx` (1,039 lines; `getByText('Pick a date')` about 20 times; `querySelector('details'/'summary'/'[role=status]')` about 12 times) | One copy edit breaks about 20 tests; selectors are structure-bound. `setTimeout(50)` at 656, `(20)` at 815. Hard-coded 'Sat, Nov 7' with no clock pin; `BookingFlow` 'Thu, Oct 22' likewise. | S | `dateChip()` helper by role, a role or testid on the disclosure, fake timers, pin the clock. Split in `.drawer` / `.date` plus `FilterBar.testkit.tsx` (the loader mocks at 70-146). |
+| TA-18 | `CheckoutPage.test.tsx:163,185-186,536,690`; `BookingFlow.test.tsx:88-107,316` | Pin literal copy and prices ("Spaces held for", "$130.00", "From $65"). | S | Import the copy constants or assert from `kayakOffer` through the formatter. Do not split either file (696 and 559 lines). |
+| TA-19 | `HomeStates.browser.tsx:63-66`, `BookingPanel.test.tsx:90`, `Notices.test.tsx:23,39,58`, `ButtonLink.test.tsx:27-39`, `UpcomingSessions.test.tsx:99`, `RetryAlert.test.tsx:36`; mount boilerplate in `forced-colors.browser.tsx:60`, `BookingPanel.browser.tsx:147`, `HomeStates.browser.tsx:88` | Class-substring selectors and repeated mount code (N1031-18, rest). | M | `tests/support/mount.ts`; `data-*` or role queries. Touches components. |
+| TA-20 | `ledger.test.ts` (1,350), `checkout.test.ts` (1,336), `holds.test.ts` (1,206), `providerEvents.test.ts` (933) | Over target. Split points by describe: ledger at 155/503/1117 (shared constants 74-152 to a testkit), checkout at 79/451/721, holds at 99/254/763, providerEvents at 283. | M | Split into 2 to 3 files each, no test cut. |
+| TA-21 | `editorial.db` (2,702), `sessions.db` (1,655), `orders.db` (1,651), `holds.db` (1,382), `checkout.db` (1,200), `browse.db` (1,180), `guests.db` (1,024), `provider-events.db` (1,002), `holds-races` (810), `editorial-races` (568) | Over target. Split points: editorial into 5 or 6 files (constraints 227-607, legal, reads, saves; fixtures 100-226 out); sessions at 196/553/1188; orders at 161/855/1136; holds at 141/415/953; checkout.db at 445/883 (setup 61-183 out); browse at 246/551/1059 (helpers 1-245 out); guests races out; provider-events races at 819; holds-races at 485. | M each | One PR per file after TA-4 to TA-8. |
+| TA-22 | `ledger.test.ts:385-388, 1092-1098, 1110-1115, 119-137`; `checkout.test.ts:615-636, 1031-1070`; `holds.test.ts:1098-1111, 1010`; `orders.db:351, 1025, 1505`; `editorial.db:2300-2310, 1667-1684, 1822-1852, 1311-1358` | Redundant or weak: tautologies (`deviceHashPattern`, `toBeInstanceOf(Array)`), `rejects.toThrow()` with no type, index-definition regexes that restate the schema, positional `cases[N]`, `as unknown as` snapshot cast, a shim that swallows non-Zod errors. Exact duplicates: `editorial.db:2300` repeats `editorial-races:257`; `ledger.test.ts:1092` repeats `:304`. | S | About 10 cuts and merges, each citing its partner, each with before and after mutation on the module. Total savings small. |
+| TA-23 | `browse.db:1154, 1166, 856`; `FilterBar:174, 594/667/1000, 760/792` | `sent.length === 1` pins the query count; `includes('"experiences"."id" = $1')` matches SQL text; one test asserts two behaviours; 3 tests for "close and refocus the chip". | S | Merge or rewrite as the agents list. |
+| TA-24 | `editorial.db:707-826, 858-946`, `editorial-races:108-135` | Assert Postgres trigger message text (`stringContaining('is final')`). | S, deferred | Needs the triggers to raise SQLSTATEs (a migration). Park. |
+| TA-25 | `sessions.db:1634-1654`, `orders.db:1594-1624`, `sessions.db:1174` | `throws for %s` checks only `rejects.toThrow()`; text-that-looks-blank overlaps `blank-text.db:27`; `toHaveLength(53)` tests date arithmetic. | S | Check the schema tests first, then trim. |
+| TA-26 | `checkout.db:321-322, 520-580, 711-713, 562`; `holds.db:148, 339, 818, 878, 928` | `Date.now()` offsets of 1 to 10 minutes; `payingUntil` at 1 minute is tight on a slow run. | S | Inject `at` or fake timers. |
+| TA-27 | `ledger.test.ts:74-85`, `checkout.test.ts:67-68`, `holds.test.ts:88-89, 673`, `providerEvents.test.ts:121, 677, 746` | `at = 2026-11-01T12:00Z` declared in 3 files; time-offset helper reinvented 3 times; 8 hand-typed UUIDs. | XS | `src/lib/testClock.ts` (`at`, `minutesFrom`) and a shared id list; do with TA-20. |
+| TA-28 | Coverage gaps from agents (confirm before filing) | No test for: a grant vs withdraw consent race (`guests.db`); a paying hold lapsing while a capacity edit waits (`holds-races`); a refund above the order total (`orders.db`, maybe in `ledger.db`); `generateSessions` vs `updateSessionAllocation` race; `updateSettings` under concurrent save; `pulse` with a wrong secret; export of a zero-row day or a mid-parts resume; a payment-declined or `requires_action` UI in `CheckoutPage`; a stale full `?date=` in `BookingFlow`. | S each | One ticket each if Dave wants them; none block the refactor. |
+
+Not yet audited (38 files over 500 lines, about 18 not read): `bookingDraft`, `pages/home`, `pages/browse`, `pages/experience`, `server/env`, `filters`, `jobs`, `editorial` (unit), `sessions` (unit), `seed/coverage`, `seed/target`, `ports/email/adapters.contract`, `ports/payments/fake`, and `tests/db` `photos`, `email`, `ledger.db`, `jobs`, `catalog`, `hold-rules`, `confirm-order`, `seed`, `bookingEmails`, `tokens`. They are split by the size rule in wave 6 without a content audit; a second pass on them is optional.
+
+## Fix PRs in waves
+
+Disjoint files within a wave; a later wave starts when the earlier one it names has merged. All are test-only except PR 15 (TA-15) and PR 19, which touch `src`. DB tests cannot be run by this lane; the builders run them in CI or against their own database.
+
+| Wave | PR | Items | Files touched |
+|---|---|---|---|
+| 1 (parallel) | W1a | TA-1, TA-3 | `tests/support/ids.ts`, `tests/support/fixtures/experience.ts`, the 15 `id()` files, the 10 fixture importers, `fakeState.test.ts` |
+| 1 | W1b | TA-10, TA-11, TA-12, TA-13 | `src/server/guestCovers.test.ts`, `tests/support/importGraph.ts` and its new test, 3 walker files, 2 e2e specs |
+| 1 | W1c | TA-20, TA-27 (unit splits) | `ledger`, `checkout`, `holds`, `providerEvents` tests plus `testClock.ts` |
+| 1 | W1d | TA-17, TA-18 | `FilterBar.test.tsx` (+ new files), `CheckoutPage.test.tsx`, `BookingFlow.test.tsx` |
+| 2 | W2 | TA-2 | the 11 `driverError` files (after W1a) |
+| 3 | W3 | TA-4, TA-5, TA-6, TA-14, TA-8 | `tests/db/harness.ts`, `holds-races`, `editorial-races`, `provider-events.db`, `confirm-order.db`, `sessions.db`, `jobs.db`, `vitest.config.ts`, the `constraint()` files |
+| 4 | W4 | TA-7 | `tests/db` fixtures (new) and the 9 files that copy `unique`/inserts (after W3) |
+| 5 (parallel, one PR per file) | W5a to W5j | TA-21 | `editorial`, `sessions`, `orders`, `holds`, `checkout`, `browse`, `guests`, `provider-events` (+ the races files); each file touched once (after W3 and W4) |
+| 6 | W6 | TA-9, TA-15, TA-16, TA-26 | `seed.db.test.ts`, `jobs.ts` + `jobs.db.test.ts`, `audit.db.test.ts`, `checkout.db` / `holds.db` clocks (after W5 for the split files) |
+| 6 | W7 | TA-22, TA-23, TA-25 | small cuts and merges, per file, after that file's split; mutation sample before and after |
+| 7 | W8 | TA-19 | `tests/support/mount.ts`, the browser and component tests, small component attribute changes |
+
+Overlap notes for the lead: W1a and W2 both touch `home`, `coverPhotos`, `experiencePage`, `HomeContent`, `BrowseContent` tests, so keep them in order. W1c and W1d are disjoint from W1a. Wave 3 must land before wave 5 touches the same files. TA-15 changes `src/server/db/jobs.ts`, so check the owning unit's tier for the base; TA-24 (trigger SQLSTATEs) and TA-28 (new coverage) are not scheduled.
