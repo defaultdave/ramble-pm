@@ -1,0 +1,104 @@
+709	SC-25	below the bar: Owner closed as won't
+707	SC-23	below the bar: Hidden duplicate main; unverified, not exposed to AT
+705	SC-21	not maintenance: Carried by U-098
+704	SC-20	not maintenance: Carried by U-103
+699	SC-15	below the bar: Duplicate skip link CSS
+696	SC-12	not maintenance: Audit-store adapter unit
+695	SC-11	below the bar: Hardening of duck-typed marker
+694	SC-10	below the bar: Alerting gap on unbuilt audit export
+693	SC-9	below the bar: Audit export unbuilt; timeout hardening
+692	SC-8	not maintenance: Audit-store adapter unit; Dave's login role
+688	SC-4	not maintenance: Carried by U-092
+572	H-78	below the bar: CSS composes duplication
+569	H-75	below the bar: Storybook preview config
+568	H-74	below the bar: CSS rule placement
+548	H-7	not maintenance: Carried by U-012 write path
+531	BC-53	not maintenance: Carried by U-074a
+486	N1101-6	below the bar: Unreachable outside FilterRow; dev hardening
+485	N1101-5	below the bar: Fragile timing, no observed focus loss
+484	N1101-4	below the bar: Repeated font name constant
+483	N1101-3	below the bar: Specificity hack
+482	N1101-2	not maintenance: Dictionary track, closed later
+481	N1101-1	below the bar: Docs omission
+480	N1031-26	below the bar: Unverified width clipping
+478	N1031-24	below the bar: Rare failure page lacks gutter; structure valid
+476	N1031-22	below the bar: Unproven screen reader behaviour
+474	N1031-20	below the bar: Unproven announcement; needs screen reader
+472	N1031-18	below the bar: Test helper duplication
+471	N1031-17	below the bar: Label and options tidy
+469	N1031-15	below the bar: Comment form
+465	N1031-11	not maintenance: Reopen on second select consumer
+462	N1031-8	below the bar: Fake state enums duplicated
+461	N1031-7	below the bar: Fake state serialisation
+460	N1031-6	below the bar: Owner closed as won't
+459	N1031-5	below the bar: Style nit
+454	N1030-28	below the bar: Already fixed, close
+452	N1030-26	below the bar: ARIA nit on summary
+451	N1030-25	below the bar: Stale process note
+448	N1030-22	below the bar: Copy repetition
+443	N1030-17	below the bar: Nav data location; year hard-coded
+442	N1030-16	below the bar: Test fixture imports
+441	N1030-15	below the bar: Test helper duplication
+435	N1030-9	below the bar: Copy choice placement
+428	N1030-2	below the bar: Deploy policy recorded, close
+426	N1029-17	below the bar: Constant dedupe
+424	N1029-13	below the bar: Port error class dedupe
+417	N1029-4	not maintenance: First ops editing unit
+415	JS-8	below the bar: Unverified, no budget breach shown
+414	JS-7	below the bar: Unverified chunk duplication
+413	JS-6	below the bar: Size optimisation, no breach shown
+412	JS-5	below the bar: Size optimisation, no breach shown
+411	JS-4	below the bar: Size optimisation, no breach shown
+410	JS-3	below the bar: Size optimisation, no breach shown
+409	JS-2	below the bar: Size optimisation, no breach shown
+404	H-107	below the bar: Owner closed as won't
+400	H-103	below the bar: Owner closed as won't
+397	H-100	below the bar: Copy placement
+395	H-98	below the bar: Fixed, close
+392	H-94	below the bar: Test tidiness
+391	H-93	below the bar: Test helper duplication
+390	H-92	below the bar: Owner closed as won't
+389	H-91	below the bar: Test gap
+382	H-76	below the bar: Duplicate of H-62
+380	H-66	below the bar: Stale; departure recorded
+379	H-65	below the bar: Fixed, close
+377	H-61	below the bar: Fixed, close
+376	H-60	below the bar: Badge tone duplication
+374	H-39	below the bar: Duplicate of H-22
+372	H-36	below the bar: Stale; owner kept cut
+369	H-28	below the bar: Stale; departure recorded
+365	H-16	not maintenance: Carried by U-039 follow-up
+364	H-15	below the bar: Owner closed as won't
+362	H-1	below the bar: Duplicate of H-22
+361	BE-20	below the bar: Fixed, close
+360	BE-18	below the bar: Fixed, close
+355	BE-5	below the bar: Latent throw
+354	BE-4	not maintenance: Carried by U-074b
+352	BE-2	not maintenance: Carried by U-021b
+350	BC-57	below the bar: Listener duplication
+346	BC-52	not maintenance: Carried by U-055
+343	BC-46	not maintenance: Carried by U-046
+342	BC-40	below the bar: Duplicate of N1030-1
+340	BC-36	below the bar: Small duplicate range helper
+337	BC-33	below the bar: Cold-cache cost only, no budget breach shown
+336	BC-32	not maintenance: Carried by U-051
+332	BC-28	below the bar: Test flake, clock mismatch
+331	BC-27	below the bar: Fixed, close
+330	BC-26	not maintenance: Carried by U-109
+329	BC-25	below the bar: Constant and arithmetic tidy
+327	BC-22	not maintenance: Carried by U-051
+325	BC-20	below the bar: Fixed, close
+324	BC-19	not maintenance: Carried by U-105
+323	BC-18	below the bar: Fixed, close
+322	BC-17	not maintenance: Carried by U-055
+321	BC-16	not maintenance: Carried by U-068
+318	BC-13	not maintenance: Carried by U-071
+317	BC-12	not maintenance: Carried by U-056
+316	BC-11	not maintenance: Carried by U-106
+314	BC-8	below the bar: Fixed, close
+313	BC-7	below the bar: Fixed, close
+312	BC-6	below the bar: Test flake
+311	BC-5	not maintenance: Carried by U-046
+310	BC-4	below the bar: Fixed, close
+309	BC-3	below the bar: CSS class duplication
+307	BC-1	below the bar: Fixed, close

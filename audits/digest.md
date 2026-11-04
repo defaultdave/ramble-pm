@@ -1,0 +1,70 @@
+# Audit digest
+
+Findings below the filing bar (`README.md`, owner 2026-11-04) whose tickets were closed as not planned. The lead sweeps them with at most one PR a week, or drops them. New nightly digest rows stay in their pass file's `## Digest` table.
+
+ID | Ticket | Reason | Moved
+--- | --- | --- | ---
+N1102-5 | #739 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-6 | #740 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-7 | #741 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-8 | #742 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-9 | #743 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-10 | #744 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-11 | #745 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-12 | #746 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-13 | #747 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-14 | #748 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-15 | #749 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-16 | #750 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-17 | #751 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-18 | #752 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-19 | #753 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-20 | #754 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-21 | #755 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-22 | #756 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-23 | #757 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-24 | #758 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-25 | #759 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-26 | #760 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-27 | #761 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-28 | #762 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-29 | #763 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-30 | #764 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-31 | #765 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-32 | #766 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-33 | #767 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-34 | #768 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-35 | #769 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-36 | #770 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-37 | #771 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-38 | #772 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-39 | #773 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-40 | #774 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-41 | #775 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-42 | #776 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-48 | #782 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-49 | #783 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-50 | #784 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-51 | #785 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-52 | #786 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-54 | #788 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-55 | #789 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-56 | #790 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-58 | #792 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-60 | #794 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-61 | #795 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-62 | #796 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-63 | #797 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-64 | #798 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-65 | #799 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-66 | #800 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1102-68 | #802 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1103-1 | #805 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1103-2 | #806 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1103-3 | #807 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1103-4 | #808 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1103-5 | #809 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1103-6 | #810 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1103-7 | #811 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1103-8 | #812 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04
+N1103-9 | #813 | tidy-up (duplication, naming, styling, tests or a design note), not a blocking rule, AA failure, budget breach or bug | 2026-11-04

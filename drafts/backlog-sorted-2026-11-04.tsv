@@ -1,0 +1,127 @@
+709	SC-25	DIGEST	-	Owner closed as won't
+707	SC-23	DIGEST	-	Hidden duplicate main; unverified, not exposed to AT
+706	SC-22	KEEP-BUG	P21	Checkout group error renders unstyled shell, no footer
+705	SC-21	UNIT	-	Carried by U-098
+704	SC-20	UNIT	-	Carried by U-103
+699	SC-15	DIGEST	P21	Duplicate skip link CSS
+697	SC-13	OWNER	-	Needs Dave's R2 account; gates U-055 deploy
+696	SC-12	UNIT	-	Audit-store adapter unit
+695	SC-11	DIGEST	-	Hardening of duck-typed marker
+694	SC-10	DIGEST	-	Alerting gap on unbuilt audit export
+693	SC-9	DIGEST	-	Audit export unbuilt; timeout hardening
+692	SC-8	UNIT	-	Audit-store adapter unit; Dave's login role
+691	SC-7	OWNER	-	PM action on audit export
+688	SC-4	UNIT	-	Carried by U-092
+572	H-78	DIGEST	-	CSS composes duplication
+569	H-75	DIGEST	P21	Storybook preview config
+568	H-74	DIGEST	P21	CSS rule placement
+548	H-7	UNIT	-	Carried by U-012 write path
+531	BC-53	UNIT	-	Carried by U-074a
+486	N1101-6	DIGEST	-	Unreachable outside FilterRow; dev hardening
+485	N1101-5	DIGEST	-	Fragile timing, no observed focus loss
+484	N1101-4	DIGEST	P21	Repeated font name constant
+483	N1101-3	DIGEST	-	Specificity hack
+482	N1101-2	UNIT	-	Dictionary track, closed later
+481	N1101-1	DIGEST	-	Docs omission
+480	N1031-26	DIGEST	-	Unverified width clipping
+478	N1031-24	DIGEST	-	Rare failure page lacks gutter; structure valid
+477	N1031-23	KEEP-A11Y	-	Hold timer states colour-only, WCAG 1.4.1
+476	N1031-22	DIGEST	-	Unproven screen reader behaviour
+475	N1031-21	KEEP-A11Y	-	New sections no live region or focus, WCAG 4.1.3
+474	N1031-20	DIGEST	-	Unproven announcement; needs screen reader
+473	N1031-19	KEEP-A11Y	-	Unstyled error frame, link contrast 1.96:1
+472	N1031-18	DIGEST	-	Test helper duplication
+471	N1031-17	DIGEST	P09	Label and options tidy
+469	N1031-15	DIGEST	-	Comment form
+465	N1031-11	UNIT	-	Reopen on second select consumer
+462	N1031-8	DIGEST	-	Fake state enums duplicated
+461	N1031-7	DIGEST	-	Fake state serialisation
+460	N1031-6	DIGEST	-	Owner closed as won't
+459	N1031-5	DIGEST	-	Style nit
+454	N1030-28	DIGEST	-	Already fixed, close
+452	N1030-26	DIGEST	-	ARIA nit on summary
+451	N1030-25	DIGEST	-	Stale process note
+448	N1030-22	DIGEST	-	Copy repetition
+444	N1030-18	KEEP-B	P22	B17 helpers placed in page module
+443	N1030-17	DIGEST	P22	Nav data location; year hard-coded
+442	N1030-16	DIGEST	-	Test fixture imports
+441	N1030-15	DIGEST	-	Test helper duplication
+435	N1030-9	DIGEST	-	Copy choice placement
+434	N1030-8	OWNER	-	Standards file edit by Dave
+433	N1030-7	OWNER	-	Standards file edit by Dave
+428	N1030-2	DIGEST	-	Deploy policy recorded, close
+427	N1030-1	OWNER	-	Dave's Neon console action
+426	N1029-17	DIGEST	P10	Constant dedupe
+424	N1029-13	DIGEST	P18	Port error class dedupe
+417	N1029-4	UNIT	-	First ops editing unit
+415	JS-8	DIGEST	-	Unverified, no budget breach shown
+414	JS-7	DIGEST	-	Unverified chunk duplication
+413	JS-6	DIGEST	-	Size optimisation, no breach shown
+412	JS-5	DIGEST	-	Size optimisation, no breach shown
+411	JS-4	DIGEST	-	Size optimisation, no breach shown
+410	JS-3	DIGEST	-	Size optimisation, no breach shown
+409	JS-2	DIGEST	-	Size optimisation, no breach shown
+404	H-107	DIGEST	-	Owner closed as won't
+400	H-103	DIGEST	-	Owner closed as won't
+397	H-100	DIGEST	-	Copy placement
+395	H-98	DIGEST	-	Fixed, close
+392	H-94	DIGEST	-	Test tidiness
+391	H-93	DIGEST	-	Test helper duplication
+390	H-92	DIGEST	-	Owner closed as won't
+389	H-91	DIGEST	-	Test gap
+382	H-76	DIGEST	-	Duplicate of H-62
+380	H-66	DIGEST	-	Stale; departure recorded
+379	H-65	DIGEST	-	Fixed, close
+377	H-61	DIGEST	-	Fixed, close
+376	H-60	DIGEST	-	Badge tone duplication
+374	H-39	DIGEST	-	Duplicate of H-22
+373	H-38	KEEP-BUG	P24	Sold-out dropped after limit; module comes up short
+372	H-36	DIGEST	-	Stale; owner kept cut
+371	H-35	OWNER	-	PM action on comment
+370	H-34	OWNER	-	Waits on PM Neon measurement
+369	H-28	DIGEST	-	Stale; departure recorded
+367	H-23	OWNER	-	PM action, a11y audit run
+366	H-22	OWNER	-	PM measurement
+365	H-16	UNIT	-	Carried by U-039 follow-up
+364	H-15	DIGEST	-	Owner closed as won't
+363	H-11	OWNER	-	Dave's database check
+362	H-1	DIGEST	-	Duplicate of H-22
+361	BE-20	DIGEST	-	Fixed, close
+360	BE-18	DIGEST	-	Fixed, close
+359	BE-17	DIGEST	P19	Extra tab stop, minor
+357	BE-11	DIGEST	P19	Duplicate DOM, low impact
+355	BE-5	DIGEST	-	Latent throw
+354	BE-4	UNIT	-	Carried by U-074b
+352	BE-2	UNIT	-	Carried by U-021b
+350	BC-57	DIGEST	-	Listener duplication
+349	BC-56	KEEP-BUG	-	Phone menu stays open after link click
+346	BC-52	UNIT	-	Carried by U-055
+343	BC-46	UNIT	-	Carried by U-046
+342	BC-40	DIGEST	-	Duplicate of N1030-1
+340	BC-36	DIGEST	-	Small duplicate range helper
+337	BC-33	DIGEST	-	Cold-cache cost only, no budget breach shown
+336	BC-32	UNIT	-	Carried by U-051
+332	BC-28	DIGEST	-	Test flake, clock mismatch
+331	BC-27	DIGEST	-	Fixed, close
+330	BC-26	UNIT	-	Carried by U-109
+329	BC-25	DIGEST	-	Constant and arithmetic tidy
+327	BC-22	UNIT	-	Carried by U-051
+326	BC-21	KEEP-BUG	P23	startPayment ignores maintenance flag
+325	BC-20	DIGEST	-	Fixed, close
+324	BC-19	UNIT	-	Carried by U-105
+323	BC-18	DIGEST	-	Fixed, close
+322	BC-17	UNIT	-	Carried by U-055
+321	BC-16	UNIT	-	Carried by U-068
+320	BC-15	OWNER	-	Standards file edit by Dave
+319	BC-14	KEEP-B	-	B17 twin guards copied logic
+318	BC-13	UNIT	-	Carried by U-071
+317	BC-12	UNIT	-	Carried by U-056
+316	BC-11	UNIT	-	Carried by U-106
+315	BC-9	KEEP-BUG	P25	Reloads lock guests out of payment
+314	BC-8	DIGEST	-	Fixed, close
+313	BC-7	DIGEST	-	Fixed, close
+312	BC-6	DIGEST	-	Test flake
+311	BC-5	UNIT	-	Carried by U-046
+310	BC-4	DIGEST	-	Fixed, close
+309	BC-3	DIGEST	-	CSS class duplication
+307	BC-1	DIGEST	-	Fixed, close
