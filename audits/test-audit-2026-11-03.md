@@ -17,7 +17,19 @@ Lane `test-audit`. Findings only, at `origin/main` `5c7c36a`. No code, tickets o
 - Real redundancy is small. The two agents that sized it found about 150 to 250 lines in the unit group and "6 to 8 merges" in the browse/guests group. Cutting tests will not shrink the suite by much (my estimate: under 2%). The wins are shared helpers (35 `id()` copies, 11 `driverError`, 8+ `unique()`, 4 `waitUntilBlocked`) and splitting files by describe block.
 - The mutation sample the production-ready draft asks for was not run (needs the DB and a tool; out of scope for a findings pass). It is the one gate to add before any deletion PR: run it on the touched module before and after.
 
-## Size target (proposal)
+## Decisions (Dave, 2026-11-03: take all recommendations)
+
+1. Size target adopted: 500 lines per file soft, 800 hard, 60 lines per test body; warn only at first.
+2. Ticket W1a to W1d now, then W2 to W4 in order; hold W5 onward until those merge.
+3. TA-15 (`run_after` from the clock port) goes ahead with a DB test; check the owning unit's tier for the base.
+4. TA-24 (trigger SQLSTATEs) parked until a migration is open anyway.
+5. TA-28: ticket only the money and hold gaps (refund above total, paying hold lapsing during a capacity edit, payment-declined UI) in Sprint 2.
+6. No second content audit of the unread files; W5 splits them by size.
+7. A mutation sample before and after every W7 cut is required.
+
+The lead files the tickets; this lane files none.
+
+## Size target (proposal, adopted)
 
 | Measure | Target | Evidence |
 |---|---|---|
