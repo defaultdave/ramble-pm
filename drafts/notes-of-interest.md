@@ -10,6 +10,15 @@ Ideas Dave flagged to dig into later. Not decisions and not work items; each one
 
 **Trade-offs seen so far.** Faster suite (the db project runs files in parallel, `maxWorkers: 4`), failing file names say what broke, but each file pays its own seeding.
 
+**Why Dave likes it (2026-11-04).** An agent working on one kind of test loads only the file it needs, so less context, and an agent running or checking tests has less to read. Files that grow too big lose focus, for people and agents alike.
+
+**Ideas to follow up (2026-11-04).**
+1. **A generated test map.** A script reads every test file and writes one index: file, `describe` blocks, test titles, and the "Behaviours under test" comment many db files already open with. Run it in `pnpm lint` beside `test-size.ts`, where it flags exact duplicate titles across a split family (`editorial-*`, `guests-*`). The analogy is TypeScript: types make duplicate shapes easy to find, and the map does the same for tests.
+2. **A cheap "already covered?" check.** Before adding a test, a Haiku agent reads the map (not the test files) and answers whether the behaviour is covered and where. It catches near-duplicates the title check cannot, and the map keeps it cheap.
+3. **One shared setup call.** PR 874's `openGuestsDatabase()` moves the per-file `beforeAll`/`afterAll` (fresh schema, HTTP shim, `DATABASE_URL`, dynamic imports) into the fixtures file, so each split file makes one call. The editorial split (PR 867) still repeats that block in all seven files. A generic `openTestDatabase()` in `harness.ts` would give every area the same call. Limit: `vi.mock(...)` stays in each test file, because Vitest hoists it per file. Separately, migrating once into a template database and copying it per file would cut the per-file seeding cost.
+
+**Article angle.** AI writes a lot of tests and reviewers rarely read them in PRs. Research on what others say and on industry guidance: `drafts/reports/AI written test bloat.md` (notes behind it in `drafts/research_notes/AI written test bloat/`).
+
 **Where to start reading.**
 - `audits/test-audit-2026-11-03.md` (ramble-pm): the findings, the size target and the fix waves.
 - PR 874 (`guests.db` into three files) and PR 867 (`editorial.db` into seven): examples of the splits.
