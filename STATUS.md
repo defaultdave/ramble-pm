@@ -8,7 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `role-tests` | The duplicated "can create the role a second time" tests in `tests/db/audit.db.test.ts` and `tests/db/ledger.db.test.ts` (TB-1, from the test-bloat measurement 2026-11-04); no other test file | PM role-tests, 2026-11-04 (from a Cleo handoff) | active | 2026-11-04 13:20 |
+| `role-tests` | The duplicated "can create the role a second time" tests in `tests/db/audit.db.test.ts` and `tests/db/ledger-guard.db.test.ts` (TB-1, from the test-bloat measurement 2026-11-04); no other test file | PM role-tests, 2026-11-04 (from a Cleo handoff) | handed off: PR 899 open, four checks posted, review requested, auto-merge queued | 2026-11-04 14:05 |
 | `maint-tail` | The agent-fixable open audit tickets left after wave 4: #793, #791, #315, #363, #835 (race tests only) | PM maint-tail, 2026-11-04 (swarm) | handed off: #793 closed; PR 863 round 2 pushed (head 308f02c, four checks posted); PR 862 queued; #315 and #363 to the lead | 2026-11-04 12:40 |
 | `pf7-island` | Sprint 1 close follow-ups: PF-7 client island, PRs 489 and 520, U-102 | continuation of the earlier lead chat, 2026-11-01 (night) | handed off: PR 715 merged, 489 and 713 merged, 520 closed; U-102's rest is in Next | 2026-11-02 14:20 |
 | `maint-wave-1` | Maintenance wave 1: PRs P01 to P07 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-1, 2026-11-01 (night) | handed off: all seven PRs merged | 2026-11-02 02:00 |
@@ -53,6 +53,12 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 - 2026-10-26: **Prototype wave 2** (one night, six parallel `senior` builders, two on Fable 5.1 as a trial): U-008b (PR 193), U-027 (PR 194), U-007 (PR 196), U-008a (PR 198) merged into `main`; U-045a (PR 195), U-006 (PR 199) merged into `integration`. Sync PRs 192 and 197 brought `main` into `integration`. Issues close as each unit is set to Done on board #19.
 
 ## In flight
+
+### Lane: role-tests
+
+**2026-11-04 14:05 (PM role-tests).** TB-1 (`audits/test-bloat-2026-11-04.md`, ticket #894): the two "can create the role a second time" db tests ran an inline copy of the migration's role block, never the migration SQL. Decision (DECISIONS 2026-11-04, PM, Dave can overrule): drop both, because `createFreshDatabase` runs the real block in every db file against a cluster that already holds the role. PR [899](https://github.com/defaultdave/ramble/pull/899) (`unit/U-001-role-tests`, head `83ad1e1a25091fb137108ddf1822430f9d72d5ad`, base `main`, closes #894) deletes both tests and the header clause, two files, 2 insertions and 38 deletions. Four checks posted, review requested, auto-merge queued. Proof in the PR body: with the role block in `0016` or `0021` replaced by a bare `CREATE ROLE`, a db test file fails in `createFreshDatabase` (`role ... already exists`), and the deleted tests still passed on the same mutation. The first branch targeted `ledger.db.test.ts`; PR 895 (W10f) split it while the builder worked, so the builder rebased and the ledger test is now in `ledger-guard.db.test.ts`.
+
+**For the lead.** (1) Set #894 Status Done on board #19 once 899 merges (the App cannot close issues). (2) Follow-ups logged, not built: `createFreshDatabase` leaks its schema when `migrate` throws (the `try/finally` only guards the migrator pool; three orphan `t_<hex>` schemas sit in the shared Postgres from the mutation runs, harmless, not dropped because they could not be told apart from other lanes' schemas); the exists branch of the role block is only exercised from the second db file onward, so a brand-new cluster relies on worker order (unchanged by this PR). (3) Remove the worktree `.claude/worktrees/agent-ab9e564c7607201f1` and branches `unit/U-001-role-tests` and `worktree-agent-ab9e564c7607201f1` once 899 merges. (4) The `test-fixes` lane's later waves (W5 to W7) touch neighbouring db files; none touches these two tests.
 
 ### Lane: maint-tail
 2026-11-04 (fix round): PR 863 failed CI `test` on `tests/security-headers.test.ts` ("adds nothing else but the BotID challenge proxy rule", expected 1 rewrite, got 0): the round-1 review missed it because the qa verdict ran only the three BotID vitest files (my brief said 'relevant vitest files'), not the full unit suite, and no builder or reviewer grepped for other tests that read `next.config`. Round 2: `wip/U-008b-maint-tail-r2` from a8d7833 with `main` merged in; the security-headers test now covers on and off Vercel; full suite 292 files, 7117 tests passed; head 308f02c pushed to the unit branch, four checks posted, auto-merge kept. The builder's merge left a 'WIP: stage main's neon files' commit (files identical to main's), net diff is the six PR files.
@@ -276,6 +282,10 @@ Lessons from waves 1 and 2: builders commit and stop; the PM pushes and opens PR
 
 ## Next chat
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
+
+### Next chat: role-tests
+
+**Before you start:** nothing. **Run:** none needed; the lane is done once PR 899 merges. **Model and effort:** Haiku, low, if you check it at all. **Prompt:** Check `gh pr view 899 --repo defaultdave/ramble --json state,mergedAt`. If merged, set #894 Done on board #19, remove the worktree and branches named in the lane entry, and mark TB-1 `merged` in `audits/test-bloat-2026-11-04.md`. If it is blocked on Dave's approval, nothing else to do. Don't commit in the ramble main checkout.
 
 ### Next chat: maint-tail
 **Before you start:** nothing. **Run:** `/ramble-pm lane: maint-tail`. **Model and effort:** Sonnet, low. **Prompt:** Lane `maint-tail`: PRs 862 (race tests, `Refs #835`) and 863 (BotID off Vercel, `Refs #791`) are queued for auto-merge with checks posted. Check each with `gh pr view <n>`; fix a blocked one on its branch (worktrees `.claude/worktrees/agent-a300bfd0dbd61cff2` and `.claude/worktrees/maint-tail-botid`), re-post the four checks on a new head. When one merges, remove its worktree and local branch, and tell the lead whether #791 and #835 should stay open for their unbuilt halves. Don't commit in the ramble main checkout.
