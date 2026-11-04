@@ -109,3 +109,5 @@ The start stays Oct 30 so the sprint calendar keeps its labels. 43 Done units ar
 
 ## 2026-11-03 (lead): plan files move to ramble-pm
 The frozen plan documents (`01` to `07`, `BUILD-PLAN.md`, `estimate-panel.json`) now live in this repo's `plan/`, byte-for-byte as frozen at `plan-frozen-2026-10-20` (`8715c42` in ramble, where the tag still holds them). The planning scripts run from `tools/plan/` here and read `units.yaml` from the ramble checkout beside this one (or `RAMBLE_DIR`). The ramble-pm publisher becomes `bun scripts/pm/site.ts` in ramble once PR 734 merges; until then it is still `bun scripts/plan/site.ts`.
+
+- **2026-11-04, lead lane:** maintenance P20 (PR 840) edited `UpcomingSessionsContent.tsx` and `BookingContent.tsx` beyond its manifest, as the only callers of the error view its retry fix changed; reviewer took them in scope, the lead accepted it. BE-17 was built and reverted in P19 (axe `scrollable-region-focusable`); it needs a client island and the owner's B8 approval.

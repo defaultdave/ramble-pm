@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 3, 2026.** Nov 3: open PRs cleared (729 to 732 merged; P13 and P25 sit in integration for your promotion). Forecast refit for the demo re-plan: 67 parked and cut units dropped, 43 done. Unit work fits by about Dec 1 on paper; the plan of record is the board's sprints: Sprint 2 (stabilization, to Nov 30), Sprint 3 (login and admin, Dec 1 to 14), test bed after, by Dec 30. The launch milestone is gone.
+**As of Nov 4, 2026.** Nov 4: maintenance wave 3 is in: P16 to P20 merged to main, P26 into integration, P15 (PR 838) re-running a flaky db test. The test audit found 28 items (TA-1 to TA-29 with your CI size warning) and test-fix wave 1 is 4 of 5 merged. Plan of record unchanged: Sprint 2 stabilization to Nov 30, Sprint 3 login and admin Dec 1 to 14, test bed after, by Dec 30.
 
 | Milestone | Likely |
 |---|---|
@@ -18,6 +18,8 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
+- Fix three issue states from wave 3. #359 (BE-17) closed when PR 820 merged, but its fix was reverted: gh issue reopen 359 --repo defaultdave/ramble. Close #401 (H-104, comment rewritten) and #687 (SC-3, won't fix): gh issue close 401 687 --repo defaultdave/ramble.
+- Eyeball two small visual changes on the next preview. Home empty state heading is one size smaller (PR 837); the home gift button has Button's 4 px focus ring (PR 838).
 - Push unit/U-001-neon-skip and bypass-merge it. Local branch f548962 adds the head_ref filter so the expire-preview job stops failing on branches with no preview (N1030-1, BC-40). Workflow files need your login.
 - One edit to .claude/standards/architecture.md. B6 exemption for system money paths (BC-15), B13 names presentation-only log-and-degrade reads (N1030-7), lib/pages zone in the diagram and B4 plus the client-island allowlist (N1030-8).
 - Give the ramble-agents App Issues read and write. Set the permission and accept it on the installation. Ticket labels dropped silently without it and a first run double-filed 181. The PM then labels the 187 tickets, closes the duplicates and files SC-1 to SC-26.
@@ -34,7 +36,7 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Decisions needed**
 
-- Test audit and comment cleanup sooner?. Recommended: Start the test audit's first pass now as a findings-only lane beside wave 3 (no file overlap), and fold N1031-15 into wave 3 as one XS PR..
+- Gallery strip tab stop (BE-17). Recommended: Approve the island and give it to the next maintenance wave; it joins the client islands review at the sprint end..
 
 **Held up**
 
