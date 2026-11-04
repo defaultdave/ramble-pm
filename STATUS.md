@@ -50,6 +50,18 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 ## In flight
 
+### Lane: test-fixes
+
+**2026-11-03 22:30 (PM test-fixes).** Wave 1 of `audits/test-audit-2026-11-03.md`. Overlap check against `origin/main` (`dd63e64`) and open PRs 820, 825, 837, 838, 839, 840: **W1a held** (TA-1, TA-3; collides with 820 on `experiences/[slugAndId]/page.test.tsx` and `pages/experience.test.ts`, and with 838 on `HomeModules.fixtures.tsx` and `pages/home.test.ts`; launch after both merge). W1b, W1c, W1d, W1e disjoint, launched with one `senior` builder each, nothing pushed yet:
+
+| PR | Branch | Base | Closes |
+|---|---|---|---|
+| W1b | `unit/U-001-test-W1b` | main | #450, #703, #821, #348 |
+| W1c | `unit/U-016-test-W1c` (critical, ledger and holds) | integration | #826, #834 |
+| W1d | `unit/U-033-test-W1d` | main | #823, #824 |
+| W1e | `unit/U-001-test-W1e` | main | #836 |
+W1a would close #441, #442.
+
 ### Lane: maint-wave-2
 - **2026-11-02 23:55, handed off.** Merged to `main`: PRs 723 P08, 724 P09, 725 P12, 726 P10, 727 P14, 728 P11 (head `8bced52`). P13 (PR 729) and P25 (PR 730) are critical tier, into `integration`, four checks posted and auto-merge queued; they merge when CI clears, then wait for Dave's promotion. History and departures: `lanes/maint-wave-2.md`. Worktrees of merged PRs removed; P11's was locked by a live builder process, and P13's and P25's stay until their PRs merge (`git worktree remove`, then `git branch -D unit/U-020-maint-P13 unit/U-047a-maint-P25 unit/U-008b-maint-P11`).
 - **For the lead / Dave:** (1) Dave approved the BE-9 copy "No experiences on this page" on 2026-11-03; he also kept the "Anywhere" label (N1031-17) as is for the demo, so #471 needs only its two code cleanups (`guestOptions()` to a `const`, un-export `chipState`). (2) Migration 0023 (consents append-only guard) is on `main`; `db-migrate-production` ran on main at your request on 2026-11-03 (run 41679255897, success), so production now has 0022 and 0023. (3) P13 and P25 sit in `integration` for the next promotion. P13 keeps only `maxDuration = 300` from SC-9: Dave confirmed Fluid compute is on (2026-11-03), so 300 is fine. The pool timeouts (#693) need a Neon startup-options check; a per-connection SET made `test:db` flaky. (4) Partly done, still open: #572 (H-78: `.band`, `.skeletonInner`, `.pills`, `.cards` are not copies of HomeHero, so the row is partly wrong), #426 (`storageSettingIssues` shape), #471, #693; #694, #695 and #315 close when 729 and 730 merge. (5) New audit items: the `lt(seatsSold, planned)` guard in `src/server/db/seed/run.ts` has no test (removing it still passes `seed.db.test`); `spendsPaymentTry` restates rules of `startPaymentDecision` and can drift (share a predicate); an owner-device refresh of an existing payment is now unbounded per hold (each costs a provider retrieve and locks); runbooks missing for `audit-export-queue-failed` and `job-dead`; `isDateInWindow` mutation `-1` survives (harmless nit); the flaky `tests/db/audit.db.test.ts` "dead-letters a day at the first attempt" failed again in CI on PR 728 (claimed 0, expected 1; second sighting after PR 721; passes on rerun); a concurrent-booking db test failed once in P09 review (3 failures, then clean). (6) Agents cannot edit PR bodies: the Closes list must be right at `pr` time; the P25 PR was first built as U-008b and renamed U-047a, since `startPayment` belongs to a critical unit. (7) Wave 3 (P15 to P20) can start once the lead re-checks file overlap against `main`.
