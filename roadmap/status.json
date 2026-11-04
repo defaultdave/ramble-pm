@@ -109,11 +109,6 @@
  ],
  "actionsForDave": [
   {
-   "title": "Fix three issue states from wave 3",
-   "detail": "#359 (BE-17) closed when PR 820 merged, but its fix was reverted: gh issue reopen 359 --repo defaultdave/ramble. Close #401 (H-104, comment rewritten) and #687 (SC-3, won't fix): gh issue close 401 687 --repo defaultdave/ramble.",
-   "where": "Any time"
-  },
-  {
    "title": "Eyeball two small visual changes on the next preview",
    "detail": "Home empty state heading is one size smaller (PR 837); the home gift button has Button's 4 px focus ring (PR 838).",
    "where": "Next preview"
@@ -478,13 +473,14 @@
    "done": [
     "Maintenance wave 3: P18 (831), P19 (820), P16 (837), P17 (825), P20 (840) merged to main; P26 (839) into integration; sync 845 (your admin merge)",
     "Test audit first pass: 28 findings, size target, fix waves (audits/test-audit-2026-11-03.md); 100 audit tickets filed (TA plus nightly N1102 and N1103)",
-    "Test-fix wave 1: W1e CI size warning (841), W1d (842), W1b (844) merged to main, W1c (843) into integration; dead-letter flake fixed (846)"
+    "Test-fix wave 1: W1e CI size warning (841), W1d (842), W1b (844) merged to main, W1c (843) into integration; dead-letter flake fixed (846)",
+    "Issue states fixed (you): #359 reopened, #401 and #687 closed"
    ],
    "today": [
     "PR 838 (P15) after a db rerun",
     "Test-fix W1a once 838 merges",
-    "Your three issue fixes and the BE-17 island call",
-    "Your promotion of integration (P13, P25, P26, W1c)"
+    "Your promotion of integration (P13, P25, P26, W1c)",
+    "Your BE-17 island call"
    ],
    "heldUs": [
     {

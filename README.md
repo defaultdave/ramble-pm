@@ -18,7 +18,6 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
-- Fix three issue states from wave 3. #359 (BE-17) closed when PR 820 merged, but its fix was reverted: gh issue reopen 359 --repo defaultdave/ramble. Close #401 (H-104, comment rewritten) and #687 (SC-3, won't fix): gh issue close 401 687 --repo defaultdave/ramble.
 - Eyeball two small visual changes on the next preview. Home empty state heading is one size smaller (PR 837); the home gift button has Button's 4 px focus ring (PR 838).
 - Push unit/U-001-neon-skip and bypass-merge it. Local branch f548962 adds the head_ref filter so the expire-preview job stops failing on branches with no preview (N1030-1, BC-40). Workflow files need your login.
 - One edit to .claude/standards/architecture.md. B6 exemption for system money paths (BC-15), B13 names presentation-only log-and-degrade reads (N1030-7), lib/pages zone in the diagram and B4 plus the client-island allowlist (N1030-8).
