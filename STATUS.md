@@ -13,7 +13,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | `maint-wave-2` | Maintenance wave 2: PRs P08 to P14, P25, N1030-10 in P10 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-2, 2026-11-02 (evening) | handed off: 8 of 9 PRs merged or queued (see lane entry) | 2026-11-02 23:55 |
 | `lead` | Shared status, `## Next`, roadmap, memory; test audit decision, wave 3 | PM lead, 2026-11-03 (midday) | active | 2026-11-03 |
 | `maint-wave-3` | Maintenance wave 3: P15 to P20 plus P26 `ticket-comments` (N1031-15) from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-3, 2026-11-03 (night) | handed off: 831, 820, 837 merged; 825, 838, 840 wait on a `db` rerun; 839 waits on a `main` into `integration` sync | 2026-11-03 23:00 |
-| `test-fixes` | Test audit fixes, wave 1: W1a to W1d from `audits/test-audit-2026-11-03.md`, plus W1e for TA-29 (CI test-size warning) | PM test-fixes, 2026-11-03 (night) | handed off: W1e and W1c merged, W1d (842) and W1b (844) queued, W1a held for PRs 820 and 838 | 2026-11-03 22:50 |
+| `test-fixes` | Test audit fixes, wave 1: W1a to W1d from `audits/test-audit-2026-11-03.md`, plus W1e for TA-29 (CI test-size warning) | PM test-fixes, 2026-11-03 (night) | handed off: W1e and W1c merged, W1b (844) queued, W1d (842) merged, W1a held for PRs 820 and 838 | 2026-11-03 22:50 |
 | `test-audit` | Test audit first pass, findings only: the largest test files and the 8 `test-audit` track rows in `audits/maintenance-triage-2026-11-01.md`; sets the test size target; no code | PM test-audit, 2026-11-03 | handed off: findings in `audits/test-audit-2026-11-03.md` (TA-1 to TA-28, 8 waves); no tickets filed | 2026-11-03 |
 | `u-035` | Sprint 1 close: U-035 category and neighborhood pages, standard tier | run by the lead chat, 2026-11-01 | closed: PR 678 merged at `39e18b4` | 2026-11-01 20:15 |
 | `u-020` | Sprint 1 close: U-020 audit log, critical tier, into `integration` | run by the lead chat, 2026-11-01 | closed: PR 683 merged into `integration` at `20ff357` | 2026-11-01 22:20 |
@@ -58,7 +58,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 |---|---|---|---|---|
 | W1e [841](https://github.com/defaultdave/ramble/pull/841) | `unit/U-001-test-W1e` | main | #836 | merged |
 | W1c [843](https://github.com/defaultdave/ramble/pull/843) | `unit/U-016-test-W1c` | integration | #826, #834 | merged into `integration` |
-| W1d [842](https://github.com/defaultdave/ramble/pull/842) | `unit/U-033-test-W1d` | main | #823, #824 | open, auto-merge queued |
+| W1d [842](https://github.com/defaultdave/ramble/pull/842) | `unit/U-033-test-W1d` | main | #823, #824 | merged |
 | W1b [844](https://github.com/defaultdave/ramble/pull/844) | `unit/U-001-test-W1b` | main | #450, #703, #821, #348 | open, auto-merge queued |
 | W1a | not started | main | #441, #442 | held for 820 and 838 |
 
