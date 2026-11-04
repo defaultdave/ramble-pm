@@ -11,7 +11,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | `pf7-island` | Sprint 1 close follow-ups: PF-7 client island, PRs 489 and 520, U-102 | continuation of the earlier lead chat, 2026-11-01 (night) | handed off: PR 715 merged, 489 and 713 merged, 520 closed; U-102's rest is in Next | 2026-11-02 14:20 |
 | `maint-wave-1` | Maintenance wave 1: PRs P01 to P07 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-1, 2026-11-01 (night) | handed off: all seven PRs merged | 2026-11-02 02:00 |
 | `maint-wave-2` | Maintenance wave 2: PRs P08 to P14, P25, N1030-10 in P10 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-2, 2026-11-02 (evening) | handed off: 8 of 9 PRs merged or queued (see lane entry) | 2026-11-02 23:55 |
-| `lead` | Shared status, `## Next`, roadmap, memory; open PRs 729 to 731 (Dave, 2026-11-03) | PM lead, 2026-11-03 (morning) | handed off: PRs cleared, refit done, plan code moved to ramble-pm | 2026-11-03 |
+| `lead` | Shared status, `## Next`, roadmap, memory; test audit decision, wave 3 | PM lead, 2026-11-03 (midday) | active | 2026-11-03 |
 | `u-035` | Sprint 1 close: U-035 category and neighborhood pages, standard tier | run by the lead chat, 2026-11-01 | closed: PR 678 merged at `39e18b4` | 2026-11-01 20:15 |
 | `u-020` | Sprint 1 close: U-020 audit log, critical tier, into `integration` | run by the lead chat, 2026-11-01 | closed: PR 683 merged into `integration` at `20ff357` | 2026-11-01 22:20 |
 | `critical-path` | U-005 then U-014a into `integration` (released 2026-10-29 12:10), PR 222 through the next promotion; then U-014b, U-048 (critical, holds and webhook side of the money path) | critical-path lane, 2026-10-29 (afternoon) | handed off | 2026-10-29 13:05 |
