@@ -8,7 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `maint-tail` | The agent-fixable open audit tickets left after wave 4: #793, #791, #315, #363, #835 (race tests only) | PM maint-tail, 2026-11-04 (swarm) | active | 2026-11-04 09:50 |
+| `maint-tail` | The agent-fixable open audit tickets left after wave 4: #793, #791, #315, #363, #835 (race tests only) | PM maint-tail, 2026-11-04 (swarm) | handed off: #793 closed; PRs 862 and 863 queued; #315 and #363 to the lead | 2026-11-04 11:00 |
 | `pf7-island` | Sprint 1 close follow-ups: PF-7 client island, PRs 489 and 520, U-102 | continuation of the earlier lead chat, 2026-11-01 (night) | handed off: PR 715 merged, 489 and 713 merged, 520 closed; U-102's rest is in Next | 2026-11-02 14:20 |
 | `maint-wave-1` | Maintenance wave 1: PRs P01 to P07 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-1, 2026-11-01 (night) | handed off: all seven PRs merged | 2026-11-02 02:00 |
 | `maint-wave-2` | Maintenance wave 2: PRs P08 to P14, P25, N1030-10 in P10 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-2, 2026-11-02 (evening) | handed off: 8 of 9 PRs merged or queued (see lane entry) | 2026-11-02 23:55 |
@@ -54,7 +54,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 ## In flight
 
 ### Lane: maint-tail
-2026-11-04: #793 closed (Done on board #19): already fixed by PR 855; 60 loads of four filtered browse addresses on a production build had 0 `<template id="P:` in `<noscript>`, Category group 8 of 8 chips. #315 not changed, handed to the lead (see For the lead). #791 (branch `unit/U-008b-maint-tail-botid-local`) and #835 (TA-28 race tests, branch `unit/U-001-maint-tail-race-tests`) built and in review. #363 handed to the lead (owner's Neon check).
+2026-11-04: #793 closed (Done on board #19): already fixed by PR 855; 60 loads of four filtered browse addresses on a production build had 0 `<template id="P:` in `<noscript>`, Category group 8 of 8 chips. #315 not changed, handed to the lead (see For the lead). #791 is PR 863 (U-008b, into `main`, Refs not Closes: the e2e seeded-database half is not built) and #835 is PR 862 (U-001, Refs not Closes: only the two race tests of TA-28's nine items). Both have the four checks posted on the head, review requested, auto-merge queued. #363 handed to the lead (owner's Neon check).
 For the lead: (1) #315 needs a decision: today every Continue tap spends a `payment_tries` try, reload no longer does (U-047b). Options: A lock-free pre-read then spend only when needed; B device-keyed limiter first then exempt reuse (new surface, owner picks numbers, migration check); C accept as specified and close as mitigated; D exempt only `already_confirmed`. Builder recommends B, or C if demo risk is fine. Frozen unit scope says "5 tries per hold, spent before any lock", so A, B and D change it. It is critical-tier (U-047a, into `integration`). (2) #363: owner checks the Neon console and deletes the stray database. (3) #791's second half, a seeded database for the e2e server, is a separate medium PR (4 to 6 files: global-setup, fixtures, playwright config, package script, CI note); not built. (4) Two stray processes from a builder (`next start` PID 47804, Neon shim PID 45724) could not be stopped from the sandbox.
 
 ### Lane: maint-wave-4b
@@ -273,6 +273,9 @@ Lessons from waves 1 and 2: builders commit and stop; the PM pushes and opens PR
 
 ## Next chat
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
+
+### Next chat: maint-tail
+**Before you start:** nothing. **Run:** `/ramble-pm lane: maint-tail`. **Model and effort:** Sonnet, low. **Prompt:** Lane `maint-tail`: PRs 862 (race tests, `Refs #835`) and 863 (BotID off Vercel, `Refs #791`) are queued for auto-merge with checks posted. Check each with `gh pr view <n>`; fix a blocked one on its branch (worktrees `.claude/worktrees/agent-a300bfd0dbd61cff2` and `.claude/worktrees/maint-tail-botid`), re-post the four checks on a new head. When one merges, remove its worktree and local branch, and tell the lead whether #791 and #835 should stay open for their unbuilt halves. Don't commit in the ramble main checkout.
 
 ### Next chat: maint-wave-4a
 
