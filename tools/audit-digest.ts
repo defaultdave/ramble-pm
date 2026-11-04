@@ -40,7 +40,6 @@ if (!run) {
 
 const today = new Date().toISOString().slice(0, 10);
 if (!known) appendFileSync(DIGEST, HEADER);
-appendFileSync(DIGEST, rows.map((r) => `${r.id} | #${r.number} | ${r.reason} | ${today}\n`).join(""));
 
 const token = Bun.spawnSync(["bun", "/Users/davidfleming/Workspace/ramble/scripts/merge-desk/app-token.ts"]).stdout.toString().trim();
 const call = async (method: string, path: string, body: unknown) => {
@@ -56,6 +55,7 @@ for (const r of rows) {
     body: `Below the audit filing bar (owner, 2026-11-04): ${r.reason}. Moved to the digest (\`audits/digest.md\` in ramble-pm); a weekly sweep may still pick it up.`,
   });
   await call("PATCH", `/issues/${r.number}`, { state: "closed", state_reason: "not_planned" });
+  appendFileSync(DIGEST, `${r.id} | #${r.number} | ${r.reason} | ${today}\n`);
   await Bun.sleep(PAUSE_MS);
 }
 console.log(`closed ${rows.length}`);
