@@ -53,6 +53,7 @@ Items raised outside a pass (in review rounds, by the owner on the live site, by
 
 Once an item has a ticket, the ticket holds its status and its row links to it; do not keep both up to date.
 
+- **The filing bar (owner, 2026-11-04):** only findings that break a blocking rule B1 to B17 (B17 only for copied logic or a helper in a page module), fail WCAG 2.2 AA, breach a PRD-68 budget, or are a bug a guest, host or operator can hit become items. Everything else goes in the pass file's `## Digest` table (ID, Item, Lens, From, Size; never a trailing Status column, so the filing tool skips it). The lead sweeps the digest with at most one PR a week, or drops rows. Digest items that already had tickets are listed in [digest.md](digest.md) and their tickets closed as not planned. When unsure, it is digest.
 - **What gets a ticket:** every item that is `open`, `fix` or `decided`. `later` items are carried by the unit they name, and `closed` and `won't` items are history, so neither gets one. A row whose status names only merged PRs is reported for closing rather than filed.
 - **Filing:** `bun tools/audit-tickets.ts` prints what it would file; `--run` files the new items and links their rows. It is safe to rerun. A short title for each new item goes in `ticket-titles.json`; without one the ticket uses the item's first sentence.
 - **The sprint:** `Maintenance` is a value of the board's Sprint field with no dates, so it never ends and stays out of the forecast. The `Maintenance` board view shows it by Status.
