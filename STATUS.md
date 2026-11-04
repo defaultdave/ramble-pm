@@ -8,6 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
+| `maint-tail` | The agent-fixable open audit tickets left after wave 4: #793, #791, #315, #363, #835 (race tests only) | PM maint-tail, 2026-11-04 (swarm) | active | 2026-11-04 09:50 |
 | `pf7-island` | Sprint 1 close follow-ups: PF-7 client island, PRs 489 and 520, U-102 | continuation of the earlier lead chat, 2026-11-01 (night) | handed off: PR 715 merged, 489 and 713 merged, 520 closed; U-102's rest is in Next | 2026-11-02 14:20 |
 | `maint-wave-1` | Maintenance wave 1: PRs P01 to P07 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-1, 2026-11-01 (night) | handed off: all seven PRs merged | 2026-11-02 02:00 |
 | `maint-wave-2` | Maintenance wave 2: PRs P08 to P14, P25, N1030-10 in P10 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-2, 2026-11-02 (evening) | handed off: 8 of 9 PRs merged or queued (see lane entry) | 2026-11-02 23:55 |
