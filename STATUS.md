@@ -12,6 +12,8 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | `maint-wave-1` | Maintenance wave 1: PRs P01 to P07 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-1, 2026-11-01 (night) | handed off: all seven PRs merged | 2026-11-02 02:00 |
 | `maint-wave-2` | Maintenance wave 2: PRs P08 to P14, P25, N1030-10 in P10 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-2, 2026-11-02 (evening) | handed off: 8 of 9 PRs merged or queued (see lane entry) | 2026-11-02 23:55 |
 | `lead` | Shared status, `## Next`, roadmap, memory; test-fixes W1a, nightly triage, wave 4 | PM lead, 2026-11-04 (night) | active | 2026-11-04 00:20 |
+| `maint-wave-4a` | Wave 4 drain, checkout: W4-A1, W4-A2, W4-B from `drafts/maintenance-wave-4-2026-11-04.md` | started by the lead, 2026-11-04 | active | 2026-11-04 |
+| `maint-wave-4b` | Wave 4 drain, browse, landing, home, gallery: W4-C to W4-F from `drafts/maintenance-wave-4-2026-11-04.md` | started by the lead, 2026-11-04 | active | 2026-11-04 |
 | `maint-wave-3` | Maintenance wave 3: P15 to P20 plus P26 `ticket-comments` (N1031-15) from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-3, 2026-11-03 (night) | handed off: 831, 820, 837, 825, 840, 846 and sync 845 merged; 838 and 839 were in CI at hand-off | 2026-11-04 00:20 |
 | `test-fixes` | Test audit fixes, wave 1: W1a to W1d from `audits/test-audit-2026-11-03.md`, plus W1e for TA-29 (CI test-size warning) | PM test-fixes, 2026-11-04 (early) | handed off: W1a PR 847 open, checks posted, auto-merge queued; wave 2 waits for it to merge | 2026-11-04 00:40 |
 | `test-audit` | Test audit first pass, findings only: the largest test files and the 8 `test-audit` track rows in `audits/maintenance-triage-2026-11-01.md`; sets the test size target; no code | PM test-audit, 2026-11-03 | handed off: findings in `audits/test-audit-2026-11-03.md` (TA-1 to TA-28, 8 waves); no tickets filed | 2026-11-03 |
@@ -235,6 +237,14 @@ Lessons from waves 1 and 2: builders commit and stop; the PM pushes and opens PR
 
 ## Next chat
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
+
+### Next chat: maint-wave-4a
+
+**Before you start:** nothing. **Run:** `/ramble-pm lane: maint-wave-4a`. **Model and effort:** Sonnet, medium. **Prompt:** Lane `maint-wave-4a`: build W4-A1, W4-A2 and W4-B from `drafts/maintenance-wave-4-2026-11-04.md` (Dave 2026-11-04: drain the backlog, combined PRs). Per PR: re-verify each row on `origin/main` (a fixed row closes with no code), re-check file overlap against `origin/main` and every open PR (other lanes included), check the owning unit's tier for the base, then one `senior` builder from the ramble checkout on `unit/maint-W4-<name>` with a scope manifest naming only that PR's rows, a `general-purpose` reviewer returning the four verdicts as text, post checks with `post-check.ts`, open the PR with `Closes #n` (`Refs #n` into `integration`), request Dave's review, queue auto-merge. At most two builders at once (machine limit five across lanes). Never touch CLAUDE.md or `.claude/standards/`. Don't commit in the ramble main checkout.
+
+### Next chat: maint-wave-4b
+
+**Before you start:** nothing. **Run:** `/ramble-pm lane: maint-wave-4b`. **Model and effort:** Sonnet, medium. **Prompt:** Lane `maint-wave-4b`: build W4-C, W4-D, W4-E and W4-F (W4-E carries the wave's one migration, 0024) from `drafts/maintenance-wave-4-2026-11-04.md` (Dave 2026-11-04: drain the backlog, combined PRs). Per PR: re-verify each row on `origin/main` (a fixed row closes with no code), re-check file overlap against `origin/main` and every open PR (other lanes included), check the owning unit's tier for the base, then one `senior` builder from the ramble checkout on `unit/maint-W4-<name>` with a scope manifest naming only that PR's rows, a `general-purpose` reviewer returning the four verdicts as text, post checks with `post-check.ts`, open the PR with `Closes #n` (`Refs #n` into `integration`), request Dave's review, queue auto-merge. At most two builders at once (machine limit five across lanes). Never touch CLAUDE.md or `.claude/standards/`. Don't commit in the ramble main checkout.
 
 ### Next chat: maint-wave-2
 
