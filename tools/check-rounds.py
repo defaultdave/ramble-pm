@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Rounds per unit from the recorded check runs under drafts/.
+"""Rounds per unit from the check runs recorded under drafts/ or posted to PRs.
 
     python3 -I tools/check-rounds.py 2026-11-01
 
-Lists every unit whose verdict files were written in the day (local time,
+Lists every unit whose verdict files were written or check runs posted in the day (local time,
 00:00 to 04:00 the next morning, so a lane that runs past midnight stays with
 its day), with one line per unit: rounds, and each round's verdict per check.
 It reads only the first 300 characters of each verdict file.
@@ -16,7 +16,9 @@ Briefs, posted copies, PR bodies and READMEs are not verdicts and are skipped.
 """
 from __future__ import annotations
 
+import json
 import re
+import subprocess
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta
@@ -86,10 +88,40 @@ def unit_dir(path: Path) -> Path:
     return path.parent.parent if ROUND_DIR.match(path.parent.name) else path.parent
 
 
+def gh_json(*args: str):
+    return json.loads(subprocess.run(["gh", *args], capture_output=True, text=True, check=True).stdout)
+
+
+def posted_rounds(start: datetime, end: datetime):
+    """Posted agent verdicts; a commit re-checked after an all-pass round stays in that round."""
+    prs = gh_json("pr", "list", "--repo", "defaultdave/ramble", "--state", "all", "--limit", "200",
+                  "--search", f"updated:>={start:%Y-%m-%d} created:<={end:%Y-%m-%d}", "--json", "number,headRefName")
+    query = "query{repository(owner:\"defaultdave\",name:\"ramble\"){" + "".join(
+        f"p{pr['number']}:pullRequest(number:{pr['number']}){{commits(last:10){{nodes{{commit{{"
+        "checkSuites(first:3,filterBy:{appId:5403551}){nodes{checkRuns(first:10){nodes{name conclusion completedAt}}}}}}}}"
+        for pr in prs) + "}}"
+    repo = gh_json("api", "graphql", "-f", f"query={query}")["data"]["repository"]
+    for pr in prs:
+        rounds: dict[int, dict[str, str]] = {}
+        for node in repo[f"p{pr['number']}"]["commits"]["nodes"]:
+            cells = {}
+            for suite in node["commit"]["checkSuites"]["nodes"]:
+                for run in suite["checkRuns"]["nodes"]:
+                    done = run["completedAt"] and datetime.fromisoformat(
+                        run["completedAt"].replace("Z", "+00:00")).astimezone().replace(tzinfo=None)
+                    if run["name"] in CHECKS and done and start <= done < end:
+                        cells[CHECKS[run["name"]]] = "PASS" if run["conclusion"] == "SUCCESS" else "FAIL"
+            if cells:
+                fix_round = not rounds or "FAIL" in rounds[len(rounds)].values()
+                rounds[len(rounds) + fix_round] = cells
+        if rounds:
+            yield f"PR {pr['number']} {pr['headRefName']}", rounds
+
+
 def main(day: str) -> None:
     start = datetime.strptime(day, "%Y-%m-%d")
     end = start + timedelta(days=1, hours=4)
-    units: dict[Path, dict[int, dict[str, str]]] = defaultdict(lambda: defaultdict(dict))
+    units: dict[str, dict[int, dict[str, str]]] = defaultdict(lambda: defaultdict(dict))
     for path in ROOT.glob("*checks*/**/*.md"):
         kind = classify(path)
         if kind is None:
@@ -98,15 +130,19 @@ def main(day: str) -> None:
         if not (start <= mtime < end):
             continue
         rnd, check = kind
-        units[unit_dir(path)][rnd][check] = verdict(path)
+        units[unit_dir(path).relative_to(ROOT).as_posix()][rnd][check] = verdict(path)
+    try:
+        units.update(posted_rounds(start, end))
+    except (OSError, subprocess.CalledProcessError, KeyError, TypeError) as err:
+        print(f"Posted check runs not read: {err}")
 
     if not units:
-        print(f"No verdict files written on {day}.")
+        print(f"No verdict files written or check runs posted on {day}.")
         return
     round1_fails: Counter[str] = Counter()
     multi = 0
-    for unit in sorted(units, key=lambda p: p.relative_to(ROOT).as_posix()):
-        rounds = units[unit]
+    for label in sorted(units):
+        rounds = units[label]
         last = max(rounds)
         if last > 1:
             multi += 1
@@ -116,10 +152,10 @@ def main(day: str) -> None:
             parts.append(f"r{rnd}: {cells}")
             if rnd == 1:
                 round1_fails.update(c for c, v in rounds[rnd].items() if v == "FAIL")
-        label = unit.relative_to(ROOT).as_posix()
         print(f"{label}  rounds={last}  " + " | ".join(parts))
     fails = ", ".join(f"{c} {n}" for c, n in round1_fails.most_common()) or "none"
-    print(f"\n{len(units)} units with verdicts on {day}; {multi} needed round 2 or later; "
+    prs = sum(label.startswith("PR ") for label in units)
+    print(f"\n{len(units) - prs} unit folders and {prs} PRs with verdicts on {day}; {multi} needed round 2 or later; "
           f"round 1 failures by check: {fails}")
 
 
