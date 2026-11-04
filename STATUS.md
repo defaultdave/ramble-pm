@@ -8,6 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
+| `role-tests` | The duplicated "can create the role a second time" tests in `tests/db/audit.db.test.ts` and `tests/db/ledger.db.test.ts` (TB-1, from the test-bloat measurement 2026-11-04); no other test file | PM role-tests, 2026-11-04 (from a Cleo handoff) | active | 2026-11-04 13:20 |
 | `maint-tail` | The agent-fixable open audit tickets left after wave 4: #793, #791, #315, #363, #835 (race tests only) | PM maint-tail, 2026-11-04 (swarm) | handed off: #793 closed; PR 863 round 2 pushed (head 308f02c, four checks posted); PR 862 queued; #315 and #363 to the lead | 2026-11-04 12:40 |
 | `pf7-island` | Sprint 1 close follow-ups: PF-7 client island, PRs 489 and 520, U-102 | continuation of the earlier lead chat, 2026-11-01 (night) | handed off: PR 715 merged, 489 and 713 merged, 520 closed; U-102's rest is in Next | 2026-11-02 14:20 |
 | `maint-wave-1` | Maintenance wave 1: PRs P01 to P07 from `audits/maintenance-triage-2026-11-01.md` | PM maint-wave-1, 2026-11-01 (night) | handed off: all seven PRs merged | 2026-11-02 02:00 |
