@@ -53,6 +53,10 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 ## In flight
 
+### Lane: maint-tail
+2026-11-04: #793 closed (Done on board #19): already fixed by PR 855; 60 loads of four filtered browse addresses on a production build had 0 `<template id="P:` in `<noscript>`, Category group 8 of 8 chips. #315 not changed, handed to the lead (see For the lead). #791 (branch `unit/U-008b-maint-tail-botid-local`) and #835 (TA-28 race tests, branch `unit/U-001-maint-tail-race-tests`) built and in review. #363 handed to the lead (owner's Neon check).
+For the lead: (1) #315 needs a decision: today every Continue tap spends a `payment_tries` try, reload no longer does (U-047b). Options: A lock-free pre-read then spend only when needed; B device-keyed limiter first then exempt reuse (new surface, owner picks numbers, migration check); C accept as specified and close as mitigated; D exempt only `already_confirmed`. Builder recommends B, or C if demo risk is fine. Frozen unit scope says "5 tries per hold, spent before any lock", so A, B and D change it. It is critical-tier (U-047a, into `integration`). (2) #363: owner checks the Neon console and deletes the stray database. (3) #791's second half, a seeded database for the e2e server, is a separate medium PR (4 to 6 files: global-setup, fixtures, playwright config, package script, CI note); not built. (4) Two stray processes from a builder (`next start` PID 47804, Neon shim PID 45724) could not be stopped from the sandbox.
+
 ### Lane: maint-wave-4b
 
 **2026-11-04 01:25 (PM maint-wave-4b).** Built W4-C, W4-D, W4-E, W4-F and the split-out BC-14 from `drafts/maintenance-wave-4-2026-11-04.md`. Overlap check on `origin/main` `d0203cc`: PR 847 touched test files only, 4a's branches were empty or on `integration`, so none collided. One `senior` builder per PR in a harness-made worktree (`isolation: "worktree"`; the worktree guard hook refuses writes into hand-cut worktrees, the lead's call), one `general-purpose` reviewer returning the four verdicts, checks posted with `post-check.ts`, `agent-git.ts review` and `automerge`. At most two builders at once.
