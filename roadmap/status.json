@@ -98,15 +98,7 @@
    "when": "Oct 20"
   }
  ],
- "decisionsNeeded": [
-  {
-   "title": "Gallery strip tab stop (BE-17)",
-   "impact": "Small accessibility fix on the experience page; moves no date.",
-   "detail": "Removing the strip's tabindex failed axe in six stories, so BE-17 was reverted. Only a small client island that sets tabIndex while the strip overflows fixes it, and client islands need your approval under B8.",
-   "recommendation": "Approve the island and give it to the next maintenance wave; it joins the client islands review at the sprint end.",
-   "blocks": "BE-17 (#359), BE-11 (#357)"
-  }
- ],
+ "decisionsNeeded": [],
  "actionsForDave": [
   {
    "title": "Eyeball two small visual changes on the next preview",
@@ -197,6 +189,10 @@
   }
  ],
  "decisionsMade": [
+  {
+   "what": "Client island for the gallery strip tab stop (BE-17, BE-11), next maintenance wave",
+   "when": "Nov 4, you"
+  },
   {
    "what": "Test audit now, beside wave 3; N1031-15 into wave 3 as P26; CI warning for test files over 500 lines (TA-29)",
    "when": "Nov 3, you"
@@ -479,8 +475,7 @@
    "today": [
     "PR 838 (P15) after a db rerun",
     "Test-fix W1a once 838 merges",
-    "Your promotion of integration (P13, P25, P26, W1c)",
-    "Your BE-17 island call"
+    "Your promotion of integration (P13, P25, P26, W1c)"
    ],
    "heldUs": [
     {

@@ -35,7 +35,7 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Decisions needed**
 
-- Gallery strip tab stop (BE-17). Recommended: Approve the island and give it to the next maintenance wave; it joins the client islands review at the sprint end..
+- None
 
 **Held up**
 
