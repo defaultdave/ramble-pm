@@ -172,3 +172,7 @@ BC-5 | #311 | not maintenance: Carried by U-046 | 2026-11-04
 BC-4 | #310 | below the bar: Fixed, close | 2026-11-04
 BC-3 | #309 | below the bar: CSS class duplication | 2026-11-04
 BC-1 | #307 | below the bar: Fixed, close | 2026-11-04
+H-22 | #366 | below the bar: no PRD-68 breach (landing LCP 1.53 s on the lab profile) and the launch milestone is cut in the demo re-plan | 2026-11-04
+H-34 | #370 | below the bar: no PRD-68 breach; waits on H-22, which is moved too | 2026-11-04
+H-35 | #371 | below the bar: the comment fix is the only owner-decided part; the platform check is optional with no breach shown | 2026-11-04
+SC-7 | #691 | not maintenance: the audit export re-drive belongs to the audit-store adapter unit, with SC-8 and SC-12 | 2026-11-04

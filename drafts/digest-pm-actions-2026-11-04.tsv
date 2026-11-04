@@ -1,0 +1,4 @@
+366	H-22	below the bar: no PRD-68 breach (landing LCP 1.53 s on the lab profile) and the launch milestone is cut in the demo re-plan
+370	H-34	below the bar: no PRD-68 breach; waits on H-22, which is moved too
+371	H-35	below the bar: the comment fix is the only owner-decided part; the platform check is optional with no breach shown
+691	SC-7	not maintenance: the audit export re-drive belongs to the audit-store adapter unit, with SC-8 and SC-12
