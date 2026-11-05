@@ -1,6 +1,10 @@
 """Profile Claude Code sessions for the Ramble project on one day.
 
 Usage: python3 -I tools/session-profile.py YYYY-MM-DD
+       python3 -I tools/session-profile.py --now
+
+With --now, prints the running chat's context on its latest model call and whether it is past the
+PM's hand-off line.
 
 For each main session with at least 20 model calls that day (local time): models, calls, user turns,
 compactions, average and peak context per call, STATUS.md touches, sleep or CI polls, tool counts,
@@ -17,6 +21,7 @@ import sys
 
 ROOT = os.path.expanduser("~/.claude/projects")
 POLL = re.compile(r"\bsleep\b|gh pr checks|--watch|\buntil\b")
+HAND_OFF = 250_000
 
 
 def on_day(ts, day):
@@ -132,7 +137,24 @@ def root_chats():
     return keep
 
 
+def now():
+    session = os.environ.get("CLAUDE_CODE_SESSION_ID")
+    paths = glob.glob(f"{ROOT}/*/{session}.jsonl") if session else []
+    if not paths:
+        sys.exit("No transcript found for this chat (CLAUDE_CODE_SESSION_ID unset or unknown).")
+    latest = 0
+    for d in records(paths[0]):
+        usage = (d.get("message") or {}).get("usage")
+        if d.get("type") == "assistant" and usage:
+            latest = context(usage)
+    verdict = "HAND OFF" if latest >= HAND_OFF else "under the line"
+    print(f"context {latest / 1000:.0f}K, hand-off line {HAND_OFF / 1000:.0f}K: {verdict}")
+
+
 if __name__ == "__main__":
+    if sys.argv[1] == "--now":
+        now()
+        sys.exit()
     day = dt.date.fromisoformat(sys.argv[1])
     for path in sorted(glob.glob(f"{ROOT}/*ramble*/*.jsonl") + root_chats()):
         profile_session(path, day)
