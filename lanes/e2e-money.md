@@ -50,3 +50,21 @@ Moved from STATUS.md on 2026-11-01. Newest first.
 - **For the lead (e2e-money, 2026-10-29 12:50):** the U-016 (ledger) pattern note is drafted, `drafts/u-016-pattern-note.md`, with four questions for Dave, each with a recommendation (Q1 which rows carry the provider id, so failed-refund legs cannot collide on the cash index; Q2 a `recorded_at` column; Q3 trigger as the real guard, `NOLOGIN` writer role created now; Q4 read functions over SQL views). Please put it to Dave with the owner decisions; U-016 cannot start before U-015 is in `integration` (about a day), so it gates nothing yet.
 - **2026-10-29 13:55, tier confirmed:** Dave opened this lane as written ("I started up all the #1 items"), which the lead takes as the go-ahead for the stub glue first and then the real chain on the fake adapter (DECISIONS 2026-10-29); he can overrule.
 - **2026-10-29 12:10, opened by the lead.** Recommended: (1) the stub glue PR today (the walking skeleton's checkout and confirmation placeholders filled with U-027's components and fixture data; `07-resourcing.md`, half a day), so a click-through exists by tomorrow whatever happens; (2) then the real chain on the fake payment adapter (U-045a is in `main`; U-046 Stripe stays out): wave 1 U-019, U-015, U-045b, U-016 (standard first, critical into `integration`); wave 2 U-054, U-047a (after U-015, U-019, U-014a); wave 3 U-047b, U-049 (after U-048 from `critical-path`, U-016, U-054); wave 4 U-050, U-040, U-041 (after U-014b). Human-led units (U-016, U-047a, U-049) go to agent builders under their pattern notes, as U-014a did (Dave's call, DECISIONS 2026-10-29). Three builders until the lead says otherwise. The demo can run from the `integration` deployment; Dave promotes once at the end.
+
+## Moved from STATUS.md, 2026-11-04 (size trim)
+
+### Lane: e2e-money
+- **2026-10-30 21:00, PR 288 merged; PR 289 queued.** Checked on GitHub: PR 288 merged at `0a0a95c`; worktree and local branches removed. [PR 289](https://github.com/defaultdave/ramble/pull/289) (BC-1) is open at `ecf88eb` with its four checks posted and auto-merge queued; CI was running at handoff, and `main` does not require a branch to be up to date. Its local worktree stays until it merges. **Production still shows both gaps** until Dave reruns the `production-demo` seed (BC-48) and PR 289 is deployed (BC-1). **For the lead:** BC-50 to BC-53 are new; BC-51 (phone menu has no Escape) touches every guest page. `U-021a-seed-guard` worktrees from another lane sit beside these; left alone.
+- Older entries: `lanes/e2e-money.md`.
+
+### e2e-money
+
+**Before you start:** (1) rerun the `production-demo` seed from a checkout of `main` that has PR 288 (`docs/runbooks/seed.md`); the PM cannot, since it needs the production env file. (2) Say whether the PM deploys PR 289; each deploy needs your word. (3) Optional: one card decline then success on production with the "Demo test cards" numbers.
+
+**Run:** `/ramble-pm lane: e2e-money` in a desktop chat on the main checkout (`/Users/davidfleming/Workspace/ramble`). **Model and effort:** Sonnet, medium.
+
+**Prompt:**
+
+```
+lane: e2e-money. Read STATUS.md in the ramble-pm repo: the Lanes table and the e2e-money section's 2026-10-30 21:00 entry. Check PR 289 merged; if a check failed, fix it. Remove its worktree (.claude/worktrees/agent-a45ad22748e6c7e52) and local branches (unit/U-030-order-frame, worktree-agent-a45ad22748e6c7e52). Once Dave has rerun the seed and production carries PR 289, book one more seeded session on https://ramble-sand.vercel.app with the fake wallet: /orders/<ref> shows the guest header and footer, and the production log shows no failed host-booking-notice. Close BC-1 and BC-48 in audits/booking-checkout.md with evidence in evidence/pr/unit-U-030-order-frame-production/. Report in the roadmap shape. Write only in this lane's STATUS sections; do not commit plan files.
+```
