@@ -8,7 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `pr-showcase` | Read-only: find a merged PR that shows the agent team running and checking itself (evidence images, checks with feedback that changed the code); no code, no tickets | PM pr-showcase, 2026-11-06 | active | 2026-11-06 15:30 |
+| `pr-showcase` | Read-only: find a merged PR that shows the agent team running and checking itself (evidence images, checks with feedback that changed the code); no code, no tickets | PM pr-showcase, 2026-11-06 | closed: showcase picks PR 273 (lead), 246, 228; answered in chat, nothing changed in ramble | 2026-11-06 15:45 |
 | `role-tests` | The duplicated "can create the role a second time" tests in `tests/db/audit.db.test.ts` and `tests/db/ledger-guard.db.test.ts` (TB-1, from the test-bloat measurement 2026-11-04); no other test file | PM role-tests, 2026-11-04 (from a Cleo handoff) | handed off: PR 899 open, four checks posted, review requested, auto-merge queued | 2026-11-04 14:05 |
 | `maint-tail` | The agent-fixable open audit tickets left after wave 4: #793, #791, #315, #363, #835 (race tests only) | PM maint-tail, 2026-11-04 (swarm) | handed off: #793 closed; PR 863 round 2 pushed (head 308f02c, four checks posted); PR 862 queued; #315 and #363 to the lead | 2026-11-04 12:40 |
 | `pf7-island` | Sprint 1 close follow-ups: PF-7 client island, PRs 489 and 520, U-102 | continuation of the earlier lead chat, 2026-11-01 (night) | handed off: PR 715 merged, 489 and 713 merged, 520 closed; U-102's rest is in Next | 2026-11-02 14:20 |
