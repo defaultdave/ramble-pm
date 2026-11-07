@@ -96,6 +96,8 @@ def posted_rounds(start: datetime, end: datetime):
     """Posted agent verdicts; a commit re-checked after an all-pass round stays in that round."""
     prs = gh_json("pr", "list", "--repo", "defaultdave/ramble", "--state", "all", "--limit", "200",
                   "--search", f"updated:>={start:%Y-%m-%d} created:<={end:%Y-%m-%d}", "--json", "number,headRefName")
+    if not prs:
+        return
     query = "query{repository(owner:\"defaultdave\",name:\"ramble\"){" + "".join(
         f"p{pr['number']}:pullRequest(number:{pr['number']}){{commits(last:10){{nodes{{commit{{"
         "checkSuites(first:3,filterBy:{appId:5403551}){nodes{checkRuns(first:10){nodes{name conclusion completedAt}}}}}}}}"

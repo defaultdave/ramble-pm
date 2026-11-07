@@ -11,10 +11,13 @@ import sys
 from collections import defaultdict
 from datetime import datetime, timedelta
 from importlib.machinery import SourceFileLoader
+from importlib.util import module_from_spec, spec_from_loader
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-audit = SourceFileLoader("token_audit", str(Path.home() / ".claude/bin/token-audit")).load_module()
+loader = SourceFileLoader("token_audit", str(Path.home() / ".claude/bin/token-audit"))
+audit = module_from_spec(spec_from_loader("token_audit", loader))
+loader.exec_module(audit)
 local = ZoneInfo("America/New_York")
 start = datetime.fromisoformat(sys.argv[1]).replace(tzinfo=local)
 records = audit.parse_logs(start, start + timedelta(days=1), project_filter="ramble")
