@@ -117,3 +117,6 @@ The frozen plan documents (`01` to `07`, `BUILD-PLAN.md`, `estimate-panel.json`)
 
 ## 2026-11-10: design doc 3.2 Route Handlers
 Plan says only the webhook, pulse, beacon and download Route Handlers exist. Reality: U-004a adds `src/app/api/auth/[...all]/route.ts`, Better Auth's handler for the sign-in POST and the magic-link verify GET (Dave, DECISIONS 2026-11-10, B15 exemption).
+
+## 2026-11-10: NEW-1 to NEW-8 get unit ids U-120 to U-127
+The MVP re-plan's eight new units go into `docs/plan/units.yaml` as U-120 (sign-in screens, critical), U-121 (ops admin UI kit, issue 910), U-122 (rolling session horizon), U-123 (test-site console), U-124 (reset demo data), U-125 (host listings and settings), U-126 (ops dashboard), U-127 (host profile page). `scope-check` accepts only U- ids listed in units.yaml, so real ids avoid a change to merge-desk. Branch `pm/units-u120-u127` (c20158f), bypass merge by Dave. PM estimates, not panelled.
