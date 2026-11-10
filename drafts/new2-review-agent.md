@@ -1,20 +1,24 @@
 PASS
 
-## review-agent (delta): NEW-2 "hrefWithQuery shared helper" (head 557be46, since b293490)
+## review-agent: NEW-2 "Shared helpers for labels, alert role, field control, known-value pick" (head 7569c58)
+
+Delta reviewed: 557be46..7569c58.
 
 ### Blocking
 None.
 
 ### Non-blocking
-- src/lib/queryHref.ts:6: `entries.map(([name, value]) => [name, value])` only drops the readonly tuple type for URLSearchParams; harmless.
-- src/components/Select/Select.tsx: the `TODO(U-073): first caller` removal is correct, since src/components/HomeModules/HomeHero.tsx now imports Select.
+- None.
 
-### Verified
-- browseHref: old path was `toQuery(q)` = `new URLSearchParams(toQueryEntries(q)).toString()`, then `?` + string or bare `browsePath`. New path builds URLSearchParams from the same `toQueryEntries` pairs (copied, same order) and applies the same empty-check. Same serializer, same ordering, so output is identical by construction. Ran a throwaway equivalence test (removed afterwards, worktree clean) comparing old formula to `browseHref` for: empty query, repeated category and neighborhood keys, encoded characters (`&`, space, `+`, `?`, `#`, `/`, non-ASCII), empty-string fields, guests 0, and `after` set or empty. All equal.
-- tableHref: still skips undefined, null and empty-string values; empty input or all-unset gives the bare path; repeated keys are carried by hrefWithQuery (covered by the new test with `tag` twice). Object keys are unique, so the old `search.set` and the new push produce the same pairs.
-- Suites: `vitest run src/lib src/components` gives 219 files, 5815 tests, all passing. No existing test file changed in the delta (only the new src/lib/queryHref.test.ts), so browse tests are unchanged.
-- Duplication: hrefWithQuery replaces two copies of the path-plus-query logic; no remaining duplicate found.
-- Hero select CSS: `cursor: default` scoped to `.control.hero .select:not(:disabled)`; no behaviour change.
+### Verification
+- Throwaway test in a scratch worktree (deleted, worktree removed) compared the new code to the old logic:
+  - parseStatusFilter vs old find-and-value logic over raw undefined, '', 'a', 'b', 'c', 'A', ['a'], ['a','b'], ['a','a'], [], [''] and three option sets (including an option with value ''): identical results.
+  - alertRole vs old toneRole map: identical for all four tones (warning/danger alert, info/success status).
+  - fieldControl vs old inline logic (id ?? generatedId, fieldIds describedBy, errorText ? true : aria-invalid) over id, hint, errorText, describedBy in {undefined, '', value} and six aria-invalid values: identical. No hint or error gives undefined describedBy.
+  - parseSort: pickKnown returns the same column or null as the old find/undefined check; an empty-string column is still kept in both. Repeated, unknown and empty inputs reach the fallback through parseSingle as before.
+- Tablelabels return the same strings as the old template literals ("Scrollable <caption>", "<caption> pages"), so DataTable accessible names are unchanged.
+- src/lib and src/components suites: 220 files, 5834 tests passed. tsc shows no errors in the changed files (only unrelated generated PageProps errors absent from the scratch worktree).
+- Duplication sweep: no second implementation of the role map, field id logic, or known-value pick remains; the three field components now share fieldControl.
 
 ### Unconfirmed
-None.
+- None.
