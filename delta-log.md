@@ -120,3 +120,6 @@ Plan says only the webhook, pulse, beacon and download Route Handlers exist. Rea
 
 ## 2026-11-10: NEW-1 to NEW-8 get unit ids U-120 to U-127
 The MVP re-plan's eight new units go into `docs/plan/units.yaml` as U-120 (sign-in screens, critical), U-121 (ops admin UI kit, issue 910), U-122 (rolling session horizon), U-123 (test-site console), U-124 (reset demo data), U-125 (host listings and settings), U-126 (ops dashboard), U-127 (host profile page). `scope-check` accepts only U- ids listed in units.yaml, so real ids avoid a change to merge-desk. Branch `pm/units-u120-u127` (c20158f), bypass merge by Dave. PM estimates, not panelled.
+
+## 2026-11-10 [w1-browse]: keyword form is not a search landmark; zero results is removals only
+The plan's U-034 form was a search landmark; storybook renders each colour scheme twice and axe `landmark-unique` fails on two landmarks of one name, so the form is a plain labelled GET form. U-032 offers filter removals and "Any day" only; PRD-05 also names nearby neighborhoods and related categories, which the MVP re-plan narrowed away. `experiences` gains `search_vector` and its GIN index (migration 0028), and `search_vector` is listed as published copy in `src/lib/privacy.ts`.
