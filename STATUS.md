@@ -8,6 +8,8 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
+| `w1-browse` | MVP wave 1 lane W1-C: U-033 (lite), U-034, U-032 (lite) per `drafts/mvp-replan-2026-11-10.md`; owns filters.ts, filterBar.ts, db/browse.ts, filterOptions.ts, schema/catalog.ts (tsvector), FilterBar/, FilterDrawer/, BrowseResults/, lib/pages/browse.ts, server/browse.ts | PM w1-browse, 2026-11-10 (swarm) | active | 2026-11-10 10:30 |
+| `w1-gift-kit` | MVP re-plan wave 1, lane W1-E: U-017 (#23, IN-LITE, critical) then NEW-2 ops admin UI kit (issue needs Dave); files per `drafts/mvp-replan-2026-11-10.md` section 4 | PM w1-gift-kit, 2026-11-10 | active | 2026-11-10 10:30 |
 | `w1-guest-pages` | MVP wave 1, W1-B: U-037 (#43), U-036 (#42), U-038 (#44) from `drafts/mvp-replan-2026-11-10.md` | PM w1-guest-pages, 2026-11-10 | active | 2026-11-10 10:30 |
 | `w1-checkout-smoke` | W1-D: U-051 (+BC-21) then U-105 from `drafts/mvp-replan-2026-11-10.md`; CheckoutPage, OrderConfirmation, checkout route, `src/server/checkout.ts`, S10 fixture, `e2e/`, playwright config, ci.yml, nightly-smoke.yml | PM w1-checkout-smoke, 2026-11-10 | active | 2026-11-10 10:25 |
 | `w1-auth` | MVP wave 1 lane W1-A (`drafts/mvp-replan-2026-11-10.md` s4): U-004a (#5), NEW-1 sign-in screens, U-022 (#29), with the section 2 lite cuts; personas in U-022 | PM w1-auth, 2026-11-10 (swarm, from the lead) | active | 2026-11-10 10:30 |
