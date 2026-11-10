@@ -1,44 +1,39 @@
 FAIL
 
-## architecture-audit: NEW-2 "Ops admin UI kit" (head 0955798, round 6, final)
+## architecture-audit: NEW-2 "Ops admin UI kit" (head b293490, round 7)
 
-Rules: .claude/standards/architecture.md (project; read in the worktree at head 095579885cbc7b982880824d647723572215b203), with wave-3 rules (drafts/wave3-review-rules.md).
-Diff: git diff origin/main...HEAD (51 files, unchanged since round 5). Judged against the amended manifest in delta-log.md "NEW-2 rulings" (2026-11-10).
-Files audited: the diff file list against the amended manifest; src/components/Select/Select.tsx; src/components/HomeModules/HomeHero.tsx:27-58; src/components/Field/Field.tsx; src/lib/flash.ts; the Input.tsx and Alert.tsx diffs; TODO(U-073) markers; docs/plan/units.yaml U-073 (line 1820).
+Rules: .claude/standards/architecture.md (project; read in the worktree at head b293490aaff8207e5cb868cc72515f82ee2c752c), with wave-3 rules (drafts/wave3-review-rules.md).
+Diff: git diff origin/main...HEAD (53 files, 2458 insertions) and git diff 0955798 HEAD (7 files: Select, HomeHero, HomeHero.module.css).
+Judged against the amended manifest in delta-log.md "NEW-2 rulings" (2026-11-10), which now names HomeHero.tsx and HomeHero.module.css.
+Files audited: the full diff file list; src/components/Select/Select.tsx and Select.module.css; src/components/HomeModules/HomeHero.tsx and HomeHero.module.css; src/components/Field/Field.tsx and Field.module.css; src/components/Input/Input.module.css; src/lib/tableQuery.ts, flash.ts, fieldIds.ts, alertTone.ts; src/lib/filters.ts (browseHref, toQuery, SelectOption) on origin/main; evidence/pr/unit-U-NEW-2/hero-*.png.
 
-### Round 5 items
-- Scope manifest: RESOLVED. The changed files match the amended manifest: src/components/Field/ (Field.tsx, Field.module.css, Field.test.tsx, index.ts), Input.tsx (imports Field and fieldIds), Alert.tsx (type-only: AlertTone moves to lib and is re-exported, no runtime change), and the five lib helpers tableQuery, statusBadge, flash, fieldIds, alertTone with tests. No other path is touched outside the named component folders.
-- serializeFlash: RESOLVED. src/lib/flash.ts:26-34 validates with the strict Zod schema and returns the value; it calls no cookie API. readFlash and parseFlash only parse a string handed to them. Cookie write and read stay with the first ops Server Action.
-- ConfirmDestructive and 'use client': RESOLVED. git grep at head finds no ConfirmDestructive reference and no src/components/ConfirmDestructive/ folder; none of the NEW-2 files carries 'use client'. The round 5 server-compatibility reading (useId only, no other hooks in Select, Textarea, Input, SearchField) still holds at head.
-- TODO(U-073): RESOLVED. The PM confirmed U-073 as first caller; the markers are at DataTable.tsx:66, Flash.tsx:9, SearchField.tsx:25, Select.tsx:27, StatusBadge.tsx:26, StatusFilterBar.tsx:16, Textarea.tsx:17, flash.ts:23/44/58, tableQuery.ts:34/52/59. U-073 (units.yaml:1820) depends on NEW-2 and is the ops shell page.
-- Select / HomeHero duplication: NOT RESOLVED (blocking, see below).
+### Round 6 blocker
+- Select / HomeHero duplication: RESOLVED. HomeHero.tsx no longer defines SelectField or imports SelectOption. It renders `<Select variant="hero">` twice (HomeHero.tsx:58 and :76, import at :6). Select gained a `hero` variant (Select.tsx:29, 40, 60; Select.module.css:37-43), and the markup exists once in src/components/Select/.
+- Dead CSS: RESOLVED. HomeHero.module.css no longer has .label, .select, .selectControl or .chevron. Every remaining class (.hero, .inner, .copy, .art, .heading, .body, .search, .field, .submit) is read by HomeHero.tsx. Select.module.css classes (.control, .select, .chevron, .hero) are all read by Select.tsx.
+- Unused exports: RESOLVED. The new type exports (SelectVariant, SelectOption, SelectProps) are type-only and exempt from B7. Every non-type export of the new component and lib files has a non-test importer or a `TODO(U-073): first caller` marker (checked by grep across src/, excluding tests and stories). lib exports used only by tests are outside B7, which covers components and data-layer files.
+- HomeHero behavior: unchanged, with one exception noted under Non-blocking. Compared with the round-6 SelectField: label tokens come from Input.module.css .label (same tokens as the removed .label); padding-right space-10 comes from `.control.hero .select` (three classes, so it beats `.control .select`); chevron colour comes from `.control.hero .chevron`; no placeholder option, name and defaultValue pass through `...rest`, and the id comes from useId, as before. Pixel check: evidence/pr/unit-U-NEW-2/ holds six before/after pairs (375 and 1024 desktop, mobile 1024, guests-default 375 and 1024). Each pair has the same SHA-256 (for example hero-before-hero-mobile-375.png and hero-after-hero-mobile-375.png both 26f65cc1...). The after files share the head commit's minute (11:27). I did not re-render them.
+
+### Full-diff sweep (defect classes and rules B1 to B17)
+- B1, B3, B12, B16: no fetch, process.env, Date.now, new Date(), toFixed, inline style, hex or rgb colour, or px literal in added lines. Nothing added outside the data layer touches the network or the database.
+- B2: .filter, .sort, .reduce in added lines appear only in src/lib (fieldIds.ts:17, tableQuery.ts filter over singleValues). None in components, app, or server.
+- B3, B8, B11: no 'use client' or 'server-only' added in the diff. No vendor SDK import.
+- B4: added imports point one way. Components import components and lib; lib imports lib and zod only; no components or server import from lib.
+- B13: one catch (flash.ts:39, parseJson) returns a typed failure ({ ok: false }) that readFlash turns into reason 'not-json'. It is not an empty catch and returns no null or []. Accepted.
+- Data in logs: no console, logger, Sentry, or captureException in added lines.
+- B17 (reuse): one blocking finding below. Field frame, alertTone, fieldIds, and the Select look are shared and reused (Input, Textarea, Select, Field; Alert imports AlertTone from lib/alertTone.ts). tableQuery reuses parseSingle, RawSearchParams, and the cursor schema from filters.ts; splitPage from pagination.ts is the cursor source.
 
 ### Blocking
-- B17 duplication (wave-3 rule, 2026-10-28): src/components/Select/Select.tsx:27-76 duplicates `SelectField` in src/components/HomeModules/HomeHero.tsx:34-58. Both render a label, a native select with name and defaultValue or spread props, a ChevronDown in a relative wrapper, and a useId for the id. The only difference is styling: the hero uses HomeHero.module.css classes and Select uses Select.module.css, which composes Input's classes.
-  - Why the PM's audit-item ruling does not clear it: the wave-3 rule makes duplication non-blocking only when it "existed before this diff". HomeHero's SelectField is on main, but the new Select that copies it is introduced by this diff, so the duplicate is new. Logging it as an audit item is a scheduling choice, and the rule has no PM waiver. The audit-item route is available only for the pre-existing copy.
-  - Why the Reuse-section exit does not hold: Select already passes name and defaultValue through `...rest`, so the markup can serve the hero. The one gap is hero styling, which a variant covers. Nothing about Select's markup blocks reuse.
-  - Fix, either of:
-    1. Clear it in this unit: add a hero look to Select as a variant prop (a class or enum, no inline style), and replace HomeHero's SelectField with Select in this PR. This edits src/components/HomeModules/HomeHero.tsx and HomeHero.module.css, so the PM must add both paths to the manifest (the Reuse section must name them).
-    2. Or Dave, as owner of the duplication rule, approves in writing that this one duplicate is carried to a named follow-up unit that migrates the hero. Then the PR body Reuse section names HomeHero.tsx:34-58 as the duplicate and the follow-up unit's ID, and the PM logs it as an audit item. Without that written approval, this stays blocking.
+- B17 duplication: src/lib/tableQuery.ts:86 `tableHref` repeats the job of `browseHref` at src/lib/filters.ts:246-248. Both build `path?query` from URLSearchParams and return the bare path when the query is empty. Input for the duplicate: tableHref(path, {name: value}) with null, undefined, and '' dropped; browseHref(query) through toQuery's entries. Fix: move the path-and-entries builder into one shared src/lib function that accepts [name, value] pairs (as toQuery does, so repeated keys survive), have browseHref and tableHref both call it, and cover the shared function in one test. tableHref maps its record to pairs and drops the empty values first.
 
 ### Non-blocking
-- Audit items (predate NEW-2, log in audits/): src/components/FakePaymentForm/FakePaymentForm.tsx:413 renders the same warning-icon error line as Field.tsx's error block; NoticeTone unions at src/lib/fakePayment.ts:75 and src/lib/bookingOutcome.ts:10 and an inline union at src/lib/orderReceipt.ts:45; email templates under src/server/ports/email/templates/ carry pre-existing style= props.
-- Carried from round 5 (still open): src/lib/tableQuery.ts:86-100 tableHref near-duplicates src/lib/filters.ts:242-248 toQuery and browseHref; suggest one calls the other when filters.ts is next touched.
-- Failing open by repair (class 3), carried: src/lib/statusBadge.ts:33 parseStatusFilter turns an unknown status into All; src/lib/tableQuery.ts:60 parseSearchTerm turns an over-limit term into no filter; src/lib/tableQuery.ts:53 parseCursor turns a malformed cursor into the first page. Decide before the first ops caller (U-073 now). No data beyond the role's read is exposed.
-- Unbounded work (class 1), carried: tableQuery.ts singleValues and carriedFields walk every key of the address with no key cap; the bound is the URL length the server accepts. SearchField hidden fields walk the same way.
-- CSS composition: src/components/Field/Field.module.css composes its frame classes from Input.module.css; the shared frame should live in Field.module.css with Input composing from Field. Non-blocking.
-- CLAUDE.md comments that describe what: src/lib/tableQuery.ts:85; src/components/Field/Field.tsx:17.
-- B13: flash.ts parseJson catch returns { ok: false }, which readFlash reports as the typed reason not-json. Typed, not silent. PASS.
-- B16: PASS. Colour, spacing, radius, font size are tokens; px literals are 1px borders and 2px and 4px focus rings.
-- B2, B4, B5, B12: PASS as in round 5. B1, B3, B6, B9, B10, B11, B14, B15: N/A or PASS.
+- Select.tsx:9-13: `SelectOption` redeclares the type at src/lib/filters.ts:361 (same name, same value and label, plus disabled). A type is not in B17's list (function, hook, component, constant, Zod schema), so this is not blocking. Fix when touched: `SelectOption & { disabled?: boolean }` built on the lib type, so one name means one shape.
+- Select.module.css:15: `.control .select` sets cursor: pointer, so the hero selects now show a pointer cursor. The old hero select had the default cursor (Input.module.css sets a cursor only when disabled). This is a hover change the PNG evidence cannot show. Dave should accept it or the hero select should override it. This is the one departure from "HomeHero behaviour unchanged".
+- tableQuery.ts:63-64: parseSearchTerm turns an over-limit term (over 100 characters) into an empty term, so the page shows the unfiltered list. readFlash refuses bad input instead. Consider failing closed (an error message, or refusing the term) so the user sees why the search did nothing. Not a security boundary; judgment for the PM.
 
 ### Unconfirmed
-- The Reuse section of the PR body is on GitHub and was not read (no GitHub calls). The duplication verdict above does not depend on it.
+- Vitest was not run in this audit (read-only scope). Select.test.tsx:58-70 (hero variant) and HomeHero behaviour were checked by reading the code, not by execution.
 
-## Verification
-- Read-only. Code unchanged since round 5, so the round 5 vitest run (5 lib files, 90 tests, all pass) is not repeated.
+Verdict: FAIL on one blocking item (B17, tableHref). The round-6 blocker is resolved; the other rules are clean.
 
-Rules: .claude/standards/architecture.md (project)
-Files audited: as listed above.
-
-ARCH_VERDICT=FAIL ARCH_SHORTCIRCUIT=0 ARCH_BLOCKING_COUNT=1
+---
+<sub>architecture-audit | haiku | read-only</sub>
