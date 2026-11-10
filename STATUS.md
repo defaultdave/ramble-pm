@@ -8,6 +8,8 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
+| `w2-guest-extras` | MVP wave 2 lane W2-D (`drafts/mvp-replan-2026-11-10.md` s4): U-043, U-091 (guide 301 only), U-058, U-127 (NEW-8), U-021b, in that order; section 2 lite cuts | PM w2-guest-extras, 2026-11-10 (from the lead) | active | 2026-11-10 12:15 |
+| `w2-money` | MVP wave 2, lane W2-B (`drafts/mvp-replan-2026-11-10.md` s4): U-056, U-106, U-055, U-057, U-059 in that order, all critical (human-read), fake payment adapter; owns jobs/refund*, db/ledger.ts, providerEvents.ts, fake.ts, holds.ts, checkout.ts, policies.ts, orders*, actions/orders.ts, manage/, ManageBooking/, refundPath.ts, cancelSession.ts | PM w2-money, 2026-11-10 | active | 2026-11-10 12:20 |
 | `w1-browse` | MVP wave 1 lane W1-C: U-033 (lite), U-034, U-032 (lite) per `drafts/mvp-replan-2026-11-10.md`; owns filters.ts, filterBar.ts, db/browse.ts, filterOptions.ts, schema/catalog.ts (tsvector), FilterBar/, FilterDrawer/, BrowseResults/, lib/pages/browse.ts, server/browse.ts | PM w1-browse, 2026-11-10 (swarm) | handed off: U-004a merged; U-022 PR 926 waiting on Dave's read; NEW-1 waits for its issue | 2026-11-10 |
 | `w1-gift-kit` | MVP re-plan wave 1, lane W1-E: U-017 (#23, IN-LITE, critical) then NEW-2 ops admin UI kit (#910) | PM w1-gift-kit, 2026-11-10 | handed off: U-017 merged (PR 913, `5bc6694`); U-121 (was NEW-2) is PR 929, all checks pass, auto-merge queued | 2026-11-10 12:10 |
 | `w1-guest-pages` | MVP wave 1, W1-B: U-037 (#43), U-036 (#42), U-038 (#44) from `drafts/mvp-replan-2026-11-10.md` | PM w1-guest-pages, 2026-11-10 | handed off: all three units merged (912, 917, 918, 923, 924); issues 42 to 44 closed; board Done | 2026-11-10 11:50 |
@@ -46,6 +48,9 @@ Moved to `lanes/earlier.md` (2026-11-04).
 ### Lane: lead (Maintenance triage)
 - **2026-11-04 early morning, handed off.** Dave: test audit now (DECISIONS 2026-11-03). Lanes `test-audit` (report published `a3f5bb6`), `maint-wave-3` and `test-fixes` ran from this chat and are handed off. Filed 100 audit tickets with `audit-tickets.ts --run`: TA-2 to TA-29 new (#814 to #836; nine TA rows map to existing tickets) plus the unfiled nightly N1102-1 to 70 and N1103-1 to 9 (filed untriaged, the routine step). PR 838 (P15) failed `db` on `holds.db.test.ts` "refuses a paying hold and changes nothing": two `Date.now()` calls let `payingUntil` fall a millisecond before `expiresAt` (check `holds_paying_until_not_before_expiry`); not P15's. Reran the failed job: passed, 838 merged at `d0203cc`. Cause recorded on TA-26 (#833), fix after the next promotion because W1c split this file in `integration`. #359 (BE-17) was closed by PR 820's `Closes` though BE-17 was reverted: Dave reopens it. P20 (840) touched two files outside its manifest (`UpcomingSessionsContent.tsx`, `BookingContent.tsx`, the only callers of the error view); accepted, delta-log.
 - Older entries: `lanes/lead.md`.
+
+### Lane: w2-guest-extras
+- **2026-11-10 12:15, claimed.** Starting U-043.
 
 ### Lane: w1-gift-kit
 - **2026-11-10 afternoon, handed off.** U-017 merged (PR 913, `5bc6694`). **U-121 (was NEW-2, issue 910) is PR 929**, branch `unit/U-121`, head `7569c58`: all CI jobs, `scope-manifest` and `human-read` pass, the four agent checks are posted, review requested, auto-merge queued: it merges on its own. Ask Dave to close the old PR 921 and delete its branch `unit/U-NEW-2` (agents cannot). ConfirmDestructive is deferred (needs an allowlisted client island, commit `3f4dc00`).
