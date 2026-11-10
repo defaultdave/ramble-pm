@@ -8,6 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
+| `w1-checkout-smoke` | W1-D: U-051 (+BC-21) then U-105 from `drafts/mvp-replan-2026-11-10.md`; CheckoutPage, OrderConfirmation, checkout route, `src/server/checkout.ts`, S10 fixture, `e2e/`, playwright config, ci.yml, nightly-smoke.yml | PM w1-checkout-smoke, 2026-11-10 | active | 2026-11-10 10:25 |
 | `w1-auth` | MVP wave 1 lane W1-A (`drafts/mvp-replan-2026-11-10.md` s4): U-004a (#5), NEW-1 sign-in screens, U-022 (#29), with the section 2 lite cuts; personas in U-022 | PM w1-auth, 2026-11-10 (swarm, from the lead) | active | 2026-11-10 10:30 |
 | `pr-showcase` | Read-only: find a merged PR that shows the agent team running and checking itself (evidence images, checks with feedback that changed the code); no code, no tickets | PM pr-showcase, 2026-11-06 | closed: showcase picks PR 273 (lead), 246, 228; answered in chat, nothing changed in ramble | 2026-11-06 15:45 |
 | `role-tests` | The duplicated "can create the role a second time" tests in `tests/db/audit.db.test.ts` and `tests/db/ledger-guard.db.test.ts` (TB-1, from the test-bloat measurement 2026-11-04); no other test file | PM role-tests, 2026-11-04 (from a Cleo handoff) | handed off: PR 899 open, four checks posted, review requested, auto-merge queued | 2026-11-04 14:05 |
