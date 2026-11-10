@@ -123,3 +123,6 @@ The MVP re-plan's eight new units go into `docs/plan/units.yaml` as U-120 (sign-
 
 ## 2026-11-10 [w1-browse]: keyword form is not a search landmark; zero results is removals only
 The plan's U-034 form was a search landmark; storybook renders each colour scheme twice and axe `landmark-unique` fails on two landmarks of one name, so the form is a plain labelled GET form. U-032 offers filter removals and "Any day" only; PRD-05 also names nearby neighborhoods and related categories, which the MVP re-plan narrowed away. `experiences` gains `search_vector` and its GIN index (migration 0028), and `search_vector` is listed as published copy in `src/lib/privacy.ts`.
+
+## 2026-11-10 [w2-guest-extras]: U-043 request form is a `'use client'` file under `src/app/`
+U-043's private session form (`experiences/[slugAndId]/private-session/PrivateSessionForm.tsx`) uses `useActionState` and so is a client file outside the B8 client-island allowlist, as `ContactForm` is. Logged here as the approval record the standard asks for; Dave can overrule. Host notification is ops-only (the `ops-notice` job kind reaches the ops address; no host-addressed email job exists), and `private_requests` columns are classified in `src/lib/privacy.ts` as "not yet anonymized" since the lite cut drops the anonymize function.
