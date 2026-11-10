@@ -8,3 +8,6 @@
 
 ## 2026-11-10 afternoon
 NEW-2 became U-121 (units U-120 to U-127 added by PR 928). Branch renamed to `unit/U-121` at the same head `7569c58`, PR 929 opened with the amended manifest, checks reposted, review requested, auto-merge queued; all CI jobs passed. PR 921 and branch `unit/U-NEW-2` are Dave's to close and delete.
+
+## Close
+PR 921 merged U-121 (NEW-2) at f66ca3b before the rename; PR 929 closed as duplicate, branches and worktree removed.
