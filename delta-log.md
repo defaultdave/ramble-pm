@@ -126,3 +126,6 @@ The plan's U-034 form was a search landmark; storybook renders each colour schem
 
 ## 2026-11-10 [w2-guest-extras]: U-043 request form is a `'use client'` file under `src/app/`
 U-043's private session form (`experiences/[slugAndId]/private-session/PrivateSessionForm.tsx`) uses `useActionState` and so is a client file outside the B8 client-island allowlist, as `ContactForm` is. Logged here as the approval record the standard asks for; Dave can overrule. Host notification is ops-only (the `ops-notice` job kind reaches the ops address; no host-addressed email job exists), and `private_requests` columns are classified in `src/lib/privacy.ts` as "not yet anonymized" since the lite cut drops the anonymize function.
+
+## 2026-11-10: sign-in form island
+The island allowlist gains the sign-in form (U-120, DECISIONS 2026-11-10, B8). It goes in the client-islands review with the rest.
