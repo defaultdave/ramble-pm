@@ -52,6 +52,9 @@ Moved to `lanes/earlier.md` (2026-11-04).
 ### Lane: w2-guest-extras
 - **2026-11-10 12:15, claimed.** Starting U-043.
 
+### Lane: w2-money
+- **2026-11-10 afternoon, active.** **U-056 is PR 935** (branch `unit/U-056`, head `4187f45`, issue 66): four agent checks posted PASS (review-agent had 4 rounds, 136 mutants killed), review requested, auto-merge queued; waits on Dave's `human-read`. **U-106** (issue 59) is with a builder on `unit/U-106` (independent of U-056). Next: U-055 after U-056 merges, then U-057, U-059. Out-of-manifest edits in 935 (small): `db/refunds.ts` new, `gateway.ts`, `lib/providerEvents.ts`, one comment in `lib/bookingEmails.ts`.
+
 ### Lane: w1-gift-kit
 - **2026-11-10 closed.** U-017 merged (PR 913, `5bc6694`). **U-121 (was NEW-2, issue 910) merged as PR 921** (`f66ca3b`; the App's auto-merge landed it before the rename was needed, title still "NEW-2: ..."). The duplicate PR 929 (`unit/U-121`, same head `7569c58`) was closed by Dave's request as superseded; both branches and the worktree are gone, issue 910 is closed. ConfirmDestructive is deferred (needs an allowlisted client island, commit `3f4dc00`, now only in PR 921's history).
 - **For the lead:** U-062a gift order (order, then gift, then `orders.gift_id`; app-generated gift id; no-links CHECK; citext email), U-099 adds `gift` to `rehashKinds`, index on `orders.gift_id` in U-064a; the 2-line `src/lib/filters.ts` edit is on main (w1-browse rebases over it); audit items in `lanes/w1-gift-kit.md`; board #19 row for U-121 may need adding by Dave (issue 910 was never on the board).
