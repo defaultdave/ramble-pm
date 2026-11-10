@@ -6,8 +6,8 @@ Usage: python3 -I tools/session-profile.py YYYY-MM-DD
 With --now, prints the running chat's context on its latest model call and whether it is past the
 PM's hand-off line.
 
-For each main session with at least 20 model calls that day (local time): models, calls, user turns,
-compactions, average and peak context per call, STATUS.md touches, sleep or CI polls, tool counts,
+For each main session with at least 20 model calls that day (local time, one call per message id):
+models, calls, user turns, compactions, average and peak context per call, STATUS.md touches, sleep or CI polls, tool counts,
 subagent launches, and the largest tool results. Then context and model per subagent type.
 Costs come from `~/.claude/bin/token-audit`; this script reports tokens and sizes only.
 """
@@ -50,7 +50,7 @@ starts = []
 def profile_session(path, day):
     first = None
     models, tools, results, agents = (collections.Counter() for _ in range(4))
-    ctx, big, pending = [], [], {}
+    ctx, big, pending, calls = [], [], {}, set()
     status_touches = polls = compacts = user_turns = 0
     for d in records(path):
         if d.get("isCompactSummary"):
@@ -74,7 +74,8 @@ def profile_session(path, day):
                     big.append((size, name, desc[:90]))
         elif d.get("type") == "assistant":
             usage = message.get("usage")
-            if usage:
+            if usage and message.get("id") not in calls:
+                calls.add(message.get("id"))
                 models[message.get("model", "?")] += 1
                 ctx.append(context(usage))
             for block in message.get("content", []):
@@ -108,6 +109,7 @@ def profile_session(path, day):
 def profile_subagents(day):
     models = collections.defaultdict(collections.Counter)
     ctx = collections.defaultdict(list)
+    calls = set()
     for path in glob.glob(f"{ROOT}/*ramble*/*/subagents/*.jsonl"):
         meta = path.replace(".jsonl", ".meta.json")
         kind = "?"
@@ -118,7 +120,9 @@ def profile_subagents(day):
                 pass
         for d in records(path):
             usage = (d.get("message") or {}).get("usage")
-            if d.get("type") == "assistant" and usage and on_day(d.get("timestamp"), day):
+            call = (path, d["message"].get("id")) if usage else None
+            if d.get("type") == "assistant" and usage and on_day(d.get("timestamp"), day) and call not in calls:
+                calls.add(call)
                 models[kind][d["message"].get("model", "?")] += 1
                 ctx[kind].append(context(usage))
     print("\n### Subagents by type")
