@@ -13,6 +13,7 @@ Verdict files come in three layouts:
   architecture-audit.md, qa-agent-r2.md
   r1/architecture-audit.md         (round folders)
 Briefs, posted copies, PR bodies and READMEs are not verdicts and are skipped.
+Check subagents run in a lane's chat add `chat U-055` rows (? when no verdict text).
 """
 from __future__ import annotations
 
@@ -72,9 +73,10 @@ def classify(path: Path) -> tuple[int, str] | None:
 
 
 def verdict(path: Path) -> str:
-    if path.name == "README.md":
-        return "see README"
-    head = head_of(path)
+    return "see README" if path.name == "README.md" else verdict_in(head_of(path))
+
+
+def verdict_in(head: str) -> str:
     first = head.split(None, 1)[0] if head.strip() else ""
     if first in ("PASS", "FAIL"):
         return first
@@ -120,6 +122,32 @@ def posted_rounds(start: datetime, end: datetime):
             yield f"PR {pr['number']} {pr['headRefName']}", rounds
 
 
+AGENT_LOGS = Path.home() / ".claude/projects"
+UNIT = re.compile(r"\b(U-\d+[a-z]?|NEW-\d+)\b")
+
+def chat_rounds(start: datetime, end: datetime):
+    """Check subagents a lane ran in its chat: the nth run of a check on a unit is round n."""
+    runs: dict[str, list[tuple[datetime, str, str]]] = defaultdict(list)
+    for meta_path in AGENT_LOGS.glob("*ramble*/*/subagents/*.meta.json"):
+        try:
+            meta = json.loads(meta_path.read_text())
+            unit = UNIT.search(meta.get("description", ""))
+            lines = [json.loads(line) for line in meta_path.with_suffix("").with_suffix(".jsonl").open(errors="replace") if line.strip()] if meta.get("agentType") in CHECKS and unit else []
+        except (OSError, ValueError):
+            continue
+        began = next((datetime.fromisoformat(d["timestamp"].replace("Z", "+00:00")).astimezone().replace(tzinfo=None) for d in lines if d.get("timestamp")), None)
+        if not began or not (start <= began < end):
+            continue
+        texts = [c["text"] for d in lines if d.get("type") == "assistant"
+                 for c in (d.get("message") or {}).get("content") or [] if isinstance(c, dict) and c.get("text", "").strip()]
+        runs[unit.group(1)].append((began, CHECKS[meta["agentType"]], verdict_in(texts[-1][:300]) if texts else "?"))
+    for unit, seen in runs.items():
+        rounds: dict[int, dict[str, str]] = defaultdict(dict)
+        for _, check, result in sorted(seen):
+            rounds[1 + sum(check in r for r in rounds.values())][check] = result
+        yield f"chat {unit}", rounds
+
+
 def main(day: str) -> None:
     start = datetime.strptime(day, "%Y-%m-%d")
     end = start + timedelta(days=1, hours=4)
@@ -137,6 +165,7 @@ def main(day: str) -> None:
         units.update(posted_rounds(start, end))
     except (OSError, subprocess.CalledProcessError, KeyError, TypeError) as err:
         print(f"Posted check runs not read: {err}")
+    units.update(chat_rounds(start, end))
 
     if not units:
         print(f"No verdict files written or check runs posted on {day}.")
@@ -157,7 +186,9 @@ def main(day: str) -> None:
         print(f"{label}  rounds={last}  " + " | ".join(parts))
     fails = ", ".join(f"{c} {n}" for c, n in round1_fails.most_common()) or "none"
     prs = sum(label.startswith("PR ") for label in units)
-    print(f"\n{len(units) - prs} unit folders and {prs} PRs with verdicts on {day}; {multi} needed round 2 or later; "
+    chats = sum(label.startswith("chat ") for label in units)
+    print(f"\n{len(units) - prs - chats} unit folders, {chats} units checked in chat and {prs} PRs with verdicts on {day}; "
+          f"{multi} needed round 2 or later; "
           f"round 1 failures by check: {fails}")
 
 

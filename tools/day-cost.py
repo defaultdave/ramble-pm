@@ -5,7 +5,8 @@
 
 `token-audit --yesterday` counts the UTC day, which takes in the evening before
 and misses the evening of the day. This uses token-audit's own parser and prices
-over local midnight to midnight, with the same `ramble` project filter.
+over local midnight to midnight, with the `ramble` project filter matched
+against the whole working directory.
 """
 import sys
 from collections import defaultdict
@@ -18,6 +19,9 @@ from zoneinfo import ZoneInfo
 loader = SourceFileLoader("token_audit", str(Path.home() / ".claude/bin/token-audit"))
 audit = module_from_spec(spec_from_loader("token_audit", loader))
 loader.exec_module(audit)
+# token-audit keeps the last three path parts, so `ramble/.claude/worktrees/agent-*`
+# (every isolated builder and check, and any chat that cd's into one) loses "ramble".
+audit.project_label = lambda cwd: cwd or "unknown"
 local = ZoneInfo("America/New_York")
 start = datetime.fromisoformat(sys.argv[1]).replace(tzinfo=local)
 records = audit.parse_logs(start, start + timedelta(days=1), project_filter="ramble")
