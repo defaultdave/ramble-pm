@@ -11,3 +11,10 @@ NEW-2 became U-121 (units U-120 to U-127 added by PR 928). Branch renamed to `un
 
 ## Close
 PR 921 merged U-121 (NEW-2) at f66ca3b before the rename; PR 929 closed as duplicate, branches and worktree removed.
+
+
+## Moved from STATUS.md 2026-11-11
+### Lane: w1-gift-kit
+- **2026-11-10 closed.** U-017 merged (PR 913, `5bc6694`). **U-121 (was NEW-2, issue 910) merged as PR 921** (`f66ca3b`; the App's auto-merge landed it before the rename was needed, title still "NEW-2: ..."). The duplicate PR 929 (`unit/U-121`, same head `7569c58`) was closed by Dave's request as superseded; both branches and the worktree are gone, issue 910 is closed. ConfirmDestructive is deferred (needs an allowlisted client island, commit `3f4dc00`, now only in PR 921's history).
+- **For the lead:** U-062a gift order (order, then gift, then `orders.gift_id`; app-generated gift id; no-links CHECK; citext email), U-099 adds `gift` to `rehashKinds`, index on `orders.gift_id` in U-064a; the 2-line `src/lib/filters.ts` edit is on main (w1-browse rebases over it); audit items in `lanes/w1-gift-kit.md`; board #19 row for U-121 may need adding by Dave (issue 910 was never on the board).
+
