@@ -132,3 +132,6 @@ The island allowlist gains the sign-in form (U-120, DECISIONS 2026-11-10, B8). I
 
 ## 2026-11-10 [w2-guest-extras]: U-091 guide redirect is a 308, not a 301
 The plan says 301. `permanentRedirect` in an app-router page sends 308, which search engines treat as 301; a literal 301 would need a database read in `proxy.ts`. U-091 (PR 932) redirects by id, so it reads no slug history and `findRetiredSlug` keeps its stale `TODO(U-091)`. The experience address does not redirect a wrong slug (follow-up).
+
+## 2026-11-10 [w2-host]: U-068 week view form is a `'use client'` file under `src/components/`
+U-068's `HostSessions` (`src/components/HostSessions/HostSessions.tsx`) wraps its forms in `useActionState` and `useEffect` (result messages and focus after an action), so it is a client file outside the B8 client-island allowlist, as `ContactForm` and U-043's `PrivateSessionForm` are. Logged here as the approval record the standard asks for; Dave can overrule. Also: price edits are per experience (no per-session price in the schema, no schema change), and `publishWeek` makes a week complete because sessions are bookable as soon as they exist (no draft status).
