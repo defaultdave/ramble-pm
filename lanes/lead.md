@@ -156,3 +156,13 @@ Next chat (older lead updates):
 **Update 2026-11-01 late evening:** **Run:** `/ramble-pm` on the main checkout. **Model and effort:** Sonnet, medium. **Prompt:** (1) PR 680 merged; #487 stays open. (2) Sync PR 682 merged. (3) U-020 is in `integration` (PR 683); #26 stays In Progress until a promotion reaches `main`, and that promotion PR's body carries `Closes #26`. Round 6 was a one-word fix: an unexported enum, SC-27. (4) Once Dave's item 1 is done, run `repair.ts` then `audit-tickets --run`. (5) Refresh the roadmap with Maintenance counts. (6) Merged worktrees are removed; PR 681 carries the B14 line and memory. Next lanes: `production-ready`, after a forecast refit.
 
 **Update 2026-11-01 (read first):** the 2026-11-01 lead folded the lanes, refreshed the roadmap and removed worktrees for merged branches. Kept on purpose: `unit/U-031-home-cache-tags`, `unit/U-001-preview-skip`, `unit/U-037`, `browse-perf`'s worktrees, and detached scratch trees (`r1`, `r2`, `perf-home-18106`, `sb-*`, `docs-storage-strategy-1a2e80`, `e2e-money-ramble-60a4ce`). Next lead: open `/ramble-pm lane: audit-fixes` first (Sonnet, medium). Older updates below are history.
+
+## Follow-ups logged 2026-11-12 (not scheduled)
+- **U-075:** an approval gate (at least one price option and one photo before approval), and a seeded `in_review` experience so the queue can be tested before U-125.
+- **U-084 debt** (in PR 963's body): `hostIsSuspended` takes no Caller (B6 waiver or Caller; Dave's call), `pauseNoticeFor` exported only for stories and tests, `readHostSuspension` returns `noSuspension` for a bad id, and the stale prior-status edge.
+- **Flaky test:** `HostSessions.test.tsx`.
+- **Senior agent:** strengthen the reuse sweep before review. Every architecture audit this wave found new B17 duplication.
+- **Session reminder:** reschedule the reminder job after a U-057 move.
+- **Dependabot alerts on `main`:** minimatch (fix 11.0.1) and glob (fix 14.0.2), both transitive, can be fixed with pnpm overrides. deepmerge has no fix yet.
+- **vig cloud kit:** install the team into `~/.claude` only when `CLAUDE_CODE_REMOTE=true`, never as repo-level `.claude/` copies (PR 925 closed for this).
+- **human-read:** the automatic re-run works only on branches that contain PR 962, because `pull_request_review` uses the PR head's workflow file.
