@@ -166,3 +166,4 @@ Next chat (older lead updates):
 - **Dependabot alerts on `main`:** minimatch (fix 11.0.1) and glob (fix 14.0.2), both transitive, can be fixed with pnpm overrides. deepmerge has no fix yet.
 - **vig cloud kit:** install the team into `~/.claude` only when `CLAUDE_CODE_REMOTE=true`, never as repo-level `.claude/` copies (PR 925 closed for this).
 - **human-read:** the automatic re-run works only on branches that contain PR 962, because `pull_request_review` uses the PR head's workflow file.
+- **U-108:** how ops cancels a session that has gift-paid bookings. Blocked in the MVP, Dave decides.
