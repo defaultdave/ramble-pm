@@ -1,0 +1,3 @@
+PASS (re-posted on the merge head)
+
+Unchanged from eed268c except a merge of main (U-125, PR 971): one file conflicted (src/server/db/hostSetup.ts: both the shared opsListPageSize import and U-125 Role import kept); a delta review of the merge commit confirmed the resolution kept both, nothing of U-125 host listings/settings/suspension changed (the only difference from main is the page-size swap), hostsPageSize has no references left, and the authz matrix auto-merged with both sides rows intact. Local gates on 2d71a15: format, lint (no file over the size limit), typecheck, knip, 10,508 unit tests, build.
