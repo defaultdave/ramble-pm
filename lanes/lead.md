@@ -168,3 +168,4 @@ Next chat (older lead updates):
 - **human-read:** the automatic re-run works only on branches that contain PR 962, because `pull_request_review` uses the PR head's workflow file.
 - **U-108:** how ops cancels a session that has gift-paid bookings. Blocked in the MVP, Dave decides.
 - **Ops `updateHost`:** it doesn't invalidate caches. This predates U-125.
+- **U-072 B2 debt** (found by U-108's audit): the role pick in `requireAnyRole` (`src/server/auth/caller.ts:124`) and the host staff cap decision (`db/staffRoles.ts:161-163`) should be pure lib functions with unit tests.
