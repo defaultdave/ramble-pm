@@ -135,3 +135,6 @@ The plan says 301. `permanentRedirect` in an app-router page sends 308, which se
 
 ## 2026-11-10 [w2-host]: U-068 week view form is a `'use client'` file under `src/components/`
 U-068's `HostSessionForms` (`src/components/HostSessions/HostSessionForms.tsx`, the only client file; `HostSessions.tsx` renders on the server) wraps the forms in `useActionState` and `useEffect` (result messages and focus after an action), so it is a client file outside the B8 client-island allowlist, as `ContactForm` and U-043's `PrivateSessionForm` are. Logged here as the approval record the standard asks for; Dave can overrule. Also: price edits are per experience (no per-session price in the schema, no schema change), and `publishWeek` makes a week complete because sessions are bookable as soon as they exist (no draft status).
+
+## 2026-11-12 [lead]: U-074a ships without the payout account
+The plan (`docs/plan/units.yaml`, the work-breakdown row and issue 90) still lists a host payout account under U-074a. The MVP re-plan's lite cut (`drafts/mvp-replan-2026-11-10.md` section 2) dropped payouts from host setup, and PR 953 built the cut version: `/ops/hosts`, an invite sent as a sign-in link, one acceptance, and a unique slug. The plan files stay frozen, and this entry is the record of the change.
