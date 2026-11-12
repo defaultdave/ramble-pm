@@ -1,23 +1,27 @@
-# U-074b review (head 6bd331b)
+# U-074b review, round 2
 
-Verdict: REQUEST_CHANGES on size only (owner decision). No code defect found that blocks. REVIEW_OWNER_DECISION=size
+Head: 51dba4806ae21cdbb24e58bb053b0bcf6d280896 (branch unit/U-074b)
+Delta reviewed: 6bd331b..HEAD (31 files, +473/-384), plus origin/main...HEAD
 
-Size: 4455 insertions, 16 deletions, 27 files. Source about 2150, tests/stories/fixtures about 2300. Not marked mechanical, no owner acceptance found.
+## Verdict: PASS (size is a pending owner decision, not a blocker)
 
-Scope: all changes within scope. No policies edit (policies.ts only drops a TODO comment), no .github/.claude/docs/e2e/auth. catalog.ts change is an export-only refactor (experienceRuleIssues) for reuse; acceptable.
+## Blocking
+None.
 
-Owner decision (size): over 1000. Proposed split: (1) src/lib/experienceEditor.ts + experienceAudit.ts + catalog.ts export + their tests; (2) db layer + actions + authz rows + db tests; (3) pages, components, nav, stories. Or Dave accepts in writing as one unit.
+## Pending owner decision
+Size: whole unit is 4713 insertions / 185 deletions across 43 files, over the 1000-line rule. Dave has not accepted it yet. Not a defect the author can fix. REVIEW_OWNER_DECISION=size
 
-Blocking (author): none.
+## Checks
+- Notice codes: hostNoticeCodes/experienceNoticeCodes are the old private lists, now exported; the lists are unchanged. parseNotice keeps the pickKnown behaviour (unknown, repeated, missing give null).
+- Redirect hrefs: host noticeHref moved from URLSearchParams to tableHref. Same output for the tested cases (`?notice=updated`, `?notice=invalid&fields=name%2CtimeZone`, empty fields dropped); the slug_taken href test still passes unchanged. Experience hrefs unchanged.
+- Field-problem parsing: parseProblemFields now takes the field list; each page passes its own (hostFormFields, experienceFormFields). Order and filtering the same.
+- Slug limits: slugFor takes the limit; hosts pass hostLimits.slug, experiences experienceLimits.slug. Same comparison.
+- oversizedFields, formText, formHas, parseIdField: bodies identical to the removed copies. Host and experience actions use parseIdField with the same arguments.
+- userActor moved to lib/audit.ts, identical.
+- Imports: no references remain to HostNotice, ExperienceNotice, parseHostNotice, parseExperienceNotice, experienceNoticeHref, parseHostIdField, parseExperienceIdField. `tsc --noEmit` clean; vitest (src/lib, ActionNotice, HostSetup, ExperienceEditor): 198 files, 6865 tests pass.
+- Coverage: removed tests (notice and id parsing, problem fields, href building, Host/ExperienceNotice rendering) are replaced by opsForm.test.ts (formText, formHas, oversizedFields, slugFor incl. 80/81 boundary, parseIdField incl. upper-case, parseNotice, noticeText, parseProblemFields, noticeHref) and ActionNotice.test.tsx (status, alert, null). New tests check that codes and fields match their text maps. Nothing lost. Small gap: no per-form test that slugFor receives the right limit, but the existing host and experience slug-length form tests still pass.
+- Scope: changes are limited to the helper extraction and the pages, actions and stories that use it. No out-of-scope files.
+- Full diff origin/main...HEAD: no defects found beyond the above; round 1 found none.
 
-Authz/security: PASS. requireRole/requireOpsUserId is the first line of every data function (src/server/db/experienceEditor.ts:63-ish reads, createExperience, updateExperience); page checks holdsOpsRole before reads (ops/experiences/[id]/page.tsx); action redirects non-ops and the data layer throws anyway. Filters and cursor zod-parsed, cursor uses a bound parameter. Authz matrix rows added.
-Transaction: one tx per change with audit row; no-op writes nothing; row locked FOR UPDATE; tags invalidated after commit for old and new place, only for guest-visible status. Correct.
-
-Nits / optional:
-- Optional, src/server/db/experienceEditor.ts updateExperience: last-write-wins. The FOR UPDATE serializes saves but an ops user holding a stale form silently reverts another's price/field change (diff is computed against the DB, so the audit row names the second user). Fix if wanted: hidden updatedAt/version field compared in the tx, return a 'stale' status.
-- Optional, readExperienceChoices: hosts capped at 500 and waivers at 200 with no signal; hosts past 500 vanish from the filter and create form.
-- FYI, db/experienceEditor.ts helpers parallel hostSetup.ts (page splitting, audit pattern) as the builder reported; splitPage is shared, so remaining duplication is small.
-- FYI, no README/CLAUDE.md change; nav link adds a user-facing ops area. Check whether README lists ops areas; add a line if so.
-- FYI, builder-reported deviations (no photo upload, no status edit, tax editable, price not removable, grouped audit details) match the diff; spec row says "reads tiers without editing policies", satisfied.
-
-Tests: good coverage at lib, action, component and db layers (create, update, no-op, refusals, stale ref, slug history, concurrency, tag invalidation, filters/paging, choices, authz). Not run by me; no run output reviewed.
+## Nits
+- src/components/ExperienceEditor/ExperienceEditView.tsx:3-4: `linksOut` import sits between experienceStatusLabels and experienceStatusTones, out of alphabetical order. The `linksOut(status)` helper in experienceEditor.ts is a small unrelated refactor of `status === 'guide_only'`; harmless.

@@ -1,40 +1,32 @@
-FAIL
+PASS
+PR 1 of 2 (photo upload deferred to PR 2 by the lead's ruling)
 
-# Spec compliance: U-074b (issue 91) Experience editor
+# Spec compliance: U-074b (issue 91), PR 1
 
-Branch `unit/U-074b`, head `6bd331b5e7c8a7b4193965d624cd386441de9862`, checked against `drafts/mvp-replan-2026-11-10.md` (section 2, U-074b row) and `docs/plan/units.yaml` (U-074b, line 1880). `docs/` has no separate acceptance-criteria list for U-074b; the criteria below are the units.yaml scope line, the issue 91 scope manifest, and the replan lite-cut text.
+Branch unit/U-074b, head 51dba4806ae21cdbb24e58bb053b0bcf6d280896, diffed as `git diff origin/main...HEAD` (43 files).
+Criteria source: the SCOPE MANIFEST in issue 91 (the issue has no `## Acceptance Criteria` section; its body mirrors the `scope` field of `docs/plan/units.yaml` U-074b) plus the draft row in `drafts/mvp-replan-2026-11-10.md`.
 
-Replan row: `IN | MVP-2 | Ops routes only, reads cancellation tiers without editing policies.ts. +/ops/experiences index by status, host, category`
+| # | Criterion | Status | Evidence |
+|---|-----------|--------|----------|
+| 1 | Ops routes only | PASS | New pages all under `src/app/(ops)/ops/experiences/` (`page.tsx`, `new/page.tsx`, `[id]/page.tsx`). No guest or host route added. `src/lib/opsNav.ts:25` adds an ops nav link only. |
+| 2 | Every experience field editable | PASS | `src/components/ExperienceEditor/ExperienceForm.tsx` covers name, slug, description, meeting point, included, accessibility notes, duration, category, neighborhood, adult and child price, child-uses-space, cancellation tier (l.224-228), age rule, min/max age, outdoor, weather policy and decision hours, tax treatment, waiver required and waiver document (l.297-305), link-out and affiliate URLs. Field set matches the `ExperienceContent` type in `src/lib/experienceEditor.ts`. |
+| 3 | Price options | PASS | Adult and child price fields, `ExperienceForm.tsx:196-207`; stored as minor units in `ExperienceContent`. |
+| 4 | Cancellation tier, read from shared list without editing policy | PASS (with one note) | Read: `src/server/db/experienceEditor.ts:127` calls `listCancellationTiers()`, which feeds the form at `ExperienceForm.tsx:228`. No tier create, edit or delete in the diff. Note: `src/server/db/policies.ts` is touched only by deleting the line `// TODO(U-074b): first caller` (the file's only diff hunk). The function body, query and schema are unchanged. The TODO's condition (a caller exists) is now true, so removing it is bookkeeping, not a policy edit. Literal reading of "without editing policies.ts" is breached by one comment line. Judged acceptable because the intent (tiers are read, not changed) holds. If Dave wants the letter of the rule, restore the comment and drop it in a follow-up. |
+| 5 | Waiver | PASS | `ExperienceForm.tsx:297-305` (required flag and document picker). Server side lists only published waivers (`experienceEditor.ts` `readExperienceChoices`, and the waiver check at ~l.215-218). |
+| 6 | Photo upload through ingest | DEFERRED to PR 2 | Not in the diff by the lead's ruling. Grep for `photo` in `ExperienceForm.tsx` and `src/lib/experienceEditor.ts` finds nothing. Not a FAIL for this PR. Issue 91 stays open until PR 2 lands. |
+| 7 | /ops/experiences index by status | PASS | `src/app/(ops)/ops/experiences/page.tsx`; status filter via `StatusFilterBar` in `src/components/ExperienceEditor/ExperiencesList.tsx:69-73`; query `readExperiencesForOps` filters `experiences.status` (`src/server/db/experienceEditor.ts:93-95`). |
+| 8 | /ops/experiences index by host | PASS | Host `Select` in `ExperiencesList.tsx:85`; `hostId` filter at `experienceEditor.ts:96-98`. |
+| 9 | /ops/experiences index by category | PASS | Category `Select` in `ExperiencesList.tsx:92`; `categoryId` filter at `experienceEditor.ts:99-101`. |
+| 10 | Status not editable in the editor (owned by U-075/U-084) | PASS (intended absence) | No status input in `ExperienceForm.tsx`. `updateExperience` takes status from the stored row (`experienceEditor.ts:307`, `experienceRuleFailures(input, current.status)`), not from the form. |
+| 11 | Axe matrix rows for the new routes and states | N/A (conditional) | The scope says rows are added by whichever of U-074b or U-100 lands second. U-100 is not on main. This PR lands first, so no row is required here. `e2e/routes.ts` has no `/ops/experiences` row yet; U-100 adds it when it lands. Re-check if U-100 merges before this PR. |
+| 12 | Review and QA verdicts | N/A | Meta items, not code-verifiable. |
 
-## Criteria
+## Blocking issues
+None for PR 1.
 
-| # | Criterion | Status | Evidence | Lite cut? |
-|---|---|---|---|---|
-| 1 | Every experience field editable (content columns) | PASS | `src/components/ExperienceEditor/ExperienceForm.tsx` renders every content column of `experiences` (`src/server/db/schema/catalog.ts:158-200`): host, name, slug, description, meeting point, included, accessibility notes, duration, category, neighborhood, outdoor, weather policy and decision hours, age rule, min/max age, tax treatment, waiver required and document, link-out and affiliate URLs. Saves via `updateExperienceAction` (`src/server/actions/experiences.ts`). | n/a |
-| 2 | Price options (adult, child) | PASS | `ExperienceForm.tsx:193-217` (`adultPrice`, `childPrice`, `childUsesSpace`); upsert on `priceOptions` in `src/server/db/experienceEditor.ts:229-232`. | n/a |
-| 3 | Cancellation tier | PASS | Select `cancellationTierId` at `ExperienceForm.tsx:224-231`, options from `readExperienceChoices` (`src/server/db/experienceEditor.ts:127`, calls `listCancellationTiers`). | n/a |
-| 4 | Waiver | PASS | `waiverRequired` and `waiverDocumentId` at `ExperienceForm.tsx:298-311`; waiver choices limited to published waiver documents (`experienceEditor.ts:138`, `:215-218`). | n/a |
-| 5 | Photo upload through ingest | FAIL | Not found. No photo field or upload action in the diff. `ingestPhoto` exists in `src/server/photos/ingest.ts:44` and `photos` table in `src/server/db/schema/catalog.ts:279`, so the seam is present on main. The replan does not cut it: the U-074b row lists no photo exclusion, and the row is `IN`, not `IN-LITE`. Only U-021b (seed photos) and U-075 (alt-text check) mention photos in the replan. | **No.** Missing requirement. The builder's stated reason (replan excludes it) is not in the replan text. |
-| 6 | Reused for ops edits after go-live (edit path works on live experiences) | PASS | Edit route `src/app/(ops)/ops/experiences/[id]/page.tsx` reads any status via `readExperienceForOps`; `updateExperienceAction` checks guest-visible status for cache invalidation (`experienceEditor.ts:323`). | n/a |
-| 7 | Ops routes only | PASS | Diff adds only `src/app/(ops)/ops/experiences/{page,new/page,[id]/page}.tsx`, each gated by `holdsOpsRole` / `OpsAccessDenied`. No guest or host routes added. | Yes, in lite cut |
-| 8 | Reads cancellation tiers without editing policies.ts | PASS, with a note | `listCancellationTiers` is called from `experienceEditor.ts:44,127`. No tier logic changed. But the diff does edit `src/server/db/policies.ts` (deletes the `// TODO(U-074b): first caller` line, 1 line). The lite cut says "without editing policies.ts", so the literal wording is breached by a comment removal. Non-behavioral. | Yes, in lite cut. Literal nit: restore the line or accept the removal. |
-| 9 | +/ops/experiences index by status | PASS | `src/app/(ops)/ops/experiences/page.tsx`; status filter `FiltersSchema` and `eq(experiences.status, …)` in `src/server/db/experienceEditor.ts:60-95`. | Yes, in lite cut |
-| 10 | +/ops/experiences index by host | PASS | Same query, `eq(experiences.hostId, …)` (`experienceEditor.ts:96-98`); host select from `choices.hosts`. | Yes, in lite cut |
-| 11 | +/ops/experiences index by category | PASS | Same query, `eq(experiences.categoryId, …)` (`experienceEditor.ts:99-101`). | Yes, in lite cut |
-| 12 | Status editable | Not met, deviation accepted | Status is not editable; `experienceEditor.ts:34` states that the review queue (U-075) and pause (U-084) own status. Create always writes `draft` (`ExperienceForm`, `new/page.tsx` copy). | **Yes, within the lite cut in spirit.** units.yaml gives approve/reject to U-075 and pause to U-084, both of which depend on U-074b. The issue's "every field" line is about content fields. Decide with Dave if he wants a status control here. |
-| 13 | Axe matrix rows for new routes (whichever of U-074b and U-100 lands second) | PASS (not due yet) | U-100 is a test-bed unit that runs after MVP-3 (replan line 222). No matrix exists on main. U-074b is landing first, so it need not add rows. | n/a |
+## Observations outside the AC list (not blocking)
+- The diff also reworks the host pages and `HostSetup` (`src/components/HostSetup/*`, `src/lib/hostSetup.ts`, `src/server/actions/hosts.ts`) to use shared `opsForm` helpers. That is U-074a's surface. It is a refactor in service of this unit and may be worth a line in the PR description.
+- `src/lib/catalog.ts` now exports the rule helpers. Reasonable reuse, no AC impact.
 
-## Blocking
-
-- **Criterion 5 (photo upload through ingest):** add a photo upload to the experience edit page that calls `ingestPhoto` (`src/server/photos/ingest.ts:44`) and links the result to the experience. Keep the ops-only route scope. Either build it, or get Dave to amend the replan row to cut it. The builder's note alone does not cut it.
-
-## Non-blocking
-
-- Criterion 8: the policies.ts edit is a comment deletion. Restore the line to match the literal lite cut, or accept it.
-- Criterion 12: status not editable matches the lite cut's ownership split. Confirm with Dave.
-
-## Scope check
-
-Diff touches 27 files, all under ops routes, `src/components/ExperienceEditor`, `src/lib/experience*`, `src/server/db/experienceEditor.ts`, `src/server/actions/experiences.ts`, `src/lib/catalog.ts`, `src/lib/opsNav.ts` (adds the Experiences nav link), and tests. No out-of-scope route, schema, or migration changes. `src/lib/catalog.ts` changed by 39 lines; not audited here (review's job).
-
-Verdict: FAIL, 1 blocking AC (criterion 5).
+---
+Verdict: PASS for PR 1 of 2. Photo upload is deferred to PR 2 by the lead's ruling. Issue 91 stays open until PR 2 lands.
