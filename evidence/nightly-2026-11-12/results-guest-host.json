@@ -1,0 +1,3346 @@
+[
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "light",
+  "w": 320,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-320-light.png",
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 18,
+  "smallWorst": [],
+  "overlaps": [
+   [
+    "a.K4LDia_link \"Gift guide\"",
+    "a \"Find something to do\"",
+    131,
+    21
+   ],
+   [
+    "a.ldgnoG_accountControl \"My bookings\"",
+    "a \"Find something to do\"",
+    131,
+    6
+   ]
+  ],
+  "clipped": [
+   "span.K4LDia_visuallyHidden._8XW2Qq_visuallyHidden \"Menu\" sw=43 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 25
+ },
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "light",
+  "w": 390,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-390-light.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 18,
+  "smallWorst": [],
+  "overlaps": [
+   [
+    "a.K4LDia_link \"Gift guide\"",
+    "a \"Find something to do\"",
+    164,
+    21
+   ],
+   [
+    "a.ldgnoG_accountControl \"My bookings\"",
+    "a \"Find something to do\"",
+    164,
+    6
+   ]
+  ],
+  "clipped": [
+   "span.K4LDia_visuallyHidden._8XW2Qq_visuallyHidden \"Menu\" sw=43 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 25
+ },
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "light",
+  "w": 768,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-768-light.png",
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 17,
+  "smallWorst": [],
+  "overlaps": [],
+  "clipped": [
+   "span.ldgnoG_visuallyHidden._8XW2Qq_visuallyHidden \"Search:\" sw=58 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 26
+ },
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "light",
+  "w": 1024,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-1024-light.png",
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 17,
+  "smallWorst": [],
+  "overlaps": [],
+  "clipped": [
+   "span.ldgnoG_visuallyHidden._8XW2Qq_visuallyHidden \"Search:\" sw=58 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 26
+ },
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "light",
+  "w": 1280,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-1280-light.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 17,
+  "smallWorst": [],
+  "overlaps": [],
+  "clipped": [
+   "span.ldgnoG_visuallyHidden._8XW2Qq_visuallyHidden \"Search:\" sw=58 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 26
+ },
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "light",
+  "w": 1440,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-1440-light.png",
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 17,
+  "smallWorst": [],
+  "overlaps": [],
+  "clipped": [
+   "span.ldgnoG_visuallyHidden._8XW2Qq_visuallyHidden \"Search:\" sw=58 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 26
+ },
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "dark",
+  "w": 320,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-320-dark.png",
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 18,
+  "smallWorst": [],
+  "overlaps": [
+   [
+    "a.K4LDia_link \"Gift guide\"",
+    "a \"Find something to do\"",
+    131,
+    21
+   ],
+   [
+    "a.ldgnoG_accountControl \"My bookings\"",
+    "a \"Find something to do\"",
+    131,
+    6
+   ]
+  ],
+  "clipped": [
+   "span.K4LDia_visuallyHidden._8XW2Qq_visuallyHidden \"Menu\" sw=43 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 25
+ },
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "dark",
+  "w": 390,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-390-dark.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 18,
+  "smallWorst": [],
+  "overlaps": [
+   [
+    "a.K4LDia_link \"Gift guide\"",
+    "a \"Find something to do\"",
+    164,
+    21
+   ],
+   [
+    "a.ldgnoG_accountControl \"My bookings\"",
+    "a \"Find something to do\"",
+    164,
+    6
+   ]
+  ],
+  "clipped": [
+   "span.K4LDia_visuallyHidden._8XW2Qq_visuallyHidden \"Menu\" sw=43 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 25
+ },
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "dark",
+  "w": 768,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-768-dark.png",
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 17,
+  "smallWorst": [],
+  "overlaps": [],
+  "clipped": [
+   "span.ldgnoG_visuallyHidden._8XW2Qq_visuallyHidden \"Search:\" sw=58 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 26
+ },
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "dark",
+  "w": 1024,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-1024-dark.png",
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 17,
+  "smallWorst": [],
+  "overlaps": [],
+  "clipped": [
+   "span.ldgnoG_visuallyHidden._8XW2Qq_visuallyHidden \"Search:\" sw=58 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 26
+ },
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "dark",
+  "w": 1280,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-1280-dark.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 17,
+  "smallWorst": [],
+  "overlaps": [],
+  "clipped": [
+   "span.ldgnoG_visuallyHidden._8XW2Qq_visuallyHidden \"Search:\" sw=58 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 26
+ },
+ {
+  "name": "account",
+  "path": "/account",
+  "persona": "guest",
+  "scheme": "dark",
+  "w": 1440,
+  "status": 200,
+  "h1": "My bookings",
+  "finalUrl": "/account",
+  "text": "My bookings You have no bookings yet. Find something to do",
+  "file": "account-1440-dark.png",
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 0,
+  "smallTotal": 17,
+  "smallWorst": [],
+  "overlaps": [],
+  "clipped": [
+   "span.ldgnoG_visuallyHidden._8XW2Qq_visuallyHidden \"Search:\" sw=58 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 26
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 320,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": null,
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 390,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": "host-390-light.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 768,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": null,
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1024,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": null,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1280,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": "host-1280-light.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1440,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": null,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 320,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": null,
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 390,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": "host-390-dark.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 768,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": null,
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1024,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": null,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1280,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": "host-1280-dark.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host",
+  "path": "/host",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1440,
+  "status": 200,
+  "h1": "Host dashboard",
+  "finalUrl": "/host",
+  "text": "Host dashboard Hudson Paddle Club My bookings Sign out Manage sessions Your experiences Host settings Staff Upcoming sessions Learn to kayak in the cove Sat",
+  "file": null,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 8,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 45
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 320,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": null,
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 390,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": "host-experiences-390-light.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 768,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": null,
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1024,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": null,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1280,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": "host-experiences-1280-light.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1440,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": null,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 320,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": null,
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 390,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": "host-experiences-390-dark.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 768,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": null,
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1024,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": null,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1280,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": "host-experiences-1280-dark.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-experiences",
+  "path": "/host/experiences",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1440,
+  "status": 200,
+  "h1": "Your experiences",
+  "finalUrl": "/host/experiences",
+  "text": "Your experiences Back to the dashboard To change an experience, contact Ramble. Family paddle Sunday Live Prices Adult $55 · Child $35 Cancellation Flexible:",
+  "file": null,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 39
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 320,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": null,
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 390,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": "host-settings-390-light.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 768,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": null,
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1024,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": null,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1280,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": "host-settings-1280-light.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1440,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": null,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 320,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": null,
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 390,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": "host-settings-390-dark.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 768,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": null,
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1024,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": null,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1280,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": "host-settings-1280-dark.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-settings",
+  "path": "/host/settings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1440,
+  "status": 200,
+  "h1": "Host settings",
+  "finalUrl": "/host/settings",
+  "text": "Host settings Back to the dashboard Host name Shown to guests on your page and on each experience. About (optional) Shown on your host page. Booking notic",
+  "file": null,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 7,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 320,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-320-light.png",
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    272,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    272,
+    9
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    272,
+    26
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    272,
+    3
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2h8sq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    272,
+    44
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 390,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-390-light.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    342,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    342,
+    9
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    342,
+    26
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    342,
+    3
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2h8sq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    342,
+    44
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 768,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-768-light.png",
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 9,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ],
+   [
+    "summary \"Change Learn to kayak in the c\"",
+    720,
+    24
+   ],
+   [
+    "summary \"Change Winter paddle series at\"",
+    720,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    720,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    720,
+    24
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    135,
+    7
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    448,
+    5
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    135,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    448,
+    24
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    111,
+    27
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1024,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-1024-light.png",
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 9,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ],
+   [
+    "summary \"Change Learn to kayak in the c\"",
+    976,
+    24
+   ],
+   [
+    "summary \"Change Winter paddle series at\"",
+    976,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    976,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    976,
+    24
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    135,
+    7
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    448,
+    5
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    135,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    448,
+    24
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    111,
+    27
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1280,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-1280-light.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 9,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ],
+   [
+    "summary \"Change Learn to kayak in the c\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Winter paddle series at\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    1200,
+    24
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    135,
+    7
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    448,
+    5
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    135,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    448,
+    24
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    111,
+    27
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1440,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-1440-light.png",
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 9,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ],
+   [
+    "summary \"Change Learn to kayak in the c\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Winter paddle series at\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    1200,
+    24
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    135,
+    7
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    448,
+    5
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    135,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    448,
+    24
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    111,
+    27
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 320,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-320-dark.png",
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    272,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    272,
+    9
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    272,
+    26
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    272,
+    3
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2h8sq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    272,
+    44
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 390,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-390-dark.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    342,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    342,
+    9
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    342,
+    26
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    342,
+    3
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2h8sq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    342,
+    44
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 768,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-768-dark.png",
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 9,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ],
+   [
+    "summary \"Change Learn to kayak in the c\"",
+    720,
+    24
+   ],
+   [
+    "summary \"Change Winter paddle series at\"",
+    720,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    720,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    720,
+    24
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    135,
+    7
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    448,
+    5
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    135,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    448,
+    24
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    111,
+    27
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1024,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-1024-dark.png",
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 9,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ],
+   [
+    "summary \"Change Learn to kayak in the c\"",
+    976,
+    24
+   ],
+   [
+    "summary \"Change Winter paddle series at\"",
+    976,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    976,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    976,
+    24
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    135,
+    7
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    448,
+    5
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    135,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    448,
+    24
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    111,
+    27
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1280,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-1280-dark.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 9,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ],
+   [
+    "summary \"Change Learn to kayak in the c\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Winter paddle series at\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    1200,
+    24
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    135,
+    7
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    448,
+    5
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    135,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    448,
+    24
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    111,
+    27
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-sessions",
+  "path": "/host/sessions",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1440,
+  "status": 200,
+  "h1": "Sessions",
+  "finalUrl": "/host/sessions",
+  "text": "Sessions Hudson Paddle Club My bookings Sign out Mon, Nov 9 to Sun, Nov 15 Previous week Next week Times are in America/New_York. Publish this week Sessi",
+  "file": "host-sessions-1440-dark.png",
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 9,
+  "smallTotal": 81,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ],
+   [
+    "summary \"Change Learn to kayak in the c\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Winter paddle series at\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    1200,
+    24
+   ],
+   [
+    "summary \"Change Sunset kayak on the Hud\"",
+    1200,
+    24
+   ]
+  ],
+  "overlaps": [
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    135,
+    7
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "input#_R_2h8kq9bsnpfdivb_.aqcCqa_input \"allocation\"",
+    448,
+    5
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "button.e7WGRa_button.e7WGRa_primary \"Save capacity\"",
+    135,
+    3
+   ],
+   [
+    "input#_R_2hocq9bsnpfdivb_.aqcCqa_input \"price\"",
+    "summary \"Change Sunset kayak on the Hud\"",
+    448,
+    24
+   ],
+   [
+    "button.e7WGRa_button.e7WGRa_primary \"Save price\"",
+    "input#_R_2hokq9bsnpfdivb_.aqcCqa_input \"price\"",
+    111,
+    27
+   ]
+  ],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 134
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 320,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": null,
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 390,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": "host-bookings-390-light.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 768,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": null,
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1024,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": null,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1280,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": "host-bookings-1280-light.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1440,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": null,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 320,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": null,
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 390,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": "host-bookings-390-dark.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 768,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": null,
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1024,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": null,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1280,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": "host-bookings-1280-dark.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings",
+  "path": "/host/bookings",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1440,
+  "status": 200,
+  "h1": "Bookings",
+  "finalUrl": "/host/bookings",
+  "text": "Bookings Search bookings Search No bookings yet",
+  "file": null,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 4,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 8
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 320,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": null,
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 390,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": "host-bookings-session-390-light.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 768,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": null,
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1024,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": null,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1280,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": "host-bookings-session-1280-light.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1440,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": null,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 320,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": null,
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 390,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": "host-bookings-session-390-dark.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 768,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": null,
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1024,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": null,
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1280,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": "host-bookings-session-1280-dark.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-bookings-session",
+  "path": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1440,
+  "status": 200,
+  "h1": "Guest list",
+  "finalUrl": "/host/bookings/session/f9a6859b-3e89-433d-8c5a-c39abed963f8",
+  "text": "Guest list Learn to kayak in the cove · Sat, Nov 14 · 9:00 AM EST Hudson Paddle Club 0 seats across 0 bookings Back to bookings To print this list, use you",
+  "file": null,
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 3,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 11
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 320,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-320-light.png",
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 390,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-390-light.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 768,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-768-light.png",
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1024,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-1024-light.png",
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1280,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-1280-light.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "light",
+  "w": 1440,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-1440-light.png",
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 320,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-320-dark.png",
+  "scrollW": 320,
+  "clientW": 320,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    320,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 390,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-390-dark.png",
+  "scrollW": 390,
+  "clientW": 390,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    390,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 768,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-768-dark.png",
+  "scrollW": 768,
+  "clientW": 768,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    768,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1024,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-1024-dark.png",
+  "scrollW": 1024,
+  "clientW": 1024,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1024,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1280,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-1280-dark.png",
+  "scrollW": 1280,
+  "clientW": 1280,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1280,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ },
+ {
+  "name": "host-staff",
+  "path": "/host/staff",
+  "persona": "owner.a",
+  "scheme": "dark",
+  "w": 1440,
+  "status": 200,
+  "h1": "Staff",
+  "finalUrl": "/host/staff",
+  "text": "Staff Email address Staff can see your dashboard, sessions and guest lists, and change nothing. They get a single-use sign-in link. Invite staff member Staff ",
+  "file": "host-staff-1440-dark.png",
+  "scrollW": 1440,
+  "clientW": 1440,
+  "sideways": false,
+  "smallCount": 1,
+  "smallTotal": 6,
+  "smallWorst": [
+   [
+    "a \"Skip to main content\"",
+    1440,
+    20
+   ]
+  ],
+  "overlaps": [],
+  "clipped": [
+   "caption.FvYQtW_caption._8XW2Qq_visuallyHidden \"Staff\" sw=31 cw=1"
+  ],
+  "lowContrast": 0,
+  "lowWorst": [],
+  "textChecked": 16
+ }
+]
