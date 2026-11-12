@@ -1,65 +1,58 @@
-# U-074b Architecture Audit: FAIL
+# Architecture Audit: U-074b final re-audit (round 4, delta 8d2fa8c..d467017)
 
-Branch `unit/U-074b`, HEAD `51dba4806ae21cdbb24e58bb053b0bcf6d280896`, diffed against `origin/main` (43 files).
-Rules: `.claude/standards/architecture.md` (project)
-Exemptions applied: B15, B6, B8 (not exercised by this diff).
+Verdict: **PASS** (0 blocking)
+HEAD: `d467017ed25af0ab06e5c5e09abecec973782c5c` (matches expected)
+Rules: `.claude/standards/architecture.md` (project, in worktree)
+Scope: delta `8d2fa8c31cc9d2e38980241d2e42927cace5918a..HEAD` touches one in-scope file, `src/server/db/catalog.ts` (+2 / -3). In scope under `server/**`.
 
-## Last-round fixes
+## Round-3 blocking item (B17, `byNameThenId`): fixed
 
-- **opsForm.ts extraction: real, with one copy left.** `formText`, `formHas`, `oversizedFields`, `slugFor`, `parseIdField`, `parseNotice`, `noticeText`, `parseProblemFields`, `noticeHref` are defined only in `src/lib/opsForm.ts`. `src/lib/hostSetup.ts` imports them and no longer defines `textOf`, `slugFor` or `parseHostIdField`. The issue-to-field loop was not extracted (see B17-1).
-- **ActionNotice: real.** `src/components/HostSetup/HostNotice.tsx` is deleted and nothing references `HostNotice`, `parseHostNotice`, `parseHostIdField` or `noticeCodes` any more. The host pages and the three new experience pages all use `ActionNotice`.
-- **userActor: real.** `userActor` is exported from `src/lib/audit.ts:90` and used by `src/lib/hostAudit.ts` and `src/lib/experienceAudit.ts`. No literal `{ actorKind: 'user', actorId }` copy remains in the diff. `src/lib/opsAudit.ts:19` has one, but that file is not in the diff (see A-5).
-- **No behaviour change on host pages.** I compared against `origin/main`:
-  - `hostNoticeCodes` lists the same 13 codes in the same order as the old `noticeCodes`.
-  - `noticeHref` now goes through `tableHref`, which builds the same `URLSearchParams` (`notice` then `fields`) and drops an empty `fields`, as the old code did.
-  - `parseProblemFields` gets `hostFormFields` as an argument, the same list the old code used.
-  - `parseIdField` uses the same `WriteIdSchema` as `parseHostIdField`.
-  - `oversizedFields(get, hostFormFields, hostLimits.rawField)` and `formText` match the old inline `hostFormFields.filter` and `textOf`.
-  - `ActionNotice` renders the same `Alert` with the same tone and title, and nothing when there is no notice.
+- The private constant `const byNameThenId = [asc(experiences.name), asc(experiences.id)];` is gone from `src/server/db/catalog.ts`. A grep of `src/` finds no other definition or inline copy of that ordering in `catalog.ts`.
+- `catalog.ts:23` imports `byNameThenId` from `./keysetPage`. `catalog.ts:119` calls `orderBy: byNameThenId(experiences)`, the same table the old constant was built on, so the ordering is unchanged.
+- The import is server-to-server (`src/server/db` to `src/server/db`), so B4 holds.
+- `asc` is still used in `catalog.ts` (`adultFirst`, and the category, neighborhood and slug-history orders), so the import list is not left with an unused name.
+- Existing callers of the shared helper are unchanged: `experienceEditor.ts:107`, `hostSetup.ts:175`.
 
-## Blocking Issues
+## Regression check on the delta
 
-- **B17-1** `src/lib/experienceEditor.ts:275-283` (the `parsed.error.issues` loop) copies `src/lib/hostSetup.ts:111-117`, and the ordered-field filter at `src/lib/experienceEditor.ts:246-248` copies `src/lib/hostSetup.ts:116` and `:131`. The rule is new in this diff, so it is not exempt as predating code. Fix: add `fieldsFromIssues(issues, fields)` and an ordered-fields helper to `src/lib/opsForm.ts`, and have both forms call them.
-- **B17-2** `src/lib/experienceEditor.ts:160-171` (`CENTS_PER_DOLLAR`, `priceText`, `parsePriceMinor`) repeats `src/lib/hostSessions.ts:272-278` (`dollarsPattern`, exported `priceMinorFromText`). It is the same dollars-and-cents regex with the same `padEnd(2, '0')` arithmetic. `CENTS_PER_DOLLAR` also repeats the private constant at `src/lib/money.ts:4`. Fix: move the parser into `src/lib/money.ts`, which already owns the money text boundary, and have both forms use it. Keep the range check in the experience module and cover it with one test.
-- **B17-3** `src/components/ExperienceEditor/ExperienceForm.tsx:45-69` (`CheckField`) and the `.check`, `.check input` and `.check input:focus-visible` rules in `src/components/ExperienceEditor/ExperienceEditor.module.css` duplicate `src/components/HostSetup/HostForm.tsx:113-121` and the same three rules in `src/components/HostSetup/HostSetup.module.css:56-76`. The CSS blocks are identical. The existing `src/components/Checkbox` primitive is controlled (it requires `onChange` and uses `useId`), so it is not a drop-in. Fix: one shared check-field component with its CSS, under `src/components/`, used by both forms. Do not add a third copy.
+- No other file changed between 8d2fa8c and HEAD.
+- No new import outside `src/server/`, no `process.env`, no `'use client'`, no vendor SDK, no `catch`, no style, no money or time code.
 
-## Advisory
+## Part (b): B1 to B17 on the delta
 
-- **A-1** `src/server/db/experienceEditor.ts:218`: `waiver?.status === 'published' && legalKindOf(waiver.doc) === 'waiver'` is a decision in the data layer (B2, borderline). Move it to a `src/lib/` predicate such as `isPublishedWaiver` and unit-test it.
-- **A-2** B5 judgment: `createExperience` (`src/server/db/experienceEditor.ts:244`) and `updateExperience` (`:279`) use their typed `input` without a Zod parse. The actions parse first (`src/server/actions/experiences.ts:33` and `:51`). `createHost` and `updateHost` in `src/server/db/hostSetup.ts:59` and `:122` follow the same pattern, so this matches existing precedent and is not counted as blocking. Decide whether the data layer should re-parse.
-- **A-3** `src/lib/experienceEditor.ts:164` `parsePriceMinor` is exported with no non-test importer. B7 covers component and data-layer files only, so this is advisory. Un-export it, or use it through the B17-2 fix.
-- **A-4** `src/components/ExperienceEditor/ExperienceEditor.module.css` `.form` and `.filters` use `max-width: 40rem`, and the focus ring uses `2px`. Neither is a colour, spacing, radius or font-size literal, so B16 does not fire. Noted only.
-- **A-5** Not in this diff: `src/lib/opsAudit.ts:19` writes the user actor literal inside its own null-aware `actor()` helper. It is pre-existing and handles the guest case, so it is not a copy of `userActor`. Log it in `audits/` if you want it tidied.
-
-## Rule checks (whole diff)
-
-| Rule | Result | Note |
+| Rule | Result | Notes |
 |---|---|---|
-| B1 | Pass | No `fetch`, Drizzle or SDK call outside `src/server/`. |
-| B2 | Pass, with A-1 | Decisions are in `src/lib/experienceEditor.ts`. |
-| B3 | Pass | `src/server/db/experienceEditor.ts` has `import 'server-only'`. `actions/experiences.ts` has `'use server'`. No `process.env` in the diff. |
-| B4 | Pass | The imports point one way, and components import only `src/components`, `src/lib`, and types from `src/server`. |
-| B5 | Pass, with A-2 | Results are Ramble types. Actions parse with Zod. |
-| B6 | Pass | Every read and write calls `requireRole(..., Role.Ops)` or `requireOpsUserId` (`src/server/db/audit.ts:50`) before any row access. |
-| B7 | Pass | No test-only export in a component or data-layer file. |
-| B8 | Exempt | |
-| B9 | Pass | `createExperience` and `updateExperience` each write the row, its price options and its audit row in one `db.transaction`. Cache tags go out after commit. |
-| B10 | N/A | No money, hold or ledger path. |
-| B11 | Pass | Drizzle appears only in `src/server/db/`. |
-| B12 | Pass | Prices are integer minor units. No `Date.now` or `new Date()` in `server/` or `lib/`. |
-| B13 | Pass | No `catch` in the diff. |
-| B14 | Pass | No new `'use cache'`. |
-| B15 | Exempt | |
-| B16 | Pass | No `style={}`. CSS uses `var(--…)` tokens for colour and spacing. |
-| B17 | **Fail** | B17-1, B17-2, B17-3. |
+| B1 | PASS | No fetch, DB or SDK call added outside the data layer. |
+| B2 | PASS | Only an ordering expression moved; SQL `ORDER BY` is not a decision. |
+| B3 | PASS | `catalog.ts` already imports `server-only`. No new `process.env`. |
+| B4 | PASS | `./keysetPage` is a same-layer import. |
+| B5 | PASS | Return path unchanged (`HostExperienceSchema.array().parse(rows)`). |
+| B6 | PASS | `listHostExperiences` still calls `requireRole` before the query (unchanged by this commit). |
+| B7 | PASS | `byNameThenId` now has non-test callers in `catalog.ts`, `experienceEditor.ts` and `hostSetup.ts`. |
+| B8 to B16 | PASS or N/A | No `'use client'`, route handler, money, cache, or style change in the delta. |
+| B17 | PASS | The duplicate is removed. The shared helper is the only definition. |
 
-## Verdict
+## Advisory (carried from round 3, none in this delta, not re-checked this round)
 
-FAIL (REQUEST_CHANGES). Three blocking B17 duplications, all introduced by this diff.
+1. `src/lib/privateSession.ts:48`: `dollarsText` strips `[$,\s]` on its own, so a budget of `12,50` still reads as 1250 dollars. The money change refuses that input elsewhere. Route the budget through `priceMinorFromText` or a whole-dollar variant in `money.ts`.
+2. `src/lib/signIn.ts:128`: inline `/^\d{1,7}$/` duplicates `wholeNumberPattern` (`src/lib/text.ts:4`).
+3. `src/components/CheckoutPage/CheckoutForm.tsx:48`: `optionalError` repeats the wrap half of `errorProps` (`src/lib/opsForm.ts:66`). Similar local copies exist in `HostSessionForms.tsx`, `ContactForm.tsx:71`, `PrivateSessionForm.tsx:45`.
+4. Inline `asc(x.name), asc(x.id)` ordering that `keysetPage.byNameThenId` could cover: `src/server/db/experienceEditor.ts:123` (choices list), `hosts.ts:52`, `home.ts:48`, `browse.ts:285`, `sessions.ts:743`.
+5. `src/lib/money.ts:40`: `priceMinorFromText` now refuses `1 200` and `$ 85`, which the old parser accepted. The tests assert this on purpose. Behaviour change for Dave to confirm, not a layer violation.
+
+## Proposed debt for Dave (not blocking)
+
+CheckField vs Checkbox; duplicated `.problem` / `.muted` CSS; duplicated `.pair` media-query CSS; duplicated `.legend` CSS.
+
+## Result
+
+PASS. 0 blocking. The one round-3 blocking item is fixed with no leftover copy, and the delta has no other changes.
+
+Files audited: `src/server/db/catalog.ts`, `src/server/db/keysetPage.ts`, `src/server/db/experienceEditor.ts`, `src/server/db/hostSetup.ts`.
 
 ---
-<sub>architecture-audit | haiku | read-only</sub>
+<sub>architecture-audit | haiku | read-only | u-074b round 4</sub>
 
-ARCH_VERDICT=REQUEST_CHANGES
+ARCH_VERDICT=APPROVE
 ARCH_SHORTCIRCUIT=0
-ARCH_BLOCKING_COUNT=3
+ARCH_BLOCKING_COUNT=0
