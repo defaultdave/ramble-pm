@@ -1,25 +1,22 @@
-# U-074b part 2 review (head c27211a)
+# U-074b part 2, round-4 review
 
-Verdict: PASS, no blocking findings. REVIEW_VERDICT=APPROVE_WITH_NITS
+Head: 130c8cdef7c239ee04ba26a14b2fcae308e75e26 (delta b4a7cc0..HEAD, 15 files, +51/-54)
 
-Size: 1546 insertions, 24 deletions (27 files), about 60% tests/stories. One logical change. Under 1000-line rule.
-Scope: all changes within scope. No changes under src/server/auth, .github, .claude, docs, e2e. No reorder/crop/delete, no ingest behaviour change (ingest.ts only drops a TODO).
-Checks run: vitest on photoForm, action, ExperienceEditor, cacheTags, experienceViews: 118 pass. tsc --noEmit clean. DB tests not run (need DB).
+Verdict: PASS
 
-## Checks
-- Authz before work: experiencePhotos.ts:12 `opsCallerOrLeave` is the first statement; id parse, form parse and file read follow. Test covers admin and anonymous. addPhoto re-checks role per experience.
-- File validation: size refused from File.size before bytes are read (action test asserts arrayBuffer not called); addPhoto then runs the existing ingest (type sniff, pixels, re-encode).
-- XSS: alt text rendered as React text only (ExperiencePhotos.tsx:64). Credit and source URL are not rendered anywhere in this diff. Source URL is validated server-side by httpUrlPattern (http/https only, no javascript:/data:), enforced by NewPhotoSchema, same pattern as the DB check. Notice code comes from a closed enum.
-- Lost data: audit row is written in the same transaction as the photo row; a failed audit rolls back the row and the existing catch removes the stored file. updateTag runs after commit, outside the try, so a tag failure cannot delete a stored file.
-- Tag: published only for guest-visible status; kind `photos` maps to the experience tag, test added.
-- Existing callers: no other addPhoto caller in src, scripts or tests (seed does not call it). New behaviour for any future caller: a caller with userId null is refused (photos.ts, after role check), and addPhoto now calls updateTag, which throws outside a Server Action for a guest-visible experience. Both are documented in the JSDoc. DB tests updated accordingly (updateTag mocked, real user ids).
+Blocking: none.
 
-## Findings
-- FYI next.config.ts:30 bodySizeLimit 11 MiB is app-wide. Every Server Action (sign-in, contact, checkout, holds, including unauthenticated ones) may now buffer up to 11 MiB, up from 1 MB, so the memory cost of one junk POST to a public action rises about 11x. Framework still rejects over the limit, and ops-only gating applies only to this action. Acceptable for a demo; accept it on purpose (ADR or decision-log line) rather than silently. Next only allows this per app, not per action.
-- FYI Hosting caveat: if deployed on Vercel functions, the platform caps request bodies near 4.5 MB before Next sees them, so a 5 to 10 MiB photo gets a platform 413 and not the friendly "too large" notice. Confirm the target before relying on the 10 MiB cap in the UI hint (the form hint does not state a size).
-- Optional experiencePhotos.ts:19 `experienceId` invalid id redirects to the list with no notice; fine, matches part 1 pattern.
-- Optional photos.ts: the `status` read for the tag decision happens before the transaction; an experience published during the upload misses one invalidation until revalidate. Negligible.
-- Nit ExperiencePhotos.tsx:84-87 alt text input is `optional` while the decorative checkbox is the alternative; server enforces it and the error text says so. Fine; consider a hint saying "Leave empty only if decorative".
+Checked
+- Tag strings unchanged: tagsFor maps 'experience' to tags.experience(id), the same value both old kinds returned. Every producer (sessions.ts x4, pulse.ts, cancelSession.ts, photos.ts addPhoto) emits the same experienceId; the publishWeek reformat is whitespace only.
+- Stale references: grep for kind 'schedule' / 'photos' in src and tests finds none. Remaining 'schedule' hits in pulse.test.ts and pulse.ts are unrelated labels (call-order markers, rate-limit key). 'photos' hits are table names.
+- Other lanes' files (sessions.ts, pulse.ts, cancelSession.ts): acceptable and necessary. The kind is a closed union, so the rename cannot compile unless every producer moves with it. Each edit is a one-word literal swap (plus a comment and prettier line breaks); no logic touched. tsc is clean.
+- Ingest format check unchanged: allowedContentTypes.public is image/jpeg, image/png, image/webp, so acceptedPhotoFormats is ['jpeg','png','webp'] as before. isAcceptedFormat has one caller (photos.ts:104, `!format || !isAcceptedFormat(format)`), which only needs a boolean; the dropped type predicate narrowed nothing it relied on.
+- hosts.ts: idOrLeave(formData,'ownerUserId',hostPath(hostId)) is the same parse and the same redirect target as the removed inline code. parseIdField is still used at hosts.ts:65.
+- mebibyte: single definition in storage.ts, imported by photos.ts. Values unchanged (5 MiB, 10 MiB, +1 MiB body limit).
+- Barrel: ExperiencePhotos is imported directly by ExperienceEditView and the stories, none through the index. refusedHref is a pure extraction.
+- Dropped coverage: the 'exactly the codes that have a notice' test is redundant. photoNotices is `satisfies Record<PhotoNoticeCode, NoticeText>` and PhotoNoticeCode derives from photoNoticeCodes, so a missing notice, or a literal key outside the codes, fails tsc. A key added via the spread cannot differ from the codes, since both come from refusalNotices. The rewritten round-trip test now goes through experiencePageNotice (public), so photoRefusalOf is still covered.
+- Run: tsc clean; vitest on photoForm, photos, cacheTags, cancelSession, pulse and server/actions: 16 files, 398 tests pass.
 
-## Required changes
-None.
+Nits
+- photoForm.test.ts: the 'maps %s to no refusal' table lost its null case. experiencePageNotice with no notice is covered by its own describe (line 254 onward), so nothing is lost; no action.
+- acceptedPhotoFormats now derives the short name by stripping 'image/'. If a non-image type is ever added to the public list, its entry would not match a decoder format name and would simply be refused. Acceptable; no action.
