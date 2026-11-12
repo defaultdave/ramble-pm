@@ -160,7 +160,7 @@ Next chat (older lead updates):
 ## Follow-ups logged 2026-11-12 (not scheduled)
 - **U-075:** an approval gate (at least one price option and one photo before approval), and a seeded `in_review` experience so the queue can be tested before U-125.
 - **U-084 debt** (in PR 963's body): `hostIsSuspended` takes no Caller (B6 waiver or Caller; Dave's call), `pauseNoticeFor` exported only for stories and tests, `readHostSuspension` returns `noSuspension` for a bad id, and the stale prior-status edge.
-- **Flaky test:** `HostSessions.test.tsx`.
+- **Flaky tests:** `HostSessions.test.tsx`; `tests/db/jobs-recheck.db.test.ts` (3 timeouts on PR 970's `12d7c68` while the same file passed on 969; the lock-contention cases sit near the 5 s test timeout).
 - **Senior agent:** strengthen the reuse sweep before review. Every architecture audit this wave found new B17 duplication.
 - **Session reminder:** reschedule the reminder job after a U-057 move.
 - **Dependabot alerts on `main`:** minimatch (fix 11.0.1) and glob (fix 14.0.2), both transitive, can be fixed with pnpm overrides. deepmerge has no fix yet.
@@ -169,3 +169,5 @@ Next chat (older lead updates):
 - **U-108:** how ops cancels a session that has gift-paid bookings. Blocked in the MVP, Dave decides.
 - **Ops `updateHost`:** it doesn't invalidate caches. This predates U-125.
 - **U-072 B2 debt** (found by U-108's audit): the role pick in `requireAnyRole` (`src/server/auth/caller.ts:124`) and the host staff cap decision (`db/staffRoles.ts:161-163`) should be pure lib functions with unit tests.
+- **Ops booking history** (found in the U-108 merge review): the history on an ops booking lists only `booking.ops_*` rows. A session cancel or pause by ops (U-108) doesn't show there, though the refund and the cancelled status do. This is a U-077 lite-cut choice; extending it is a PRD-51 feature.
+- **`parseSessionWhen`** (`src/lib/opsSessions.ts`) builds its options and parser by hand where main's `statusFilter` (`src/lib/statusBadge.ts`) now does the same. Cleanup only, no behaviour change.
