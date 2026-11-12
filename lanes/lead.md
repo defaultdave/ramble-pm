@@ -167,3 +167,4 @@ Next chat (older lead updates):
 - **vig cloud kit:** install the team into `~/.claude` only when `CLAUDE_CODE_REMOTE=true`, never as repo-level `.claude/` copies (PR 925 closed for this).
 - **human-read:** the automatic re-run works only on branches that contain PR 962, because `pull_request_review` uses the PR head's workflow file.
 - **U-108:** how ops cancels a session that has gift-paid bookings. Blocked in the MVP, Dave decides.
+- **Ops `updateHost`:** it doesn't invalidate caches. This predates U-125.
