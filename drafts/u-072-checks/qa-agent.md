@@ -1,0 +1,6 @@
+PASS (gaps named: no browser, and no e2e or Storybook run by the QA agent; CI ran them)
+
+CI on 4370187 passed in full: db (including host-staff.db.test.ts, the authz matrix with the new host-staff rows and the corrected host-staff test, the guest-list and dashboard db tests), storybook, e2e, build, test, lint, format, knip, codeql, gitleaks, osv, scope-manifest. The two db tests the lead required for the minors-data shaping passed in CI on this head:
+  (a) tests/db/host-guest-lists.db.test.ts > readHostGuestList > "gives host staff the booking and contacts, without the children’s ages or the guardian": a host_staff read has scope staff and the keys childrenAges, guardianName and guardianContact are ABSENT;
+  (b) tests/db/host-guest-lists.db.test.ts > readHostGuestList > "gives an owner the session with its confirmed bookings by name, with every detail the host may see": the owner still sees childrenAges, guardianName and guardianContact.
+Also passing: tests/db/account-bookings.db.test.ts "gives host staff only their own bookings, never a guest’s on their host". Unconfirmed: /host/staff and the read-only host pages in a browser. PM should capture the staff page (invite, resend, remove, cap and rate-limit notices) and a staff view of the sessions page without edit forms.

@@ -1,0 +1,3 @@
+PASS (re-audited: delta audit of round 3, 085d3bd..10b271e)
+
+An architecture-audit agent re-checked the round-3 delta: the B2 fix (display strings built in the view models in lib/accountBookings.ts and lib/hostGuestLists.ts), the index-qualified keys, and the new readAccountBookings(caller, now) ordering. No blocking findings; B6 requireRole runs before the read, the clock is read once, the ordering SQL matches the JS upcoming predicate and is capped at 100. Advisory: the upcoming predicate lives in SQL and in lib and must stay in sync; two near-similar detail-line builders (host and account) could share a formatter; a doc-comment line break.

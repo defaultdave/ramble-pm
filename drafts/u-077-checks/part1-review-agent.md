@@ -1,0 +1,3 @@
+APPROVE
+
+First review: no blocking findings; the non-blocking test gaps (paging past one page, tied timestamps, unrelated guest excluded from an email search, cancelled-by labels) were added in the fix round. Final delta review of the last batch (shared select, guests subquery equivalent to the old inner join, opsListPageSize replacing hostsPageSize): no blocking findings. Size: 1,785 insertions (about half tests/stories/fixtures) is the read half of a unit the lead split. Head a3b8709 is 6de4e65 plus a clean merge of main; the local gates (format, lint, typecheck, knip, 10k unit tests) pass on it.

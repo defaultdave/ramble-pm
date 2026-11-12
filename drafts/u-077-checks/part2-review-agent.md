@@ -1,0 +1,3 @@
+APPROVE
+
+Reviews of the stack: first review REQUEST_CHANGES on the retry (refunded the whole rest, no status gate), fixed per the lead ruling (exact failed amount, keyed to the failed refund id, refunded+pending<=captured under the order lock, tests); delta reviews APPROVE on the fix round and on the last two commits (refundIdFor is the same computation as before so stored ids are unchanged; pickRetry plus the data layer cannot double refund; the flag clears only on a new refund). This head 834200d is those commits plus a merge of Part 1 and main; local gates pass (format, lint, typecheck, knip, build; unit tests pass apart from one load flake that passes alone). Size: 2,650 insertions on top of Part 1 ships as the second half of a unit the lead split.

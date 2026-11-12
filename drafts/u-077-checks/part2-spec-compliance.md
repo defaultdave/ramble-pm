@@ -1,0 +1,3 @@
+PASS (axe rows deferred)
+
+Part 2 criteria met: cancel through the existing cancel path with an ops actor, fake refund of the rest, retry of a failed refund via the refund-failed queue, resend confirmation to the booking address only (audit row plus a job through the existing outbox, shared confirmation builder), void earlier links (bumpTokenVersion plus audit in one transaction), audit rows for every action, action matrix rows. The U-100 axe matrix rows are not added because the matrix does not exist yet (the unit record assigns them to whichever of U-077 and U-100 lands second), same as the other units in this lane. Step-up correctly absent (lite cut).

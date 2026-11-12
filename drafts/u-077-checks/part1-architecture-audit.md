@@ -1,0 +1,3 @@
+PASS (re-audited: delta audit of the fix round)
+
+First audit: 5 blocking (B2 badge string, B17 count noun / view entry / page size and status filter, B5 cursor); all fixed in the fix round (countLabel, opsViewEntry, opsListPageSize, statusFilter, cursor parse) and verified by a delta audit; a second delta found two more (page size constant duplicated by the hosts list, projection written twice), fixed in the last batch and verified by a final delta audit: Part 1 PASS. Non-blocking logged: search condition uses dbRead directly, doc line width. Head a3b8709 is 6de4e65 plus a clean merge of main.

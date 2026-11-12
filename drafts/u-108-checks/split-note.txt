@@ -1,0 +1,2 @@
+
+Re-posted on 1a73035: the only change since e948cd3 is a test-only commit that splits src/lib/opsSessions.test.ts (883 lines, over the 800-line lint hard limit) into opsSessions.test.ts, a new opsSessionsPause.test.ts and a shared opsSessions.fixtures.ts, moved verbatim with no behaviour change (3 files, no production code). Full lint, format, typecheck, knip and 10,538 unit tests pass locally.
