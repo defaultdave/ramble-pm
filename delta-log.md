@@ -138,3 +138,6 @@ U-068's `HostSessionForms` (`src/components/HostSessions/HostSessionForms.tsx`, 
 
 ## 2026-11-12 [lead]: U-074a ships without the payout account
 The plan (`docs/plan/units.yaml`, the work-breakdown row and issue 90) still lists a host payout account under U-074a. The MVP re-plan's lite cut (`drafts/mvp-replan-2026-11-10.md` section 2) dropped payouts from host setup, and PR 953 built the cut version: `/ops/hosts`, an invite sent as a sign-in link, one acceptance, and a unique slug. The plan files stay frozen, and this entry is the record of the change.
+
+## 2026-11-13 [lead]: MVP stops after wave 2 plus the test console
+The MVP re-plan (`drafts/mvp-replan-2026-11-10.md`) had 59 units in three waves plus a test bed. Waves 1 and 2 merged (41 units, last one U-108 as PR 969 `3234e2d`). Dave parked the rest of wave 3 and all of wave 4 except NEW-4 and NEW-5: 16 MVP units and 7 test-bed units. The plan's wave 3 window (6.75 to 15.0 agent-days) no longer applies; what remains is about 1.75 agent-days of build plus the walkthrough and the page changes it finds. Parked units keep their issues and board rows (Todo, no Sprint).
