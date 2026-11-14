@@ -8,6 +8,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
+| `dictionary` | Text dictionary (DECISIONS 2026-11-14, `drafts/dictionary-design-2026-11.md`): U-128 (#974) phase 0, standard tier; owns src/lib/copy/, eslint.config.mjs (copy rules only), src/lib/text.ts, src/lib/orderSummary.ts (guestsLabel), the andList module, ErrorNotice/, NotFoundNotice/, the four group layouts' metadata, the contract test | PM dictionary, 2026-11-14 (from the lead) | claimed | 2026-11-14 |
 | `test-console` | Slim MVP (DECISIONS 2026-11-13): U-123 (NEW-4, #948) `/ops/dev` then U-124 (NEW-5, #949) reset demo data, both standard tier; owns (ops)/ops/dev/, src/server/ports/clock*, src/server/db/seed/reset.ts, the reset CLI script, actions/opsDev.ts | PM test-console, 2026-11-13 (from the lead) | handed off 2026-11-13: U-123 (PR 972 `b8cb4f4`) and U-124 (PR 973 `7a26999`) merged, both Done on board #19; lane done | 2026-11-13 |
 | `w2-roles` | MVP wave 2 lane W2-E (`drafts/mvp-replan-2026-11-10.md` s4): U-112, U-083a, U-107, U-072, U-077, U-108 in that order; section 2 lite cuts; owns src/server/auth/, schema/people.ts, scripts/grant-role*, ops/{staff,audit,support,bookings,sessions}/, (guest)/account/, Header account link, db/guests.ts, host/staff/, db/opsBookings.ts, actions/ops*.ts | PM w2-roles, 2026-11-11 (from the lead) | handed off: U-112 (960), U-083a (958), U-107 (961), U-072 (964) merged; U-077 merged (965 `0d1cf5c`, 967 `1792c86`), Done on board #19; U-108 merged as PR 969 (`3234e2d`, which carries all of 970), Done on board #19; lane done | 2026-11-12 |
 | `w2-host` | MVP wave 2 lane W2-C (`drafts/mvp-replan-2026-11-10.md` s4): U-067, U-122 (rolling session horizon, was NEW-3), U-068, U-069 in that order; section 2 lite cuts; owns (host)/layout.tsx, host/page.tsx, host/sessions/, host/bookings/, components/SiteShell/, Host*/, db/sessions.ts, lib/sessions.ts, server/pulse.ts, actions/hostSessions.ts, db/hostGuestLists.ts | PM w2-host, 2026-11-10 (from the lead) | closed: U-067 (PR 940), U-122 (PR 943), U-069 (PR 946), U-068 (PR 945) merged; U-068 board item still to set Done (gh login lacks project scope) | 2026-11-11 |
@@ -18,7 +19,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | `w1-gift-kit` | MVP re-plan wave 1, lane W1-E: U-017 then U-121 (was NEW-2) | PM w1-gift-kit, 2026-11-10 | closed: U-017 (PR 913) and U-121 (PR 921) merged | 2026-11-10 |
 | `w1-guest-pages` | MVP wave 1, W1-B: U-037 (#43), U-036 (#42), U-038 (#44) from `drafts/mvp-replan-2026-11-10.md` | PM w1-guest-pages, 2026-11-10 | handed off: all three units merged (912, 917, 918, 923, 924); issues 42 to 44 closed; board Done | 2026-11-10 11:50 |
 | `w1-auth` | MVP wave 1 lane W1-A (`drafts/mvp-replan-2026-11-10.md` s4): U-004a (#5), NEW-1 sign-in screens, U-022 (#29), with the section 2 lite cuts; personas in U-022 | PM w1-auth, 2026-11-10 (swarm, from the lead) | closed: U-004a (PR 920), U-022 (PR 926) and U-120 (NEW-1, PR 931) merged | 2026-11-10 |
-| `audit-images` | Audit of how experience images load (home cards, detail page, sizes, srcset, placeholders, preload) and Dave's idea: one shared small size, larger views show it while the large one loads. Read-only audit; findings in `audits/images-2026-11-14.md` | PM audit-images, 2026-11-14 | active | 2026-11-14 01:00 |
+| `audit-images` | Audit of how experience images load (home cards, detail page, sizes, srcset, placeholders, preload) and Dave's idea: one shared small size, larger views show it while the large one loads. Read-only audit; findings in `audits/images-2026-11-14.md` | PM audit-images, 2026-11-14 | active: audit published, waiting on Dave for spike timing | 2026-11-14 01:20 |
 | `lead` | Shared status, `## Next`, roadmap, memory; finish-off swarm (test waves, maintenance tail) | PM lead, 2026-11-04 (morning, swarm) | active | 2026-11-04 09:45 |
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
@@ -26,6 +27,10 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 Moved to `lanes/earlier.md` (2026-11-04).
 
 ## In flight
+
+### Lane: audit-images
+- **2026-11-14, waiting on Dave.** Image audit published: `audits/images-2026-11-14.md` (IMG-1 to IMG-6 plus IMG-I, Dave's small-cached-image-under-the-large-one idea). On phones the card and the detail lead already share a file (1440w at 3x); on desktop they differ (1080 vs 1920), which is where the idea pays. IMG-6 (no photos locally, image LCP never measured) blocks proving anything. Recommendation: a spike unit on the lead only, measured on a preview with Blob photos; IMG-1 and IMG-3 ship as cheap fixes. Waiting on Dave: when the spike runs (it adds a unit, so it is a scope change).
+- **For the lead:** IMG rows are not yet filed as tickets; file them with `audit-tickets.ts --run` once Dave says when the spike runs. Add the pass to the `audits/README.md` table.
 
 ### Lane: lead (Maintenance triage)
 - **2026-11-04 early morning, handed off.** Dave: test audit now (DECISIONS 2026-11-03). Lanes `test-audit` (report published `a3f5bb6`), `maint-wave-3` and `test-fixes` ran from this chat and are handed off. Filed 100 audit tickets with `audit-tickets.ts --run`: TA-2 to TA-29 new (#814 to #836; nine TA rows map to existing tickets) plus the unfiled nightly N1102-1 to 70 and N1103-1 to 9 (filed untriaged, the routine step). PR 838 (P15) failed `db` on `holds.db.test.ts` "refuses a paying hold and changes nothing": two `Date.now()` calls let `payingUntil` fall a millisecond before `expiresAt` (check `holds_paying_until_not_before_expiry`); not P15's. Reran the failed job: passed, 838 merged at `d0203cc`. Cause recorded on TA-26 (#833), fix after the next promotion because W1c split this file in `integration`. #359 (BE-17) was closed by PR 820's `Closes` though BE-17 was reverted: Dave reopens it. P20 (840) touched two files outside its manifest (`UpcomingSessionsContent.tsx`, `BookingContent.tsx`, the only callers of the error view); accepted, delta-log.
@@ -85,6 +90,17 @@ Older Next items (done or superseded): `lanes/lead.md`.
 
 ## Next chat
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
+
+### Next chat: audit-images
+- **Before you start:** Dave decides when the IMG-I spike runs (now, or after the MVP).
+- **Run:** `/ramble-pm lane: audit-images`
+- **Model and effort:** Sonnet, medium.
+- **Prompt:** Read `audits/images-2026-11-14.md` and the `audit-images` lane entry in `STATUS.md`. Log Dave's timing call in `DECISIONS.md`. If the spike is in, draft its unit (scope manifest: `Photo.tsx` underlay for the gallery lead only, a measurement plan on a preview with Blob photos covering cold and warm loads on desktop and phone, exit check on lead paint time) as a `PM bookkeeping:` change to `units.yaml`, and file IMG-1 to IMG-6 with `audit-tickets.ts --run`. Don't commit in ramble.
+
+### Next chat: dictionary
+- **Before you start (Dave):** add U-128 (#974) to board #19 if the lane's token can't.
+- **Run:** `/ramble-pm lane: dictionary`, Sonnet, medium.
+- **Prompt:** Build U-128 (#974, scope manifest in the issue), one PR, standard tier, per `drafts/dictionary-design-2026-11.md` sections 3 to 7 (approved). Lint rules land as warnings only. Record per-route client JS (home, browse, experience, checkout) before and after in the PR body. Per PR: overlap check, `senior` builder (`isolation: "worktree"`, cwd in the ramble checkout, base `origin/main`, `bun install --frozen-lockfile`, `pnpm format:check`), independent reviewer with four verdicts and a mutation proof, `post-check.ts` on the final head after CI's `db` job passes, review requested, auto-merge through `scripts/merge-desk/`. Board In Progress at pickup, Done at merge; remove the worktree and branch after merge. Never touch CLAUDE.md or `.claude/standards/` (the `src/lib/copy/` line in architecture.md is Dave's). Don't commit in the ramble main checkout. Write only this lane's row and sections in `STATUS.md`.
 
 ### Next chat: test-console
 - **Lane done.** U-123 and U-124 are merged and Done. There is no further lane work.
