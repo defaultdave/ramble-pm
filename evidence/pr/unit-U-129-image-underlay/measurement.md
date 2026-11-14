@@ -85,3 +85,25 @@ Each cell: median (min-max) of 5 runs. Times in ms.
 | local build, underlay | desktop | cold | under 1080w network; main 1920w network | 937 (924-941) | 1142 (1137-1155) | 968 (964-984) | photo 1080w | 66918 | 5 |
 | local build, underlay | desktop | warm-hard | under 1080w hit: memory; main 1920w network | 186 (185-193) | 668 (655-669) | 208 (200-212) | photo 1080w | 52214 | 5 |
 | local build, underlay | desktop | warm-click | under 1080w hit: memory, no request; main 1920w network | 27 (26-28) | 509 (477-512) | n/a | not reported (client-side navigation) | 52214 | 5 |
+
+## Round 2, 2026-11-14: no client JS
+
+Branch head 9b14ecd22e4caa1b4685dc0ab48d646a2b69dcdb (`unit/U-129-image-underlay`). `PhotoWithUnderlay.tsx` and its load state are gone. The underlay is a decorative `next/image` (`alt=""`, `aria-hidden`, eager, the card's `sizes`, blur placeholder) rendered on the server inside `Photo`; the main image sits over it in the same box with no placeholder and no opacity rule, so it is transparent until its own pixels paint. Server HTML confirmed: underlay carries the blur background, main carries none, `fetchPriority="high"` on main only.
+
+Method as above (local `next build` + `next start` of the branch with the harness, desktop 1440x900 at DPR 2, 1.6 Mbps / 150 ms applied to the navigation under test, one discarded warm-up pass, n=5, median with (min-max), ms). Only desktop cold and desktop warm-click were run. "First sharp" is the first frame in which any lead layer is a loaded image, so with no fade it is the underlay showing through. The experience was `/measure/exp/0` (the earlier rounds' experience path is not recorded, so absolute bytes match round 1 but the photo may differ).
+
+| Target | Device | Flow | Lead layers (URL width, cache) | First sharp, ms | Main complete, ms | LCP, ms | Image bytes on the wire | n |
+|---|---|---|---|---|---|---|---|---|
+| local build, underlay (server-rendered) | desktop | cold | under 1080w network; main 1920w network | 940 (928-950) | 1145 (1131-1150) | 980 (972-992) | 66918 | 5 |
+| local build, underlay (server-rendered) | desktop | warm-click | under 1080w hit: memory, no request; main 1920w network | 27 (21-29) | 493 (471-510) | n/a | 52214 | 5 |
+
+Compared with round 1 (cold 937 / 1142; warm-click 27 / 509): the same. The desktop warm card click still gives a sharp first frame at about 27 ms, from the card's 1080w file served from the memory cache with no request, while the 1920w main arrives at about 493 ms. Cold shows the 1080w underlay at about 940 ms and main at about 1145 ms. Every run's first sharp layer was the underlay at 1080w. Main-complete and opaque are now the same moment because there is no fade.
+
+### Failed main load over the underlay
+
+Desktop (1440x900 at DPR 2, Chromium via Playwright), main layer's `w=1920` request aborted, underlay allowed. Screenshots of the lead frame: `/private/tmp/claude-501/-Users-davidfleming-Workspace-ramble--claude-worktrees-ramble-status-c5d9be/2cbd7721-327d-4aeb-a742-b1364e63bb5d/scratchpad/fail-warm-click.png` and `fail-cold.png` (scratch, not copied into the repo).
+
+- The underlay stays visible and sharp in both flows; there is no blank frame.
+- The broken main `<img>` still paints Chromium's broken-image icon in the top-left corner of the frame, over the underlay.
+- After a card click (warm) the alt text also renders, in the page's body font and colour, over the top-left of the photo, wrapping across the full frame width ("Generated test image 1 of 4 for ...", two lines). On the cold load only the broken icon showed and no alt text; I did not establish why (timing of the error against the screenshot is the likely difference).
+- So a failed main load shows the photo and, over it, a broken icon and, at least sometimes, the full alt text. It is not hidden. Not built: the owner did not ask for a fix; `next/image` already sets `color: transparent` inline on both layers and the alt text still showed dark, so that is not a fix; an `onError` handler would need client JS.
