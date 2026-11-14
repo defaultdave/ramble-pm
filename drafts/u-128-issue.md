@@ -1,0 +1,8 @@
+SCOPE MANIFEST
+IN SCOPE: phase 0 of the text dictionary (ramble-pm `drafts/dictionary-design-2026-11.md`, sections 3 to 7). Create `src/lib/copy/` with `common.ts` (shared actions, the error and not-found notices from `ErrorNotice` and `NotFoundNotice`, brand, site nav and footer labels), `meta.ts` (page titles and the one `'%s | Ramble'` template, used by the four group layouts), and `format.ts` (`count()` replacing `countLabel`, plus `guestsLabel` and `andList` moved in with their callers; `formatMoney` and the zoned date labels re-exported, not moved). Move only the call sites of what these three files hold. Add `react/jsx-no-literals` and a `no-restricted-syntax` selector for literal `aria-label`, `title`, `placeholder` and `alt`, both as warnings, in `eslint.config.mjs`, with an override list for folders that turn them into errors (empty for now). Add `no-restricted-imports` so a `'use client'` file can import only its own area file from `src/lib/copy/`, never the folder index. Add the copy contract test (legal demo label, email subjects, the payment-failure message, the 404 heading). Record client JS per route (home, browse, experience, checkout) as the baseline for later phases, in the PR body.
+OUT OF SCOPE: moving any page's, island's, email's or form's copy (phases 1 to 4); database content and seed fixtures; developer-facing text (Zod invariants, `new Error`, logs); `.claude/standards/` (Dave's).
+DEPENDS: none.
+REVIEW TIER: standard.
+ESTIMATE: 0.75 days (PM, not panelled).
+
+Source: ramble-pm `drafts/dictionary-design-2026-11.md`, approved by Dave 2026-11-14 (DECISIONS).

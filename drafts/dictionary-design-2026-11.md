@@ -1,6 +1,6 @@
 # Text dictionary: design, November 2026
 
-**Status:** draft for Dave. Nothing gets built until he approves it (DECISIONS 2026-11-14). It picks up item 3 of `drafts/sprint-2-production-ready.md`: one locale, typed, no library.
+**Status:** approved by Dave on 2026-11-14, all seven decisions in section 9 as recommended (DECISIONS 2026-11-14). It picks up item 3 of `drafts/sprint-2-production-ready.md`: one locale, typed, no library.
 
 **Evidence:** a read-only inventory of `main` at `7a26999` on 2026-11-14. Its counts come from an AST scan, so they're approximate.
 
