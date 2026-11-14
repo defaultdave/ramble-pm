@@ -1,0 +1,708 @@
+[
+ {
+  "device": "phone",
+  "flow": "cold",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": null,
+  "cardBox": null,
+  "layers": [
+   {
+    "alt": "Generated test image",
+    "w": 1440,
+    "natural": [
+     390,
+     260
+    ],
+    "box": [
+     390,
+     292.5,
+     0,
+     60
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": false,
+    "bytes": 17940,
+    "edge": "HIT"
+   }
+  ],
+  "firstSharpMs": 1470,
+  "firstSharpLayer": "main",
+  "firstSharpW": 1440,
+  "mainCompleteMs": 1470,
+  "mainOpaqueMs": 1470,
+  "lcp": {
+   "ms": 1192,
+   "size": 114075,
+   "tag": "IMG",
+   "w": null,
+   "url": "xmlns='http://www.w3.org/2000/svg' %3E%3Cfilter id='b' color"
+  },
+  "lcpCandidates": [
+   {
+    "ms": 1192,
+    "size": 114075,
+    "tag": "IMG",
+    "w": null
+   }
+  ],
+  "imageRequests": [
+   {
+    "w": 1440,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 17940,
+    "edge": "HIT"
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1440,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 17148,
+    "edge": "HIT"
+   },
+   {
+    "w": 1440,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 18855,
+    "edge": "HIT"
+   }
+  ],
+  "imageBytes": 53943,
+  "ttfbMs": 45,
+  "elapsedMs": 3873
+ },
+ {
+  "device": "phone",
+  "flow": "warm-hard",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": "https://ramble-sand.vercel.app/_next/image?url=https%3A%2F%2Fyfnbu2tamcgyncmy.public.blob.vercel-storage.com%2Fpublic%2Fphotos%2F92a3453c-2e3d-4a22-876f-5533364aea59%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1440&q=75",
+  "cardBox": [
+   340,
+   227
+  ],
+  "layers": [
+   {
+    "alt": "Generated test image",
+    "w": 1440,
+    "natural": [
+     390,
+     260
+    ],
+    "box": [
+     390,
+     292.5,
+     0,
+     60
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": "memory",
+    "bytes": 0,
+    "edge": "HIT"
+   }
+  ],
+  "firstSharpMs": 193,
+  "firstSharpLayer": "main",
+  "firstSharpW": 1440,
+  "mainCompleteMs": 193,
+  "mainOpaqueMs": 193,
+  "lcp": {
+   "ms": 200,
+   "size": 114075,
+   "tag": "IMG",
+   "w": 1440,
+   "url": "aea59%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1440&q=75"
+  },
+  "lcpCandidates": [
+   {
+    "ms": 180,
+    "size": 3196,
+    "tag": "SPAN",
+    "w": null
+   },
+   {
+    "ms": 200,
+    "size": 114075,
+    "tag": "IMG",
+    "w": 1440
+   }
+  ],
+  "imageRequests": [
+   {
+    "w": 1440,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": "HIT"
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1440,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 17334,
+    "edge": "HIT"
+   },
+   {
+    "w": 1440,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 18805,
+    "edge": "HIT"
+   }
+  ],
+  "imageBytes": 36139,
+  "ttfbMs": 13,
+  "elapsedMs": 2526
+ },
+ {
+  "device": "phone",
+  "flow": "warm-click",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": "https://ramble-sand.vercel.app/_next/image?url=https%3A%2F%2Fyfnbu2tamcgyncmy.public.blob.vercel-storage.com%2Fpublic%2Fphotos%2F92a3453c-2e3d-4a22-876f-5533364aea59%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1440&q=75",
+  "cardBox": [
+   340,
+   227
+  ],
+  "layers": [
+   {
+    "alt": "Generated test image",
+    "w": 1440,
+    "natural": [
+     390,
+     260
+    ],
+    "box": [
+     390,
+     292.5,
+     0,
+     60
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": false,
+    "cacheHit": "memory, no request",
+    "bytes": null,
+    "edge": null
+   }
+  ],
+  "firstSharpMs": 28,
+  "firstSharpLayer": "main",
+  "firstSharpW": 1440,
+  "mainCompleteMs": 28,
+  "mainOpaqueMs": 28,
+  "lcp": null,
+  "lcpCandidates": null,
+  "imageRequests": [
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1440,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 17148,
+    "edge": "HIT"
+   },
+   {
+    "w": 1440,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 18982,
+    "edge": "HIT"
+   },
+   {
+    "w": 1440,
+    "file": "6eb817ca.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 25072,
+    "edge": "HIT"
+   }
+  ],
+  "imageBytes": 61202,
+  "ttfbMs": 48,
+  "elapsedMs": 2417
+ },
+ {
+  "device": "desktop",
+  "flow": "cold",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": null,
+  "cardBox": null,
+  "layers": [
+   {
+    "alt": "Generated test image",
+    "w": 1920,
+    "natural": [
+     792,
+     528
+    ],
+    "box": [
+     784,
+     440,
+     120,
+     256
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": false,
+    "bytes": 22577,
+    "edge": "HIT"
+   }
+  ],
+  "firstSharpMs": 1675,
+  "firstSharpLayer": "main",
+  "firstSharpW": 1920,
+  "mainCompleteMs": 1675,
+  "mainOpaqueMs": 1675,
+  "lcp": {
+   "ms": 1724,
+   "size": 344947,
+   "tag": "IMG",
+   "w": 1920,
+   "url": "aea59%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1920&q=75"
+  },
+  "lcpCandidates": [
+   {
+    "ms": 1236,
+    "size": 81529,
+    "tag": "IMG",
+    "w": null
+   },
+   {
+    "ms": 1724,
+    "size": 344947,
+    "tag": "IMG",
+    "w": 1920
+   }
+  ],
+  "imageRequests": [
+   {
+    "w": 1920,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 22577,
+    "edge": "HIT"
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1080,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 13172,
+    "edge": "HIT"
+   },
+   {
+    "w": 1080,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 14602,
+    "edge": "HIT"
+   }
+  ],
+  "imageBytes": 50351,
+  "ttfbMs": 47,
+  "elapsedMs": 4015
+ },
+ {
+  "device": "desktop",
+  "flow": "warm-hard",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": "https://ramble-sand.vercel.app/_next/image?url=https%3A%2F%2Fyfnbu2tamcgyncmy.public.blob.vercel-storage.com%2Fpublic%2Fphotos%2F92a3453c-2e3d-4a22-876f-5533364aea59%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1080&q=75",
+  "cardBox": [
+   382,
+   255
+  ],
+  "layers": [
+   {
+    "alt": "Generated test image",
+    "w": 1920,
+    "natural": [
+     792,
+     528
+    ],
+    "box": [
+     784,
+     440,
+     120,
+     256
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": false,
+    "bytes": 22591,
+    "edge": "HIT"
+   }
+  ],
+  "firstSharpMs": 672,
+  "firstSharpLayer": "main",
+  "firstSharpW": 1920,
+  "mainCompleteMs": 672,
+  "mainOpaqueMs": 672,
+  "lcp": {
+   "ms": 708,
+   "size": 344947,
+   "tag": "IMG",
+   "w": 1920,
+   "url": "aea59%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1920&q=75"
+  },
+  "lcpCandidates": [
+   {
+    "ms": 192,
+    "size": 4600,
+    "tag": "SPAN",
+    "w": null
+   },
+   {
+    "ms": 208,
+    "size": 50917,
+    "tag": "H1",
+    "w": null
+   },
+   {
+    "ms": 216,
+    "size": 81529,
+    "tag": "IMG",
+    "w": null
+   },
+   {
+    "ms": 708,
+    "size": 344947,
+    "tag": "IMG",
+    "w": 1920
+   }
+  ],
+  "imageRequests": [
+   {
+    "w": 1920,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 22591,
+    "edge": "HIT"
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1080,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 13172,
+    "edge": "HIT"
+   },
+   {
+    "w": 1080,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 14596,
+    "edge": "HIT"
+   }
+  ],
+  "imageBytes": 50359,
+  "ttfbMs": 13,
+  "elapsedMs": 2613
+ },
+ {
+  "device": "desktop",
+  "flow": "warm-click",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": "https://ramble-sand.vercel.app/_next/image?url=https%3A%2F%2Fyfnbu2tamcgyncmy.public.blob.vercel-storage.com%2Fpublic%2Fphotos%2F92a3453c-2e3d-4a22-876f-5533364aea59%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1080&q=75",
+  "cardBox": [
+   382,
+   255
+  ],
+  "layers": [
+   {
+    "alt": "Generated test image",
+    "w": 1920,
+    "natural": [
+     792,
+     528
+    ],
+    "box": [
+     784,
+     440,
+     120,
+     256
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": false,
+    "bytes": 22583,
+    "edge": "HIT"
+   }
+  ],
+  "firstSharpMs": 645,
+  "firstSharpLayer": "main",
+  "firstSharpW": 1920,
+  "mainCompleteMs": 645,
+  "mainOpaqueMs": 645,
+  "lcp": null,
+  "lcpCandidates": null,
+  "imageRequests": [
+   {
+    "w": 1920,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 22583,
+    "edge": "HIT"
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1080,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 13172,
+    "edge": "HIT"
+   },
+   {
+    "w": 1080,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 14596,
+    "edge": "HIT"
+   }
+  ],
+  "imageBytes": 50351,
+  "ttfbMs": 49,
+  "elapsedMs": 2721
+ }
+]

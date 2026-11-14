@@ -1,0 +1,920 @@
+[
+ {
+  "device": "phone",
+  "flow": "cold",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": null,
+  "cardBox": null,
+  "layers": [
+   {
+    "alt": "",
+    "w": 1440,
+    "natural": [
+     390,
+     260
+    ],
+    "box": [
+     390,
+     292.5,
+     0,
+     0
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": false,
+    "bytes": 18446,
+    "edge": null
+   },
+   {
+    "alt": "Generated test image",
+    "w": 1440,
+    "natural": [
+     390,
+     260
+    ],
+    "box": [
+     390,
+     292.5,
+     0,
+     0
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": false,
+    "bytes": 18446,
+    "edge": null
+   }
+  ],
+  "firstSharpMs": 1027,
+  "firstSharpLayer": "underlay",
+  "firstSharpW": 1440,
+  "mainCompleteMs": 1027,
+  "mainOpaqueMs": 2261,
+  "lcp": {
+   "ms": 824,
+   "size": 114075,
+   "tag": "IMG",
+   "w": null,
+   "url": "xmlns='http://www.w3.org/2000/svg' %3E%3Cfilter id='b' color"
+  },
+  "srcLog": [
+   {
+    "t": 744,
+    "srcs": "1440|1440",
+    "done": "false|false"
+   },
+   {
+    "t": 1027,
+    "srcs": "1440|1440",
+    "done": "true|true"
+   }
+  ],
+  "lcpCandidates": [
+   {
+    "ms": 824,
+    "size": 114075,
+    "tag": "IMG",
+    "w": null,
+    "urlLen": 100
+   }
+  ],
+  "imageRequests": [
+   {
+    "w": 1440,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 18446,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1440,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 17842,
+    "edge": null
+   },
+   {
+    "w": 1440,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 19500,
+    "edge": null
+   }
+  ],
+  "imageBytes": 55788,
+  "ttfbMs": 2,
+  "elapsedMs": 2647
+ },
+ {
+  "device": "phone",
+  "flow": "warm-hard",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": "http://localhost:3201/_next/image?url=%2Fmeasure%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1440&q=75",
+  "cardBox": [
+   356,
+   237
+  ],
+  "layers": [
+   {
+    "alt": "",
+    "w": 1440,
+    "natural": [
+     390,
+     260
+    ],
+    "box": [
+     390,
+     292.5,
+     0,
+     0
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": "memory",
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "alt": "Generated test image",
+    "w": 1440,
+    "natural": [
+     390,
+     260
+    ],
+    "box": [
+     390,
+     292.5,
+     0,
+     0
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": "memory",
+    "bytes": 0,
+    "edge": null
+   }
+  ],
+  "firstSharpMs": 189,
+  "firstSharpLayer": "underlay",
+  "firstSharpW": 1440,
+  "mainCompleteMs": 189,
+  "mainOpaqueMs": 438,
+  "lcp": {
+   "ms": 196,
+   "size": 114075,
+   "tag": "IMG",
+   "w": 1440,
+   "url": "asure%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1440&q=75"
+  },
+  "srcLog": [
+   {
+    "t": 189,
+    "srcs": "1440|1440",
+    "done": "true|true"
+   }
+  ],
+  "lcpCandidates": [
+   {
+    "ms": 188,
+    "size": 24640,
+    "tag": "H1",
+    "w": null,
+    "urlLen": 0
+   },
+   {
+    "ms": 196,
+    "size": 114075,
+    "tag": "IMG",
+    "w": 1440,
+    "urlLen": 103
+   }
+  ],
+  "imageRequests": [
+   {
+    "w": 1440,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1440,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 17842,
+    "edge": null
+   },
+   {
+    "w": 1440,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 19500,
+    "edge": null
+   }
+  ],
+  "imageBytes": 37342,
+  "ttfbMs": 5,
+  "elapsedMs": 2076
+ },
+ {
+  "device": "phone",
+  "flow": "warm-click",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": "http://localhost:3201/_next/image?url=%2Fmeasure%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1440&q=75",
+  "cardBox": [
+   356,
+   237
+  ],
+  "layers": [
+   {
+    "alt": "",
+    "w": 1440,
+    "natural": [
+     390,
+     260
+    ],
+    "box": [
+     390,
+     292.5,
+     0,
+     0
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": false,
+    "cacheHit": "memory, no request",
+    "bytes": null,
+    "edge": null
+   },
+   {
+    "alt": "Generated test image",
+    "w": 1440,
+    "natural": [
+     390,
+     260
+    ],
+    "box": [
+     390,
+     292.5,
+     0,
+     0
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": false,
+    "cacheHit": "memory, no request",
+    "bytes": null,
+    "edge": null
+   }
+  ],
+  "firstSharpMs": 195,
+  "firstSharpLayer": "underlay",
+  "firstSharpW": 1440,
+  "mainCompleteMs": 195,
+  "mainOpaqueMs": 462,
+  "lcp": null,
+  "srcLog": [
+   {
+    "t": 925,
+    "srcs": "1440|1440",
+    "done": "true|true"
+   }
+  ],
+  "lcpCandidates": null,
+  "imageRequests": [
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1440,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 17842,
+    "edge": null
+   },
+   {
+    "w": 1440,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 19500,
+    "edge": null
+   },
+   {
+    "w": 1440,
+    "file": "6eb817ca.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 25732,
+    "edge": null
+   }
+  ],
+  "imageBytes": 63074,
+  "ttfbMs": 2,
+  "elapsedMs": 2172
+ },
+ {
+  "device": "desktop",
+  "flow": "cold",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": null,
+  "cardBox": null,
+  "layers": [
+   {
+    "alt": "",
+    "w": 1080,
+    "natural": [
+     384,
+     256
+    ],
+    "box": [
+     792,
+     440,
+     120,
+     214
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": false,
+    "bytes": 14704,
+    "edge": null
+   },
+   {
+    "alt": "Generated test image",
+    "w": 1920,
+    "natural": [
+     792,
+     528
+    ],
+    "box": [
+     792,
+     440,
+     120,
+     214
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": false,
+    "bytes": 23080,
+    "edge": null
+   }
+  ],
+  "firstSharpMs": 930,
+  "firstSharpLayer": "underlay",
+  "firstSharpW": 1080,
+  "mainCompleteMs": 1130,
+  "mainOpaqueMs": 2313,
+  "lcp": {
+   "ms": 960,
+   "size": 348455,
+   "tag": "IMG",
+   "w": 1080,
+   "url": "asure%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1080&q=75"
+  },
+  "srcLog": [
+   {
+    "t": 747,
+    "srcs": "1080|1920",
+    "done": "false|false"
+   },
+   {
+    "t": 930,
+    "srcs": "1080|1920",
+    "done": "true|false"
+   },
+   {
+    "t": 1130,
+    "srcs": "1080|1920",
+    "done": "true|true"
+   }
+  ],
+  "lcpCandidates": [
+   {
+    "ms": 848,
+    "size": 79860,
+    "tag": "IMG",
+    "w": null,
+    "urlLen": 100
+   },
+   {
+    "ms": 960,
+    "size": 348455,
+    "tag": "IMG",
+    "w": 1080,
+    "urlLen": 103
+   }
+  ],
+  "imageRequests": [
+   {
+    "w": 1080,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 14704,
+    "edge": null
+   },
+   {
+    "w": 1920,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 23080,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1080,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 13866,
+    "edge": null
+   },
+   {
+    "w": 1080,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 15268,
+    "edge": null
+   }
+  ],
+  "imageBytes": 66918,
+  "ttfbMs": 2,
+  "elapsedMs": 3284
+ },
+ {
+  "device": "desktop",
+  "flow": "warm-hard",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": "http://localhost:3201/_next/image?url=%2Fmeasure%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1080&q=75",
+  "cardBox": [
+   382,
+   255
+  ],
+  "layers": [
+   {
+    "alt": "",
+    "w": 1080,
+    "natural": [
+     384,
+     256
+    ],
+    "box": [
+     792,
+     440,
+     120,
+     214
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": "memory",
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "alt": "Generated test image",
+    "w": 1920,
+    "natural": [
+     792,
+     528
+    ],
+    "box": [
+     792,
+     440,
+     120,
+     214
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": false,
+    "bytes": 23080,
+    "edge": null
+   }
+  ],
+  "firstSharpMs": 188,
+  "firstSharpLayer": "underlay",
+  "firstSharpW": 1080,
+  "mainCompleteMs": 655,
+  "mainOpaqueMs": 888,
+  "lcp": {
+   "ms": 200,
+   "size": 348455,
+   "tag": "IMG",
+   "w": 1080,
+   "url": "asure%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1080&q=75"
+  },
+  "srcLog": [
+   {
+    "t": 188,
+    "srcs": "1080|0",
+    "done": "true|false"
+   },
+   {
+    "t": 338,
+    "srcs": "1080|1920",
+    "done": "true|false"
+   },
+   {
+    "t": 655,
+    "srcs": "1080|1920",
+    "done": "true|true"
+   }
+  ],
+  "lcpCandidates": [
+   {
+    "ms": 184,
+    "size": 50917,
+    "tag": "H1",
+    "w": null,
+    "urlLen": 0
+   },
+   {
+    "ms": 200,
+    "size": 348455,
+    "tag": "IMG",
+    "w": 1080,
+    "urlLen": 103
+   }
+  ],
+  "imageRequests": [
+   {
+    "w": 1080,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1920,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 23080,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1080,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 13866,
+    "edge": null
+   },
+   {
+    "w": 1080,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 15268,
+    "edge": null
+   }
+  ],
+  "imageBytes": 52214,
+  "ttfbMs": 5,
+  "elapsedMs": 2307
+ },
+ {
+  "device": "desktop",
+  "flow": "warm-click",
+  "rep": 0,
+  "throttle": true,
+  "cardSrc": "http://localhost:3201/_next/image?url=%2Fmeasure%2F68b14b2d-d726-4605-af52-acc60699ea60.jpg&w=1080&q=75",
+  "cardBox": [
+   382,
+   255
+  ],
+  "layers": [
+   {
+    "alt": "",
+    "w": 1080,
+    "natural": [
+     384,
+     256
+    ],
+    "box": [
+     792,
+     440,
+     120,
+     214
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": false,
+    "cacheHit": "memory, no request",
+    "bytes": null,
+    "edge": null
+   },
+   {
+    "alt": "Generated test image",
+    "w": 1920,
+    "natural": [
+     792,
+     528
+    ],
+    "box": [
+     792,
+     440,
+     120,
+     214
+    ],
+    "fit": "cover",
+    "pos": "50% 50%",
+    "requested": true,
+    "cacheHit": false,
+    "bytes": 23080,
+    "edge": null
+   }
+  ],
+  "firstSharpMs": 29,
+  "firstSharpLayer": "underlay",
+  "firstSharpW": 1080,
+  "mainCompleteMs": 512,
+  "mainOpaqueMs": 745,
+  "lcp": null,
+  "srcLog": [
+   {
+    "t": 758,
+    "srcs": "1080|0",
+    "done": "true|false"
+   },
+   {
+    "t": 925,
+    "srcs": "1080|1920",
+    "done": "true|false"
+   },
+   {
+    "t": 1241,
+    "srcs": "1080|1920",
+    "done": "true|true"
+   }
+  ],
+  "lcpCandidates": null,
+  "imageRequests": [
+   {
+    "w": 1920,
+    "file": "0699ea60.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 23080,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": null,
+    "status": 200,
+    "hit": true,
+    "disk": false,
+    "memory": true,
+    "bytes": 0,
+    "edge": null
+   },
+   {
+    "w": 1080,
+    "file": "13df986e.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 13866,
+    "edge": null
+   },
+   {
+    "w": 1080,
+    "file": "6c9df264.jpg",
+    "status": 200,
+    "hit": false,
+    "disk": false,
+    "memory": false,
+    "bytes": 15268,
+    "edge": null
+   }
+  ],
+  "imageBytes": 52214,
+  "ttfbMs": 2,
+  "elapsedMs": 2189
+ }
+]
