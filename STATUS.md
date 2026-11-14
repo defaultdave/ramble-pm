@@ -29,7 +29,7 @@ Moved to `lanes/earlier.md` (2026-11-04).
 ## In flight
 
 ### Lane: audit-images
-- **2026-11-14, U-129 building.** Dave: run the IMG-I spike now (DECISIONS 2026-11-14). PR 976 (PM bookkeeping: add U-129 to `units.yaml`) is approved by Dave but fails `scope-manifest`, which blocks a bookkeeping PR from adding a unit, so Dave bypass-merges it with `gh pr merge 976 --repo defaultdave/ramble --merge --admin`. A senior builder is running U-129 on `unit/U-129-image-underlay` (lead photo only; measurement to `evidence/pr/unit-U-129-image-underlay/` here). Round r1.
+- **2026-11-14, U-129 building.** Dave: run the IMG-I spike now (DECISIONS 2026-11-14). PR 976 (PM bookkeeping: add U-129 to `units.yaml`) was merged by Dave with a bypass at `23cfa2195e40e247d2da84938ada7962713f3925`, because `scope-manifest` blocks a bookkeeping PR from adding a unit. A senior builder is running U-129 on `unit/U-129-image-underlay` (lead photo only; measurement to `evidence/pr/unit-U-129-image-underlay/` here). Round r1.
 - **For the lead:** (1) File IMG-1 to IMG-6 with `audit-tickets.ts --run`. The lane held off because the run would also file 21 unfiled nightly items (N1105 to N1113). (2) Add the images pass to the `audits/README.md` table. (3) PR 975 (U-128) has a title the `units.yaml` on `main` doesn't hold, so the dictionary lane needs its own bookkeeping entry; both append at the end of the file, so the second to land merges `main`. (4) U-129 has no issue or board item: Dave creates them.
 
 ### Lane: lead (Maintenance triage)
@@ -92,7 +92,7 @@ Older Next items (done or superseded): `lanes/lead.md`.
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
 
 ### Next chat: audit-images
-- **Before you start:** Dave bypass-merges PR 976 (`gh pr merge 976 --repo defaultdave/ramble --merge --admin`) and creates the U-129 issue.
+- **Before you start:** Dave creates the U-129 issue and board item.
 - **Run:** `/ramble-pm lane: audit-images`
 - **Model and effort:** Sonnet, medium.
 - **Prompt:** Read the `audit-images` lane entry in `STATUS.md`, `audits/images-2026-11-14.md` and `evidence/pr/unit-U-129-image-underlay/measurement.md`. If the builder's branch `unit/U-129-image-underlay` is done, check its files against the U-129 manifest, then push, open the PR and request review through `agent-git.ts`, and run the review checks. Done means U-129 merged, or dropped with the numbers. Don't commit in ramble outside the merge-desk scripts.
