@@ -1,0 +1,249 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<title>Sign-in and Account Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one reading column; a legend, the render tree as nested rails, then the arrival order and the booking path. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #1b1f27;
+  --muted: #5b6372;
+  --rule: #d9dde4;
+  --server: #3b5bab;
+  --server-bg: #e8edf8;
+  --cached: #0f7a6c;
+  --cached-bg: #e2f3f0;
+  --stream: #a3610a;
+  --stream-bg: #fbefdc;
+  --client: #8a2f9c;
+  --client-bg: #f5e6f8;
+  --action: #b3261e;
+  --action-bg: #fbe6e4;
+  --lib: #59606d;
+  --lib-bg: #eceef1;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+    --server: #8fa9ec; --server-bg: #1f2840;
+    --cached: #5fcfbe; --cached-bg: #14302c;
+    --stream: #f0b65a; --stream-bg: #3a2a10;
+    --client: #e08ef0; --client-bg: #36203c;
+    --action: #f28b82; --action-bg: #3d1d1b;
+    --lib: #aab1bd; --lib-bg: #262b34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+  --server: #8fa9ec; --server-bg: #1f2840;
+  --cached: #5fcfbe; --cached-bg: #14302c;
+  --stream: #f0b65a; --stream-bg: #3a2a10;
+  --client: #e08ef0; --client-bg: #36203c;
+  --action: #f28b82; --action-bg: #3d1d1b;
+  --lib: #aab1bd; --lib-bg: #262b34;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 32px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 32px; }
+h1 { font-size: 30px; line-height: 1.15; margin: 0; text-wrap: balance; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 19px; margin: 0 0 12px; text-wrap: balance; }
+p { margin: 0; max-width: 68ch; }
+.lede { color: var(--muted); margin-top: 8px; }
+code, .path { font-family: var(--font-mono); font-size: 0.86em; }
+.route { font-family: var(--font-mono); font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.legend div { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+
+.k { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+.k.server { color: var(--server); background: var(--server-bg); }
+.k.cached { color: var(--cached); background: var(--cached-bg); }
+.k.stream { color: var(--stream); background: var(--stream-bg); }
+.k.client { color: var(--client); background: var(--client-bg); }
+.k.action { color: var(--action); background: var(--action-bg); }
+.k.lib { color: var(--lib); background: var(--lib-bg); }
+
+.tree-box { overflow-x: auto; }
+ul.tree, ul.tree ul { list-style: none; margin: 0; padding: 0; }
+ul.tree ul { margin-left: 18px; padding-left: 16px; border-left: 2px solid var(--rule); }
+ul.tree li { padding-top: 8px; min-width: 0; }
+.node { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 12px; display: grid; gap: 3px; border-left-width: 4px; min-width: 260px; }
+.node.server { border-left-color: var(--server); }
+.node.cached { border-left-color: var(--cached); }
+.node.stream { border-left-color: var(--stream); }
+.node.client { border-left-color: var(--client); }
+.node.action { border-left-color: var(--action); }
+.node.lib { border-left-color: var(--lib); }
+.node .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.node .name { font-family: var(--font-mono); font-weight: 500; font-size: 14.5px; }
+.node .path { color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+.node .note { color: var(--muted); font-size: 13.5px; max-width: 72ch; }
+.slot { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding: 10px 0 0 2px; }
+.slot::before { content: "slot "; color: var(--fg); font-weight: 500; }
+
+ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 10px; max-width: 72ch; }
+ol.steps li::marker { font-family: var(--font-mono); color: var(--muted); }
+
+.cols { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 18px; min-width: 0; }
+.foot { color: var(--muted); font-size: 13px; }
+</style>
+
+<div class="wrap">
+  <p><a href="index.html">All page maps</a></p>
+  <header>
+    <div class="route">/sign-in · /sign-in/confirm · /account · ramble main at 2db68ea</div>
+    <h1>Sign-in and account map</h1>
+    <p class="lede">How a guest asks for a sign-in link, confirms it, and reaches their bookings: every component from the layout down, which action or route handler sets the session, and how the caller and its roles are read. Traced from the code on <code>main</code>, 2026-11-15.</p>
+  </header>
+
+  <section aria-labelledby="legend-h">
+    <h2 id="legend-h">Key</h2>
+    <div class="legend">
+      <div><span class="k server">Server</span> renders to HTML, no JS shipped</div>
+      <div><span class="k cached">Cached read</span> <code>'use cache'</code>, tagged for invalidation</div>
+      <div><span class="k stream">Streamed</span> per request, behind a Suspense fallback</div>
+      <div><span class="k client">Client island</span> <code>'use client'</code>, hydrates</div>
+      <div><span class="k action">Server action</span> called from an island</div>
+      <div><span class="k lib">Pure lib</span> plain function in <code>src/lib</code> or <code>src/server</code> (here also the auth and data reads)</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="tree-h">
+    <h2 id="tree-h">Render tree</h2>
+    <div class="tree-box">
+<ul class="tree">
+<li>
+<div class="node server"><div class="head"><span class="name">GuestLayout</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/layout.tsx</div><div class="note">The root layout for this route group: html, body, fonts, base styles. There is no <code>src/app/layout.tsx</code>; each group (guest, host, ops, checkout) owns its own html and body. Unlike the host and ops layouts it renders no <code>RenderPerRequest</code>.</div></div>
+<ul>
+<li>
+<div class="node server"><div class="head"><span class="name">GuestShell</span><span class="k server">Server</span></div><div class="path">src/components/GuestShell/GuestShell.tsx</div><div class="note">Skip link, banner, header, the page inside <code>main</code>, footer. Takes the banner and the account control as slots.</div></div>
+<ul>
+<li><div class="node server"><div class="head"><span class="name">SkipLink</span><span class="k server">Server</span></div><div class="path">src/components/SkipLink/</div></div></li>
+<li><div class="slot">banner</div>
+<div class="node stream"><div class="head"><span class="name">GuestBanner</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/GuestBanner.tsx</div><div class="note">Awaits <code>connection()</code>, so it renders per request. Fallback: nothing. A failed read drops the banner and logs.</div></div>
+<ul>
+<li><div class="node cached"><div class="head"><span class="name">getCachedGuestSettings()</span><span class="k cached">Cached read</span></div><div class="path">src/server/siteSettings.ts</div><div class="note">The ops banner text comes from the cached guest settings (cache tag <code>settings</code>).</div></div></li>
+<li><div class="node server"><div class="head"><span class="name">SiteBanner</span><span class="k server">Server</span></div><div class="path">src/components/GuestShell/SiteBanner.tsx</div><div class="note">One-line notice, only when ops set text.</div></div></li>
+</ul></li>
+<li>
+<div class="node server"><div class="head"><span class="name">Header</span><span class="k server">Server</span></div><div class="path">src/components/Header/Header.tsx</div><div class="note">Home link, main nav, search, Gifts. Puts the <code>account</code> slot in the bar from tablet up and passes the same slot to the menu.</div></div>
+<ul>
+<li><div class="node client"><div class="head"><span class="name">SiteMenu</span><span class="k client">Client island</span></div><div class="path">src/components/GuestShell/SiteMenu.tsx</div><div class="note">Phone menu. The account control is its last item, so the same element renders twice on one page.</div></div></li>
+<li><div class="slot">account</div>
+<div class="node stream"><div class="head"><span class="name">HeaderAccount</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/HeaderAccount.tsx</div><div class="note">Reads <code>headers()</code> and asks whether a session exists. Wrapped in React <code>cache()</code> so the header and the phone menu share one read. Fallback: <code>AccountControl signedIn={false}</code>. A read that throws shows Sign in.</div></div>
+<ul>
+<li><div class="node lib"><div class="head"><span class="name">readSession(headers)</span><span class="k lib">Pure lib</span></div><div class="path">src/server/auth/session.ts</div><div class="note">Better Auth <code>api.getSession</code> on the request cookie. Returns id, user id, created and expiry times, or null. Does not read roles.</div></div></li>
+<li><div class="node server"><div class="head"><span class="name">AccountControl</span><span class="k server">Server</span></div><div class="path">src/components/Header/AccountControl.tsx</div><div class="note">Signed out: a Sign in link to <code>/sign-in</code>. Signed in: My bookings link to <code>/account</code> and a Sign out form that posts to <code>/api/auth/end-session</code>. No JS needed.</div></div></li>
+</ul></li>
+</ul></li>
+<li><div class="slot">children (the route)</div>
+<ul>
+<li>
+<div class="node server"><div class="head"><span class="name">SignInPage</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/sign-in/page.tsx</div><div class="note"><code>/sign-in</code>. Metadata title, <code>robots: noindex</code>. Wraps the content in Suspense. Fallback: <code>PageHeading</code> with a text <code>Skeleton</code>.</div></div>
+<ul>
+<li><div class="node stream"><div class="head"><span class="name">SignInContent</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/sign-in/SignInContent.tsx</div><div class="note">Awaits <code>searchParams</code>. <code>?next=</code> is cleaned by <code>safeNextPath</code>; <code>?error=</code> becomes a problem notice (INVALID_TOKEN is "expired or already used", anything else is "could not sign you in").</div></div>
+<ul>
+<li><div class="node lib"><div class="head"><span class="name">safeNextPath · signInProblemFor · firstQueryValue</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/signIn.ts · src/lib/text.ts</div><div class="note">Only a path on this site survives; anything else becomes <code>/</code>. Checks several layers of percent-decoding, backslashes, control characters and dot segments.</div></div></li>
+<li><div class="node server"><div class="head"><span class="name">PageHeading</span><span class="k server">Server</span></div><div class="path">src/components/PageHeading.tsx</div></div></li>
+<li><div class="node server"><div class="head"><span class="name">SignInProblem → Alert</span><span class="k server">Server</span></div><div class="path">src/components/SignIn/SignInProblem.tsx</div></div></li>
+<li><div class="node client"><div class="head"><span class="name">SignInForm</span><span class="k client">Client island</span></div><div class="path">src/components/SignIn/SignInForm.tsx</div><div class="note"><code>useActionState</code> on the action passed in as a prop. States: idle, invalid, sent, rate limited, failed. Moves focus to the first invalid field or to the notice. Renders <code>Alert</code>, <code>Input</code>, <code>Button</code>, <code>ButtonLink</code>.</div></div>
+<ul><li><div class="node action"><div class="head"><span class="name">requestSignInLink(previous, formData)</span><span class="k action">Server action</span></div><div class="path">src/server/actions/signIn.ts</div><div class="note">Trims and validates the email, then builds an in-process POST to <code>/api/auth/sign-in/magic-link</code> with <code>callbackURL</code> set to the clean <code>next</code>, and hands it to <code>handleAuthRequest</code>. Maps 200, 429 (with Retry-After), 400 and the rest to form states. Never logs the address.</div></div>
+<ul><li><div class="node lib"><div class="head"><span class="name">handleAuthRequest → guardSignInLink</span><span class="k lib">Pure lib</span></div><div class="path">src/server/auth/handler.ts</div><div class="note">Refuses a body over 4096 bytes, bad JSON or a bad address, then counts the address with <code>consumeRateLimit('sign_in_link', email)</code> in the <code>rate_limits</code> table. A counter failure refuses the request (503): nothing is sent uncounted. Responses carry <code>no-store</code>.</div></div>
+<ul><li><div class="node lib"><div class="head"><span class="name">getAuth() → Better Auth magicLink</span><span class="k lib">Pure lib</span></div><div class="path">src/server/auth/auth.ts</div><div class="note">Built on first use. Stores the token as an HMAC (<code>SIGN_IN_LINK_SECRET</code>) in <code>auth_verifications</code>, lives 5 minutes. <code>sendMagicLink</code> rewrites the link to <code>/sign-in/confirm?token=&amp;next=</code> and calls <code>sendEmail</code> with the <code>sign-in-link</code> template.</div></div></li></ul></li></ul></li></ul></li>
+</ul></li>
+</ul>
+</li>
+<li>
+<div class="node server"><div class="head"><span class="name">ConfirmSignInPage</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/sign-in/confirm/page.tsx</div><div class="note"><code>/sign-in/confirm</code>. Metadata: noindex, nofollow, <code>referrer: origin</code> so the token does not leak in a Referer (and not <code>no-referrer</code>, which makes the form post send <code>Origin: null</code>). Same Suspense and skeleton as sign-in.</div></div>
+<ul>
+<li><div class="node stream"><div class="head"><span class="name">ConfirmContent</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/sign-in/confirm/ConfirmContent.tsx</div><div class="note">Awaits <code>searchParams</code>. Checks the token shape with <code>ConfirmSignInSchema</code> (letters and digits, up to 128). It never calls Better Auth: opening the page uses nothing up. A bad token shows the expired notice and an "Ask for a new link" <code>ButtonLink</code>.</div></div>
+<ul>
+<li><div class="node server"><div class="head"><span class="name">ConfirmSignIn</span><span class="k server">Server</span></div><div class="path">src/components/SignIn/ConfirmSignIn.tsx</div><div class="note">A plain HTML form: hidden <code>token</code> and <code>next</code>, one Sign in <code>Button</code>, posting to <code>/api/auth/confirm-sign-in</code>. Works with no JS (the <code>Button</code> module itself is <code>'use client'</code>).</div></div>
+<ul><li><div class="node lib"><div class="head"><span class="name">POST /api/auth/confirm-sign-in → handleConfirmSignIn</span><span class="k lib">Pure lib</span></div><div class="path">src/app/api/auth/confirm-sign-in/route.ts · src/server/auth/forms.ts</div><div class="note">Only POST is exported, so a prefetch or a mail scanner GET is a 405. Refuses a foreign Origin (403), reads at most 2048 bytes, rebuilds a GET to <code>/api/auth/magic-link/verify</code> and passes it to Better Auth. <strong>Better Auth sets the session cookie here.</strong> Answers 303 to <code>next</code>; a refused link goes to <code>/sign-in?next=…&amp;error=INVALID_TOKEN</code>.</div></div></li></ul></li>
+</ul></li>
+</ul>
+</li>
+<li>
+<div class="node server"><div class="head"><span class="name">AccountPage</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/account/page.tsx</div><div class="note"><code>/account</code>. Title "My bookings", noindex. Suspense fallback: <code>PageHeading</code> with a text skeleton.</div></div>
+<ul>
+<li><div class="node stream"><div class="head"><span class="name">AccountContent</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/account/AccountContent.tsx</div><div class="note">The page is the gate, not the layout: a layout does not render again on a client navigation. Signed out: <code>redirect(signInHref('/account'))</code>.</div></div>
+<ul>
+<li><div class="node lib"><div class="head"><span class="name">loadAccountBookings()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/accountBookings.ts</div><div class="note"><code>getCaller()</code>; no user id returns <code>signed_out</code>. Otherwise reads the rows, builds each manage token at the order's current version, returns the view.</div></div>
+<ul>
+<li><div class="node lib"><div class="head"><span class="name">getCaller() → callerForHeaders()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/auth/caller.ts</div><div class="note">Reads the session, drops it if past its idle deadline or 8 hour ceiling, moves the idle deadline forward (at most once a minute), reads <code>role_grants</code>, and builds the caller.</div></div></li>
+<li><div class="node lib"><div class="head"><span class="name">readAccountBookings(caller, now)</span><span class="k lib">Pure lib</span></div><div class="path">src/server/db/accountBookings.ts</div><div class="note">Joins orders to guests to auth users on the email address, only where <code>email_verified</code> is true. Upcoming first, soonest first, then past, latest first, capped at 100.</div></div></li>
+<li><div class="node lib"><div class="head"><span class="name">buildAccountBookings() · capabilityToken()</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/accountBookings.ts · src/server/tokens.ts</div><div class="note">Splits upcoming from past and builds each Manage link.</div></div></li>
+</ul></li>
+<li><div class="node server"><div class="head"><span class="name">AccountBookings → BookingGroup × 2</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/account/AccountBookings.tsx</div><div class="note">"Upcoming" and "Past" sections, or "You have no bookings yet" with a link to browse. Each row is a <code>BookingListRow</code> linking to the manage page.</div></div>
+<ul><li><div class="node server"><div class="head"><span class="name">PageHeading · BookingListRow</span><span class="k server">Server</span></div><div class="path">src/components/PageHeading.tsx · src/components/BookingListRow/</div></div></li></ul></li>
+</ul></li>
+</ul>
+</li>
+</ul></li>
+<li><div class="node server"><div class="head"><span class="name">Footer</span><span class="k server">Server</span></div><div class="path">src/components/Footer/</div></div></li>
+</ul>
+</li>
+<li><div class="node server"><div class="head"><span class="name">VercelMeasurement · SentryBrowserScript</span><span class="k server">Server</span></div><div class="path">src/server/analytics/ · src/server/monitoring/</div><div class="note">Analytics and error-tracking scripts.</div></div></li>
+</ul>
+</li>
+</ul>
+</div>
+  </section>
+
+  <div class="cols">
+    <section class="card" aria-labelledby="arrive-h">
+      <h2 id="arrive-h">What arrives when</h2>
+      <ol class="steps">
+        <li><strong>Shell.</strong> Layout, header with a Sign in link, footer, and the page's heading with a text skeleton. Nothing on these three routes is cached; the only <code>'use cache'</code> read is the banner's settings.</li>
+        <li><strong>Streamed in.</strong> The banner, the real account control (Sign in or My bookings and Sign out), and each page's content. Sign-in and confirm wait on <code>searchParams</code>; account waits on the session and then the bookings read.</li>
+        <li><strong>Hydration.</strong> <code>SiteMenu</code>, and on <code>/sign-in</code> only, <code>SignInForm</code>. The confirm page and sign out are plain form posts. Without scripting, the sign-in form does not submit through the action.</li>
+      </ol>
+    </section>
+    <section class="card" aria-labelledby="path-h">
+      <h2 id="path-h">The sign-in path</h2>
+      <ol class="steps">
+        <li>A guest opens <code>/account</code> signed out. <code>AccountContent</code> redirects to <code>/sign-in?next=%2Faccount</code>.</li>
+        <li>They submit an email. <span class="k action">Server action</span> <code>requestSignInLink</code> goes through <code>handleAuthRequest</code>, which rate limits per address. The form says "if this address can sign in, a link is on its way", whether or not an account exists.</li>
+        <li>The email links to <code>/sign-in/confirm?token=…&amp;next=…</code>, a page that only shows a button. This is so a mail scanner that fetches the link cannot use it up.</li>
+        <li>The button posts to <code>/api/auth/confirm-sign-in</code>. The handler asks Better Auth to verify the token; the session cookie is set on that response. A 303 sends the guest to <code>next</code>, so they land on <code>/account</code>. A used or expired link lands on <code>/sign-in</code> with a notice.</li>
+        <li>Sign out is a form post to <code>/api/auth/end-session</code>, which calls Better Auth sign-out with the cookie and sends a 303 to <code>/</code>.</li>
+      </ol>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="roles-h">
+    <h2 id="roles-h">Roles, the caller, and where hosts and ops go</h2>
+    <p><code>getCaller()</code> (<code>src/server/auth/caller.ts</code>) is the one place a caller is made. It dynamically imports the session, grants and session-extend code, so files that only call <code>requireRole</code> do not load Better Auth. Anonymous is <code>{ userId: null, roles: [] }</code>. Everyone signed in gets the <code>guest</code> role; <code>role_grants</code> rows add <code>host_owner</code> and <code>host_staff</code> (each tied to one host) and <code>ops</code> and <code>admin</code> (tied to none). A grant that does not match its scope is skipped. At most 200 grants are read.</p>
+    <p style="margin-top:10px">There is no redirect by role. Sign-in lands on <code>next</code> or <code>/</code> whoever signs in. Each host page checks itself: signed out goes to <code>/sign-in?next=…</code>, signed in without a host gets the area's not-found page. Ops pages check <code>holdsOpsRole</code> and otherwise show <code>OpsAccessDenied</code>, which tells the person to sign in with a team account and links to <code>/sign-in?next=…</code>. Ops reads its caller through <code>readOpsCaller</code>, which treats a failed read as anonymous.</p>
+  </section>
+
+  <section class="card" aria-labelledby="cache-h">
+    <h2 id="cache-h">Caches and what clears them</h2>
+    <p>These routes have no tagged reads of their own, so nothing here is invalidated by a content edit. The banner reads <code>getCachedGuestSettings()</code>, which is cleared by the <code>settings</code> tag when ops change site settings. Auth responses are explicitly <code>Cache-Control: no-store</code> because they may set or clear the cookie. A sign-in link's life is the verification row's expiry (5 minutes) and its single use, not a cache.</p>
+  </section>
+
+  <section class="card" aria-labelledby="worth-h">
+    <h2 id="worth-h">Worth knowing</h2>
+    <ul class="steps" style="list-style:disc">
+      <li><strong>No app-level layout.</strong> <code>src/app/layout.tsx</code> does not exist on main. The guest layout is itself the root and renders the html and body, so the header's account control is rebuilt per route group, and the host and ops areas have their own shells with no <code>HeaderAccount</code>.</li>
+      <li><strong>The header and the page read the session differently.</strong> <code>HeaderAccount</code> calls <code>readSession</code> only. <code>getCaller</code> (used by <code>/account</code>) also checks the 8 hour ceiling and moves the 30 minute idle deadline. Browsing public pages never extends the session, and the header shows My bookings to any signed-in user, hosts and ops included.</li>
+      <li><strong>One element, two places.</strong> The same <code>account</code> slot is rendered inside the header and inside the <code>SiteMenu</code> island's panel. <code>cache()</code> keeps it to one session read per request.</li>
+      <li><strong>The sign-in action calls the auth handler in process.</strong> It builds a synthetic Request with an <code>Origin</code> header and passes it to <code>handleAuthRequest</code> rather than fetching its own API. The rate limit still applies because it lives in that handler.</li>
+      <li><strong>Better Auth's own limiter is off.</strong> Its counter would sit in the memory of one serverless instance. The count is in the <code>rate_limits</code> table instead.</li>
+      <li><strong>Two ways to make a token.</strong> <code>createSignInLinkToken</code> (<code>src/server/auth/signInLink.ts</code>) writes the same verification row as the plugin for callers that need their own email wording. The <code>/sign-in</code> form uses the plugin's path.</li>
+      <li><strong>The guest check in <code>readAccountBookings</code> is not what scopes the data.</strong> <code>requireRole(caller, Guest, { ownerId: caller.userId })</code> compares the caller to itself. What limits the rows is the join on an email with <code>email_verified</code> true.</li>
+      <li><strong>The account redirect runs inside Suspense.</strong> By then the shell has started streaming, so Next will most likely deliver it as a client-side redirect rather than a 307. Worth confirming in a browser trace.</li>
+      <li><strong>The auth proxy skips <code>/api</code>.</strong> <code>src/proxy.ts</code> sets the CSP and nonce for pages but its matcher excludes <code>/api</code>, so the confirm, end-session and Better Auth responses carry only the headers the handlers set.</li>
+    </ul>
+  </section>
+
+  <p class="foot">Read from <code>origin/main</code> at 2db68ea. Key files: <code>src/server/auth/</code> (auth, caller, forms, handler, session, signInLink, signInToken), <code>src/lib/signIn.ts</code>, <code>src/lib/auth.ts</code>, <code>src/lib/roleGrants.ts</code>, and the three route handlers under <code>src/app/api/auth/</code>.</p>
+</div>

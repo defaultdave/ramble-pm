@@ -1,3 +1,4 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
 <title>Experience Page Map</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,10 +97,11 @@ ol.steps li::marker { font-family: var(--font-mono); color: var(--muted); }
 </style>
 
 <div class="wrap">
+  <a href="index.html">All page maps</a>
   <header>
-    <div class="route">/experiences/[slugAndId] · ramble main at 7a26999</div>
+    <div class="route">/experiences/[slugAndId] · ramble main at 2db68ea</div>
     <h1>Experience page map</h1>
-    <p class="lede">How the experience page is assembled: every component from the layout down, where it runs, what it reads, and how the booking islands reach the server. Traced from the code on <code>main</code>, 2026-11-14.</p>
+    <p class="lede">How the experience page is assembled: every component from the layout down, where it runs, what it reads, and how the booking islands reach the server. Traced from the code on <code>main</code>, 2026-11-14, rechecked 2026-11-15.</p>
   </header>
 
   <section aria-labelledby="legend-h">
@@ -146,7 +148,7 @@ ol.steps li::marker { font-family: var(--font-mono); color: var(--muted); }
                 <ul>
                   <li><div class="node server"><div class="head"><span class="name">Breadcrumbs · Badge</span><span class="k server">Server</span></div></div></li>
                   <li>
-                    <div class="node server"><div class="head"><span class="name">ExperienceGallery</span><span class="k server">Server</span></div><div class="path">src/components/ExperienceGallery/</div><div class="note">Renders each <code>Photo</code> on the server, or a placeholder when there are none (the case locally).</div></div>
+                    <div class="node server"><div class="head"><span class="name">ExperienceGallery</span><span class="k server">Server</span></div><div class="path">src/components/ExperienceGallery/</div><div class="note">Renders each <code>Photo</code> on the server, or a placeholder when there are none (the case locally). The lead <code>Photo</code> draws itself twice: a hidden copy at the card's width, which a guest who came from a card already has cached, shows first under the full photo.</div></div>
                     <ul><li><div class="node client"><div class="head"><span class="name">GalleryStrip</span><span class="k client">Client island</span></div><div class="path">src/components/ExperienceGallery/GalleryStrip.tsx</div><div class="note">Wraps the server-rendered photos. Its only job: give the strip a tab stop while it overflows.</div></div></li></ul>
                   </li>
                   <li><div class="slot">dates → Section "Upcoming dates"</div>
@@ -216,5 +218,5 @@ ol.steps li::marker { font-family: var(--font-mono); color: var(--muted); }
     <p>Both reads for this page share the tag <code>experience:&lt;id&gt;</code>. Publishing an edit, seat changes (through <code>src/server/spacesLeft.ts</code>) and the pulse job all go through <code>tagsForChanges()</code> in <code>src/server/cache/invalidate.ts</code>, which clears that tag, and the next request rebuilds the shell and the session lists. Site settings (bookings paused, gifts on) have their own <code>settings</code> tag. Cached code never reads who is signed in: that is what the streamed <code>HeaderAccount</code> is for.</p>
   </section>
 
-  <p class="foot">Island list as approved in <code>.claude/standards/architecture.md</code> (client islands allowlist) and design doc section 4.1 in <code>ramble-pm/plan/01-design-doc.md</code>.</p>
+  <p class="foot">Island list as approved in <code>.claude/standards/architecture.md</code> (client islands allowlist) and design doc section 4.1 in <code>ramble-pm/plan/01-design-doc.md</code>. Checked against <code>origin/main</code> at 2db68ea.</p>
 </div>

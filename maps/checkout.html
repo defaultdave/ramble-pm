@@ -1,0 +1,179 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<title>Checkout Page Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one reading column; a legend, the render tree as nested rails, then the arrival order and the payment path. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #1b1f27;
+  --muted: #5b6372;
+  --rule: #d9dde4;
+  --server: #3b5bab;
+  --server-bg: #e8edf8;
+  --cached: #0f7a6c;
+  --cached-bg: #e2f3f0;
+  --stream: #a3610a;
+  --stream-bg: #fbefdc;
+  --client: #8a2f9c;
+  --client-bg: #f5e6f8;
+  --action: #b3261e;
+  --action-bg: #fbe6e4;
+  --lib: #59606d;
+  --lib-bg: #eceef1;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+    --server: #8fa9ec; --server-bg: #1f2840;
+    --cached: #5fcfbe; --cached-bg: #14302c;
+    --stream: #f0b65a; --stream-bg: #3a2a10;
+    --client: #e08ef0; --client-bg: #36203c;
+    --action: #f28b82; --action-bg: #3d1d1b;
+    --lib: #aab1bd; --lib-bg: #262b34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+  --server: #8fa9ec; --server-bg: #1f2840;
+  --cached: #5fcfbe; --cached-bg: #14302c;
+  --stream: #f0b65a; --stream-bg: #3a2a10;
+  --client: #e08ef0; --client-bg: #36203c;
+  --action: #f28b82; --action-bg: #3d1d1b;
+  --lib: #aab1bd; --lib-bg: #262b34;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 32px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 32px; }
+h1 { font-size: 30px; line-height: 1.15; margin: 0; text-wrap: balance; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 19px; margin: 0 0 12px; text-wrap: balance; }
+p { margin: 0; max-width: 68ch; }
+.lede { color: var(--muted); margin-top: 8px; }
+code, .path { font-family: var(--font-mono); font-size: 0.86em; }
+.route { font-family: var(--font-mono); font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.legend div { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+
+.k { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+.k.server { color: var(--server); background: var(--server-bg); }
+.k.cached { color: var(--cached); background: var(--cached-bg); }
+.k.stream { color: var(--stream); background: var(--stream-bg); }
+.k.client { color: var(--client); background: var(--client-bg); }
+.k.action { color: var(--action); background: var(--action-bg); }
+.k.lib { color: var(--lib); background: var(--lib-bg); }
+
+.tree-box { overflow-x: auto; }
+ul.tree, ul.tree ul { list-style: none; margin: 0; padding: 0; }
+ul.tree ul { margin-left: 18px; padding-left: 16px; border-left: 2px solid var(--rule); }
+ul.tree li { padding-top: 8px; min-width: 0; }
+.node { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 12px; display: grid; gap: 3px; border-left-width: 4px; min-width: 260px; }
+.node.server { border-left-color: var(--server); }
+.node.cached { border-left-color: var(--cached); }
+.node.stream { border-left-color: var(--stream); }
+.node.client { border-left-color: var(--client); }
+.node.action { border-left-color: var(--action); }
+.node.lib { border-left-color: var(--lib); }
+.node .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.node .name { font-family: var(--font-mono); font-weight: 500; font-size: 14.5px; }
+.node .path { color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+.node .note { color: var(--muted); font-size: 13.5px; max-width: 72ch; }
+.slot { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding: 10px 0 0 2px; }
+.slot::before { content: "slot "; color: var(--fg); font-weight: 500; }
+
+ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 10px; max-width: 72ch; }
+ol.steps li::marker { font-family: var(--font-mono); color: var(--muted); }
+
+.cols { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 18px; min-width: 0; }
+.back { font-size: 13px; }
+.back a { color: var(--muted); }
+ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 10px; max-width: 76ch; }
+.foot { color: var(--muted); font-size: 13px; }
+</style>
+
+<div class="wrap">
+  <p class="back"><a href="index.html">All page maps</a></p>
+  <header>
+    <div class="route">/checkout/[holdId] · ramble main at 2db68ea</div>
+    <h1>Checkout page map</h1>
+    <p class="lede">How the checkout page is assembled and how a held booking becomes a paid order: every component from the root layout down, the payment path through the fake gateway and its webhook, and the hand-off to the order confirmation page. Traced from the code on <code>main</code>, 2026-11-15.</p>
+  </header>
+
+  <section aria-labelledby="legend-h">
+    <h2 id="legend-h">Key</h2>
+    <div class="legend">
+      <div><span class="k server">Server</span> renders to HTML, no JS shipped</div>
+      <div><span class="k cached">Cached read</span> <code>'use cache'</code>, tagged for invalidation</div>
+      <div><span class="k stream">Streamed</span> per request, behind a Suspense fallback</div>
+      <div><span class="k client">Client island</span> <code>'use client'</code>, hydrates</div>
+      <div><span class="k action">Server action</span> called from an island</div>
+      <div><span class="k lib">Pure lib</span> plain function in <code>src/lib</code> or <code>src/server</code></div>
+    </div>
+    <p class="foot" style="margin-top:10px">Nothing on this page is streamed: the route has no Suspense boundary. The whole page is one request-time render.</p>
+  </section>
+
+  <section aria-labelledby="tree-h">
+    <h2 id="tree-h">Render tree</h2>
+    <div class="tree-box"><ul class="tree"><li><div class="node server"><div class="head"><span class="name">CheckoutRootLayout</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/layout.tsx</div><div class="note">The root layout for this group: there is no <code>src/app/layout.tsx</code>. Owns <code>html</code> and <code>body</code>, fonts and base styles, <code>robots: noindex</code>, and <code>instant = false</code>.</div></div><ul><li><div class="slot">after children</div><div class="node server"><div class="head"><span class="name">RenderPerRequest</span><span class="k server">Server</span></div><div class="path">src/app/renderPerRequest.tsx</div><div class="note">Sits beside the children and awaits <code>connection()</code>, so the whole tree renders per request and every script carries the CSP nonce. Renders nothing.</div></div></li><li><div class="node server"><div class="head"><span class="name">CheckoutLayout</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/checkout/layout.tsx</div><div class="note">Wraps children in <code>CheckoutFrame</code>. Kept above <code>error.tsx</code> so the frame is server-rendered.</div></div><ul><li><div class="node server"><div class="head"><span class="name">CheckoutFrame</span><span class="k server">Server</span></div><div class="path">src/components/CheckoutPage/CheckoutFrame.tsx</div><div class="note">Skip link, the page, and the footer. The page renders its own header because the header carries the hold timer.</div></div><ul><li><div class="slot">after children</div><div class="node server"><div class="head"><span class="name">Footer</span><span class="k server">Server</span></div><div class="path">src/components/Footer/</div><div class="note">Link groups, tagline and copyright from <code>src/lib/pages/siteNav</code>.</div></div></li><li><div class="slot">error boundary</div><div class="node server"><div class="head"><span class="name">error.tsx (CheckoutError)</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/checkout/error.tsx</div><div class="note"><code>'use client'</code> boundary for this segment. Sits below the layout, so the frame stays. Shows the checkout header with no timer and <code>ErrorNotice</code> with a retry. Not part of the happy render.</div></div></li><li><div class="node server"><div class="head"><span class="name">CheckoutRoute</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/checkout/[holdId]/page.tsx</div><div class="note">Not cached and not streamed: no Suspense in this tree. Reads params, the device cookie, the hold view and the settings, then renders. Every refusal is rendered as <code>HoldNotFound</code> or an error panel, never thrown.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">EntityIdSchema.safeParse()</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/catalog</div><div class="note">A malformed id is no hold; no query is made.</div></div></li><li><div class="node lib"><div class="head"><span class="name">readDevice()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/device</div><div class="note">Reads the cookie, never sets one. No device means no hold.</div></div></li><li><div class="node lib"><div class="head"><span class="name">readCheckoutView(device, holdId)</span><span class="k lib">Pure lib</span></div><div class="path">src/server/db/checkoutView.ts</div><div class="note">Uncached. One transaction reads hold, session, experience, host, price lines and the database clock. Null for another device's hold, a missing, gift, paid or released one, so a guessed id learns nothing. Then reads current terms and the waiver, and builds the view with <code>buildCheckoutView()</code>.</div></div></li><li><div class="node cached"><div class="head"><span class="name">getCachedGuestSettings()</span><span class="k cached">Cached read</span></div><div class="path">src/server/siteSettings.ts · cacheLife 'settings' · tag settings</div><div class="note">Runs in parallel with the hold read. Only the <code>checkoutMaintenance</code> switch is used here.</div></div></li><li><div class="node lib"><div class="head"><span class="name">rethrowOrLog()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/monitoring/rethrowOrLog</div><div class="note">A failed read renders "We couldn't load checkout" with a retry link; the hold stays.</div></div></li><li><div class="node server"><div class="head"><span class="name">HoldNotFound</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/checkout/[holdId]/page.tsx</div><div class="note">A <code>Header variant="checkout"</code> and <code>NotFoundNotice</code>, rendered not thrown, so the first flush has a heading and stylesheet.</div></div></li><li><div class="node client"><div class="head"><span class="name">CheckoutPage</span><span class="k client">Client island</span></div><div class="path">src/components/CheckoutPage/CheckoutPage.tsx</div><div class="note">The page's one client island. Holds the step reducer, the summary toggle and focus. Takes <code>view</code>, <code>maintenance</code>, <code>focusTitle</code> and three server actions as props. Pushes to the next route on <code>already_confirmed</code>, <code>held</code>, or a paid payment.</div></div><ul><li><div class="slot">holdTimer, hidden only on the sold_out step</div><div class="node server"><div class="head"><span class="name">Header variant="checkout"</span><span class="k server">Server</span></div><div class="path">src/components/Header/Header.tsx</div><div class="note">No <code>'use client'</code> of its own; ships as client code because the island imports it. Takes the timer as a <code>holdTimer</code> slot.</div></div><ul><li><div class="node client"><div class="head"><span class="name">CheckoutHoldTimer</span><span class="k client">Client island</span></div><div class="path">src/components/CheckoutPage/CheckoutHoldTimer.tsx</div><div class="note">Its own one-second tick (<code>useHoldCountdown</code>), so only the timer re-renders. Starts from <code>serverNow</code>, then keeps an offset from the browser clock. Calls <code>onEnd</code> once, which dispatches <code>timer_ended</code>.</div></div><ul><li><div class="node server"><div class="head"><span class="name">HoldTimer</span><span class="k server">Server</span></div><div class="path">src/components/HoldTimer/</div></div></li></ul></li></ul></li><li><div class="node server"><div class="head"><span class="name">OrderSummary</span><span class="k server">Server</span></div><div class="path">src/components/OrderSummary/OrderSummary.tsx</div><div class="note">Experience, date, guests, line items, tax, total, cancellation line. Collapsed on a phone, open from tablet width.</div></div></li><li><div class="node server"><div class="head"><span class="name">Alert (maintenance)</span><span class="k server">Server</span></div><div class="path">src/components/Alert/</div><div class="note">Replaces the whole flow when <code>checkoutMaintenance</code> is on. No payment is taken.</div></div></li><li><div class="node server"><div class="head"><span class="name">Step (switch on step)</span><span class="k server">Server</span></div><div class="path">src/components/CheckoutPage/CheckoutPage.tsx</div><div class="note">Same file, not exported. One panel at a time: <code>details</code> (the form), <code>payment</code>, <code>expired</code>, <code>sold_out</code>, <code>too_many_tries</code>. A panel that replaces the form takes focus.</div></div><ul><li><div class="node client"><div class="head"><span class="name">CheckoutForm</span><span class="k client">Client island</span></div><div class="path">src/components/CheckoutPage/CheckoutForm.tsx</div><div class="note">The details form: names, email, age and waiver answers, terms. Checks the fields with <code>formIssues()</code> before anything is sent. Shown while the step is <code>details</code>.</div></div><ul><li><div class="node server"><div class="head"><span class="name">Input · Checkbox · ExternalLink · Button</span><span class="k server">Server</span></div><div class="path">src/components/</div><div class="note">Plain components. They ship as client code because this island imports them.</div></div></li></ul></li><li><div class="node server"><div class="head"><span class="name">Payment panel</span><span class="k server">Server</span></div><div class="path">src/components/CheckoutPage/CheckoutPage.tsx</div><div class="note">Holds <code>FakePaymentForm</code>, plus a "Check again" link to the confirmation page when the answer was lost.</div></div><ul><li><div class="node client"><div class="head"><span class="name">FakePaymentForm</span><span class="k client">Client island</span></div><div class="path">src/components/FakePaymentForm/FakePaymentForm.tsx</div><div class="note">Demo card form with its own reducer (<code>flowReducer</code>). Calls <code>confirm</code> with the payment id, the client secret and a plan (card, wallet or 3-D Secure). The only place a payment is confirmed.</div></div><ul><li><div class="node action"><div class="head"><span class="name">confirmFakePayment</span><span class="k action">Server action</span></div><div class="path">src/server/actions/fakePayment.ts</div><div class="note">The <code>confirm</code> action. Retrieves the payment, compares the client secret in constant time, then calls <code>deliverFakeConfirmation()</code>. An unknown payment or wrong secret answers <code>refused</code>; anything else throws.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">getFakePayments()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/ports/payments/gateway.ts</div><div class="note">The fake gateway. Its payments live in the database, so any instance finds them. <code>retrieve</code>, then <code>confirm</code> emits the event.</div></div></li><li><div class="node lib"><div class="head"><span class="name">deliverFakeConfirmation()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/fakePaymentDelivery.ts</div><div class="note">Signs the event and hands it to <code>takePaymentWebhook()</code> in this process, then drains the job it queued. See the payment path below.</div></div></li></ul></li></ul></li></ul></li><li><div class="node server"><div class="head"><span class="name">Expired · sold out · too many tries panels</span><span class="k server">Server</span></div><div class="path">src/components/CheckoutPage/CheckoutPage.tsx</div><div class="note">Expired offers "Hold my spaces again" (calls <code>reserve</code>) or a link back to the experience. Sold out lists alternative dates as links.</div></div><ul><li><div class="node action"><div class="head"><span class="name">reholdSpaces</span><span class="k action">Server action</span></div><div class="path">src/server/actions/rehold.ts</div><div class="note">The <code>reserve</code> action. Same device, lapsed hold only; releases the old hold and reserves the same spaces again. Returns <code>held</code>, and the page routes to <code>/checkout/&lt;newId&gt;?rehold=1</code>.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">claimLapsedHold() · reserveSpaces() · consumeRateLimit('reserve')</span><span class="k lib">Pure lib</span></div><div class="path">src/server/db/rehold.ts · src/server/db/holds.ts · src/server/ports/rate-limit</div><div class="note">No bot check here (ADR 0007), but the reserve try limit still counts.</div></div></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></div>
+  </section>
+
+  <section aria-labelledby="other-h">
+    <h2 id="other-h">Other addresses in the group</h2>
+    <div class="tree-box"><ul class="tree"><li><div class="node server"><div class="head"><span class="name">/checkout and /checkout/[...unknown]</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/checkout/page.tsx · [...unknown]/page.tsx</div><div class="note">Both are <code>UnknownPage</code>: <code>await notFoundPerRequest()</code>, which awaits <code>connection()</code> and then calls <code>notFound()</code>.</div></div><ul><li><div class="node server"><div class="head"><span class="name">NotFound</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/not-found.tsx</div><div class="note">At the group root, above the checkout frame, so it brings its own <code>GuestShell</code> and <code>NotFoundNotice</code>. The status ends up 200, not 404, because the render resumes from an empty shell.</div></div></li></ul></li></ul></div>
+  </section>
+
+  <section aria-labelledby="path-h">
+    <h2 id="path-h">The payment path</h2>
+    <p class="lede" style="margin:0 0 12px">In order, from the hold to the confirmation page.</p>
+    <div class="tree-box"><ol class="steps"><li><div class="node lib"><div class="head"><span class="name">reserveSpaces()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/db/holds.ts</div><div class="note">The hold. Made earlier by the <code>reserveSpaces</code> action on the experience page; it writes <code>holds</code> and <code>holdItems</code> for the device and takes the seats. Its id is the address of this page.</div></div></li><li><div class="node action"><div class="head"><span class="name">startPayment</span><span class="k action">Server action</span></div><div class="path">src/server/actions/checkout.ts</div><div class="note">Hold becomes an order plus an attempt, and a payment with a client secret. See the tree above.</div></div></li><li><div class="node action"><div class="head"><span class="name">confirmFakePayment</span><span class="k action">Server action</span></div><div class="path">src/server/actions/fakePayment.ts</div><div class="note">The guest's card step reaches the fake gateway.</div></div></li><li><div class="node lib"><div class="head"><span class="name">getFakePayments().confirm()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/ports/payments/gateway.ts · fake.ts</div><div class="note">Records the outcome and returns the event it emitted (<code>payment.succeeded</code>, a decline, or a 3-D Secure step). A retry of a success recalls the stored event through <code>lastEventFor()</code>.</div></div></li><li><div class="node lib"><div class="head"><span class="name">deliverFakeConfirmation()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/fakePaymentDelivery.ts</div><div class="note">Signs the event with <code>signWebhook()</code> and builds a <code>Request</code> to <code>http://localhost/api/webhooks/payments</code> that is never sent over the network; it is passed straight to <code>takePaymentWebhook()</code>.</div></div></li><li><div class="node lib"><div class="head"><span class="name">takePaymentWebhook()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/paymentWebhook.ts</div><div class="note">The same intake the real route uses: size cap, <code>verifyWebhook()</code> on the raw body, rate limits (<code>payment_webhook_failed</code> by address, <code>payment_webhook</code> overall), then <code>recordProviderEvent()</code>, which stores the event once with its job <code>process-provider-event</code>.</div></div></li><li><div class="node server"><div class="head"><span class="name">POST /api/webhooks/payments</span><span class="k server">Server</span></div><div class="path">src/app/api/webhooks/payments/route.ts</div><div class="note">The real door, one line: <code>paymentWebhookResponse(request)</code>. The fake path above does not call it. A real provider would.</div></div></li><li><div class="node lib"><div class="head"><span class="name">drainJobs() then handleProviderEvent()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/jobs/drain.ts · providerEvents.ts</div><div class="note">Runs the queued job at once, inside <code>after()</code>, and the reply waits up to <code>fakeDrainWaitMs</code> for it. <code>prepareProviderEvent()</code> looks up Ramble ids first if the event carried none.</div></div></li><li><div class="node lib"><div class="head"><span class="name">confirmOrder()</span><span class="k lib">Pure lib</span></div><div class="path">src/server/db/confirmOrder.ts</div><div class="note">Inside the job's transaction, under the session, hold and order locks. Decides with <code>confirmDecision()</code>: confirm the booking, report <code>already_confirmed</code>, or take the refund path (seats sold after a lapse). On confirm it calls <code>revalidateTagsForChanges()</code> for the session's spaces.</div></div></li><li><div class="node client"><div class="head"><span class="name">router.push(orderConfirmationPath(reference, token))</span><span class="k client">Client island</span></div><div class="path">src/components/CheckoutPage/CheckoutPage.tsx · src/lib/routes.ts</div><div class="note"><code>onPaid</code> runs when <code>FakePaymentForm</code> gets <code>succeeded</code>. The token travels as <code>?t=</code>.</div></div></li><li><div class="node server"><div class="head"><span class="name">OrderConfirmationPage</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/(site)/orders/[reference]/page.tsx</div><div class="note">Picks the token from the cookie or <code>?t=</code> (<code>src/proxy.ts</code> moves it into a cookie and redirects without it), calls <code>readOrderPage(reference, token)</code>, and <code>notFound()</code> on any refusal. It passes <code>getOrderStatus</code> to <code>OrderConfirmation</code> as the poller for an order not yet confirmed.</div></div></li></ol></div>
+  </section>
+
+  <div class="cols">
+    <section class="card" aria-labelledby="arrive-h">
+      <h2 id="arrive-h">What arrives when</h2>
+      <ol class="steps">
+        <li><strong>One render, per request.</strong> The root layout, frame, header, summary, form and footer arrive together. The route reads the hold and the settings in parallel, so the page waits on the slower of the two. There is no skeleton.</li>
+        <li><strong>Hydration.</strong> <code>CheckoutPage</code> wakes up as one island, with <code>Header</code>, <code>OrderSummary</code>, <code>CheckoutForm</code> and the panels inside it. <code>CheckoutHoldTimer</code> starts ticking from the server's clock.</li>
+        <li><strong>Later, on a tap.</strong> <code>startPayment</code>, then <code>confirmFakePayment</code>. Nothing is called on load or refresh, so reloading spends none of the hold's five tries.</li>
+      </ol>
+    </section>
+    <section class="card" aria-labelledby="path2-h">
+      <h2 id="path2-h">Key user path through the actions</h2>
+      <ol class="steps">
+        <li>Guest lands from the experience page's <code>reserveSpaces</code>, with the hold id in the address.</li>
+        <li>Tap Continue: <span class="k action">Server action</span> <code>startPayment</code>. An answer of <code>requires_payment</code> moves the step to <code>payment</code>; <code>already_confirmed</code> routes straight to the order page; <code>held</code> to a fresh checkout.</li>
+        <li>Tap Pay: <span class="k action">Server action</span> <code>confirmFakePayment</code>. <code>succeeded</code> calls <code>onPaid</code> and the router goes to the order page.</li>
+        <li>Timer ends: the step becomes <code>expired</code>; <span class="k action">Server action</span> <code>reholdSpaces</code> offers the same spaces again.</li>
+      </ol>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="cache-h">
+    <h2 id="cache-h">Cache invalidation</h2>
+    <p>The only cached read here is <code>getCachedGuestSettings()</code>, tagged <code>settings</code> and cleared when an ops user saves settings. The hold view is never cached. A confirmed payment calls <code>revalidateTagsForChanges()</code> from the job, and a re-hold or release calls <code>updateTagsForChanges()</code> from its action, both for the session's <code>spaces</code> change, which clears the <code>session:&lt;id&gt;</code> tag, so the space counts that the experience page shows are rebuilt. The webhook and job path uses <code>revalidateTag(tag, 'max')</code>, so one response after the call may still show the old count.</p>
+  </section>
+
+  <section class="card" aria-labelledby="worth-h">
+    <h2 id="worth-h">Worth knowing</h2>
+    <ul class="plain">
+      <li><strong>There is no root <code>src/app/layout.tsx</code>.</strong> <code>(checkout)/layout.tsx</code> is the root layout and draws <code>html</code> and <code>body</code>. The <code>(site)</code> layout that serves orders, manage and gift does not wrap checkout.</li>
+      <li><strong>The page is one big island.</strong> <code>Header</code>, <code>OrderSummary</code>, <code>Alert</code>, <code>Input</code> and the rest have no <code>'use client'</code> but all ship as client code, because <code>CheckoutPage</code> imports them. The server page passes three server actions in as props, so the island never imports them.</li>
+      <li><strong>The fake webhook is never an HTTP call.</strong> <code>deliverFakeConfirmation()</code> signs an event and calls <code>takePaymentWebhook()</code> directly in the same process. The route <code>/api/webhooks/payments</code> exists for a real provider (a TODO for U-046), and its secret is random per process, so a delivery nobody in this process signed is refused.</li>
+      <li><strong>Paying and confirming the order are two separate steps.</strong> The webhook only stores the event and a job. <code>confirmOrder()</code> runs in the job, which the action drains in <code>after()</code> and waits for only a few seconds. If the drain is slow, the guest lands on the order page before the order is confirmed, which is why that page polls <code>getOrderStatus</code>.</li>
+      <li><strong>The hold timer and the page's step share one reducer.</strong> <code>onEnd</code> from <code>CheckoutHoldTimer</code> dispatches into <code>CheckoutPage</code>'s state, and <code>showsHoldTimer(step)</code> hides the timer in the header only on the <code>sold_out</code> step, so it stays visible beside the expired panel.</li>
+      <li><strong>Unknown checkout addresses answer 200, not 404.</strong> <code>/checkout</code> and the catch-all call <code>notFoundPerRequest()</code>; the comment in <code>renderPerRequest.tsx</code> says the status cannot change once the render resumes from the empty shell. A bad hold id on the real route is also a rendered "not found" panel, not a thrown one.</li>
+      <li><strong>The maintenance switch is read twice by two different functions.</strong> The page reads it through the cached <code>getCachedGuestSettings()</code>, while <code>startCheckoutPayment()</code> reads it through the uncached <code>getGuestSettings()</code>, so the action stays correct when the cached page is stale. A failed read fails closed.</li>
+      <li><strong>No bot check on checkout.</strong> ADR 0007 keeps BotID off it; limits are the device's <code>reserve</code> tries and the hold's <code>payment_tries</code>.</li>
+    </ul>
+  </section>
+
+  <p class="foot">Source: <code>origin/main</code> at 2db68ea, read-only. Layer rules in <code>.claude/standards/architecture.md</code>; the payment design is in design doc section 4.2.3 in <code>ramble-pm/plan/01-design-doc.md</code>.</p>
+</div>

@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<title>Ramble Page Maps</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root { --bg:#f6f7f9; --surface:#fff; --fg:#1b1f27; --muted:#5b6372; --rule:#d9dde4; --accent:#3b5bab;
+  --font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace; }
+@media (prefers-color-scheme: dark) { :root { --bg:#12151b; --surface:#1a1e26; --fg:#e6e9ef; --muted:#9aa3b2; --rule:#2d333f; --accent:#8fa9ec; color-scheme:dark; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font-family:var(--font-body); font-size:15px; line-height:1.5; }
+.wrap { max-width:980px; margin:0 auto; padding:32px 16px 64px; display:grid; gap:24px; }
+h1 { font-size:30px; line-height:1.15; margin:0; font-weight:700; letter-spacing:-0.01em; }
+.lede { color:var(--muted); margin:8px 0 0; max-width:68ch; }
+.grid { display:grid; gap:12px; grid-template-columns:1fr; }
+@media (min-width:640px) { .grid { grid-template-columns:1fr 1fr; } }
+a.card { display:block; background:var(--surface); border:1px solid var(--rule); border-radius:8px; padding:16px; color:inherit; text-decoration:none; }
+a.card:hover, a.card:focus-visible { border-color:var(--accent); }
+a.card strong { display:block; font-size:17px; color:var(--accent); }
+a.card code { font-family:var(--font-mono); font-size:13px; color:var(--muted); }
+a.card p { margin:6px 0 0; color:var(--muted); font-size:14px; }
+</style>
+<div class="wrap">
+<header>
+<h1>Ramble page maps</h1>
+<p class="lede">Each map is a render tree of one page group, traced from the code on <code>main</code>: every component from the layouts down, marked server, cached, streamed or client island, with the actions it calls and how its caches are cleared. Each map's footer names the commit it was read from.</p>
+</header>
+<div class="grid">
+<a class="card" href="home.html"><strong>Home</strong><code>/</code><p>Hero, card rails, and the guest layout.</p></a>
+<a class="card" href="browse.html"><strong>Browse</strong><code>/new-york/browse</code><p>Filters held in the URL, the filter bar and drawer, the landing pages that share them.</p></a>
+<a class="card" href="experience-page.html"><strong>Experience page</strong><code>/experiences/[slugAndId]</code><p>Cached shell, streamed booking controls, three booking islands on one draft.</p></a>
+<a class="card" href="checkout.html"><strong>Checkout</strong><code>/checkout/[holdId]</code><p>The hold, payment start, the webhook that confirms.</p></a>
+<a class="card" href="orders-and-manage.html"><strong>Confirmation and manage</strong><code>/orders/[reference]</code> <code>/manage/[token]</code><p>Status polling, the receipt, guest changes.</p></a>
+<a class="card" href="sign-in-and-account.html"><strong>Sign-in and account</strong><code>/sign-in</code> <code>/account</code><p>The sign-in flow, the caller and roles, the header account control.</p></a>
+<a class="card" href="host.html"><strong>Host area</strong><code>/host/*</code><p>Dashboard, sessions, bookings, settings, staff.</p></a>
+<a class="card" href="ops.html"><strong>Ops area</strong><code>/ops/*</code><p>Supply, bookings, people and tools for staff.</p></a>
+<a class="card" href="content-and-gifts.html"><strong>Content, profiles and gifts</strong><code>/help</code> <code>/picks</code> <code>/hosts</code> <code>/gifts</code><p>Help, legal, editorial, host profiles, private sessions, parked gifting, not-found pages.</p></a>
+</div>
+</div>

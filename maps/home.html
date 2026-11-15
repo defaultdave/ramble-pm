@@ -1,0 +1,287 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<title>Home Page Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one reading column; a legend, the render tree as nested rails, then the arrival order, the search path and the cache notes. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #1b1f27;
+  --muted: #5b6372;
+  --rule: #d9dde4;
+  --server: #3b5bab;
+  --server-bg: #e8edf8;
+  --cached: #0f7a6c;
+  --cached-bg: #e2f3f0;
+  --stream: #a3610a;
+  --stream-bg: #fbefdc;
+  --client: #8a2f9c;
+  --client-bg: #f5e6f8;
+  --action: #b3261e;
+  --action-bg: #fbe6e4;
+  --lib: #59606d;
+  --lib-bg: #eceef1;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+    --server: #8fa9ec; --server-bg: #1f2840;
+    --cached: #5fcfbe; --cached-bg: #14302c;
+    --stream: #f0b65a; --stream-bg: #3a2a10;
+    --client: #e08ef0; --client-bg: #36203c;
+    --action: #f28b82; --action-bg: #3d1d1b;
+    --lib: #aab1bd; --lib-bg: #262b34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+  --server: #8fa9ec; --server-bg: #1f2840;
+  --cached: #5fcfbe; --cached-bg: #14302c;
+  --stream: #f0b65a; --stream-bg: #3a2a10;
+  --client: #e08ef0; --client-bg: #36203c;
+  --action: #f28b82; --action-bg: #3d1d1b;
+  --lib: #aab1bd; --lib-bg: #262b34;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 32px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 32px; }
+h1 { font-size: 30px; line-height: 1.15; margin: 0; text-wrap: balance; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 19px; margin: 0 0 12px; text-wrap: balance; }
+p { margin: 0; max-width: 68ch; }
+a { color: var(--server); }
+.back { font-size: 13px; margin-bottom: 14px; display: inline-block; }
+.lede { color: var(--muted); margin-top: 8px; }
+code, .path { font-family: var(--font-mono); font-size: 0.86em; }
+.route { font-family: var(--font-mono); font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.legend div { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+
+.k { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+.k.server { color: var(--server); background: var(--server-bg); }
+.k.cached { color: var(--cached); background: var(--cached-bg); }
+.k.stream { color: var(--stream); background: var(--stream-bg); }
+.k.client { color: var(--client); background: var(--client-bg); }
+.k.action { color: var(--action); background: var(--action-bg); }
+.k.lib { color: var(--lib); background: var(--lib-bg); }
+
+.tree-box { overflow-x: auto; }
+ul.tree, ul.tree ul { list-style: none; margin: 0; padding: 0; }
+ul.tree ul { margin-left: 18px; padding-left: 16px; border-left: 2px solid var(--rule); }
+ul.tree li { padding-top: 8px; min-width: 0; }
+.node { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 12px; display: grid; gap: 3px; border-left-width: 4px; min-width: 260px; }
+.node.server { border-left-color: var(--server); }
+.node.cached { border-left-color: var(--cached); }
+.node.stream { border-left-color: var(--stream); }
+.node.client { border-left-color: var(--client); }
+.node.action { border-left-color: var(--action); }
+.node.lib { border-left-color: var(--lib); }
+.node .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.node .name { font-family: var(--font-mono); font-weight: 500; font-size: 14.5px; }
+.node .path { color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+.node .note { color: var(--muted); font-size: 13.5px; max-width: 72ch; }
+.slot { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding: 10px 0 0 2px; }
+.slot::before { content: "slot "; color: var(--fg); font-weight: 500; }
+.slot.case::before { content: "case "; }
+
+ol.steps, ul.plain { margin: 0; padding-left: 22px; display: grid; gap: 10px; max-width: 72ch; }
+ol.steps li::marker { font-family: var(--font-mono); color: var(--muted); }
+
+.cols { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 18px; min-width: 0; }
+.foot { color: var(--muted); font-size: 13px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">All page maps</a>
+    <div class="route">/ · ramble main at 2db68ea</div>
+    <h1>Home page map</h1>
+    <p class="lede">How the home page is assembled: every component from the layout down, where it runs, what it reads, and how the search form reaches the browse page. This page has no server actions and no page-specific client islands. Traced from the code on <code>main</code>, 2026-11-15.</p>
+  </header>
+
+  <section aria-labelledby="legend-h">
+    <h2 id="legend-h">Key</h2>
+    <div class="legend">
+      <div><span class="k server">Server</span> renders to HTML, no JS shipped</div>
+      <div><span class="k cached">Cached read</span> <code>'use cache'</code>, tagged for invalidation</div>
+      <div><span class="k stream">Streamed</span> per request, behind a Suspense fallback</div>
+      <div><span class="k client">Client island</span> <code>'use client'</code>, hydrates</div>
+      <div><span class="k action">Server action</span> called from an island</div>
+      <div><span class="k lib">Pure lib</span> plain function in <code>src/lib</code></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="tree-h">
+    <h2 id="tree-h">Render tree</h2>
+    <div class="tree-box">
+    <ul class="tree">
+      <li>
+        <div class="node server"><div class="head"><span class="name">GuestLayout</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/layout.tsx</div><div class="note">Owns <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code>, fonts and base styles. There is no <code>src/app/layout.tsx</code>: each route group (guest, checkout, host, ops) has its own root layout.</div></div>
+        <ul>
+          <li>
+            <div class="node server"><div class="head"><span class="name">GuestShell</span><span class="k server">Server</span></div><div class="path">src/components/GuestShell/GuestShell.tsx</div><div class="note">Skip link, notice, header, <code>&lt;main&gt;</code>, footer. The page goes in <code>main</code>.</div></div>
+            <ul>
+              <li><div class="node server"><div class="head"><span class="name">SkipLink</span><span class="k server">Server</span></div></div></li>
+              <li><div class="slot">banner</div>
+                <div class="node stream"><div class="head"><span class="name">GuestBanner</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/GuestBanner.tsx</div><div class="note">Calls <code>connection()</code>, so it renders per request. Fallback: nothing. A failed read leaves the banner out.</div></div>
+                <ul>
+                  <li><div class="node cached"><div class="head"><span class="name">getCachedGuestSettings()</span><span class="k cached">Cached read</span></div><div class="path">src/server/siteSettings.ts · cacheLife 'settings' · tag settings</div></div></li>
+                  <li><div class="node server"><div class="head"><span class="name">SiteBanner</span><span class="k server">Server</span></div><div class="path">src/components/GuestShell/SiteBanner.tsx</div></div></li>
+                </ul>
+              </li>
+              <li>
+                <div class="node server"><div class="head"><span class="name">Header</span><span class="k server">Server</span></div><div class="path">src/components/Header/Header.tsx</div><div class="note">Logo, main nav, search link, gifts link. Takes the menu and the account control as props.</div></div>
+                <ul>
+                  <li><div class="slot">menu</div>
+                    <div class="node client"><div class="head"><span class="name">SiteMenu</span><span class="k client">Client island</span></div><div class="path">src/components/GuestShell/SiteMenu.tsx</div><div class="note">Phone menu. It also receives the account control, so the control appears in the page twice.</div></div>
+                  </li>
+                  <li><div class="slot">account</div>
+                    <div class="node stream"><div class="head"><span class="name">HeaderAccount</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/HeaderAccount.tsx</div><div class="note">Reads the session from request headers, once per request through React <code>cache()</code>. Fallback: <code>AccountControl signedIn={false}</code>.</div></div>
+                    <ul><li><div class="node server"><div class="head"><span class="name">AccountControl</span><span class="k server">Server</span></div><div class="path">src/components/Header/AccountControl.tsx</div></div></li></ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="node server"><div class="head"><span class="name">HomePage</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/page.tsx</div><div class="note">Only a Suspense boundary. Fallback: <code>HomeSkeleton</code>, which holds the hero, category row and first Picks row in place, with a hidden h1.</div></div>
+                <ul>
+                  <li><div class="slot">fallback</div>
+                    <div class="node server"><div class="head"><span class="name">HomeSkeleton</span><span class="k server">Server</span></div><div class="path">src/components/HomeStates/HomeSkeleton.tsx</div><div class="note">Uses <code>Skeleton kind="card"</code> three times.</div></div>
+                  </li>
+                  <li>
+                    <div class="node stream"><div class="head"><span class="name">HomeContent</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/HomeContent.tsx</div><div class="note">The whole page body. Awaits <code>connection()</code> first, because the day and the week come from the clock. Reads in parallel, builds the view, then reads the Picks covers.</div></div>
+                    <ul>
+                      <li>
+                        <div class="node cached"><div class="head"><span class="name">getHomeContent()</span><span class="k cached">Cached read</span></div><div class="path">src/server/home.ts · cacheLife 'editorial' · tag home, plus experience:&lt;id&gt; for each Pick card</div><div class="note">Modules, Picks, gift guide, categories, neighborhoods and the Pick cards, without covers (<code>covers: false</code>). Reads <code>listHomeModules</code>, <code>listHomePicks</code>, <code>getHomeGiftGuide</code>, <code>listHomeExperiences</code>.</div></div>
+                        <ul><li><div class="node cached"><div class="head"><span class="name">getFilterOptions()</span><span class="k cached">Cached read</span></div><div class="path">src/server/filterOptions.ts · cacheLife 'editorial' · tag taxonomy</div><div class="note">Category and neighborhood names, nested inside the home entry.</div></div></li></ul>
+                      </li>
+                      <li><div class="node cached"><div class="head"><span class="name">getThisWeek(minuteAsOf(now))</span><span class="k cached">Cached read</span></div><div class="path">src/server/home.ts · cacheLife 'browse' · tag catalog, plus experience:&lt;id&gt; for each card</div><div class="note">Experiences with an open session in the next 7 days, with their covers (<code>covers: true</code>). Keyed by the minute.</div></div></li>
+                      <li><div class="node cached"><div class="head"><span class="name">getCachedGuestSettings()</span><span class="k cached">Cached read</span></div><div class="path">src/server/siteSettings.ts · cacheLife 'settings' · tag settings</div><div class="note">Only <code>giftsEnabled</code> is used here. The same entry the banner reads.</div></div></li>
+                      <li><div class="node lib"><div class="head"><span class="name">buildHomePage()</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/pages/home.ts</div><div class="note">Turns the rows into a view: drops a module with nothing to show, marks the first Picks module with the <code>picks</code> anchor, decides whether the page needs its own h1. Also <code>homeCardIds</code> and <code>withHomeCovers</code>.</div></div></li>
+                      <li>
+                        <div class="node server"><div class="head"><span class="name">readGuestCovers()</span><span class="k server">Server</span></div><div class="path">src/server/guestCovers.ts</div><div class="note">Reads the cover photos of the Picks cards. A failure is logged and the cards render with no image.</div></div>
+                        <ul><li><div class="node cached"><div class="head"><span class="name">getCoverPhotos(ids)</span><span class="k cached">Cached read</span></div><div class="path">src/server/coverPhotos.ts · cacheLife 'catalog' · tag experience:&lt;id&gt; for each id</div></div></li></ul>
+                      </li>
+                      <li><div class="slot case">read failed</div>
+                        <div class="node server"><div class="head"><span class="name">PageError</span><span class="k server">Server</span></div><div class="path">src/components/PageError/PageError.tsx</div><div class="note">"We couldn't load the home page", with a retry link to <code>/</code>. Next.js's own prerender-end errors are rethrown, not shown.</div></div>
+                      </li>
+                      <li><div class="slot case">no module has anything to show</div>
+                        <div class="node server"><div class="head"><span class="name">HomeEmpty</span><span class="k server">Server</span></div><div class="path">src/components/HomeStates/HomeEmpty.tsx</div><div class="note">A heading, a line of copy and a link to browse. Uses <code>PageHeading</code>.</div></div>
+                      </li>
+                      <li><div class="slot case">modules, no hero</div>
+                        <div class="node server"><div class="head"><span class="name">HomeTitle</span><span class="k server">Server</span></div><div class="path">src/components/HomeStates/HomeTitle.tsx</div><div class="note">A hidden h1. The hero normally carries the page's h1.</div></div>
+                      </li>
+                      <li><div class="slot case">modules</div>
+                        <div class="node server"><div class="head"><span class="name">HomeModules</span><span class="k server">Server</span></div><div class="path">src/components/HomeModules/HomeModules.tsx</div><div class="note">One <code>Module</code> switch per entry, in the order staff arranged them. It takes <code>today</code> and a <code>renderCopy</code> function, so it never imports the rich-text renderer.</div></div>
+                        <ul>
+                          <li><div class="node server"><div class="head"><span class="name">RichText</span><span class="k server">Server</span></div><div class="path">src/components/RichText/RichText.tsx</div><div class="note"><code>'server-only'</code>. Passed in as <code>renderCopy</code>; draws the hero body and the gift guide body.</div></div></li>
+                          <li>
+                            <div class="slot">hero_search</div>
+                            <div class="node server"><div class="head"><span class="name">HomeHero</span><span class="k server">Server</span></div><div class="path">src/components/HomeModules/HomeHero.tsx</div><div class="note">The page's h1 and a plain GET form to <code>/new-york/browse</code>. Works with no script.</div></div>
+                            <ul>
+                              <li><div class="node server"><div class="head"><span class="name">Eyebrow</span><span class="k server">Server</span></div><div class="note">Shared by the hero, Picks and gift guide.</div></div></li>
+                              <li><div class="node server"><div class="head"><span class="name">Select × 2 · Input (date)</span><span class="k server">Server</span></div><div class="path">src/components/Select/ · src/components/Input/</div><div class="note">Neighborhood, guests, and the day (starts as today, in New York time).</div></div></li>
+                              <li><div class="node client"><div class="head"><span class="name">Button</span><span class="k client">Client island</span></div><div class="path">src/components/Button/Button.tsx</div><div class="note">The submit button, "Find something to do". The file is <code>'use client'</code>, so a button that only submits a form still ships as client code.</div></div></li>
+                              <li><div class="node server"><div class="head"><span class="name">Illustration</span><span class="k server">Server</span></div></div></li>
+                            </ul>
+                          </li>
+                          <li>
+                            <div class="slot">category_rail</div>
+                            <div class="node server"><div class="head"><span class="name">CategoryRail</span><span class="k server">Server</span></div><div class="path">src/components/HomeModules/CategoryRail.tsx</div></div>
+                            <ul><li><div class="node server"><div class="head"><span class="name">ChipLink × n</span><span class="k server">Server</span></div><div class="path">src/components/Chip/ChipLink.tsx</div><div class="note">Links to each category page. <code>prefetch={false}</code>.</div></div></li></ul>
+                          </li>
+                          <li>
+                            <div class="slot">picks (one per Pick module)</div>
+                            <div class="node server"><div class="head"><span class="name">PicksSection</span><span class="k server">Server</span></div><div class="path">src/components/HomeModules/PicksSection.tsx</div><div class="note">The first one gets <code>id="picks"</code>, the target of <code>/#picks</code>. Ends with a "See all N picks" link.</div></div>
+                            <ul>
+                              <li>
+                                <div class="node server"><div class="head"><span class="name">ExperienceCardItem × n</span><span class="k server">Server</span></div><div class="path">src/components/ExperienceCard/ExperienceCardItem.tsx</div><div class="note">Vertical layout, h3.</div></div>
+                                <ul><li><div class="node server"><div class="head"><span class="name">Card · Photo</span><span class="k server">Server</span></div><div class="path">src/components/Card/ · src/components/Photo/</div></div></li></ul>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <div class="slot">gift_guide</div>
+                            <div class="node server"><div class="head"><span class="name">GiftGuideSection</span><span class="k server">Server</span></div><div class="path">src/components/HomeModules/GiftGuideSection.tsx</div><div class="note">Left out when gifts are switched off. Eyebrow, copy, <code>ButtonLink</code> to the gift guide, a fixed sponsor line, <code>Illustration</code>.</div></div>
+                          </li>
+                          <li>
+                            <div class="slot">this_week</div>
+                            <div class="node server"><div class="head"><span class="name">ThisWeekSection</span><span class="k server">Server</span></div><div class="path">src/components/HomeModules/ThisWeekSection.tsx</div></div>
+                            <ul><li><div class="node server"><div class="head"><span class="name">ExperienceCardItem × n</span><span class="k server">Server</span></div><div class="note">Horizontal layout, h3. Up to the <code>thisWeekShown</code> cards.</div></div></li></ul>
+                          </li>
+                          <li>
+                            <div class="slot">reassurance</div>
+                            <div class="node server"><div class="head"><span class="name">ReassuranceSection</span><span class="k server">Server</span></div><div class="path">src/components/HomeModules/ReassuranceSection.tsx</div><div class="note">Three fixed facts from <code>homeCopy</code>, each with an icon.</div></div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="node server"><div class="head"><span class="name">Footer</span><span class="k server">Server</span></div><div class="path">src/components/Footer/Footer.tsx</div></div>
+              </li>
+            </ul>
+          </li>
+          <li><div class="node server"><div class="head"><span class="name">VercelMeasurement · SentryBrowserScript</span><span class="k server">Server</span></div><div class="note">Emit the analytics and error-tracking scripts.</div></div></li>
+        </ul>
+      </li>
+    </ul>
+    </div>
+  </section>
+
+  <div class="cols">
+    <section class="card" aria-labelledby="arrive-h">
+      <h2 id="arrive-h">What arrives when</h2>
+      <ol class="steps">
+        <li><strong>Shell.</strong> Layout, skip link, header, footer, and the <code>HomeSkeleton</code>. The header shows signed-out. No page content is in the shell, because <code>HomeContent</code> waits for the request before it reads anything.</li>
+        <li><strong>Streamed in.</strong> The banner and the signed-in account control replace their fallbacks. <code>HomeContent</code> replaces the skeleton in one piece: hero, rails, Picks, gift guide, this week and the reassurance row arrive together, not one by one.</li>
+        <li><strong>Hydration.</strong> Two islands: <code>SiteMenu</code> and the hero's submit <code>Button</code>. The search form, the chips and every card link work with scripting off.</li>
+      </ol>
+    </section>
+    <section class="card" aria-labelledby="search-h">
+      <h2 id="search-h">The one user path: the hero search</h2>
+      <ol class="steps">
+        <li>The guest picks a neighborhood, a day and a party size. Nothing runs in the browser; these are plain form fields.</li>
+        <li>Submit is an ordinary GET to <code>/new-york/browse</code>, with <code>neighborhood</code>, <code>date</code> and <code>guests</code> in the address. The browse page reads them.</li>
+        <li>No server action runs on this page. Category chips, Pick cards, "See all" and the gift guide button are links.</li>
+      </ol>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="cache-h">
+    <h2 id="cache-h">Cache invalidation</h2>
+    <p>Five cached reads feed this page, on five kinds of tag. Each change goes through <code>tagsForChanges()</code> in <code>src/lib/cacheTags.ts</code>.</p>
+    <ul class="plain" style="margin-top:12px">
+      <li><strong>Home modules saved</strong> (<code>homeModules</code>) clears <code>home</code>, and so does a Pick or gift guide change, which also clears its own <code>pick:&lt;slug&gt;</code> or <code>gift-guide</code> tag. That rebuilds <code>getHomeContent</code>.</li>
+      <li><strong>An experience's sessions or photos change</strong> clears <code>experience:&lt;id&gt;</code>. That reaches <code>getHomeContent</code>, <code>getThisWeek</code> and <code>getCoverPhotos</code> for any card that shows the experience. <code>getHomeContent</code> tags every ID a Pick names, even one a guest cannot see yet, so publishing it adds its card.</li>
+      <li><strong>A listing is published, edited or taken down</strong> also clears <code>catalog</code>, which is what <code>getThisWeek</code> is tagged with, and the experience's own tag.</li>
+      <li><strong>Settings saved</strong> clears <code>settings</code>: the banner, and the gift guide module's on/off.</li>
+      <li><strong>Category or neighborhood names:</strong> <code>taxonomy</code> has no change kind that reaches it, so a new name shows when the <code>editorial</code> profile runs out (revalidate 1 hour).</li>
+      <li><strong>Bookings:</strong> a booking or hold publishes only <code>session:&lt;id&gt;</code>, which nothing on this page carries. "On this week" catches up when its minute-keyed entry rolls over, about 60 seconds.</li>
+    </ul>
+  </section>
+
+  <section class="card" aria-labelledby="know-h">
+    <h2 id="know-h">Worth knowing</h2>
+    <ul class="plain">
+      <li><strong>The whole page is streamed.</strong> <code>HomeContent</code> calls <code>connection()</code> before anything, so even the cached editorial content never reaches the static shell. Every visitor first sees <code>HomeSkeleton</code>. The comment gives the reason: the day and the week are request-time values.</li>
+      <li><strong>The "On this week" cards bring their own covers, the Picks cards do not.</strong> <code>getHomeContent</code> reads with <code>covers: false</code>, then <code>HomeContent</code> makes a second read through <code>readGuestCovers</code>. <code>getThisWeek</code> reads with <code>covers: true</code>. Two ways of getting a cover on one page.</li>
+      <li><strong>A cover failure is silent, a content failure is not.</strong> A failed cover read renders cards without images; a failed content read shows <code>PageError</code>. A failed settings read inside this try block also shows <code>PageError</code>, although the banner, which reads the same entry, quietly hides itself.</li>
+      <li><strong>The only page-level client code is a submit button.</strong> <code>Button</code> is <code>'use client'</code>, and the hero is otherwise all server. <code>SiteMenu</code> is the other island, and it comes from the shell.</li>
+      <li><strong>The gift guide depends on two switches.</strong> It needs <code>giftsEnabled</code> (settings, 5 minute revalidate) and a module row, so turning gifts off hides it only after the settings entry is cleared, and the home entry itself does not carry the settings.</li>
+      <li><strong>No root layout file.</strong> <code>(guest)/layout.tsx</code> renders <code>&lt;html&gt;</code>. Each route group (guest, checkout, host, ops) has its own, so html-level changes are made per group.</li>
+      <li><strong>The h1 can come from three places:</strong> the hero, <code>HomeTitle</code> (no hero), or the skeleton's hidden one while loading. <code>HomeEmpty</code> has its own through <code>PageHeading</code>.</li>
+    </ul>
+  </section>
+
+  <p class="foot">Read from <code>origin/main</code> at 2db68ea. Cache profiles are in <code>src/lib/cacheProfiles.ts</code>: editorial 5 min stale / 1 h revalidate, catalog 5 min / 15 min, browse 30 s / 60 s, settings 1 min / 5 min.</p>
+</div>

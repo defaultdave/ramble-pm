@@ -1,0 +1,213 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<title>Host Area Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one reading column; a legend, the render tree as nested rails, the role gate, then the action and cache sections. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #1b1f27;
+  --muted: #5b6372;
+  --rule: #d9dde4;
+  --server: #3b5bab;
+  --server-bg: #e8edf8;
+  --cached: #0f7a6c;
+  --cached-bg: #e2f3f0;
+  --stream: #a3610a;
+  --stream-bg: #fbefdc;
+  --client: #8a2f9c;
+  --client-bg: #f5e6f8;
+  --action: #b3261e;
+  --action-bg: #fbe6e4;
+  --lib: #59606d;
+  --lib-bg: #eceef1;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+    --server: #8fa9ec; --server-bg: #1f2840;
+    --cached: #5fcfbe; --cached-bg: #14302c;
+    --stream: #f0b65a; --stream-bg: #3a2a10;
+    --client: #e08ef0; --client-bg: #36203c;
+    --action: #f28b82; --action-bg: #3d1d1b;
+    --lib: #aab1bd; --lib-bg: #262b34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+  --server: #8fa9ec; --server-bg: #1f2840;
+  --cached: #5fcfbe; --cached-bg: #14302c;
+  --stream: #f0b65a; --stream-bg: #3a2a10;
+  --client: #e08ef0; --client-bg: #36203c;
+  --action: #f28b82; --action-bg: #3d1d1b;
+  --lib: #aab1bd; --lib-bg: #262b34;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 32px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 32px; }
+h1 { font-size: 30px; line-height: 1.15; margin: 0; text-wrap: balance; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 19px; margin: 0 0 12px; text-wrap: balance; }
+p { margin: 0; max-width: 68ch; }
+.lede { color: var(--muted); margin-top: 8px; }
+code, .path { font-family: var(--font-mono); font-size: 0.86em; }
+.route { font-family: var(--font-mono); font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.legend div { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+
+.k { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+.k.server { color: var(--server); background: var(--server-bg); }
+.k.cached { color: var(--cached); background: var(--cached-bg); }
+.k.stream { color: var(--stream); background: var(--stream-bg); }
+.k.client { color: var(--client); background: var(--client-bg); }
+.k.action { color: var(--action); background: var(--action-bg); }
+.k.lib { color: var(--lib); background: var(--lib-bg); }
+
+.tree-box { overflow-x: auto; }
+ul.tree, ul.tree ul { list-style: none; margin: 0; padding: 0; }
+ul.tree ul { margin-left: 18px; padding-left: 16px; border-left: 2px solid var(--rule); }
+ul.tree li { padding-top: 8px; min-width: 0; }
+.node { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 12px; display: grid; gap: 3px; border-left-width: 4px; min-width: 260px; }
+.node.server { border-left-color: var(--server); }
+.node.cached { border-left-color: var(--cached); }
+.node.stream { border-left-color: var(--stream); }
+.node.client { border-left-color: var(--client); }
+.node.action { border-left-color: var(--action); }
+.node.lib { border-left-color: var(--lib); }
+.node .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.node .name { font-family: var(--font-mono); font-weight: 500; font-size: 14.5px; }
+.node .path { color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+.node .note { color: var(--muted); font-size: 13.5px; max-width: 72ch; }
+.slot { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding: 10px 0 0 2px; }
+.slot::before { content: "slot "; color: var(--fg); font-weight: 500; }
+
+ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 10px; max-width: 72ch; }
+ol.steps li::marker { font-family: var(--font-mono); color: var(--muted); }
+
+.cols { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 18px; min-width: 0; }
+.foot { color: var(--muted); font-size: 13px; }
+.toplink { font-size: 13px; }
+.toplink a { color: var(--server); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; }
+.card { overflow-x: auto; }
+ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 8px; max-width: 76ch; }
+</style>
+<div class="wrap">
+  <p class="toplink"><a href="index.html">All page maps</a></p>
+  <header>
+    <div class="route">/host/* · ramble main at 2db68ea</div>
+    <h1>Host area map</h1>
+    <p class="lede">Every page under <code>src/app/(host)/</code>: one shared layout, a dashboard, and six more pages. The area is for signed-in hosts, has no cached reads and no Suspense boundary, and ships very little client code. Traced from the code on <code>main</code>, 2026-11-15.</p>
+  </header>
+
+  <section aria-labelledby="legend-h">
+    <h2 id="legend-h">Key</h2>
+    <div class="legend">
+      <div><span class="k server">Server</span> renders to HTML, no JS shipped</div>
+      <div><span class="k cached">Cached read</span> <code>'use cache'</code> (none in this area)</div>
+      <div><span class="k stream">Streamed</span> behind a Suspense fallback (none in this area)</div>
+      <div><span class="k client">Client island</span> <code>'use client'</code>, hydrates</div>
+      <div><span class="k action">Server action</span> called from a form or island</div>
+      <div><span class="k lib">Pure lib / server read</span> function in <code>src/lib</code> or <code>src/server</code>, run per request</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="tree-h">
+    <h2 id="tree-h">Render tree: layout and dashboard</h2>
+    <div class="tree-box"><ul class="tree"><li><div class="node server"><div class="head"><span class="name">HostLayout</span><span class="k server">Server</span></div><div class="path">src/app/(host)/layout.tsx</div><div class="note">Its own html and body, not the guest layout. <code>robots: noindex</code> and <code>instant = false</code>. No role check here: a layout is not rendered again on a client navigation.</div></div><ul><li><div class="node server"><div class="head"><span class="name">SiteShell areaName="For hosts"</span><span class="k server">Server</span></div><div class="path">src/components/SiteShell.tsx</div><div class="note">Skip link, header with the brand link and the area name, <code>main#main</code>, footer. Not the guest shell: no menu island, no banner, no streamed account control.</div></div><ul><li><div class="slot">children (main)</div></li><li><div class="node server"><div class="head"><span class="name">HostDashboardPage</span><span class="k server">Server</span></div><div class="path">src/app/(host)/host/page.tsx</div><div class="note">Runs the gate itself. <code>signed_out</code> redirects to sign in and back; <code>refused</code> calls <code>notFound()</code>. Otherwise renders the dashboard.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">loadHostDashboard()</span><span class="k lib">Server read</span></div><div class="path">src/server/hostDashboard.ts · per request, not cached</div><div class="note">Calls <code>loadForHostArea(read, decide, allowStaff = true)</code>: caller, access, host id, the read, then the decision.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">getCaller() · hostAccessFor()</span><span class="k lib">Server read</span></div><div class="path">src/server/auth/caller.ts · src/lib/hostAccess.ts</div><div class="note">Session cookie to a caller; the caller's own grants to signed_out, no_host_role, owner or staff. The host id never comes from the address.</div></div></li><li><div class="node lib"><div class="head"><span class="name">readHostDashboard(caller, hostId, now)</span><span class="k lib">Server read</span></div><div class="path">src/server/db/hostDashboard.ts</div><div class="note">Checks <code>requireAnyRole(host_owner, host_staff)</code> for that host first, then three queries in parallel: the host name, the next scheduled sessions with seats sold, the latest bookings. All cut to that host.</div></div></li><li><div class="node lib"><div class="head"><span class="name">hostDashboardResult() · buildHostDashboard()</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/hostAccess.ts · src/lib/hostDashboard.ts</div><div class="note">Access plus rows become signed_out, refused, or ok with the view and <code>canManage</code> (true for an owner only).</div></div></li></ul></li><li><div class="node lib"><div class="head"><span class="name">hostNavLinks(canManage)</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/hostStaff.ts</div><div class="note">Owner: Manage sessions, Your experiences, Host settings, Staff. Staff: Sessions only.</div></div></li><li><div class="node server"><div class="head"><span class="name">HostDashboard</span><span class="k server">Server</span></div><div class="path">src/components/HostDashboard/HostDashboard.tsx</div><div class="note">Plain server markup. No island of its own on this page.</div></div><ul><li><div class="node server"><div class="head"><span class="name">PageHeading</span><span class="k server">Server</span></div><div class="path">src/components/PageHeading.tsx</div><div class="note">Title "Host dashboard" and the host name.</div></div><ul><li><div class="node server"><div class="head"><span class="name">AccountControl signedIn</span><span class="k server">Server</span></div><div class="path">src/components/Header/AccountControl.tsx</div><div class="note">My bookings link and a Sign out form that posts to a plain action path, so it works with no script. Reused from the guest header.</div></div></li></ul></li><li><div class="node server"><div class="head"><span class="name">nav "Host pages" · ButtonLink × 1 to 4</span><span class="k server">Server</span></div><div class="path">src/components/Button/ButtonLink.tsx</div><div class="note">Links from <code>hostNavLinks</code>. ButtonLink is a server component.</div></div></li><li><div class="node server"><div class="head"><span class="name">Section "Upcoming sessions" · SessionRow × n</span><span class="k server">Server</span></div><div class="path">src/components/HostDashboard/HostDashboard.tsx</div><div class="note">Experience, when, sold label, and a fill bar (<code>soldFillStep</code> sets a data attribute; the bar is hidden from screen readers). Empty text when none.</div></div></li><li><div class="node server"><div class="head"><span class="name">Section "Recent bookings" · BookingRow × n</span><span class="k server">Server</span></div><div class="path">src/components/HostDashboard/HostDashboard.tsx</div><div class="note">Guest, experience and time, seats, total, status, reference. Empty text when none.</div></div></li></ul></li></ul></li></ul></li><li><div class="node server"><div class="head"><span class="name">RenderPerRequest</span><span class="k server">Server</span></div><div class="path">src/app/renderPerRequest.tsx</div><div class="note">Awaits <code>connection()</code> and renders nothing. Beside the shell, so every script tag carries the request's CSP nonce and the page still renders in the first stage.</div></div></li><li><div class="node client"><div class="head"><span class="name">error.tsx → GroupError</span><span class="k client">Client island</span></div><div class="path">src/app/(host)/error.tsx</div><div class="note">Error boundary for the area: <code>ErrorNotice</code> with a retry. Shown when a host read throws, instead of a page with missing rows.</div></div></li><li><div class="node server"><div class="head"><span class="name">not-found.tsx → NotFound</span><span class="k server">Server</span></div><div class="path">src/app/(host)/not-found.tsx</div><div class="note"><code>NotFoundNotice</code>. This is what a non-host sees, and it never says the area exists.</div></div></li></ul></li></ul></div>
+  </section>
+
+  <section aria-labelledby="pages-h">
+    <h2 id="pages-h">The other pages</h2>
+    <p class="lede" style="margin-bottom:12px">Each one fills the <code>children</code> slot of <code>SiteShell</code>, under the same layout, error page and not-found page.</p>
+    <div class="tree-box"><ul class="tree"><li><div class="slot">/host/sessions</div><ul><li><div class="node server"><div class="head"><span class="name">HostSessionsPage</span><span class="k server">Server</span></div><div class="path">src/app/(host)/host/sessions/page.tsx</div><div class="note">Reads <code>?week=</code>. Owner or staff. Passes the six actions to the view as one prop.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">loadHostWeek() → readHostWeek()</span><span class="k lib">Server read</span></div><div class="path">src/server/hostSessions.ts · src/server/db/sessions.ts</div><div class="note">Per request. Repeats the gate by hand instead of using <code>loadForHostArea</code>. <code>buildHostWeek</code> sets <code>canEdit</code> for an owner only.</div></div></li><li><div class="node server"><div class="head"><span class="name">HostSessions</span><span class="k server">Server</span></div><div class="path">src/components/HostSessions/HostSessions.tsx</div><div class="note">Heading, AccountControl, week nav (ButtonLink × 3), the days and rows.</div></div><ul><li><div class="node client"><div class="head"><span class="name">PublishWeekForm</span><span class="k client">Client island</span></div><div class="path">src/components/HostSessions/HostSessionForms.tsx</div><div class="note">Owner only. A <code>useActionState</code> form (shared <code>ActionForm</code>).</div></div><ul><li><div class="node action"><div class="head"><span class="name">publishWeekAction</span><span class="k action">Server action</span></div><div class="path">src/server/actions/hostSessions.ts</div><div class="note">Owner of a host only; the host comes from the grant.</div></div></li></ul></li><li><div class="node server"><div class="head"><span class="name">SessionRow × n</span><span class="k server">Server</span></div><div class="path">src/components/HostSessions/HostSessions.tsx</div><div class="note">Server markup per session.</div></div><ul><li><div class="node client"><div class="head"><span class="name">EditSessionForms</span><span class="k client">Client island</span></div><div class="path">src/components/HostSessions/HostSessionForms.tsx</div><div class="note">Owner, editable rows only. A <code>details</code> holding four forms (Alert, Button, Input, Select), with a hidden session id and expected version.</div></div><ul><li><div class="node action"><div class="head"><span class="name">updateSessionCapacityAction · updateSessionTimeAction · updateSessionPriceAction · cancelSessionAction</span><span class="k action">Server action</span></div><div class="path">src/server/actions/hostSessions.ts</div><div class="note">Each runs <code>run()</code>: schema parse, <code>getCaller()</code>, a db function that checks the session is on the caller's host, then <code>revalidatePath('/host/sessions')</code>.</div></div></li></ul></li></ul></li><li><div class="node client"><div class="head"><span class="name">AddOneOffForm</span><span class="k client">Client island</span></div><div class="path">src/components/HostSessions/HostSessionForms.tsx</div><div class="note">Owner with at least one experience.</div></div><ul><li><div class="node action"><div class="head"><span class="name">addOneOffSessionAction</span><span class="k action">Server action</span></div><div class="path">src/server/actions/hostSessions.ts</div></div></li></ul></li></ul></li></ul></li></ul></li><li><div class="slot">/host/bookings</div><ul><li><div class="node server"><div class="head"><span class="name">HostBookingsPage</span><span class="k server">Server</span></div><div class="path">src/app/(host)/host/bookings/page.tsx</div><div class="note">Reads <code>?q=</code>. Owner or staff.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">loadHostBookings() → readHostBookings()</span><span class="k lib">Server read</span></div><div class="path">src/server/hostGuestLists.ts · src/server/db/hostGuestLists.ts</div><div class="note"><code>requireAnyRole</code> for the host, narrowed by the search term.</div></div></li><li><div class="node server"><div class="head"><span class="name">HostGuestLists</span><span class="k server">Server</span></div><div class="path">src/components/HostGuestLists/HostGuestLists.tsx</div></div><ul><li><div class="node server"><div class="head"><span class="name">PageHeading</span><span class="k server">Server</span></div><div class="path">src/components/PageHeading.tsx</div></div></li><li><div class="node server"><div class="head"><span class="name">SearchField</span><span class="k server">Server</span></div><div class="path">src/components/SearchField/SearchField.tsx</div><div class="note">A GET form: the term lives in the address and it works with no script.</div></div></li><li><div class="node server"><div class="head"><span class="name">BookingListRow × n</span><span class="k server">Server</span></div><div class="path">src/components/BookingListRow/</div></div></li></ul></li></ul></li></ul></li><li><div class="slot">/host/bookings/session/[sessionId]</div><ul><li><div class="node server"><div class="head"><span class="name">HostGuestListPage</span><span class="k server">Server</span></div><div class="path">src/app/(host)/host/bookings/session/[sessionId]/page.tsx</div><div class="note">Reads <code>params.sessionId</code>. Owner or staff. A bad id, a missing session and another host's session all end in not found.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">loadHostGuestList() → readHostGuestList()</span><span class="k lib">Server read</span></div><div class="path">src/server/hostGuestLists.ts · src/server/db/hostGuestLists.ts</div><div class="note"><code>parseSessionId</code>, then the read checks the session is on the caller's host.</div></div></li><li><div class="node server"><div class="head"><span class="name">HostGuestList</span><span class="k server">Server</span></div><div class="path">src/components/HostGuestList/HostGuestList.tsx</div><div class="note">PageHeading, link back to bookings, GuestRow × n.</div></div></li></ul></li></ul></li><li><div class="slot">/host/experiences</div><ul><li><div class="node server"><div class="head"><span class="name">HostExperiencesPage</span><span class="k server">Server</span></div><div class="path">src/app/(host)/host/experiences/page.tsx</div><div class="note">Owner only. Staff are refused.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">loadHostExperiences() → listHostExperiences()</span><span class="k lib">Server read</span></div><div class="path">src/server/hostExperiences.ts · src/server/db/catalog.ts</div><div class="note">Through <code>loadForHostArea</code> with staff not allowed; the read needs <code>host_owner</code>. Every status.</div></div></li><li><div class="node server"><div class="head"><span class="name">HostExperiences</span><span class="k server">Server</span></div><div class="path">src/components/HostExperiences/HostExperiences.tsx</div><div class="note">PageHeading, ExperienceCard × n (StatusBadge), link back to the dashboard.</div></div></li></ul></li></ul></li><li><div class="slot">/host/settings</div><ul><li><div class="node server"><div class="head"><span class="name">HostSettingsPage</span><span class="k server">Server</span></div><div class="path">src/app/(host)/host/settings/page.tsx</div><div class="note">Owner only. Reads <code>?notice=</code> and <code>?fields=</code> for the answer after a save.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">loadHostSettings() → readHostSettings()</span><span class="k lib">Server read</span></div><div class="path">src/server/hostSettings.ts · src/server/db/hostSettings.ts</div><div class="note">Through <code>loadForHostArea</code>, owner only.</div></div></li><li><div class="node server"><div class="head"><span class="name">HostSettings</span><span class="k server">Server</span></div><div class="path">src/components/HostSettings/HostSettings.tsx</div><div class="note">A plain <code>&lt;form action={serverAction}&gt;</code>: no <code>useActionState</code>, works with no script. PageHeading, ActionNotice, HostNameField, HostDescriptionField, HostNoticeEmailField, link back.</div></div><ul><li><div class="node client"><div class="head"><span class="name">Button (submit)</span><span class="k client">Client island</span></div><div class="path">src/components/Button/Button.tsx</div><div class="note"><code>Button</code> is <code>'use client'</code> for its loading state.</div></div><ul><li><div class="node action"><div class="head"><span class="name">updateHostSettingsAction</span><span class="k action">Server action</span></div><div class="path">src/server/actions/hostSettings.ts</div><div class="note">Gate, parse, <code>updateHostSettings</code>, then <code>redirect</code> back with a notice code.</div></div></li></ul></li></ul></li></ul></li></ul></li><li><div class="slot">/host/staff</div><ul><li><div class="node server"><div class="head"><span class="name">HostStaffPage</span><span class="k server">Server</span></div><div class="path">src/app/(host)/host/staff/page.tsx</div><div class="note">Owner only; staff are refused. Builds PageHeading, ActionNotice and StaffView itself.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">loadHostStaff() → readHostStaff()</span><span class="k lib">Server read</span></div><div class="path">src/server/hostStaff.ts · src/server/db/staffRoles.ts</div><div class="note">Owner only.</div></div></li><li><div class="node server"><div class="head"><span class="name">StaffView (shared with ops staff admin)</span><span class="k server">Server</span></div><div class="path">src/components/StaffAdmin/StaffView.tsx</div><div class="note">Invite form, a DataTable of staff, per-row resend and revoke forms, all plain <code>&lt;form action&gt;</code>. EmailField, DataTable, StaffActions.</div></div><ul><li><div class="node client"><div class="head"><span class="name">Button × n</span><span class="k client">Client island</span></div><div class="path">src/components/Button/Button.tsx</div><div class="note">Invite, resend and revoke submits.</div></div><ul><li><div class="node action"><div class="head"><span class="name">inviteHostStaffAction · resendHostStaffLinkAction · revokeHostStaffAction</span><span class="k action">Server action</span></div><div class="path">src/server/actions/hostStaff.ts</div><div class="note"><code>ownerOrLeave</code> first, then the grant or email, then <code>redirect</code> with a notice. Invite and resend email a single-use sign-in link, rate limited.</div></div></li></ul></li></ul></li></ul></li></ul></li><li><div class="slot">/host/[...unknown]</div><ul><li><div class="node server"><div class="head"><span class="name">UnknownPage</span><span class="k server">Server</span></div><div class="path">src/app/(host)/host/[...unknown]/page.tsx</div><div class="note">Any other <code>/host/...</code> address. Calls <code>notFoundPerRequest()</code>: awaits <code>connection()</code> then <code>notFound()</code>, so the not-found page renders with the nonce. The status is 200, not 404.</div></div></li></ul></li></ul></div>
+  </section>
+
+  <div class="cols">
+    <section class="card" aria-labelledby="gate-h">
+      <h2 id="gate-h">The role gate</h2>
+      <ol class="steps">
+        <li><strong>Not in the proxy or the layout.</strong> <code>src/proxy.ts</code> only sets the CSP nonce. The layout renders the shell for anyone, because a layout is not rendered again on a client navigation. So every page checks the caller itself.</li>
+        <li><strong>Page.</strong> A <code>load...()</code> function calls <code>getCaller()</code>, then <code>hostAccessFor()</code>, which reads the caller's own grants: signed_out, no_host_role, owner or staff. The host is the grant's host, never one from the address. An owner of several hosts gets the first granted; owning one and staffing another gives the owned one.</li>
+        <li><strong>Read.</strong> The read runs only if a host id came out, and the db function checks the role again (<code>requireAnyRole</code> for owner or staff, <code>requireRole</code> for owner).</li>
+        <li><strong>Answer.</strong> Signed out: <code>redirect(signInHref(path))</code>, which returns to the same page. No host role, staff on an owner-only page, a host that is gone, or a session that is not theirs: <code>notFound()</code>, drawn by <code>NotFoundNotice</code>, which does not say the area exists.</li>
+        <li><strong>Actions repeat it.</strong> Each action fetches the caller again and uses the grant's host, so a posted host id or session id from another host changes nothing.</li>
+      </ol>
+    </section>
+    <section class="card" aria-labelledby="who-h">
+      <h2 id="who-h">Who sees what</h2>
+      <table>
+        <tr><th>Page</th><th>Owner</th><th>Staff</th></tr>
+        <tr><td>/host</td><td>yes, four links</td><td>yes, Sessions link only</td></tr>
+        <tr><td>/host/sessions</td><td>yes, with forms</td><td>read only, no forms</td></tr>
+        <tr><td>/host/bookings and a session's guest list</td><td>yes</td><td>yes</td></tr>
+        <tr><td>/host/experiences</td><td>yes</td><td>not found</td></tr>
+        <tr><td>/host/settings</td><td>yes</td><td>not found</td></tr>
+        <tr><td>/host/staff</td><td>yes</td><td>not found</td></tr>
+      </table>
+      <p class="foot" style="margin-top:10px">Ops and admin hold no host grant, so here they are no_host_role and see not found. Signed out goes to sign in on every page.</p>
+    </section>
+  </div>
+
+  <div class="cols">
+    <section class="card" aria-labelledby="arrive-h">
+      <h2 id="arrive-h">What arrives when</h2>
+      <ol class="steps">
+        <li><strong>One wait.</strong> <code>RenderPerRequest</code> pins the area to per-request rendering and there is no Suspense, so nothing is prerendered. The reply starts after the page's caller lookup and database read finish.</li>
+        <li><strong>One piece.</strong> The shell, the page and all its rows arrive together as server HTML. A failed read shows the area's error page instead.</li>
+        <li><strong>Hydration.</strong> <code>Button</code> wherever a form uses it, plus <code>PublishWeekForm</code>, <code>EditSessionForms</code> and <code>AddOneOffForm</code> on the sessions page, and the error boundary if it shows. The dashboard, bookings and experiences pages have no island of their own.</li>
+      </ol>
+    </section>
+    <section class="card" aria-labelledby="path-h">
+      <h2 id="path-h">Actions by page</h2>
+      <ol class="steps">
+        <li><strong>/host/sessions.</strong> Six actions through <code>useActionState</code>. Each returns a state (done, problem, invalid, failed) and the page refreshes with <code>revalidatePath('/host/sessions')</code>.</li>
+        <li><strong>/host/settings.</strong> <code>updateHostSettingsAction</code>, a plain form post that ends in a <code>redirect</code> with <code>?notice=</code>.</li>
+        <li><strong>/host/staff.</strong> Invite, resend and revoke: plain form posts that redirect with a notice code.</li>
+        <li><strong>Dashboard, bookings, guest list, experiences.</strong> No actions. The bookings search is a GET form.</li>
+      </ol>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="cache-h">
+    <h2 id="cache-h">What a host change clears in the guest caches</h2>
+    <p style="margin-bottom:12px">Host pages read the database every time, so their own pages need no clearing. These writes clear guest-side tags with <code>updateTagsForChanges()</code> (<code>updateTag</code>, so the next guest request sees the change) after the commit.</p>
+    <table>
+      <tr><th>Host change</th><th>Tags cleared</th><th>Guest reads it reaches</th></tr>
+      <tr><td>Capacity saved</td><td><code>session:&lt;id&gt;</code></td><td>The spaces-left count of that session (<code>'use cache: remote'</code>).</td></tr>
+      <tr><td>Time changed, session cancelled</td><td><code>experience:&lt;id&gt;</code> and <code>session:&lt;id&gt;</code></td><td>Experience page data and its upcoming dates, plus the spaces left.</td></tr>
+      <tr><td>Price saved</td><td><code>experience:&lt;id&gt;</code></td><td>The experience page data and dates for that experience.</td></tr>
+      <tr><td>One-off session added</td><td><code>experience:&lt;id&gt;</code></td><td>Experience page and upcoming dates.</td></tr>
+      <tr><td>Week published</td><td><code>experience:&lt;id&gt;</code> for each experience that gained a session</td><td>Same. A week that adds nothing clears nothing.</td></tr>
+      <tr><td>Name or about text saved</td><td><code>catalog</code> (host profile) and <code>experience:&lt;id&gt;</code> for every experience the host owns</td><td>Browse and home reads, the host page, and each experience page that shows the host.</td></tr>
+      <tr><td>Notice email saved</td><td>none</td><td>Never shown to a guest.</td></tr>
+      <tr><td>Staff invited, resent or revoked</td><td>none</td><td>Nothing guest-side.</td></tr>
+    </table>
+    <p class="foot" style="margin-top:10px">Tag names are in <code>src/lib/cacheTags.ts</code>. The settings changes come from <code>hostSettingsChanges()</code> in <code>src/lib/hostSettings.ts</code>, applied by <code>withLockedHost</code> once its transaction commits.</p>
+  </section>
+
+  <section class="card" aria-labelledby="know-h">
+    <h2 id="know-h">Worth knowing</h2>
+    <ul class="plain">
+      <li><strong>The gate is repeated, not shared.</strong> The layout has no check by design, and each of the seven pages repeats the same three-line branch. Only the dashboard, experiences and settings loaders use <code>loadForHostArea</code>; the week, bookings, guest list and staff loaders rebuild the caller, access and host steps by hand. A new host page that forgets the branch would render for anyone, with the read the only thing stopping it.</li>
+      <li><strong>The catch-all answers 200.</strong> An unknown <code>/host/x</code> shows the not-found page with status 200, and the page appears only once script runs (the empty shell has no heading). The code comment says why: a render resumed from the shell cannot change the status.</li>
+      <li><strong>A capacity change clears less than a time or price change.</strong> It clears only <code>session:&lt;id&gt;</code>, not <code>experience:&lt;id&gt;</code>, so the experience page's cached data is not rebuilt by it.</li>
+      <li><strong>Staff are stopped twice on owner pages.</strong> The page refuses them, and the db read needs <code>host_owner</code>. On sessions they get the page without forms, and publishing uses the owned host only.</li>
+      <li><strong><code>Button</code> is the common island.</strong> It is <code>'use client'</code>, so every host form that uses it (settings, staff, sessions, search) ships that code even though most of those forms are plain server <code>&lt;form action&gt;</code> posts.</li>
+      <li><strong>Shared with ops.</strong> <code>StaffView</code> is the component ops staff admin uses; the host page passes <code>managedRole="host_staff"</code> and its own three actions.</li>
+      <li><strong>Sign out needs no script.</strong> <code>AccountControl</code> is a server component with a plain form post, reused from the guest header.</li>
+    </ul>
+  </section>
+
+  <p class="foot">Read from <code>origin/main</code> at 2db68ea. Tag names in <code>src/lib/cacheTags.ts</code>; role rules in <code>src/lib/hostAccess.ts</code> and <code>src/server/auth/caller.ts</code>.</p>
+</div>

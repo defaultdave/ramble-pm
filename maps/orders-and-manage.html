@@ -1,0 +1,307 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<title>Orders and Manage Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one reading column; a legend, the shared frame, one render tree per page, then the arrival order and the guest paths. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #1b1f27;
+  --muted: #5b6372;
+  --rule: #d9dde4;
+  --server: #3b5bab;
+  --server-bg: #e8edf8;
+  --cached: #0f7a6c;
+  --cached-bg: #e2f3f0;
+  --stream: #a3610a;
+  --stream-bg: #fbefdc;
+  --client: #8a2f9c;
+  --client-bg: #f5e6f8;
+  --action: #b3261e;
+  --action-bg: #fbe6e4;
+  --lib: #59606d;
+  --lib-bg: #eceef1;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+    --server: #8fa9ec; --server-bg: #1f2840;
+    --cached: #5fcfbe; --cached-bg: #14302c;
+    --stream: #f0b65a; --stream-bg: #3a2a10;
+    --client: #e08ef0; --client-bg: #36203c;
+    --action: #f28b82; --action-bg: #3d1d1b;
+    --lib: #aab1bd; --lib-bg: #262b34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+  --server: #8fa9ec; --server-bg: #1f2840;
+  --cached: #5fcfbe; --cached-bg: #14302c;
+  --stream: #f0b65a; --stream-bg: #3a2a10;
+  --client: #e08ef0; --client-bg: #36203c;
+  --action: #f28b82; --action-bg: #3d1d1b;
+  --lib: #aab1bd; --lib-bg: #262b34;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+a { color: var(--server); }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 32px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 32px; }
+h1 { font-size: 30px; line-height: 1.15; margin: 0; text-wrap: balance; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 19px; margin: 0 0 12px; text-wrap: balance; }
+p { margin: 0; max-width: 68ch; }
+.lede { color: var(--muted); margin-top: 8px; }
+code, .path { font-family: var(--font-mono); font-size: 0.86em; }
+.route { font-family: var(--font-mono); font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+.back { font-size: 13px; display: inline-block; margin-bottom: 10px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.legend div { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+
+.k { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+.k.server { color: var(--server); background: var(--server-bg); }
+.k.cached { color: var(--cached); background: var(--cached-bg); }
+.k.stream { color: var(--stream); background: var(--stream-bg); }
+.k.client { color: var(--client); background: var(--client-bg); }
+.k.action { color: var(--action); background: var(--action-bg); }
+.k.lib { color: var(--lib); background: var(--lib-bg); }
+
+.tree-box { overflow-x: auto; }
+ul.tree, ul.tree ul { list-style: none; margin: 0; padding: 0; }
+ul.tree ul { margin-left: 18px; padding-left: 16px; border-left: 2px solid var(--rule); }
+ul.tree li { padding-top: 8px; min-width: 0; }
+.node { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 12px; display: grid; gap: 3px; border-left-width: 4px; min-width: 260px; }
+.node.server { border-left-color: var(--server); }
+.node.cached { border-left-color: var(--cached); }
+.node.stream { border-left-color: var(--stream); }
+.node.client { border-left-color: var(--client); }
+.node.action { border-left-color: var(--action); }
+.node.lib { border-left-color: var(--lib); }
+.node .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.node .name { font-family: var(--font-mono); font-weight: 500; font-size: 14.5px; }
+.node .path { color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+.node .note { color: var(--muted); font-size: 13.5px; max-width: 72ch; }
+.slot { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding: 10px 0 0 2px; }
+.slot::before { content: "slot "; color: var(--fg); font-weight: 500; }
+
+ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 10px; max-width: 72ch; }
+ol.steps li::marker { font-family: var(--font-mono); color: var(--muted); }
+ul.facts { margin: 0; padding-left: 22px; display: grid; gap: 10px; max-width: 76ch; }
+
+.cols { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 18px; min-width: 0; }
+.foot { color: var(--muted); font-size: 13px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">All page maps</a>
+    <div class="route">/orders/[reference] and /manage/[token] · ramble main at 2db68ea</div>
+    <h1>Orders and manage map</h1>
+    <p class="lede">What a guest sees after paying: the order confirmation with its status poller, and the manage page for cancelling or moving a booking. Both live in one route group, share one frame, and neither reads a cache. Traced from the code on <code>main</code>, 2026-11-15.</p>
+  </header>
+
+  <section aria-labelledby="legend-h">
+    <h2 id="legend-h">Key</h2>
+    <div class="legend">
+      <div><span class="k server">Server</span> renders to HTML, no JS shipped</div>
+      <div><span class="k cached">Cached read</span> <code>'use cache'</code>, tagged for invalidation</div>
+      <div><span class="k stream">Streamed</span> per request, behind a Suspense fallback</div>
+      <div><span class="k client">Client island</span> <code>'use client'</code>, hydrates</div>
+      <div><span class="k action">Server action</span> called from an island or a form</div>
+      <div><span class="k lib">Pure lib</span> plain function in <code>src/lib</code></div>
+    </div>
+    <p class="foot" style="margin-top:10px">Nothing on these pages is a cached read and nothing is streamed: there is no <code>'use cache'</code>, <code>cacheTag</code>, <code>cacheLife</code> or Suspense boundary in either route. Both pages are per-request and every read is behind a secret in the address.</p>
+  </section>
+
+  <section aria-labelledby="frame-h">
+    <h2 id="frame-h">Shared frame</h2>
+    <div class="tree-box">
+    <ul class="tree">
+      <li>
+        <div class="node server"><div class="head"><span class="name">CheckoutLayout</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/layout.tsx</div><div class="note">Draws <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code>. There is no <code>src/app/layout.tsx</code> on main; the group owns the document. Fonts, base styles, <code>robots: noindex</code>, <code>instant = false</code>.</div></div>
+        <ul>
+          <li>
+            <div class="node server"><div class="head"><span class="name">SiteLayout</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/(site)/layout.tsx</div><div class="note">Only wraps the page in <code>GuestShell</code>. No site notice and no third-party tags (ADR 0007). The checkout page sits outside this layout and draws its own header.</div></div>
+            <ul>
+              <li>
+                <div class="node server"><div class="head"><span class="name">GuestShell</span><span class="k server">Server</span></div><div class="path">src/components/GuestShell/GuestShell.tsx</div><div class="note">Passed no <code>banner</code> and no <code>account</code>, so the header uses the default signed-out control.</div></div>
+                <ul>
+                  <li><div class="node server"><div class="head"><span class="name">SkipLink</span><span class="k server">Server</span></div><div class="path">src/components/SkipLink/SkipLink.tsx</div></div></li>
+                  <li>
+                    <div class="node server"><div class="head"><span class="name">Header</span><span class="k server">Server</span></div><div class="path">src/components/Header/Header.tsx</div><div class="note">Logo, main links, gifts and search links.</div></div>
+                    <ul>
+                      <li><div class="node server"><div class="head"><span class="name">AccountControl signedIn={false}</span><span class="k server">Server</span></div><div class="path">src/components/Header/AccountControl.tsx</div><div class="note">A plain "Sign in" link.</div></div></li>
+                      <li><div class="node client"><div class="head"><span class="name">SiteMenu</span><span class="k client">Client island</span></div><div class="path">src/components/GuestShell/SiteMenu.tsx</div><div class="note">Phone menu, with its own copy of the account control.</div></div></li>
+                    </ul>
+                  </li>
+                  <li><div class="slot">main#main → the route</div>
+                    <div class="node server"><div class="head"><span class="name">/orders/[reference]</span><span class="k server">Server</span></div><div class="note">Tree below.</div></div>
+                    <div class="node server" style="margin-top:8px"><div class="head"><span class="name">/manage/[token]</span><span class="k server">Server</span></div><div class="note">Tree below.</div></div>
+                    <div class="node server" style="margin-top:8px"><div class="head"><span class="name">/orders · /manage · /orders/[...unknown] · /manage/[...unknown]</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/(site)/{orders,manage}/…/page.tsx</div><div class="note">All four are the same page: <code>await notFoundPerRequest()</code>, which awaits <code>connection()</code> and then calls <code>notFound()</code>. Read after the request so the not-found page carries the nonce; the status is 200, not 404.</div></div>
+                  </li>
+                  <li><div class="node server"><div class="head"><span class="name">Footer</span><span class="k server">Server</span></div><div class="path">src/components/Footer/Footer.tsx</div></div></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><div class="node server"><div class="head"><span class="name">RenderPerRequest</span><span class="k server">Server</span></div><div class="path">src/app/renderPerRequest.tsx</div><div class="note">A sibling of the children, not a parent. Awaits <code>connection()</code> so no prerendered shell is made and every script carries the request's CSP nonce, while the page still renders in the first streaming stage.</div></div></li>
+        </ul>
+      </li>
+    </ul>
+    </div>
+    <p style="margin-top:12px">Failure frames: <code>(site)/error.tsx</code> is a client <code>ErrorNotice</code> inside the shell. <code>(checkout)/error.tsx</code> is a client <code>ErrorFrame</code> around <code>ErrorNotice</code>, for errors in the layouts themselves. <code>(checkout)/not-found.tsx</code> brings its own <code>GuestShell</code> with <code>NotFoundNotice</code>, because it sits above the <code>(site)</code> layout.</p>
+  </section>
+
+  <section aria-labelledby="orders-h">
+    <h2 id="orders-h">Order confirmation tree</h2>
+    <div class="tree-box">
+    <ul class="tree">
+      <li>
+        <div class="node server"><div class="head"><span class="name">OrderConfirmationPage</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/(site)/orders/[reference]/page.tsx</div><div class="note">Awaits <code>params</code>, <code>searchParams</code> and <code>cookies()</code> together, so the whole page is per request with no Suspense. Generic title, no description, no Open Graph or Twitter card, <code>referrer: no-referrer</code>, <code>nocache</code>. A missing token or an order the token does not open is <code>notFound()</code>.</div></div>
+        <ul>
+          <li><div class="node lib"><div class="head"><span class="name">pickOrderToken()</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/orderAccess.ts</div><div class="note">The <code>ramble_order_access</code> cookie wins; <code>?t=</code> is the fallback. Either must have the token shape.</div></div></li>
+          <li><div class="node server"><div class="head"><span class="name">readOrderPage(reference, token)</span><span class="k server">Server</span></div><div class="path">src/server/orderConfirmation.ts · uncached</div><div class="note"><code>resolveToken('order', token, reference)</code> recomputes the HMAC and compares it, then one transaction runs <code>readBookingEmailOrder</code>. Returns null for a wrong token, an unknown reference and another order's token alike.</div></div></li>
+          <li><div class="node lib"><div class="head"><span class="name">orderPageView()</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/orderReceipt.ts</div><div class="note">Picks <code>confirmed</code>, <code>pending</code> or <code>notice</code> from the order status. For a confirmed order it builds the calendar link, the <code>.ics</code> data link, the maps link and the manage link (the <code>manage</code> token comes from <code>capabilityToken()</code> in <code>src/server/tokens.ts</code>).</div></div></li>
+          <li>
+            <div class="node server"><div class="head"><span class="name">OrderConfirmation</span><span class="k server">Server</span></div><div class="path">src/components/OrderConfirmation/OrderConfirmation.tsx</div><div class="note">Switches on <code>view.kind</code>. Receives the <code>getOrderStatus</code> action as <code>checkStatus</code>.</div></div>
+            <ul>
+              <li><div class="slot">kind: confirmed</div>
+                <div class="node server"><div class="head"><span class="name">Receipt</span><span class="k server">Server</span></div><div class="note">Check badge, heading ("You're booked, Alex"), booking card, receipt lines, seller-of-record line, "what happens next".</div></div>
+                <ul>
+                  <li><div class="node server"><div class="head"><span class="name">ButtonLink: Add to Google Calendar</span><span class="k server">Server</span></div><div class="path">googleCalendarUrl() · src/lib/ics.ts</div><div class="note">An external calendar.google.com link built on the server.</div></div></li>
+                  <li><div class="node server"><div class="head"><span class="name">ButtonLink: Download .ics file</span><span class="k server">Server</span></div><div class="path">buildIcs() · src/lib/ics.ts</div><div class="note">A <code>data:text/calendar</code> link with a <code>download</code> name, so there is no download route.</div></div></li>
+                  <li><div class="node server"><div class="head"><span class="name">ButtonLink: Open in Maps</span><span class="k server">Server</span></div><div class="path">mapsHref() · src/lib/maps.ts</div><div class="note">Searches the first sentence of the meeting point. Left out when there is no meeting point or its first sentence is too long to be an address.</div></div></li>
+                  <li><div class="node server"><div class="head"><span class="name">ButtonLink: Manage booking</span><span class="k server">Server</span></div><div class="path">managePath(manageToken) · src/lib/routes.ts</div><div class="note">Goes to <code>/manage/&lt;token&gt;</code>. The only place the site hands a guest the manage token besides the email.</div></div></li>
+                  <li><div class="node server"><div class="head"><span class="name">ButtonLink: Explore more experiences</span><span class="k server">Server</span></div></div></li>
+                </ul>
+              </li>
+              <li><div class="slot">kind: pending</div>
+                <div class="node server"><div class="head"><span class="name">"Almost there" block</span><span class="k server">Server</span></div><div class="note">Heading, confirmation reference and experience name.</div></div>
+                <ul>
+                  <li>
+                    <div class="node client"><div class="head"><span class="name">OrderStatusPoller</span><span class="k client">Client island</span></div><div class="path">src/components/OrderStatusPoller/OrderStatusPoller.tsx</div><div class="note"><code>role="status"</code> region. Props: <code>reference</code>, the raw order <code>token</code>, and the action. Moves focus to the region when "Check again" removes itself.</div></div>
+                    <ul>
+                      <li><div class="node client"><div class="head"><span class="name">useOrderStatus()</span><span class="k client">Client island</span></div><div class="path">src/components/OrderStatusPoller/useOrderStatus.ts</div><div class="note">A <code>setTimeout</code> per attempt. A settled answer sets the message and calls <code>router.refresh()</code>, so the server component re-renders with the real state.</div></div></li>
+                      <li><div class="node lib"><div class="head"><span class="name">pollDelayMs · pollStep · settledMessage</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/orderStatus.ts</div><div class="note">Waits 2, 3, 5, 8, 13, then 20 seconds, at most 12 asks (about three minutes). A pending answer or a dropped request asks again; anything else is "show".</div></div></li>
+                      <li><div class="node action"><div class="head"><span class="name">getOrderStatus({ reference, token })</span><span class="k action">Server action</span></div><div class="path">src/server/actions/orders.ts</div><div class="note">Zod-checks the input, then <code>readOrderState</code> runs <code>resolveToken</code> and <code>readOrderStatus</code> (src/server/db/orderStatus.ts). Every refusal is <code>{ state: 'unknown' }</code>.</div></div></li>
+                      <li><div class="node client"><div class="head"><span class="name">Button: Check again</span><span class="k client">Client island</span></div><div class="path">src/components/Button/Button.tsx</div><div class="note">Appears once the polls give up. Resets the attempt count to 0.</div></div></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><div class="slot">kind: notice (failed, refunded after lapse, closed)</div>
+                <div class="node server"><div class="head"><span class="name">Notice block</span><span class="k server">Server</span></div><div class="note">Heading "Booking &lt;reference&gt;".</div></div>
+                <ul>
+                  <li><div class="node server"><div class="head"><span class="name">Alert</span><span class="k server">Server</span></div><div class="path">src/components/Alert/</div></div></li>
+                  <li><div class="node server"><div class="head"><span class="name">ButtonLink (browse)</span><span class="k server">Server</span></div></div></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="manage-h">
+    <h2 id="manage-h">Manage tree</h2>
+    <div class="tree-box">
+    <ul class="tree">
+      <li>
+        <div class="node server"><div class="head"><span class="name">ManageBookingPage</span><span class="k server">Server</span></div><div class="path">src/app/(checkout)/(site)/manage/[token]/page.tsx</div><div class="note">Awaits <code>connection()</code>, then <code>params</code> and <code>searchParams</code>. Per request, no Suspense. Same private metadata as the order page. Not found is <code>notFound()</code>.</div></div>
+        <ul>
+          <li><div class="node server"><div class="head"><span class="name">readManagePage(token, { picker })</span><span class="k server">Server</span></div><div class="path">src/server/manageBooking.ts · uncached</div><div class="note"><code>openManageToken</code> shape-checks the token, spends one try of the <code>manage</code> rate limit (<code>consumeRateLimit</code>), then <code>resolveManageToken</code> finds the order by stored hash. One transaction reads the database clock, <code>readBookingEmailOrder</code>, <code>readCancelFacts</code> and, with <code>?move=1</code>, <code>readMoveSubject</code> and <code>readMoveCandidates</code>.</div></div></li>
+          <li><div class="node lib"><div class="head"><span class="name">manageScreen · managePageState · wantsMovePicker</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/manageBooking.ts</div><div class="note">Reduces the read to <code>page</code>, <code>too_many_tries</code> or <code>not_found</code>. Reduces the query (<code>confirm</code>, <code>move</code>, <code>result</code>, <code>moved</code>) to one notice and two step flags; an answer is shown only for a booking it could be about.</div></div></li>
+          <li><div class="slot">screen: too_many_tries</div>
+            <div class="node server"><div class="head"><span class="name">ManageTooManyTries</span><span class="k server">Server</span></div><div class="path">src/components/ManageBooking/ManageBooking.tsx</div><div class="note">The same page for every visitor, with no booking on it, and a retry wait.</div></div>
+            <ul><li><div class="node server"><div class="head"><span class="name">Alert</span><span class="k server">Server</span></div></div></li></ul>
+          </li>
+          <li><div class="slot">screen: page</div>
+            <div class="node server"><div class="head"><span class="name">ManageBooking</span><span class="k server">Server</span></div><div class="path">src/components/ManageBooking/ManageBooking.tsx</div><div class="note">No <code>'use client'</code>. Works with scripting off: the steps are links with <code>?confirm=1</code> and <code>?move=1</code>, and the two forms post to server actions.</div></div>
+            <ul>
+              <li><div class="node server"><div class="head"><span class="name">Alert</span><span class="k server">Server</span></div><div class="note">The one notice: a cancel or move answer, or the standing "already cancelled" or "can't be cancelled" line.</div></div></li>
+              <li><div class="node server"><div class="head"><span class="name">BookingCard</span><span class="k server">Server</span></div><div class="note">Name, date line, reference with host, meeting line, price lines, total, gift and card amounts.</div></div></li>
+              <li>
+                <div class="node server"><div class="head"><span class="name">MoveSection</span><span class="k server">Server</span></div><div class="note">Active and movable bookings only. A link to <code>?move=1</code>; with the picker open, a radio form of other dates of the same experience.</div></div>
+                <ul>
+                  <li><div class="node action"><div class="head"><span class="name">moveBookingForm(formData)</span><span class="k action">Server action</span></div><div class="path">src/server/actions/orders.ts</div><div class="note">Reads <code>manageToken</code> and <code>targetSessionId</code>, runs <code>moveBooking</code> (parse, <code>openManageToken</code>, <code>moveBookingOrder</code> in src/server/db/orderMove.ts), then <code>redirect</code>s to <code>?moved=&lt;code&gt;</code>.</div></div></li>
+                  <li><div class="node client"><div class="head"><span class="name">Button: submit</span><span class="k client">Client island</span></div><div class="path">src/components/Button/Button.tsx</div></div></li>
+                </ul>
+              </li>
+              <li>
+                <div class="node server"><div class="head"><span class="name">Cancel section</span><span class="k server">Server</span></div><div class="note">Active bookings only. Step one shows the refund and a link to <code>?confirm=1</code>; step two is a form that says the refund again.</div></div>
+                <ul>
+                  <li><div class="node action"><div class="head"><span class="name">cancelBookingForm(formData)</span><span class="k action">Server action</span></div><div class="path">src/server/actions/orders.ts</div><div class="note">Reads <code>manageToken</code> and the shown <code>expectedRefundMinor</code>, runs <code>cancelBooking</code> (parse, <code>openManageToken</code>, <code>cancelBookingOrder</code> in src/server/db/orderCancel.ts), then <code>redirect</code>s to <code>?result=&lt;status&gt;</code>.</div></div></li>
+                  <li><div class="node client"><div class="head"><span class="name">Button: submit</span><span class="k client">Client island</span></div><div class="path">src/components/Button/Button.tsx</div></div></li>
+                </ul>
+              </li>
+              <li><div class="node server"><div class="head"><span class="name">ButtonLink × several</span><span class="k server">Server</span></div><div class="note">Keep my booking, Explore more (cancelled only), and the help and contact links. Plain anchors, no script.</div></div></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    </div>
+  </section>
+
+  <div class="cols">
+    <section class="card" aria-labelledby="arrive-h">
+      <h2 id="arrive-h">What arrives when</h2>
+      <ol class="steps">
+        <li><strong>One response per page.</strong> Neither page has a Suspense boundary, so the shell and the body arrive together after the order read. The only thing that streams separately is <code>RenderPerRequest</code>, which renders nothing.</li>
+        <li><strong>Hydration.</strong> Confirmed receipt: only <code>SiteMenu</code>. Pending order: <code>SiteMenu</code> and <code>OrderStatusPoller</code>. Manage: <code>SiteMenu</code> and the <code>Button</code> module, which ships because <code>ManageBooking</code> imports it.</li>
+        <li><strong>Pending to settled.</strong> The poller asks <code>getOrderStatus</code> on its timer. When the state is anything but pending, it shows one announcement and calls <code>router.refresh()</code>. The server component runs again, re-checks the token, and swaps the poller for the receipt or notice.</li>
+      </ol>
+    </section>
+    <section class="card" aria-labelledby="token-h">
+      <h2 id="token-h">How the token is handed over</h2>
+      <ol class="steps">
+        <li>Checkout sends the paying device to <code>/orders/&lt;ref&gt;?t=&lt;order token&gt;</code> (<code>orderConfirmationPath</code> in <code>src/lib/routes.ts</code>).</li>
+        <li><code>src/proxy.ts</code> sees the token on that path, sets the <code>ramble_order_access</code> cookie (HttpOnly, <code>SameSite=Lax</code>, path scoped to that order, two hours), and answers with a 303 to the same address with no query.</li>
+        <li>The page reads the cookie first and checks the token against the order anyway, so the cookie has no more power than the link.</li>
+        <li>The receipt then offers the manage token, and the confirmation email carries it too. <code>/manage/&lt;token&gt;</code> has no cookie: the token stays in the address.</li>
+      </ol>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="path-h">
+    <h2 id="path-h">Guest cancel and move through the actions</h2>
+    <ol class="steps">
+      <li>The guest opens <code>/manage/&lt;token&gt;</code>. <code>readManagePage</code> spends a try, finds the booking and builds the refund from the same quote the action checks.</li>
+      <li><strong>Cancel:</strong> The cancel button, labelled with the refund, links to <code>?confirm=1</code>. The form posts <span class="k action">Server action</span> <code>cancelBookingForm</code> with the token and <code>expectedRefundMinor</code>. If the refund has changed since the page was drawn, nothing is cancelled and the page says "The refund has changed".</li>
+      <li><strong>Move:</strong> The move link (<code>prompt.linkLabel</code>) goes to <code>?move=1</code>, which makes the read include other dates. The form posts <span class="k action">Server action</span> <code>moveBookingForm</code> with <code>targetSessionId</code>. The price stays the same.</li>
+      <li>Both forms <code>redirect()</code> back to the same page with a short code in the query (<code>?result=</code> or <code>?moved=</code>). The page turns the code into the notice, and a stale or odd value shows nothing.</li>
+      <li>Every refusal (bad shape, unknown, stale version) is <code>not_found</code>. Over the limit is <code>rate_limited</code> with a wait time.</li>
+    </ol>
+  </section>
+
+  <section class="card" aria-labelledby="cache-h">
+    <h2 id="cache-h">How its caches are cleared</h2>
+    <p>These pages hold nothing in the cache and nothing is cleared for them: the next view always reads the database, and both routes send <code>Cache-Control: no-store</code> through <code>tokenRouteHeaders</code> in the proxy. The actions do reach out the other way. A cancel that goes through, or a move, calls <code>revalidateTagsForChanges</code> with a <code>spaces</code> change for each affected session, which clears the <code>session</code> tag of that date so the experience page's sold-out and spaces-left reads rebuild. A refused or unchanged result clears nothing. Note these use <code>revalidateTag(tag, 'max')</code>, not <code>updateTag</code>, so the next experience-page view may still be served the old spaces count once while it rebuilds.</p>
+  </section>
+
+  <section class="card" aria-labelledby="know-h">
+    <h2 id="know-h">Worth knowing</h2>
+    <ul class="facts">
+      <li><strong>The header here never knows who is signed in.</strong> <code>GuestShell</code> gets no <code>account</code> slot in <code>(site)/layout.tsx</code>, so a signed-in guest sees "Sign in" on both pages. The experience page streams <code>HeaderAccount</code>; these pages do not.</li>
+      <li><strong>No <code>src/app/layout.tsx</code>.</strong> The <code>(checkout)</code> layout draws the document itself, so the html, fonts and CSS for these pages come from there, not from a root layout.</li>
+      <li><strong>The order token crosses into the browser for a pending order.</strong> The cookie is HttpOnly, but <code>OrderStatusPoller</code> receives the raw token as a prop so it can pass it to the action. It is only sent for the pending state.</li>
+      <li><strong>The page and the poller never share a verdict.</strong> The poller only decides "keep asking" or "re-render". The page re-checks the token and rebuilds the view, so a status can never show on the poller that the server would not show.</li>
+      <li><strong>Each manage view costs one try.</strong> The page and both actions share the <code>manage</code> limit, so refreshing the page counts, and a guest who reloads a lot hits the too-many-tries screen with no booking on it.</li>
+      <li><strong>A shared version voids both links.</strong> The <code>order</code> and <code>manage</code> tokens are derived from the same row and <code>manage_token_version</code>, so one bump kills the confirmation URL and the manage link together.</li>
+      <li><strong>Catch-alls return 200.</strong> <code>notFoundPerRequest</code> cannot change the status of a render resumed from the empty shell, so <code>/orders</code> and <code>/manage</code> are 200 pages that show the not-found notice. A wrong token on the real routes goes through the same path.</li>
+      <li><strong><code>Button</code> is a client module, <code>ButtonLink</code> is not.</strong> <code>ManageBooking</code> and <code>OrderConfirmation</code> are server components, but the submit and "Check again" buttons are client code. The receipt's four action links ship no JS.</li>
+      <li><strong>The calendar file is not a route.</strong> It is a data URI built at render time, so the whole event sits inside the page's HTML.</li>
+    </ul>
+  </section>
+
+  <p class="foot">Read from <code>origin/main</code> at <code>2db68ea</code>. Rules for the pages come from <code>src/lib/orderAccess.ts</code>, <code>src/proxy.ts</code> and design doc section 4.2 in <code>ramble-pm/plan/01-design-doc.md</code>.</p>
+</div>

@@ -1,0 +1,185 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<title>Browse Page Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one reading column; a legend, the render tree as nested rails, then the arrival order and the booking path. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #1b1f27;
+  --muted: #5b6372;
+  --rule: #d9dde4;
+  --server: #3b5bab;
+  --server-bg: #e8edf8;
+  --cached: #0f7a6c;
+  --cached-bg: #e2f3f0;
+  --stream: #a3610a;
+  --stream-bg: #fbefdc;
+  --client: #8a2f9c;
+  --client-bg: #f5e6f8;
+  --action: #b3261e;
+  --action-bg: #fbe6e4;
+  --lib: #59606d;
+  --lib-bg: #eceef1;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+    --server: #8fa9ec; --server-bg: #1f2840;
+    --cached: #5fcfbe; --cached-bg: #14302c;
+    --stream: #f0b65a; --stream-bg: #3a2a10;
+    --client: #e08ef0; --client-bg: #36203c;
+    --action: #f28b82; --action-bg: #3d1d1b;
+    --lib: #aab1bd; --lib-bg: #262b34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+  --server: #8fa9ec; --server-bg: #1f2840;
+  --cached: #5fcfbe; --cached-bg: #14302c;
+  --stream: #f0b65a; --stream-bg: #3a2a10;
+  --client: #e08ef0; --client-bg: #36203c;
+  --action: #f28b82; --action-bg: #3d1d1b;
+  --lib: #aab1bd; --lib-bg: #262b34;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 32px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 32px; }
+h1 { font-size: 30px; line-height: 1.15; margin: 0; text-wrap: balance; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 19px; margin: 0 0 12px; text-wrap: balance; }
+p { margin: 0; max-width: 68ch; }
+.lede { color: var(--muted); margin-top: 8px; }
+code, .path { font-family: var(--font-mono); font-size: 0.86em; }
+.route { font-family: var(--font-mono); font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.legend div { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+
+.k { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+.k.server { color: var(--server); background: var(--server-bg); }
+.k.cached { color: var(--cached); background: var(--cached-bg); }
+.k.stream { color: var(--stream); background: var(--stream-bg); }
+.k.client { color: var(--client); background: var(--client-bg); }
+.k.action { color: var(--action); background: var(--action-bg); }
+.k.lib { color: var(--lib); background: var(--lib-bg); }
+
+.tree-box { overflow-x: auto; }
+ul.tree, ul.tree ul { list-style: none; margin: 0; padding: 0; }
+ul.tree ul { margin-left: 18px; padding-left: 16px; border-left: 2px solid var(--rule); }
+ul.tree li { padding-top: 8px; min-width: 0; }
+.node { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 12px; display: grid; gap: 3px; border-left-width: 4px; min-width: 260px; }
+.node.server { border-left-color: var(--server); }
+.node.cached { border-left-color: var(--cached); }
+.node.stream { border-left-color: var(--stream); }
+.node.client { border-left-color: var(--client); }
+.node.action { border-left-color: var(--action); }
+.node.lib { border-left-color: var(--lib); }
+.node .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.node .name { font-family: var(--font-mono); font-weight: 500; font-size: 14.5px; }
+.node .path { color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+.node .note { color: var(--muted); font-size: 13.5px; max-width: 72ch; }
+.slot { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding: 10px 0 0 2px; }
+.slot::before { content: "slot "; color: var(--fg); font-weight: 500; }
+
+ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 10px; max-width: 72ch; }
+ol.steps li::marker { font-family: var(--font-mono); color: var(--muted); }
+
+.cols { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 18px; min-width: 0; }
+.foot { color: var(--muted); font-size: 13px; }
+</style>
+
+<div class="wrap">
+  <a href="index.html">All page maps</a>
+  <header>
+    <div class="route">/new-york/browse · ramble main at 2db68ea</div>
+    <h1>Browse page map</h1>
+    <p class="lede">How browse is assembled: the filters held in the address, the filter bar and drawer, the lazily loaded calendar, and the results. The two landing pages that reuse its results are mapped in the second half. Traced from the code on <code>main</code>, 2026-11-15.</p>
+  </header>
+
+  <section aria-labelledby="legend-h">
+    <h2 id="legend-h">Key</h2>
+    <div class="legend">
+      <div><span class="k server">Server</span> renders to HTML, no JS shipped</div>
+      <div><span class="k cached">Cached read</span> <code>'use cache'</code>, tagged for invalidation</div>
+      <div><span class="k stream">Streamed</span> per request, behind a Suspense fallback</div>
+      <div><span class="k client">Client island</span> <code>'use client'</code>, hydrates</div>
+      <div><span class="k action">Server action</span> called from an island</div>
+      <div><span class="k lib">Pure lib</span> plain function in <code>src/lib</code></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="url-h">
+    <h2 id="url-h">Filters live in the address</h2>
+    <p>There is no filter state in the browser. The address is the state: <code>category</code>, <code>neighborhood</code> (both lists, up to 8), <code>date</code>, <code>guests</code>, <code>price</code>, <code>age</code>, <code>setting</code>, <code>q</code> and <code>after</code>, defined once in <code>browseParamNames</code> in <code>src/lib/filters.ts</code>. <code>parseFilters()</code> drops anything malformed, so a bad value is the same as an absent one, and sorts lists so one set of filters has one address. Every chip is a link to the address with that chip toggled. A page's cache key is the parsed filters plus the minute, so people with the same filters share one entry.</p>
+  </section>
+
+  <section aria-labelledby="tree-h">
+    <h2 id="tree-h">Render tree: browse</h2>
+    <div class="tree-box">
+    <ul class="tree"><li><div class="node server"><div class="head"><span class="name">GuestLayout</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/layout.tsx</div><div class="note">html, fonts, base styles. Shared by every guest page.</div></div><ul><li><div class="node server"><div class="head"><span class="name">GuestShell</span><span class="k server">Server</span></div><div class="path">src/components/GuestShell/</div><div class="note">Header, footer, phone menu, and the banner and account slots.</div></div><ul><li><div class="node client"><div class="head"><span class="name">SiteMenu</span><span class="k client">Client island</span></div><div class="path">src/components/GuestShell/SiteMenu.tsx</div><div class="note">Phone menu.</div></div></li><li><div class="slot">banner</div><div class="node stream"><div class="head"><span class="name">GuestBanner</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/GuestBanner.tsx</div><div class="note">Per request. Fallback: nothing. Reads <code>getCachedGuestSettings()</code>.</div></div></li><li><div class="slot">account</div><div class="node stream"><div class="head"><span class="name">HeaderAccount</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/HeaderAccount.tsx</div><div class="note">Fallback: signed-out <code>AccountControl</code>.</div></div></li></ul></li><li><div class="node server"><div class="head"><span class="name">VercelMeasurement · SentryBrowserScript</span><span class="k server">Server</span></div><div class="note">Analytics and error-tracking scripts.</div></div></li><li><div class="node server"><div class="head"><span class="name">BrowsePage</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/new-york/browse/page.tsx</div><div class="note">Prerenders the heading and intro. <code>generateMetadata</code> parses the address and reads <code>getBrowseTitle()</code> for the title; any filtered or paged address is marked <code>noindex, follow</code>.</div></div><ul><li><div class="node server"><div class="head"><span class="name">Intro header</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/new-york/browse/page.tsx</div><div class="note">h1 "Browse experiences" and a one-line intro.</div></div></li><li><div class="node server"><div class="head"><span class="name">noscript skip link</span><span class="k server">Server</span></div><div class="note">"Skip to results", shown only with scripting off, because the results sit after the footer in the document then.</div></div></li><li><div class="slot">Suspense fallback</div><div class="node server"><div class="head"><span class="name">BrowseSkeleton</span><span class="k server">Server</span></div><div class="path">src/components/BrowseSkeleton/BrowseSkeleton.tsx</div><div class="note">Fallback of the Suspense: a filter-bar skeleton plus card skeletons, so space is held.</div></div></li><li><div class="node stream"><div class="head"><span class="name">BrowseContent</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/new-york/browse/BrowseContent.tsx</div><div class="note">The whole filter bar and the results stream together, behind one Suspense. Awaits <code>searchParams</code> and <code>connection()</code>. A failed read renders the error view (and the status line) in place of the bar.</div></div><ul><li><div class="node lib"><div class="head"><span class="name">parseFilters() · knownFilters()</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/filters.ts</div><div class="note">Parses the address into a <code>BrowseQuery</code> (bad values are dropped, lists sorted and capped at 8). Then only slugs the catalog has, and days inside the 121-day window, reach a cache key.</div></div></li><li><div class="node cached"><div class="head"><span class="name">getFilterOptions()</span><span class="k cached">Cached read</span></div><div class="path">src/server/filterOptions.ts · cacheLife 'editorial' · tag taxonomy</div><div class="note">Every category and neighborhood. Also read by the page title and by the zero-result reads.</div></div></li><li><div class="node cached"><div class="head"><span class="name">getBrowseDates(filters)</span><span class="k cached">Cached read</span></div><div class="path">src/server/browse.ts · cacheLife 'browse' · tag catalog</div><div class="note">Days that have a session. The date is left out of its key, so picking a day does not miss the calendar entry.</div></div></li><li><div class="node cached"><div class="head"><span class="name">getBrowseResults(query, asOf)</span><span class="k cached">Cached read</span></div><div class="path">src/server/browse.ts · cacheLife 'browse' · tags catalog + experience:&lt;id&gt; per card</div><div class="note">One page per filter combination and cursor per minute. A cursor nobody can see switches itself to <code>uncached</code>.</div></div></li><li><div class="node cached"><div class="head"><span class="name">getZeroResultSuggestions()</span><span class="k cached">Cached read</span></div><div class="path">src/server/browse.ts · cacheLife 'browse' · tag catalog</div><div class="note">Only when the page is empty and filtered. Failure is forgiven: the empty state shows without suggestions.</div></div></li><li><div class="node lib"><div class="head"><span class="name">browseView() · withSuggestions() · browseHeading()</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/pages/browse.ts</div><div class="note">Builds the one view the results component renders, and the text of the always-present <code>role="status"</code> line.</div></div></li><li><div class="node server"><div class="head"><span class="name">div#browse-results</span><span class="k server">Server</span></div><div class="note">Wrapper with <code>data-reveal-without-script</code>, the target of the skip link.</div></div></li><li><div class="slot">band</div><div class="node server"><div class="head"><span class="name">FilterBar</span><span class="k server">Server</span></div><div class="path">src/components/FilterBar/FilterBar.tsx</div><div class="note">Takes only plain data: option names, the parsed filters, <code>today</code>, <code>availableDates</code>, and <code>onPickDate</code>. Builds every chip as a link to the address with that chip toggled.</div></div><ul><li><div class="node server"><div class="head"><span class="name">KeywordSearch</span><span class="k server">Server</span></div><div class="path">src/components/FilterBar/KeywordSearch.tsx</div><div class="note">A plain GET form (<code>q</code>) that keeps the other filters as hidden fields. Works with no script.</div></div></li><li><div class="node client"><div class="head"><span class="name">FilterRow</span><span class="k client">Client island</span></div><div class="path">src/components/FilterBar/FilterDrawerHost.tsx</div><div class="note">The row of chips and owner of the drawer. Holds <code>open</code>, <code>busy</code> and <code>failed</code> state, shares them with its buttons through a context, and remembers focus so a chip that clears itself hands focus to Filters.</div></div><ul><li><div class="node client"><div class="head"><span class="name">DrawerButton ×3</span><span class="k client">Client island</span></div><div class="path">src/components/FilterBar/FilterDrawerHost.tsx</div><div class="note">Filters (with the active count), Neighborhood (hidden once one is chosen) and Guests (hidden once set). All three open the same drawer. Press shows aria-busy until the chunk arrives.</div></div></li><li><div class="slot">chip row</div><div class="node server"><div class="head"><span class="name">WhenControl (row)</span><span class="k server">Server</span></div><div class="path">src/components/FilterBar/FilterBar.tsx</div><div class="note">Server function: the date chip as a popover in the row.</div></div><ul><li><div class="node client"><div class="head"><span class="name">WhenDetails</span><span class="k client">Client island</span></div><div class="path">src/components/FilterBar/WhenDetails.tsx</div><div class="note">A <code>&lt;details&gt;</code> disclosure, so the chip opens with no script. Counts opens, closes itself when the day changes, returns focus to the chip.</div></div><ul><li><div class="node client"><div class="head"><span class="name">LazyDatePicker</span><span class="k client">Client island</span></div><div class="path">src/components/FilterBar/LazyDatePicker.tsx</div><div class="note">Shows a box the size of the month (with a live status message) until the calendar chunk arrives. A failed fetch says so and the next open tries again. Once loaded it is never remounted.</div></div><ul style="border-left-style: dashed"><li><div class="node client"><div class="head"><span class="name">DatePicker</span><span class="k client">Client island</span></div><div class="path">src/components/DatePicker/DatePicker.tsx</div><div class="note">Lazy chunk: React Aria calendar, fetched through <code>import()</code> in <code>datePickerLoader.ts</code>. Days with no session are disabled from <code>availableDates</code>. Picking a day calls <code>onPickDate</code>.</div></div></li></ul></li><li><div class="node server"><div class="head"><span class="name">ButtonLink "Clear date"</span><span class="k server">Server</span></div><div class="path">src/components/Button</div><div class="note">Only when a day is chosen. A plain link to the same filters without the day.</div></div></li></ul></li></ul></li><li><div class="node server"><div class="head"><span class="name">ChipLink (selected) × n</span><span class="k server">Server</span></div><div class="path">src/components/Chip/ChipLink.tsx</div><div class="note">One per active filter. Pressing one is a link to the address without it.</div></div></li><li><div class="node client"><div class="head"><span class="name">FilterDrawer</span><span class="k client">Client island</span></div><div class="path">src/components/FilterDrawer/FilterDrawer.tsx</div><div class="note"><span class="k stream">Lazy chunk</span> Not in the first bundle. Mounted only while open, so its calendar is mounted fresh each time. Warm-up: <code>FilterRow</code> fetches this chunk when the browser is idle (or on hover or focus of a chip), unless the guest asked to save data.</div></div><ul style="border-left-style: dashed"><li><div class="node client"><div class="head"><span class="name">Dialog</span><span class="k client">Client island</span></div><div class="path">src/components/Dialog/Dialog.tsx</div><div class="note">The drawer variant. Footer: Clear all (pushes <code>browsePath</code>) and the apply button, "Show results".</div></div></li><li><div class="slot">drawer children (built on the server)</div><div class="node server"><div class="head"><span class="name">When group</span><span class="k server">Server</span></div><div class="path">src/components/FilterBar/FilterBar.tsx</div><div class="note">The same <code>WhenControl</code> again, this time in the flow of the drawer.</div></div><ul><li><div class="node client"><div class="head"><span class="name">WhenDetails</span><span class="k client">Client island</span></div><div class="path">src/components/FilterBar/WhenDetails.tsx</div><div class="note">A <code>&lt;details&gt;</code> disclosure, so the chip opens with no script. Counts opens, closes itself when the day changes, returns focus to the chip.</div></div><ul><li><div class="node client"><div class="head"><span class="name">LazyDatePicker</span><span class="k client">Client island</span></div><div class="path">src/components/FilterBar/LazyDatePicker.tsx</div><div class="note">Shows a box the size of the month (with a live status message) until the calendar chunk arrives. A failed fetch says so and the next open tries again. Once loaded it is never remounted.</div></div><ul style="border-left-style: dashed"><li><div class="node client"><div class="head"><span class="name">DatePicker</span><span class="k client">Client island</span></div><div class="path">src/components/DatePicker/DatePicker.tsx</div><div class="note">Lazy chunk: React Aria calendar, fetched through <code>import()</code> in <code>datePickerLoader.ts</code>. Days with no session are disabled from <code>availableDates</code>. Picking a day calls <code>onPickDate</code>.</div></div></li></ul></li><li><div class="node server"><div class="head"><span class="name">ButtonLink "Clear date"</span><span class="k server">Server</span></div><div class="path">src/components/Button</div><div class="note">Only when a day is chosen. A plain link to the same filters without the day.</div></div></li></ul></li></ul></li><li><div class="node server"><div class="head"><span class="name">ChipGroup × 6</span><span class="k server">Server</span></div><div class="path">src/components/FilterBar/ChipGroup.tsx</div><div class="note">Guests, Neighborhood, Category, Price, Age, Indoor or outdoor. Each chip is a <code>ChipLink</code>, so a press navigates; Apply only closes the drawer.</div></div></li></ul></li></ul></li><li><div class="node client"><div class="head"><span class="name">NoScriptFilters</span><span class="k client">Client island</span></div><div class="path">src/components/FilterBar/NoScriptFilters.tsx</div><div class="note">Only the <code>&lt;noscript&gt;</code> content: a "Show this day" GET form and all six chip groups again as links. It is a client file on purpose, so the framework does not stream the chips as templates that cannot be swapped into a <code>&lt;noscript&gt;</code>.</div></div></li></ul></li><li><div class="node server"><div class="head"><span class="name">BrowseResults</span><span class="k server">Server</span></div><div class="path">src/components/BrowseResults/BrowseResults.tsx</div><div class="note">Picks one of four views: list, empty (with suggestions, a next-day link, or "Clear all filters"), error (<code>RetryAlert</code>), or a first-page link for a cursor nobody can see.</div></div><ul><li><div class="node client"><div class="head"><span class="name">BrowseResultsList</span><span class="k client">Client island</span></div><div class="path">src/components/BrowseResults/BrowseResultsList.tsx</div><div class="note">A client file so the cards cross the boundary as plain data, not one server element each. The card code below ships to the browser because this imports it.</div></div><ul><li><div class="node client"><div class="head"><span class="name">ExperienceCardItem × 12</span><span class="k client">Client island</span></div><div class="path">src/components/ExperienceCard/ExperienceCardItem.tsx</div><div class="note">Page size is 12. The first card preloads its photo. Uses <code>Photo</code> and <code>Card</code>.</div></div></li><li><div class="node server"><div class="head"><span class="name">TargetButton "Show more"</span><span class="k server">Server</span></div><div class="path">src/components/BrowseResults/TargetButton.tsx</div><div class="note"><code>next/form</code> GET to the same address with <code>after=&lt;last id&gt;</code> as a hidden field. A cursor, not an offset.</div></div></li></ul></li><li><div class="node server"><div class="head"><span class="name">Empty and error branches</span><span class="k server">Server</span></div><div class="path">src/components/BrowseResults/BrowseResults.tsx</div><div class="note"><code>ButtonLink</code>, <code>RemoveFilterLinks</code> (one link per filter worth taking off), <code>RetryAlert</code>.</div></div></li></ul></li></ul></li></ul></li></ul></li></ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="land-h">
+    <h2 id="land-h">Landing pages</h2>
+    <p style="margin-bottom:12px"><code>/new-york/neighborhoods/[neighborhood]</code> and <code>/new-york/things-to-do/[category]</code> are one component, <code>LandingRoute</code>, called with a different <code>kind</code>.</p>
+    <div class="tree-box">
+    <ul class="tree"><li><div class="node server"><div class="head"><span class="name">GuestLayout · GuestShell</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/layout.tsx</div><div class="note">Same shell as browse.</div></div><ul><li><div class="node server"><div class="head"><span class="name">NeighborhoodPage · CategoryPage</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/new-york/neighborhoods/[neighborhood]/page.tsx · src/app/(guest)/new-york/things-to-do/[category]/page.tsx</div><div class="note">Two thin files: each awaits <code>params</code> and hands <code>kind</code> and <code>slug</code> to the shared <code>LandingRoute</code>. <code>generateStaticParams</code> prerenders only the placeholder slug <code>not_a_slug</code>, since the build has no database; any real slug renders on first request.</div></div><ul><li><div class="node server"><div class="head"><span class="name">LandingRoute</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/new-york/_landing/LandingRoute.tsx</div><div class="note">Reads the page data. A failed read shows <code>PageError</code> with a retry link; an unknown slug is a 404.</div></div><ul><li><div class="node cached"><div class="head"><span class="name">getLandingData(kind, slug)</span><span class="k cached">Cached read</span></div><div class="path">src/server/landing.ts · cacheLife 'editorial' · tag category:&lt;slug&gt; or neighborhood:&lt;slug&gt;</div><div class="note">Name plus the editor's copy. Reads <code>getFilterOptions()</code> inside it. A miss is <code>uncached</code>. A malformed slug is refused before the cache is asked. Also called by <code>generateMetadata</code> (title and description).</div></div></li><li><div class="node server"><div class="head"><span class="name">LandingPage</span><span class="k server">Server</span></div><div class="path">src/components/LandingPage/LandingPage.tsx</div><div class="note">Heading, intro, a "browse with more filters" link, the results slot, then the body copy.</div></div><ul><li><div class="node server"><div class="head"><span class="name">RichText × 2</span><span class="k server">Server</span></div><div class="path">src/components/RichText</div><div class="note">The editor's intro and body.</div></div></li><li><div class="node server"><div class="head"><span class="name">ButtonLink to browse</span><span class="k server">Server</span></div><div class="path">src/components/Button</div><div class="note"><code>landingBrowseHref()</code>: the browse address with this one category or neighborhood already set.</div></div></li><li><div class="slot">results</div><div class="node stream"><div class="head"><span class="name">LandingResults</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/new-york/_landing/LandingRoute.tsx</div><div class="note">Awaits <code>connection()</code> for the minute. Fallback: <code>BrowseSkeleton filters={false}</code>.</div></div><ul><li><div class="node cached"><div class="head"><span class="name">getBrowseResults(landingQuery, asOf)</span><span class="k cached">Cached read</span></div><div class="path">src/server/browse.ts · cacheLife 'browse' · tag catalog + experience:&lt;id&gt;</div><div class="note">The same function as browse, called with the first page of one filter.</div></div></li><li><div class="node server"><div class="head"><span class="name">BrowseResults → BrowseResultsList → ExperienceCardItem</span><span class="k server">Server</span></div><div class="path">src/components/BrowseResults/</div><div class="note">The same results tree as browse. "Show more" posts to browse (see worth knowing).</div></div></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul>
+    </div>
+    <div class="cols" style="margin-top:24px">
+      <div class="card"><h2>Shared with browse</h2><p>The results tree (<code>BrowseResults</code>, the list island, the cards, <code>BrowseSkeleton</code>), <code>getBrowseResults</code>, <code>getFilterOptions</code>, the <code>minuteAsOf</code> clock and the <code>connection()</code> stream boundary.</p></div>
+      <div class="card"><h2>Different</h2><p>No filter bar, drawer, calendar or search, so none of those islands ship. Only two things are read besides the results: the editor's copy and the name. The heading and copy sit in the prerendered shell; only the experiences stream. No <code>searchParams</code>: the page has one filter, fixed by the address.</p></div>
+    </div>
+  </section>
+
+  <div class="cols">
+    <section class="card" aria-labelledby="arrive-h">
+      <h2 id="arrive-h">What arrives when (browse)</h2>
+      <ol class="steps">
+        <li><strong>Shell.</strong> Layout, header, the heading and intro, and the <code>BrowseSkeleton</code> in place of the bar and results.</li>
+        <li><strong>Streamed in.</strong> Banner and account, then <code>BrowseContent</code>: the filter bar and the first 12 cards land together, replacing the skeleton. They need <code>searchParams</code> and the clock.</li>
+        <li><strong>Hydration.</strong> <code>SiteMenu</code>, <code>FilterRow</code> with its buttons and date chip, <code>WhenDetails</code>, <code>LazyDatePicker</code> (placeholder only), the results list and <code>Button</code>. No filter works only through these: every chip, the search and Show more are plain links or forms.</li>
+        <li><strong>Idle.</strong> The drawer chunk and the calendar chunk are fetched when the browser is idle, or on first hover or focus of a chip, unless data saving is on.</li>
+      </ol>
+    </section>
+    <section class="card" aria-labelledby="path-h">
+      <h2 id="path-h">Picking a day</h2>
+      <ol class="steps">
+        <li>The guest opens the date chip. <code>WhenDetails</code> counts the open and <code>LazyDatePicker</code> fetches the calendar if the idle warm-up has not.</li>
+        <li>Choosing a day calls <span class="k action">Server action</span> <code>chooseBrowseDate</code> in <code>src/server/actions/browse.ts</code>, bound to the current filters by <code>BrowseContent</code>.</li>
+        <li>The action parses both the filters and the date again (both come from the browser), then <code>redirect()</code>s to the address with <code>date</code> set. There is no stored state. The new address renders, <code>WhenDetails</code> sees the date change and closes.</li>
+      </ol>
+      <p style="margin-top:10px">Every other filter, and the drawer's chips, navigate by link: they call no action.</p>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="cache-h">
+    <h2 id="cache-h">Cache invalidation</h2>
+    <p>The three schedule reads (<code>getBrowseResults</code>, <code>getBrowseDates</code>, suggestions) use the short <code>browse</code> profile (revalidate 60 s, expire 120 s) and carry <code>catalog</code>. A <code>listing</code> change (publish, edit, take-down) and <code>hostProfile</code> go through <code>tagsForChanges()</code> in <code>src/lib/cacheTags.ts</code> and clear <code>catalog</code>, which clears all of them. <code>getBrowseResults</code> also tags each experience it shows, so an <code>experience</code> change (sessions or photos) clears the pages that list it. A session added to an experience that is on no cached page waits for the minute to run out. Category and neighborhood names (<code>taxonomy</code>) are never invalidated: no change reaches that tag, so a rename shows when the <code>editorial</code> profile runs out. Landing copy has its own tags, <code>category:&lt;slug&gt;</code> and <code>neighborhood:&lt;slug&gt;</code>, cleared by the <code>categoryCopy</code> and <code>neighborhoodCopy</code> changes, and by a <code>listing</code> change for that listing's own category or neighborhood.</p>
+  </section>
+
+  <section class="card" aria-labelledby="know-h">
+    <h2 id="know-h">Worth knowing</h2>
+    <ol class="steps">
+      <li><strong>One boundary holds both bar and results.</strong> The filter bar sits inside <code>BrowseContent</code>, so on a first load it waits for the same reads as the cards and the skeleton stands in for both. The bar is not independent of the results: a failed read replaces it with the error view.</li>
+      <li><strong>The calendar is loaded two ways and mounted twice.</strong> It appears in the chip row and, inside the drawer, again as its own <code>WhenControl</code>. The drawer mounts its copy fresh each time it opens, which is why <code>loadedDatePicker()</code> hands an already-fetched module to a late mount.</li>
+      <li><strong>Shared state between islands is small.</strong> <code>FilterRow</code> shares open and busy with its buttons through a context. <code>datePickerLoader.ts</code> holds one module-level variable that every <code>LazyDatePicker</code> and the warm-up read. <code>WhenDetails</code> passes the open count to the picker by context.</li>
+      <li><strong>The drawer's chips are not controlled inputs.</strong> They are links built on the server. "Show results" only closes the drawer, since pressing a chip has already navigated. The button cannot say how many results, and the code says so.</li>
+      <li><strong><code>NoScriptFilters</code> and <code>BrowseResultsList</code> are client files for a render reason, not interactivity.</strong> Both exist to keep the markup from being streamed as templates (noscript content, and a row past about 3,200 bytes). The card code ships to the browser as a result.</li>
+      <li><strong>The server action takes filters from the browser.</strong> <code>chooseBrowseDate.bind(null, filters)</code> sends the filters through the client, so the action re-validates all of them.</li>
+      <li><strong>Landing results share browse's cache.</strong> <code>landingQuery()</code> is the first page of one filter, which is a query browse also issues for <code>?category=x</code>, so the entry can be shared.</li>
+      <li><strong>A landing page's "Show more" leaves the landing page.</strong> The landing view reuses <code>browseView()</code>, whose <code>targetFor()</code> posts to <code>browsePath</code> with the category or neighborhood and <code>after</code>. The second page is therefore browse, not another landing page. Its empty state is the exception: <code>landingView()</code> rewrites it so it is not "filtered".</li>
+      <li><strong>Page title reads options a second time.</strong> <code>generateMetadata</code> calls <code>getFilterOptions()</code> through <code>getBrowseTitle()</code> as well; the same cached entry, so no extra database read.</li>
+    </ol>
+  </section>
+
+  <p class="foot">Read from <code>origin/main</code> at 2db68ea. Cache profiles from <code>src/lib/cacheProfiles.ts</code>, tags from <code>src/lib/cacheTags.ts</code>.</p>
+</div>
