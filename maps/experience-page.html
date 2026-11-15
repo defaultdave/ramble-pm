@@ -1,0 +1,220 @@
+<title>Experience Page Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one reading column; a legend, the render tree as nested rails, then the arrival order and the booking path. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #1b1f27;
+  --muted: #5b6372;
+  --rule: #d9dde4;
+  --server: #3b5bab;
+  --server-bg: #e8edf8;
+  --cached: #0f7a6c;
+  --cached-bg: #e2f3f0;
+  --stream: #a3610a;
+  --stream-bg: #fbefdc;
+  --client: #8a2f9c;
+  --client-bg: #f5e6f8;
+  --action: #b3261e;
+  --action-bg: #fbe6e4;
+  --lib: #59606d;
+  --lib-bg: #eceef1;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+    --server: #8fa9ec; --server-bg: #1f2840;
+    --cached: #5fcfbe; --cached-bg: #14302c;
+    --stream: #f0b65a; --stream-bg: #3a2a10;
+    --client: #e08ef0; --client-bg: #36203c;
+    --action: #f28b82; --action-bg: #3d1d1b;
+    --lib: #aab1bd; --lib-bg: #262b34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --surface: #1a1e26; --fg: #e6e9ef; --muted: #9aa3b2; --rule: #2d333f;
+  --server: #8fa9ec; --server-bg: #1f2840;
+  --cached: #5fcfbe; --cached-bg: #14302c;
+  --stream: #f0b65a; --stream-bg: #3a2a10;
+  --client: #e08ef0; --client-bg: #36203c;
+  --action: #f28b82; --action-bg: #3d1d1b;
+  --lib: #aab1bd; --lib-bg: #262b34;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 32px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 32px; }
+h1 { font-size: 30px; line-height: 1.15; margin: 0; text-wrap: balance; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 19px; margin: 0 0 12px; text-wrap: balance; }
+p { margin: 0; max-width: 68ch; }
+.lede { color: var(--muted); margin-top: 8px; }
+code, .path { font-family: var(--font-mono); font-size: 0.86em; }
+.route { font-family: var(--font-mono); font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.legend div { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+
+.k { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+.k.server { color: var(--server); background: var(--server-bg); }
+.k.cached { color: var(--cached); background: var(--cached-bg); }
+.k.stream { color: var(--stream); background: var(--stream-bg); }
+.k.client { color: var(--client); background: var(--client-bg); }
+.k.action { color: var(--action); background: var(--action-bg); }
+.k.lib { color: var(--lib); background: var(--lib-bg); }
+
+.tree-box { overflow-x: auto; }
+ul.tree, ul.tree ul { list-style: none; margin: 0; padding: 0; }
+ul.tree ul { margin-left: 18px; padding-left: 16px; border-left: 2px solid var(--rule); }
+ul.tree li { padding-top: 8px; min-width: 0; }
+.node { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 9px 12px; display: grid; gap: 3px; border-left-width: 4px; min-width: 260px; }
+.node.server { border-left-color: var(--server); }
+.node.cached { border-left-color: var(--cached); }
+.node.stream { border-left-color: var(--stream); }
+.node.client { border-left-color: var(--client); }
+.node.action { border-left-color: var(--action); }
+.node.lib { border-left-color: var(--lib); }
+.node .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.node .name { font-family: var(--font-mono); font-weight: 500; font-size: 14.5px; }
+.node .path { color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+.node .note { color: var(--muted); font-size: 13.5px; max-width: 72ch; }
+.slot { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding: 10px 0 0 2px; }
+.slot::before { content: "slot "; color: var(--fg); font-weight: 500; }
+
+ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 10px; max-width: 72ch; }
+ol.steps li::marker { font-family: var(--font-mono); color: var(--muted); }
+
+.cols { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 18px; min-width: 0; }
+.foot { color: var(--muted); font-size: 13px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="route">/experiences/[slugAndId] · ramble main at 7a26999</div>
+    <h1>Experience page map</h1>
+    <p class="lede">How the experience page is assembled: every component from the layout down, where it runs, what it reads, and how the booking islands reach the server. Traced from the code on <code>main</code>, 2026-11-14.</p>
+  </header>
+
+  <section aria-labelledby="legend-h">
+    <h2 id="legend-h">Key</h2>
+    <div class="legend">
+      <div><span class="k server">Server</span> renders to HTML, no JS shipped</div>
+      <div><span class="k cached">Cached read</span> <code>'use cache'</code>, tagged for invalidation</div>
+      <div><span class="k stream">Streamed</span> per request, behind a Suspense fallback</div>
+      <div><span class="k client">Client island</span> <code>'use client'</code>, hydrates</div>
+      <div><span class="k action">Server action</span> called from an island</div>
+      <div><span class="k lib">Pure lib</span> plain function in <code>src/lib</code></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="tree-h">
+    <h2 id="tree-h">Render tree</h2>
+    <div class="tree-box">
+    <ul class="tree">
+      <li>
+        <div class="node server"><div class="head"><span class="name">GuestLayout</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/layout.tsx</div><div class="note">html, fonts, base styles. Shared by every guest page.</div></div>
+        <ul>
+          <li>
+            <div class="node server"><div class="head"><span class="name">GuestShell</span><span class="k server">Server</span></div><div class="path">src/components/GuestShell/</div><div class="note">Header, footer, and the phone menu.</div></div>
+            <ul>
+              <li><div class="node client"><div class="head"><span class="name">SiteMenu</span><span class="k client">Client island</span></div><div class="path">src/components/GuestShell/SiteMenu.tsx</div><div class="note">Phone menu: closes on Escape and outside press, returns focus to its button.</div></div></li>
+              <li><div class="slot">banner</div>
+                <div class="node stream"><div class="head"><span class="name">GuestBanner</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/GuestBanner.tsx</div><div class="note">Calls <code>connection()</code>, so it renders per request. Fallback: nothing.</div></div>
+                <ul><li><div class="node cached"><div class="head"><span class="name">getCachedGuestSettings()</span><span class="k cached">Cached read</span></div><div class="path">src/server/siteSettings.ts · cacheLife 'settings' · tag settings</div></div></li></ul>
+              </li>
+              <li><div class="slot">account</div>
+                <div class="node stream"><div class="head"><span class="name">HeaderAccount</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/HeaderAccount.tsx</div><div class="note">Reads who is signed in. Fallback: <code>AccountControl signedIn={false}</code>, so the header never waits on it.</div></div>
+              </li>
+            </ul>
+          </li>
+          <li><div class="node server"><div class="head"><span class="name">VercelMeasurement · SentryBrowserScript</span><span class="k server">Server</span></div><div class="note">Emit the analytics and error-tracking scripts.</div></div></li>
+          <li>
+            <div class="node server"><div class="head"><span class="name">ExperienceRoute</span><span class="k server">Server</span></div><div class="path">src/app/(guest)/experiences/[slugAndId]/page.tsx</div><div class="note">Parses the address, loads the page data, builds the view. A bad address is a 404; a failed read shows <code>PageError</code> with a retry link.</div></div>
+            <ul>
+              <li><div class="node lib"><div class="head"><span class="name">parseExperienceAddress()</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/routes.ts</div><div class="note">Splits the slug from the id.</div></div></li>
+              <li><div class="node cached"><div class="head"><span class="name">getExperiencePage(id)</span><span class="k cached">Cached read</span></div><div class="path">src/server/experiencePage.ts · cacheLife 'catalog' · tag experience:&lt;id&gt;</div><div class="note">Runs in parallel with the settings read. A missing experience is not cached.</div></div></li>
+              <li><div class="node lib"><div class="head"><span class="name">buildExperiencePage()</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/pages/experience.ts</div><div class="note">Turns the rows plus <code>giftsEnabled</code> and <code>bookingsPaused</code> into the view the components render.</div></div></li>
+              <li>
+                <div class="node server"><div class="head"><span class="name">ExperiencePage</span><span class="k server">Server</span></div><div class="path">src/components/ExperiencePage/ExperiencePage.tsx</div><div class="note">The static body. It takes two slots, <code>dates</code> and <code>booking</code>, that the route streams in.</div></div>
+                <ul>
+                  <li><div class="node server"><div class="head"><span class="name">Breadcrumbs · Badge</span><span class="k server">Server</span></div></div></li>
+                  <li>
+                    <div class="node server"><div class="head"><span class="name">ExperienceGallery</span><span class="k server">Server</span></div><div class="path">src/components/ExperienceGallery/</div><div class="note">Renders each <code>Photo</code> on the server, or a placeholder when there are none (the case locally).</div></div>
+                    <ul><li><div class="node client"><div class="head"><span class="name">GalleryStrip</span><span class="k client">Client island</span></div><div class="path">src/components/ExperienceGallery/GalleryStrip.tsx</div><div class="note">Wraps the server-rendered photos. Its only job: give the strip a tab stop while it overflows.</div></div></li></ul>
+                  </li>
+                  <li><div class="slot">dates → Section "Upcoming dates"</div>
+                    <div class="node stream"><div class="head"><span class="name">UpcomingSessionsContent</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/experiences/[slugAndId]/UpcomingSessionsContent.tsx</div><div class="note">Fallback: <code>UpcomingSessionsSkeleton</code>. Awaits <code>searchParams</code> (for <code>?date=</code>) and <code>connection()</code>, then reads the time.</div></div>
+                    <ul>
+                      <li><div class="node cached"><div class="head"><span class="name">readUpcomingSessions(id, asOf, 6)</span><span class="k cached">Cached read</span></div><div class="path">src/server/upcomingSessions.ts · cacheLife 'browse' · tag experience:&lt;id&gt;</div><div class="note"><code>asOf</code> is rounded to the minute, so the cache key changes at most once a minute.</div></div></li>
+                      <li><div class="node server"><div class="head"><span class="name">UpcomingSessions · UpcomingSessionsError</span><span class="k server">Server</span></div><div class="path">src/components/UpcomingSessions/</div></div></li>
+                    </ul>
+                  </li>
+                  <li><div class="node server"><div class="head"><span class="name">Section × 7</span><span class="k server">Server</span></div><div class="note">About, What's included, Your host (link to <code>/hosts/&lt;slug&gt;</code>), Meeting point (Maps <code>ButtonLink</code>), Accessibility, Weather, Cancellation, then the gift link (when gifts are on) and the private-session link.</div></div></li>
+                  <li><div class="slot">booking</div>
+                    <div class="node stream"><div class="head"><span class="name">BookingContent</span><span class="k stream">Streamed</span></div><div class="path">src/app/(guest)/experiences/[slugAndId]/BookingContent.tsx</div><div class="note">Fallback: <code>BookingSlots</code> with <code>BookingPanelSkeleton</code>, so the panel's space is held. Awaits <code>searchParams</code> and <code>connection()</code>.</div></div>
+                    <ul>
+                      <li><div class="node cached"><div class="head"><span class="name">readUpcomingSessions(id, asOf, bookingRead)</span><span class="k cached">Cached read</span></div><div class="note">The same cached function, up to 60 sessions.</div></div></li>
+                      <li><div class="node lib"><div class="head"><span class="name">buildBookingOffer()</span><span class="k lib">Pure lib</span></div><div class="path">src/lib/pages/experienceBooking.ts</div><div class="note">Builds the <code>offer</code>, the one plain-data prop every booking island gets.</div></div></li>
+                      <li>
+                        <div class="node server"><div class="head"><span class="name">BookingSlots</span><span class="k server">Server</span></div><div class="path">src/components/ExperiencePage/ExperiencePage.tsx</div><div class="note">Places the controls: the bar under the tablet width, the panel beside the page above it. Each is hidden where the other shows.</div></div>
+                        <ul>
+                          <li><div class="slot">bar (phone)</div>
+                            <div class="node client"><div class="head"><span class="name">BookingBarIsland</span><span class="k client">Client island</span></div><div class="path">src/components/BookingBar/BookingBarIsland.tsx</div><div class="note">Sticky bottom bar: price, Continue, or paused and sold-out states.</div></div>
+                            <ul style="border-left-style: dashed"><li><div class="node client"><div class="head"><span class="name">BookingSheetIsland</span><span class="k client">Client island</span></div><div class="path">src/components/BookingSheet/BookingSheetIsland.tsx</div><div class="note">The sheet the bar opens, with <code>BookingChoices</code> inside.</div></div></li></ul>
+                          </li>
+                          <li><div class="slot">panel (tablet and up)</div>
+                            <div class="node client"><div class="head"><span class="name">StickyAside</span><span class="k client">Client island</span></div><div class="path">src/components/ExperiencePage/StickyAside.tsx</div><div class="note">CSS makes it sticky; the script only handles a panel taller than the window, so both its ends can be reached.</div></div>
+                            <ul>
+                              <li>
+                                <div class="node client"><div class="head"><span class="name">BookingPanelIsland</span><span class="k client">Client island</span></div><div class="path">src/components/BookingPanel/BookingPanelIsland.tsx</div><div class="note">Pulls in <code>BookingPanel</code>, <code>BookingModeSwitch</code> and <code>BookingChoices</code>. They have no <code>'use client'</code> of their own but ship as client code because an island imports them.</div></div>
+                                <ul><li><div class="node client"><div class="head"><span class="name">BookingChoices</span><span class="k client">Client island</span></div><div class="path">src/components/BookingChoices/BookingChoices.tsx</div><div class="note"><code>DatePicker</code> (React Aria calendar, imported directly here, not lazy), <code>TimeSlot</code>, <code>Chip</code>, <code>Stepper</code>, <code>Button</code>.</div></div></li></ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    </div>
+  </section>
+
+  <div class="cols">
+    <section class="card" aria-labelledby="arrive-h">
+      <h2 id="arrive-h">What arrives when</h2>
+      <ol class="steps">
+        <li><strong>Shell.</strong> Layout, header, gallery and every section, from the cached page data. The header shows signed-out, the dates and booking slots show skeletons.</li>
+        <li><strong>Streamed in.</strong> The banner, the signed-in account control, the upcoming dates and the booking controls each replace their fallback as they finish. They read the clock and the address's <code>?date=</code>, which is why they can't be part of the cached shell.</li>
+        <li><strong>Hydration.</strong> Five islands wake up: <code>SiteMenu</code>, <code>GalleryStrip</code>, <code>StickyAside</code>, and the bar and sheet or the panel. With scripting off, everything but those still renders.</li>
+      </ol>
+    </section>
+    <section class="card" aria-labelledby="book-h">
+      <h2 id="book-h">Pressing Continue</h2>
+      <ol class="steps">
+        <li>Bar, sheet and panel all call <code>useBookingDraft(offer)</code>. One module-level store, keyed by experience id, through <code>useSyncExternalStore</code>, so a date picked in the sheet is already picked in the panel.</li>
+        <li><code>submit</code> calls <span class="k action">Server action</span> <code>reserveSpaces</code> in <code>src/server/actions/holds.ts</code>. The bot check and the device's try limit run first.</li>
+        <li>A held booking routes to <code>/checkout/&lt;holdId&gt;</code>. Sold out or a lost race comes back as an effect the islands show, with nearby alternatives.</li>
+      </ol>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="cache-h">
+    <h2 id="cache-h">Cache invalidation</h2>
+    <p>Both reads for this page share the tag <code>experience:&lt;id&gt;</code>. Publishing an edit, seat changes (through <code>src/server/spacesLeft.ts</code>) and the pulse job all go through <code>tagsForChanges()</code> in <code>src/server/cache/invalidate.ts</code>, which clears that tag, and the next request rebuilds the shell and the session lists. Site settings (bookings paused, gifts on) have their own <code>settings</code> tag. Cached code never reads who is signed in: that is what the streamed <code>HeaderAccount</code> is for.</p>
+  </section>
+
+  <p class="foot">Island list as approved in <code>.claude/standards/architecture.md</code> (client islands allowlist) and design doc section 4.1 in <code>ramble-pm/plan/01-design-doc.md</code>.</p>
+</div>
