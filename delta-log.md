@@ -141,3 +141,6 @@ The plan (`docs/plan/units.yaml`, the work-breakdown row and issue 90) still lis
 
 ## 2026-11-13 [lead]: MVP stops after wave 2 plus the test console
 The MVP re-plan (`drafts/mvp-replan-2026-11-10.md`) had 59 units in three waves plus a test bed. Waves 1 and 2 merged (41 units, last one U-108 as PR 969 `3234e2d`). Dave parked the rest of wave 3 and all of wave 4 except NEW-4 and NEW-5: 16 MVP units and 7 test-bed units. The plan's wave 3 window (6.75 to 15.0 agent-days) no longer applies; what remains is about 1.75 agent-days of build plus the walkthrough and the page changes it finds. Parked units keep their issues and board rows (Todo, no Sprint).
+
+## 2026-11-16 [lead]: `src/lib/copy/` is in the architecture standard
+At Dave's request, `.claude/standards/architecture.md` in the ramble repo gets placement decision 3: interface copy lives in `src/lib/copy/`, and a client island takes its copy as props or imports only its own area file (the text dictionary design, approved 2026-11-14). This is decision 7 of that design. The ramble change is on branch `dave/architecture-copy-home`; the scope-manifest check fails on `.claude/` by design, so Dave merges it with bypass.
