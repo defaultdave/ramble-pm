@@ -144,3 +144,4 @@ The MVP re-plan (`drafts/mvp-replan-2026-11-10.md`) had 59 units in three waves 
 
 ## 2026-11-16 [lead]: `src/lib/copy/` is in the architecture standard
 At Dave's request, `.claude/standards/architecture.md` in the ramble repo gets placement decision 3: interface copy lives in `src/lib/copy/`, and a client island takes its copy as props or imports only its own area file (the text dictionary design, approved 2026-11-14). This is decision 7 of that design. The ramble change is on branch `dave/architecture-copy-home`; the scope-manifest check fails on `.claude/` by design, so Dave merges it with bypass.
+- **2026-11-16 (lane guest-signin):** PRD-37 said guest accounts sign in by an emailed link. With email off, the link is now shown on screen for guest-only addresses (DECISIONS 2026-11-16). New unit U-130, not in the frozen plan.

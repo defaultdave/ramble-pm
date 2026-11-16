@@ -21,6 +21,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | `w1-auth` | MVP wave 1 lane W1-A (`drafts/mvp-replan-2026-11-10.md` s4): U-004a (#5), NEW-1 sign-in screens, U-022 (#29), with the section 2 lite cuts; personas in U-022 | PM w1-auth, 2026-11-10 (swarm, from the lead) | closed: U-004a (PR 920), U-022 (PR 926) and U-120 (NEW-1, PR 931) merged | 2026-11-10 |
 | `audit-images` | Audit of how experience images load (home cards, detail page, sizes, srcset, placeholders, preload) and Dave's idea: one shared small size, larger views show it while the large one loads. Read-only audit; findings in `audits/images-2026-11-14.md` | PM audit-images, 2026-11-14 | active: U-129 in review, PR 978 | 2026-11-14 |
 | `page-maps` | Page maps: HTML in ramble-pm `maps/`; READMEs beside each route tree in ramble (U-009 carrier); the upkeep rule in CLAUDE.md | PM page-maps, 2026-11-15 | handed off: PR 980 (READMEs, four checks PASS, auto-merge queued, Dave's review requested) and PR 979 (CLAUDE.md rule, Dave bypass-merges) open | 2026-11-15 16:45 |
+| `guest-signin` | U-130: show the guest sign-in link on screen while email is off (DECISIONS 2026-11-16); owns (guest)/sign-in/, src/server/auth/ (sign-in link path only), src/lib/signIn.ts | PM guest-signin, 2026-11-16 | active: scoped, not started | 2026-11-16 11:20 |
 | `lead` | Shared status, `## Next`, roadmap, memory; finish-off swarm (test waves, maintenance tail) | PM lead, 2026-11-04 (morning, swarm) | active | 2026-11-04 09:45 |
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
@@ -28,6 +29,10 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 Moved to `lanes/earlier.md` (2026-11-04).
 
 ## In flight
+
+### Lane: guest-signin
+- **2026-11-16, U-130 scoped, not started.** Problem: guests sign in only by emailed magic link, and email is off (`EMAIL_MODE=sink`), so no guest can create an account or sign in. Dave chose option 2: after a guest submits their address, the page shows the sign-in link (the same `/sign-in/confirm` page the email points to) instead of saying "check your email". Rules: it works only while `EMAIL_MODE` is `sink`; it refuses any address that holds a role grant (host, host_staff, ops roles), and those still go through the ops mailbox; the refusal looks the same as a normal "link sent" reply so it does not reveal which addresses hold roles. Known accepted hole: anyone who types an existing guest's address signs in as that guest. Tier: critical (auth path). The PRD-37 wording change goes in `delta-log.md`, since the PRD is frozen.
+- **For the lead:** add U-130 to `## Next`; Dave creates its issue and board item; `units.yaml` entry via a `PM bookkeeping:` PR.
 
 ### Lane: page-maps
 
@@ -85,6 +90,12 @@ Older Next items (done or superseded): `lanes/lead.md`.
 
 ## Next chat
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
+
+### Next chat: guest-signin
+- **Before you start:** Dave creates the U-130 issue and board item (or says to go without them).
+- **Run:** `/ramble-pm lane: guest-signin` in a new desktop chat, then `/senior U-130` from it.
+- **Model and effort:** Sonnet, medium.
+- **Prompt:** Read the `guest-signin` lane entry in `STATUS.md` and the 2026-11-16 guest sign-in decision in `DECISIONS.md`. In ramble, read `src/server/auth/auth.ts` (magicLink `sendMagicLink`), `src/server/auth/handler.ts`, `src/lib/email/route.ts`, `src/app/(guest)/sign-in/` and its README. Build U-130: while `EMAIL_MODE` is `sink`, the sign-in page shows the guest a "Continue" link to the confirm page instead of "check your email"; addresses holding any role grant get the normal "link sent" reply and the link goes to the ops mailbox only; with any other email mode nothing changes. New accounts are created the same way as now. Tests cover sink on and off, a guest address, a role-holding address, and that the two replies look the same. Update the sign-in README and add copy through `src/lib/copy/`. Done looks like: a worktree branch `unit/U-130-guest-signin-on-screen` with tests passing, stopped before push. Don't commit outside the merge-desk scripts.
 
 ### Next chat: audit-images
 - **Before you start:** Dave approves PR 978 at `9b14ecd` and creates the U-129 issue and board item.
