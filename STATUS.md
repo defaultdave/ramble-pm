@@ -59,7 +59,7 @@ Moved to `lanes/earlier.md`.
 In this demo, the client facts have no one to ask. Where a fact blocks a decision, the PM proposes a working assumption and logs it as one.
 
 ## Blocked on Dave
-Refreshed 2026-11-16 night by the lead from the dependabot-review chat's decisions (DECISIONS 2026-11-16). Cleared that day: the architecture rulings (PR 987), lint and TypeScript configs protected (PR 988), U-102 done on MFA, the App's Issues read and write, the `CLAUDE.md` gate bullet (PR 986), the Dependabot job skip (PR 984), the beacon firewall rule, BotID Basic, private vulnerability reporting. Older lists: `lanes/lead.md`. Nothing here blocks the current goal.
+Refreshed 2026-11-17 by the lead. Older lists and what was cleared on 2026-11-16: `lanes/lead.md`. Nothing here blocks the current goal.
 
 1. **Production migrations 0024 to 0032:** run the `db-migrate-production` workflow before the next production deploy.
 2. **U-129:** create its issue and board item (PR 978 merged 2026-11-14), so it can be set Done.
@@ -84,15 +84,9 @@ Legal and vendor questions for the real job, logged, not blocking the demo: Ramb
 
 Then, as each lane ends: the walkthrough with Dave (block `walkthrough`), and page-change units from its findings, with dictionary phases 1 to 4 riding along. The lead also closes U-051 and U-105 on board #19 once a CI e2e run on `main` shows the booking-path spec ran (PRs 911 and 915 merged).
 
-**Goal set by Dave, 2026-11-13 night (lead): wrap the build at a slimmer MVP.** Parked (not cut, can come back): gifting (U-063, U-062a, U-064a, U-064b, U-113, U-062b), reviews (U-060, U-044, U-061), host cancel (U-070), and also U-083b, the CMS (U-076a to c, U-078), NEW-7 and all of wave 4 (U-095, U-092, U-042, U-086, U-089, U-096, U-100). Still built: the test console, NEW-4 (`/ops/dev`) then NEW-5 (reset demo data), one standard-tier lane, about 1.75 agent-days. Then: (1) close out U-108 (done), (2) a walkthrough of the site as guest, host and ops with the seeded personas, findings to a page-changes list, (3) page-change units from that list, (4) Dave uses the site to test ideas. Automatic runs are off (DECISIONS 2026-11-13). Board #19 has no Parked option; parked units stay Todo with no Sprint.
-
-**Text dictionary approved 2026-11-14 (Dave, all as recommended):** `drafts/dictionary-design-2026-11.md`. Next: phase 0 as unit U-128 (scaffold `src/lib/copy/`, `common.ts`, `meta.ts`, `format.ts`, the jsx-no-literals warning, the island import restriction, the contract test, the per-route client JS baseline), standard tier, about 0.75 agent-days, its own small PR. Phases 1 to 4 ride with the walkthrough's page-change units. Phase 0 is done: U-128 merged (PR 975), the `src/lib/copy/` line merged (PR 983).
-
-**Superseded 2026-11-13:** the 2026-11-04 goal (maintenance drain, now in `lanes/lead.md`) and the MVP wave 3 and 4 plan in `drafts/mvp-replan-2026-11-10.md` s4.
-
 **Standing rule since 2026-10-29 (DECISIONS):** the PM proceeds on its recommendation wherever no owner-only capability is needed, logs the call, and lists it under "Decided for you" on the roadmap; work waits for Dave only on promotions, bypass merges, rulesets, the App, secrets, repo creation, deploys and spend.
 
-Older Next items (done or superseded): `lanes/lead.md`.
+Older Next items, the 2026-11-13 slim MVP goal (parked list) and the text dictionary note: `lanes/lead.md`.
 
 ## Next chat
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
@@ -141,6 +135,6 @@ One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane
 
 ### lead
 
-**Update 2026-11-17 (read first):** The swarm runs from one Fable main chat (block `swarm` above), one Sonnet subagent per lane. The lead folds their "For the lead" notes, closes U-051 and U-105, refreshes the roadmap, and when the build lanes end opens the walkthrough lane, then the page-change units. **Previous update, 2026-11-16 night:** **Run:** `/ramble-pm`, Sonnet, medium. **Before you start (Dave):** the Blocked list. **Prompt:** Fold the `guest-signin` and `walkthrough` lanes' "For the lead" notes into `## Next`. When U-130 merges: set it Done on board #19, then file the walkthrough's page-change units (`units.yaml` entries in one `PM bookkeeping:` PR, Dave creates the issues) and open a lane per disjoint file set. Triage the 28 tickets filed 2026-11-16 (#991 to #1018) into the page-change units or the Maintenance tail. Lead end steps: `roadmap/status.json` and today's standup, schedule, `roadmap.ts`, board dates, `audit-tickets.ts --run`, republish the artifact, publish.
+**Update 2026-11-17 (read first):** The swarm runs from one Fable main chat (block `swarm` above), one Sonnet subagent per lane. The lead folds their "For the lead" notes, closes U-051 and U-105, refreshes the roadmap, and when the build lanes end opens the walkthrough lane, then the page-change units.
 
 Older updates: `lanes/lead.md`.

@@ -202,3 +202,16 @@ Next chat (older lead updates):
 
 ### Old Updated line (replaced 2026-11-16)
 **Updated:** 2026-11-04 evening by the lead. **One merge lane:** Dave merged PR 905 (process audit 5.3): every unit now targets `main`; critical-tier PRs need the `human-read` check, which passes only on Dave's approval of the head. `integration`, syncs and promotions are retired; `integration` is 0 commits ahead of `main` and no PR targets it. PR 858 (sweep finished lanes at claim) also merged. Test fixes are done (W1 to W11, the 800-line limit enforced by PR 903). Older `Updated` lines: `lanes/lead.md`.
+
+
+## Moved from STATUS.md on 2026-11-17 (size limit)
+
+**Goal set by Dave, 2026-11-13 night (lead): wrap the build at a slimmer MVP.** Parked (not cut, can come back): gifting (U-063, U-062a, U-064a, U-064b, U-113, U-062b), reviews (U-060, U-044, U-061), host cancel (U-070), and also U-083b, the CMS (U-076a to c, U-078), NEW-7 and all of wave 4 (U-095, U-092, U-042, U-086, U-089, U-096, U-100). Still built: the test console, NEW-4 (`/ops/dev`) then NEW-5 (reset demo data), one standard-tier lane, about 1.75 agent-days. Then: (1) close out U-108 (done), (2) a walkthrough of the site as guest, host and ops with the seeded personas, findings to a page-changes list, (3) page-change units from that list, (4) Dave uses the site to test ideas. Automatic runs are off (DECISIONS 2026-11-13). Board #19 has no Parked option; parked units stay Todo with no Sprint.
+
+**Text dictionary approved 2026-11-14 (Dave, all as recommended):** `drafts/dictionary-design-2026-11.md`. Next: phase 0 as unit U-128 (scaffold `src/lib/copy/`, `common.ts`, `meta.ts`, `format.ts`, the jsx-no-literals warning, the island import restriction, the contract test, the per-route client JS baseline), standard tier, about 0.75 agent-days, its own small PR. Phases 1 to 4 ride with the walkthrough's page-change units. Phase 0 is done: U-128 merged (PR 975), the `src/lib/copy/` line merged (PR 983).
+
+**Superseded 2026-11-13:** the 2026-11-04 goal (maintenance drain, now in `lanes/lead.md`) and the MVP wave 3 and 4 plan in `drafts/mvp-replan-2026-11-10.md` s4.
+
+**Previous update, 2026-11-16 night:** **Run:** `/ramble-pm`, Sonnet, medium. **Before you start (Dave):** the Blocked list. **Prompt:** Fold the `guest-signin` and `walkthrough` lanes' "For the lead" notes into `## Next`. When U-130 merges: set it Done on board #19, then file the walkthrough's page-change units (`units.yaml` entries in one `PM bookkeeping:` PR, Dave creates the issues) and open a lane per disjoint file set. Triage the 28 tickets filed 2026-11-16 (#991 to #1018) into the page-change units or the Maintenance tail. Lead end steps: `roadmap/status.json` and today's standup, schedule, `roadmap.ts`, board dates, `audit-tickets.ts --run`, republish the artifact, publish.
+
+Refreshed 2026-11-16 night by the lead from the dependabot-review chat's decisions (DECISIONS 2026-11-16). Cleared that day: the architecture rulings (PR 987), lint and TypeScript configs protected (PR 988), U-102 done on MFA, the App's Issues read and write, the `CLAUDE.md` gate bullet (PR 986), the Dependabot job skip (PR 984), the beacon firewall rule, BotID Basic, private vulnerability reporting. Older lists: `lanes/lead.md`. Nothing here blocks the current goal.
