@@ -1,0 +1,7 @@
+# Lane history: audit-fixes-b
+
+Newest first.
+
+- **2026-11-17, S-F2 handed off, PR 1031** (`unit/U-057-audit-sf2`, head `122c371`, U-057 critical, closes #1009 and #1016). Builder (sonnet) round 1 at `41fd3db`: scope clean, gates green (11412 unit, 2977 db, knip, build, gitleaks, no schema change). Review REQUEST_CHANGES on test strength (no running or dead reminder case, no test that fails without `.for('update')`); round 2 added them (the lock test uses a second connection holding the row `running` uncommitted, since holding the move open cannot show the lock) and fixed a README comma. Round 2 review APPROVE, qa PASS (7 of 23 move-emails tests fail with the retime call removed), spec-compliance and architecture-audit PASS (their code is unchanged since round 1). All four posted on `122c371`; auto-merge set, review requested; `human-read` waits on Dave.
+  - Accepted advisories: a reminder job `running` during a move can yield two reminders (different email keys); the pending lookup filters `payload->>'orderId'` with no index (follow-up needs a migration); the job-row update could move into `db/jobs.ts`; `retimeSessionReminder` has no `Caller` and relies on the manage-token check in `moveBookingOrder` (B6 reading for Dave).
+  - Mechanics: the main checkout stayed on `main`; worktree `.claude/worktrees/u057-sf2`; first QA subagent returned an empty report, rerun on the final head; zsh does not word-split `set -- $var`.
