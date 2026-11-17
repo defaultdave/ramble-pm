@@ -154,3 +154,5 @@ At Dave's request, `.claude/standards/architecture.md` in the ramble repo gets p
 Reviews (U-060, U-044, U-061), host cancel (U-070), the CMS (U-076a to c), settings (U-078) and the private requests queue (U-083b) come back from the 2026-11-13 park; U-126 (ops dashboard, was NEW-7) is built too. U-078 drops the gift switches (gifts off, gift validity, expiry action) while gifting stays parked. Lanes follow `drafts/mvp-replan-2026-11-10.md` s4 wave 3, re-cut for five builders (DECISIONS 2026-11-17).
 
 - **2026-11-17 (w3-ops-host):** U-083b scope reduced to a list-only queue: `private_requests` (U-043) has no status column and no writer after insert; "with status" deferred (DECISIONS 2026-11-17, w3-ops-host).
+
+- **2026-11-17 (guest-signin):** PRD-37 wording change for U-130 (DECISIONS 2026-11-16): the guest sign-in page no longer always says "check your email". While `EMAIL_MODE` is `sink` it shows a Continue link to `/sign-in/confirm` for any address without a role grant; role-holding addresses and every other email mode keep the check-your-email reply. Reverts to the original wording once a real email provider is on (a later unit sets the mode). PR 1020.
