@@ -63,3 +63,32 @@ Critical tier:
 - C-D, PROTECTED, Dave only: 999.
 
 Not batched: 998 (ruleset, Dave), 890 (Dave decision), 791 (decision on e2e database scope), 367 and 996 (measurements), 326, 735, 830 (close as fixed or stale).
+
+## Round 2 rework: batches by owning unit and tier (2026-11-17)
+
+`scope-check.ts` takes the tier from the unit in the PR title and branch (`unit/<unit>-audit-<batch>`, title `<unit>: ...`), so a batch spanning tiers files under the most critical owner. Owners from `git log` of each file against `units.yaml`.
+
+| Batch | Tickets | Unit | Tier | PR |
+|---|---|---|---|---|
+| S-C | 892, 1003, 1010, 1011, 1012 | U-068 (files also of U-024, U-074a critical; U-025, U-038, U-074b, U-074c standard) | critical | 1023 (replaces 1021) |
+| S-A1 | 1006, 1007, 1008 | U-038 (U-043, U-037 files, all standard) | standard | |
+| S-A2 | 1000 | U-014a (`bot-check.ts` is its file) | critical | |
+| S-B | 1017, 1015, 1013, 1014 (last) | U-072 (staff access; U-108, U-107 files) | critical | |
+| S-D | 891, 893, 997, 991, 992 | U-039 (gallery, photo, card) | standard | |
+| S-F1 | 1002 | U-127 (U-036) | standard | |
+| S-F2 | 1009, 1016 | U-057 (order move; `hostSetup.ts` is U-077 and U-074a) | critical | |
+| S-G | 834, then 835 by test file | U-049 (`confirmOrder.test.ts`; db tests of critical units) | critical | |
+| C-A | 1018, 319 | U-077 (refund retry; ledger is U-016) | critical | |
+
+Critical PRs wait on the owner's `human-read`; that is six PRs for one reader, so the owner may want to read them in one sitting.
+
+## Owner-held tickets: question, options, recommendation
+
+- **#998 ruleset 25513279 (human-read not required).** Add `human-read` as a required check on `main`? (A) yes, one ruleset edit; (B) no, rely on the approval window. Recommend A: without it a critical PR can merge on green checks alone (PR 1023 shows `human-read` failing as designed, which is only a block if it is required).
+- **#999 `scope-check.ts` PROTECTED list.** Add `.gitleaks*`, `package.json`, `pnpm-lock.yaml`, `vitest.config`, `knip.json`, `playwright.config`, `scripts/test-size.ts`? (A) all seven; (B) config files only, keep `package.json` and the lockfile open. Recommend B: dependabot and every feature PR edit `package.json` and the lockfile, so A blocks all of them. Protected path, bypass merge; the lane will prepare the branch on request.
+- **#890 NoScriptFilters.** (A) approve the client island: one allowlist line in `.claude/standards/architecture.md` (protected, a human edit); (B) replace it with a server route. Recommend A: it is one line and the component is small.
+- **#1005 confirm-sign-in and end-session routes.** (A) convert to Server Actions; (B) keep the route handlers and add a DECISIONS row extending B15. Recommend B, after the guest-signin lane lands U-130 (it owns those paths).
+- **#1001 sign-in lockout and #1004 auth purge.** #1001: add a per-email limit beside the per-address one (A) or lock after N failed attempts (B). Recommend A, since B lets anyone lock out a guest. #1004: purge expired `auth_verifications` and `auth_sessions` in the existing pulse job, 30-day retention. Recommend yes. Both wait for U-130.
+- **#791 seeded e2e database.** (A) build a seeded e2e database now (M); (B) leave `NEXT_PUBLIC_BOT_CHALLENGE` skip as the fix and close. Recommend B: the client skip is done, and the seeded database is a testing project of its own.
+- **#993 to #995 image sizing (IMG-3 to 5).** (A) set a source-size cap and container-query `sizes` (S each); (B) measure on the Neon preview first (see #367, #996). Recommend B: they are tuning with no measured defect.
+- **#367 and #996** are measurements (axe, keyboard, 320px sweep; real-photo LCP) needing a preview deploy; no code.
