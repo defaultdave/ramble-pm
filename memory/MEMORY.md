@@ -142,3 +142,9 @@ Full list with reasons in `DECISIONS.md`.
 - A 200-row ticket backlog is verifiable in one pass: one read-only Sonnet verifier per audit pass file, all against a detached scratch worktree at `origin/main`, each writing a verdict table (verdict, size, bucket, group, files) to a shared folder. Six agents took about five minutes wall clock and found 18 rows already fixed or stale, 20 that belong to units, and 46 that belong to Sprint 2 tracks, so under half the backlog needs its own fix.
 - A triage table that lists audit IDs must not end in a `Status` column: `tools/audit-tickets.ts` files any table whose first column is `ID` and whose last is `Status`.
 - Before compiling a backlog report, re-run `bun tools/audit-tickets.ts` (dry run) and count open audit issues: another session filed 27 tickets and closed 113 duplicates while the verifiers ran. One session owns ticket, label and board writes; the others stay read-only and leave an actions file (`drafts/maintenance-triage-actions.json`) for it.
+
+## Lessons from the 2026-11-16 lead sweep
+- Lanes that closed while the `gh` login lacked the project scope left ten merged units In Progress or Todo on board #19 for up to six days. At each lead claim, compare the board's non-Done units with the merged PRs before writing status.
+- `forecast.ts` cannot price a unit added after the freeze: it needs a solo estimate in the frozen `plan/estimate-panel.json`, even for a unit marked done. Drop such units with `--drop`; a unit still to build cannot be forecast.
+- `audit-tickets.ts --run` can file every issue and then fail on the board sync with a network timeout; rerun it, since it files nothing twice.
+- When a script edits `STATUS.md` by heading, match the heading with its newline (`\n## Blocked on Dave\n`): the Lanes intro names the same headings in running text, and a bare match once cut the Lanes table and In flight (restored the same night).
