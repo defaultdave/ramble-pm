@@ -152,3 +152,5 @@ At Dave's request, `.claude/standards/architecture.md` in the ramble repo gets p
 
 ## 2026-11-17 [lead]: un-parked for the finishing swarm
 Reviews (U-060, U-044, U-061), host cancel (U-070), the CMS (U-076a to c), settings (U-078) and the private requests queue (U-083b) come back from the 2026-11-13 park; U-126 (ops dashboard, was NEW-7) is built too. U-078 drops the gift switches (gifts off, gift validity, expiry action) while gifting stays parked. Lanes follow `drafts/mvp-replan-2026-11-10.md` s4 wave 3, re-cut for five builders (DECISIONS 2026-11-17).
+
+- **2026-11-17 (w3-ops-host):** U-083b scope reduced to a list-only queue: `private_requests` (U-043) has no status column and no writer after insert; "with status" deferred (DECISIONS 2026-11-17, w3-ops-host).
