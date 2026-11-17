@@ -13,3 +13,10 @@
   - Landing pages' "Show more" posts to browse, not the landing page.
   - Audit rows: reading the audit log, the ops home and a blank new-host form write rows; the test console's demo-data reset writes none.
   - Gifting routes other than `/gifts` are `RoutePlaceholder` stubs (parked).
+
+### Lane: page-maps
+
+- **2026-11-15 16:45, handed off.** Nine HTML maps in `maps/` (https://defaultdave.github.io/ramble-pm/maps/). Dave asked for them in the repo beside the code with builders keeping them current (DECISIONS 2026-11-15): PR 980 `U-009: Page maps beside each route tree` (`unit/U-009-page-maps` at `f2a9860`; 9 READMEs, 43 Mermaid diagrams; review round 1 FAIL on two wrong claims (help misses, settings save), fixed; review, spec, architecture, qa PASS posted; Dave's review requested; auto-merge queued). PR 979 `PM bookkeeping: page maps stay current with the code` (`pm/page-maps-rule`, one CLAUDE.md line; scope-manifest fails by design, Dave bypass-merges). Verdicts in `drafts/u-009-page-maps-checks/`; history and the code findings in `lanes/page-maps.md`. After 980 merges: remove worktrees `u-009-page-maps` and `pm-page-maps-rule` and their local branches. Worktree note: subagents of a chat rooted in another worktree are blocked by a hook from writing into a new worktree; give such work a chat rooted there. **For the lead:** triage the code findings in `lanes/page-maps.md` as audit items; add the maps to the public memory index (where page structure lives; the rule in CLAUDE.md keeps them current).
+
+
+- **2026-11-16, closed by the lead.** PR 980 merged 2026-11-15, PR 979 merged 2026-11-16; worktrees `u-009-page-maps` and `pm-page-maps-rule` and their branches removed.

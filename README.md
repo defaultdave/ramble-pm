@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 4, 2026.** Nov 4: maintenance wave 3 is in: P16 to P20 merged to main, P26 into integration, P15 (PR 838) re-running a flaky db test. The test audit found 28 items (TA-1 to TA-29 with your CI size warning) and test-fix wave 1 is 4 of 5 merged. Plan of record unchanged: Sprint 2 stabilization to Nov 30, Sprint 3 login and admin Dec 1 to 14, test bed after, by Dec 30.
+**As of Nov 16, 2026.** Nov 16: every slim-MVP build unit is merged except U-130, the guest sign-in link shown on screen while email is off (issue #989, critical tier, about 0.75 agent-days). Next is the walkthrough as guest, host and ops, then page-change units from its findings. Your asks today: bypass-merge PR 990, and run the production migrations 0024 to 0032 before the next deploy.
 
 | Milestone | Likely |
 |---|---|
@@ -18,20 +18,11 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
-- Eyeball two small visual changes on the next preview. Home empty state heading is one size smaller (PR 837); the home gift button has Button's 4 px focus ring (PR 838).
-- Push unit/U-001-neon-skip and bypass-merge it. Local branch f548962 adds the head_ref filter so the expire-preview job stops failing on branches with no preview (N1030-1, BC-40). Workflow files need your login.
-- One edit to .claude/standards/architecture.md. B6 exemption for system money paths (BC-15), B13 names presentation-only log-and-degrade reads (N1030-7), lib/pages zone in the diagram and B4 plus the client-island allowlist (N1030-8).
-- Give the ramble-agents App Issues read and write. Set the permission and accept it on the installation. Ticket labels dropped silently without it and a first run double-filed 181. The PM then labels the 187 tickets, closes the duplicates and files SC-1 to SC-26.
-- Decide the PF-7 client island. With JavaScript off, the first load of a large browse result shows only 5 cards. One client component fed plain data fixes it, and needs your approval under B8. Recommended.
-- Confirm MFA for U-102. U-102 stays In Progress until you confirm MFA is on.
-- Stop stray local servers. kill 7104 8217 9069 6395 and kill 7626. The last one holds port 3100.
-- Rerun the production-demo seed. From a current main checkout (docs/runbooks/seed.md). The PM cannot: it needs the production env file. Closes BC-48 and lets the last seeded booking check run.
-- Sandbox: allow api.github.com and local port binding. GitHub reads fail inside the sandbox (board dates, nightly merge list) and reviewers cannot run Postgres, Chromium or ports, so QA falls back to static checks.
-- Turn off unused connectors in Ramble chats. Token review fix 3: every chat starts at 99K tokens. Finance, Gmail, Drive, Docs, iOS simulator, computer use; Vercel only in deploy chats.
-- Try a card decline then success on production. Use the Demo test cards on the payment step; the PM does not type card numbers there.
-- Neon console. Delete the stray database from the first migrate run if it is stale (H-11).
-- Vercel and Sentry. Beacon firewall rule (PR 193), BotID, Sentry DSNs and projects, alert rules in docs/runbooks/alerting.md.
-- GitHub. Enable private vulnerability reporting; the BE-1 Vercel firewall rule from PR 263 is skipped by decision.
+- Bypass-merge PR 990. Adds U-130 to units.yaml so the U-130 PR passes scope-manifest. gh pr merge 990 --repo defaultdave/ramble --merge --admin
+- Production migrations 0024 to 0032. Run the db-migrate-production workflow before the next production deploy.
+- Create the U-129 issue and board item. PR 978 (image underlay) merged Nov 14 with no issue, so it cannot be set Done.
+- Walk the site as guest, host and ops. Script and findings table in drafts/walkthrough-2026-11.md; a walkthrough lane chat runs it with you.
+- Sentry setup, when the demo is shared. Server and browser projects, the ops address, three alert rules (docs/runbooks/alerting.md), then the two DSNs in Vercel.
 
 **Decisions needed**
 
@@ -39,8 +30,7 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Held up**
 
-- Audit ticket labels, 26 new tickets and closing the duplicates: Issues permission on the ramble-agents App
-- BC-48 host notices on production: Dave rerunning the production-demo seed
+- Guest sign-in on the deployed site: U-130, which waits on PR 990
 - Real-job only: legal review, sponsor terms, Stripe review: Client facts with no one to ask in this demo; logged, not blocking
 <!-- roadmap:status:end -->
 
