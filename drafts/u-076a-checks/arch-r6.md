@@ -1,0 +1,1 @@
+VERDICT: PASS (head 87d3307), 0 blocking. B13 list catch and B8 island ruled; B8 allowlist line is Dave's. Rounds: r2 FAIL 1, r3 FAIL 4, r4 FAIL 3, r5 FAIL 3 (B7 lib export, B8 ruled, action ternary), r6 PASS.
