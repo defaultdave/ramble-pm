@@ -46,19 +46,8 @@ Moved to `lanes/earlier.md` (2026-11-04).
 ### Earlier (before lanes)
 Moved to `lanes/earlier.md`.
 
-## Open client facts (from the PRD, tracked work, not decisions)
-| Q | Needs | Feeds |
-|---|---|---|
-| Q-11 | Answered by the spike (docs only): FareHarbor, Peek Pro, Mindbody need a partner program; Acuity yes (host on Premium); Square no; Eventbrite read-only. Launch on allocations (ADR 0002). Still needed: Marcus's tally of hosts by system | P4 estimate |
-| Q-12 | NYC sales tax map | Launch; tax display is already decided by PRD-78 |
-| Q-13 | Sponsor contract: what the $60k needs | Launch scope, gift cards (PRD-34) |
-| Q-14 | Launch-day catalog size | P4 |
-| Q-16 | Lawyer engaged | Terms, waivers, seller-of-record confirmation |
-| Q-19 | Monthly burn | Risk ratings in P4 |
-| Q-20 | Newsletter traffic per issue | ADR R7 |
-| Q-21 | Investor's GMV bar | G6 |
-
-In this demo, the client facts have no one to ask. Where a fact blocks a decision, the PM proposes a working assumption and logs it as one.
+## Open client facts
+Eight open PRD facts (Q-11 to Q-21) with their working assumptions: `open-client-facts.md`. None blocks the demo.
 
 ## Blocked on Dave
 Refreshed 2026-11-17 by the lead. Older lists and what was cleared on 2026-11-16: `lanes/lead.md`. Nothing here blocks the current goal.
