@@ -31,6 +31,7 @@ Moved to `lanes/earlier.md` (2026-11-04).
 
 ### Lane: w3-cms
 - **2026-11-17 00:30, claimed.** Order U-076a, U-076b, U-076c, U-078, standard tier, one builder at a time. Round numbers: none yet.
+- **2026-11-17 01:40, U-076a:** [PR 1022](https://github.com/defaultdave/ramble/pull/1022) on `unit/U-076a-editorial-editing`. Round 1 at `d5e9eef`: review REQUEST_CHANGES, a11y FAIL (1), architecture FAIL, spec PASS, qa action_required (Postgres down). Round 2 (`wip/U-076a-r2`) merged with main to `7d1d4d3`, pushed: review APPROVE, a11y PASS, spec PASS, qa PASS (36 screenshots in `evidence/pr/unit-U-076a-editorial-editing/`), architecture FAIL (1 blocking B2: settle rule in the data layer). Round 3 `wip/U-076a-r3` fixing it. Checks not yet posted; auto-merge not queued. Verdicts in `drafts/u-076a-checks/`. Editorial entries are help articles; U-076c extends this form.
 - **For the lead:** none yet.
 
 ### Lane: audit-fixes
@@ -99,6 +100,7 @@ One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane
 - **Before you start:** nothing.
 - **Run:** `/ramble-pm lane: w3-cms` in a new desktop chat.
 - **Model and effort:** Sonnet, medium.
+- **Resume 2026-11-17 01:50:** U-076a is PR 1022 (`unit/U-076a-editorial-editing`, head `7d1d4d3` pushed; round 3 fixer on `wip/U-076a-r3` from worktree agent-a2e00e8d4f292a4ee was running one B2 fix, `settleEntry` into `src/lib/editorialAdmin.ts`). Round 2 checks passed except architecture (that one finding). Next: fast-forward the unit branch to the r3 head, merge main, gates, push, rerun architecture and review focused, post four checks from `drafts/u-076a-checks/`, request review, queue auto-merge, then U-076b.
 - **Prompt:** Lane `w3-cms`: U-076a (editorial editing and publish, Tiptap on U-117's document format, publish revalidates through `tagsForChange`), then U-076b (home and collections admin; the gift guide sponsor slot stays out while gifting is parked), U-076c (pages and documents admin, plus the category and neighborhood add, rename, reorder, retire), U-078 (settings and ops switches without the gift switches, plus the read-only cancellation tier list). All standard tier. Read the `w3` lane rules under `## Next` in `STATUS.md`, DECISIONS 2026-11-17, and the units' rows in `drafts/mvp-replan-2026-11-10.md` section 2 (lite cuts) and section 4 wave 3 (file scopes). For each unit in order: set it In Progress on board #19, launch the builder in a worktree from the ramble checkout (`/senior <unit>`, scope manifest from units.yaml plus the lite cut), check its files against the manifest, push and open the PR through `agent-git.ts`, request Dave's review, run review, qa, spec-compliance, a11y-audit and architecture-audit, post the checks, queue auto-merge, and set Done with actuals when it merges. Start the next unit while a PR waits on checks if its files are disjoint; one builder at a time. Don't commit in ramble outside the merge-desk scripts. Done: four units merged.
 
 ### Next chat: w3-reviews
