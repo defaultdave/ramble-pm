@@ -9,7 +9,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
 | `guest-signin` | U-130: show the guest sign-in link on screen while email is off (DECISIONS 2026-11-16); owns (guest)/sign-in/, src/server/auth/ (sign-in link path only), src/lib/signIn.ts | swarm subagent, 2026-11-17 | closed: U-130 merged (PR 1020), board Done, worktrees removed | 2026-11-17 03:00 |
-| `w3-reviews` | U-060, U-044, U-061 (reviews, lite cut); owns schema/reviews, jobs/reviewInvite*, (checkout)/(site)/review/, fixtures/reviews.ts, db/browse.ts and db/home.ts (rating only), lib/experienceCards.ts, components/ExperienceCard/, ExperiencePage/ reviews block, (ops)/ops/reviews/ | swarm subagent round 2, 2026-11-17 | active: U-060 PR 1024 waiting on CI and Dave's approval | 2026-11-17 02:30 |
+| `w3-reviews` | U-060, U-044, U-061 (reviews, lite cut); owns schema/reviews, jobs/reviewInvite*, (checkout)/(site)/review/, fixtures/reviews.ts, db/browse.ts and db/home.ts (rating only), lib/experienceCards.ts, components/ExperienceCard/, ExperiencePage/ reviews block, (ops)/ops/reviews/ | swarm subagent round 2, 2026-11-17 | handed off: U-060, U-044, U-061 merged and Done; lane complete | 2026-11-17 10:00 |
 | `w3-cms` | U-076a, U-076b, U-076c, U-078 (no gift switches): (ops)/ops/editorial/, ops/settings/, lib/richText/, components/RichTextEditor/, actions/editorial.ts, actions/settings.ts, db/settings.ts, db/taxonomy.ts | swarm subagent round 5, 2026-11-17 | active: U-076c, rebuilding in a harness worktree (isolation), round 4 patch kept as reference | 2026-11-17 15:00 |
 | `audit-fixes` | the open `audit` issues: triage against `main`, fix in batches of disjoint files; any file no other lane owns | swarm subagent round 8, 2026-11-17 | handed off: #1017 built as PR 1039 (U-072, critical); all audit batches done; waits on `human-read` | 2026-11-17 13:30 |
 | `w3-ops-host` | U-083b, U-070 (cancel only), U-126; owns (ops)/ops/requests/, (host)/host/sessions/[id]/cancel, (ops)/ops/page.tsx (dashboard) | swarm subagent round 2, 2026-11-17 | handed off: lane complete, U-083b, U-070 and U-126 all merged and Done on board #19 | 2026-11-17 08:40 |
@@ -32,7 +32,7 @@ Moved to `lanes/earlier.md` (2026-11-04).
 - **2026-11-17 00:40, claimed.** Order U-060, U-044, U-061, all standard tier. Round numbers and PRs are logged here as they happen.
 - **Round 2 relaunch.** U-060 = PR 1024, branch `unit/U-060-review-invites`, reviewed head 7488736. Round 1: review RC, qa FAIL, spec RC, arch FAIL, a11y PASS. Findings and history: `lanes/w3-reviews.md`. Fixer branch `wip/U-060-r2`.
 - **2026-11-17 02:30, U-060 PR 1024 head 05656f0: four checks green, review requested, auto-merge queued; waits on CI and Dave's approval.** U-044 and U-061 wait for the merge. History and lessons: `lanes/w3-reviews.md`.
-- **U-060 (PR 1024) and U-044 (PR 1033) merged and Done. U-061: PR 1037 head aedc5cf, agent checks running.**
+- **2026-11-17: U-060 (PR 1024), U-044 (PR 1033), U-061 (PR 1037) merged, Done on board #19. Lane complete.**
 - **For the lead:** see `lanes/w3-reviews.md` "For the lead" (main checkout on `wip/U-076a-r7`, hosts.spec flake, `ramble_qa_u060` not empty, two memory lessons).
 
 ### Lane: w3-cms
@@ -110,8 +110,7 @@ One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane
 - **Prompt:** Lane `w3-cms`: U-076a (editorial editing and publish, Tiptap on U-117's document format, publish revalidates through `tagsForChange`), then U-076b (home and collections admin; the gift guide sponsor slot stays out while gifting is parked), U-076c (pages and documents admin, plus the category and neighborhood add, rename, reorder, retire), U-078 (settings and ops switches without the gift switches, plus the read-only cancellation tier list). All standard tier. Read the `w3` lane rules under `## Next` in `STATUS.md`, DECISIONS 2026-11-17, and the units' rows in `drafts/mvp-replan-2026-11-10.md` section 2 (lite cuts) and section 4 wave 3 (file scopes). For each unit in order: set it In Progress on board #19, launch the builder in a worktree from the ramble checkout (`/senior <unit>`, scope manifest from units.yaml plus the lite cut), check its files against the manifest, push and open the PR through `agent-git.ts`, request Dave's review, run review, qa, spec-compliance, a11y-audit and architecture-audit, post the checks, queue auto-merge, and set Done with actuals when it merges. Start the next unit while a PR waits on checks if its files are disjoint; one builder at a time. Don't commit in ramble outside the merge-desk scripts. Done: four units merged.
 
 ### Next chat: w3-reviews
-- **Run:** `/ramble-pm lane: w3-reviews` in a new desktop chat (Sonnet, medium).
-- **Prompt:** Lane `w3-reviews`. Read `lanes/w3-reviews.md`. U-060 is PR 1024 (checks posted on head 05656f0, auto-merge queued): if merged, set U-060 Done on board #19 with actuals, remove its worktrees and branches (`unit/U-060-review-invites`, `wip/U-060-*`), then build U-044 (display at five or more reviews, at most ten, rating on cards), then U-061 (ops hide and unhide with audit), one builder at a time, same pipeline as U-060 (scope from `drafts/mvp-replan-2026-11-10.md` section 2). If not merged, find what blocks it. Don't commit in ramble outside the merge-desk scripts.
+- Lane complete (U-060, U-044, U-061 merged). Nothing to run; the lead removes the row.
 
 ### Next chat: w3-ops-host
 - **Status:** lane complete; nothing to run. The lead removes the row.
