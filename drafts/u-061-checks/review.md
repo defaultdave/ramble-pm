@@ -1,0 +1,3 @@
+VERDICT: APPROVE
+
+Review of PR 1037 (U-061), head 82419476449df898bfcceca1ac5e4e044fbc9a8c, two rounds. Round 1: no required changes (B6 caller check on every guarded read and write, B9 update plus audit row in one transaction under FOR UPDATE with a lock-race test, inputs parsed, first name only, tag refresh after commit and only on a real change, minimal nav edit). Round 2 delta (refresh decision in lib, record and id parsing, aria-labels, notice copy): approved, tampered input still ends in a notice or first page, not a 500. Nits left as suggestions: the redirect after an action drops the status filter and cursor; the unhide aria-label phrasing differs slightly from hide.
