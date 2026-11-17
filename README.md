@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 16, 2026.** Nov 16: every slim-MVP build unit is merged except U-130, the guest sign-in link shown on screen while email is off (issue #989, critical tier, about 0.75 agent-days). Next is the walkthrough as guest, host and ops, then page-change units from its findings. Your asks today: bypass-merge PR 990, and run the production migrations 0024 to 0032 before the next deploy.
+**As of Nov 16, 2026.** Nov 16: every slim-MVP build unit is merged except U-130, the guest sign-in link shown on screen while email is off (issue #989, critical tier, about 0.75 agent-days). Next is the walkthrough as guest, host and ops, then page-change units from its findings. PR 990 merged, so U-130 can start. Your ask: run the production migrations 0024 to 0032 before the next deploy.
 
 | Milestone | Likely |
 |---|---|
@@ -18,7 +18,6 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
-- Bypass-merge PR 990. Adds U-130 to units.yaml so the U-130 PR passes scope-manifest. gh pr merge 990 --repo defaultdave/ramble --merge --admin
 - Production migrations 0024 to 0032. Run the db-migrate-production workflow before the next production deploy.
 - Create the U-129 issue and board item. PR 978 (image underlay) merged Nov 14 with no issue, so it cannot be set Done.
 - Walk the site as guest, host and ops. Script and findings table in drafts/walkthrough-2026-11.md; a walkthrough lane chat runs it with you.
@@ -30,7 +29,6 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Held up**
 
-- Guest sign-in on the deployed site: U-130, which waits on PR 990
 - Real-job only: legal review, sponsor terms, Stripe review: Client facts with no one to ask in this demo; logged, not blocking
 <!-- roadmap:status:end -->
 

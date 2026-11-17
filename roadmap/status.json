@@ -1,6 +1,6 @@
 {
   "asOf": "2026-11-16",
-  "headline": "Nov 16: every slim-MVP build unit is merged except U-130, the guest sign-in link shown on screen while email is off (issue #989, critical tier, about 0.75 agent-days). Next is the walkthrough as guest, host and ops, then page-change units from its findings. Your asks today: bypass-merge PR 990, and run the production migrations 0024 to 0032 before the next deploy.",
+  "headline": "Nov 16: every slim-MVP build unit is merged except U-130, the guest sign-in link shown on screen while email is off (issue #989, critical tier, about 0.75 agent-days). Next is the walkthrough as guest, host and ops, then page-change units from its findings. PR 990 merged, so U-130 can start. Your ask: run the production migrations 0024 to 0032 before the next deploy.",
   "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
   "phases": [
     {
@@ -101,11 +101,6 @@
   "decisionsNeeded": [],
   "actionsForDave": [
     {
-      "title": "Bypass-merge PR 990",
-      "detail": "Adds U-130 to units.yaml so the U-130 PR passes scope-manifest. gh pr merge 990 --repo defaultdave/ramble --merge --admin",
-      "where": "ramble PR 990"
-    },
-    {
       "title": "Production migrations 0024 to 0032",
       "detail": "Run the db-migrate-production workflow before the next production deploy.",
       "where": "GitHub Actions"
@@ -127,11 +122,6 @@
     }
   ],
   "heldUp": [
-    {
-      "what": "Guest sign-in on the deployed site",
-      "waitingOn": "U-130, which waits on PR 990",
-      "owner": "Dave"
-    },
     {
       "what": "Real-job only: legal review, sponsor terms, Stripe review",
       "waitingOn": "Client facts with no one to ask in this demo; logged, not blocking",
@@ -440,10 +430,10 @@
         "Merged: 979 page-maps rule, 981 and 982 Dependabot, 983 copy line in the architecture standard, 984 Neon jobs skip Dependabot, 986 db:generate gate, 987 architecture rulings, 988 lint configs protected; 985 closed",
         "Your confirmations: MFA everywhere (U-102 Done), App Issues write, beacon firewall rule, BotID Basic",
         "Board #19 reconciled: ten merged units set Done; U-068 and U-128 Done",
-        "28 audit tickets filed (#991 to #1018); U-130 scoped, issue #989, units.yaml PR 990"
+        "28 audit tickets filed (#991 to #1018); U-130 scoped, issue #989, units.yaml PR 990",
+        "You merged PR 990 (U-130 in units.yaml)"
       ],
       "today": [
-        "You: bypass-merge PR 990",
         "U-130 build in the guest-signin lane",
         "Walkthrough as guest, host and ops with you"
       ],
