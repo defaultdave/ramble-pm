@@ -41,7 +41,8 @@ Moved to `lanes/earlier.md` (2026-11-04).
 
 ### Lane: w3-ops-host
 - **2026-11-17 00:18, lane claimed.** Order: U-083b, U-070 (cancel only, critical), U-126. Nothing built yet.
-- **For the lead:** none yet.
+- **2026-11-17 01:20, U-060:** built (builder 39 min), PR 1024 opened at 74887364, auto-merge not yet queued. Round 1 (review, qa, spec-compliance, a11y, arch audit): REQUEST_CHANGES/FAIL on prettier, seed on production-demo, B2/B17 duplications, PRD-29 non-refunded eligibility, malformed-token e2e, no-JS submit 500 (Origin null from no-referrer). Round 2 sent to the builder; no wip branch needed (builder's own worktree). U-044 and U-061 wait on U-060 landing.
+- **For the lead:** (1) a stale `next-server` (pid 58164, from `Workspace/defaultdave/.../seo-perf-lighthouse`, 5 days old) held port 3100 and blocked e2e for a while; not ours, not killed. (2) QA left a stray `ramble_qa_u060` database in docker Postgres and a scratch pg dir under /var/folders/.../T/pg16. (3) Review rate limit shares the `manage:` bucket; keyed by token only (pre-existing pattern), audit item candidate.
 
 ### Earlier (before lanes)
 Moved to `lanes/earlier.md`.
