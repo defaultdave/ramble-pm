@@ -1,0 +1,5 @@
+Round 4 head 05656f00d7debd980f0bafc74cdf6adf9b1599c1. Delta since 9c15e850: the review seed reads the terms document through its own db client (CI e2e seed failed on dbRead, the Neon HTTP driver), plus a merge of main (U-076a). Reviewed by the agent on that delta: APPROVE.
+
+VERDICT: APPROVE
+
+Review of PR 1024, U-060, head 9c15e850 (rounds 2 and 3). Round 1 findings all verified fixed and each class swept: Prettier; seed gated off production-demo (seedsPastBookings); B2/B17 list (12 items plus shared line/link/nameClip/utf8Bytes/absolute, invitableOrderCondition, reviewPageFor); PRD-29 refunded (any ticket or tax refund above zero) applied in the sweep, console list, form gate, submit and job-time decision; malformed token rejected before any database read; no-JS post fixed (referrer 'origin'); failed submit keeps input in a 10-minute httpOnly cookie scoped to /review and the order reference (security reviewed). Round 3 delta: no behaviour regressions, 7,996 unit tests run by the reviewer pass. Optional follow-up: orderReceipt.ts literals 120/200 (pre-existing, outside this PR). Size (13k lines, 7.5k generated snapshot) accepted by lane PM decision.
