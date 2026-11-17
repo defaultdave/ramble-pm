@@ -31,7 +31,7 @@ Moved to `lanes/earlier.md` (2026-11-04).
 
 ### Lane: w3-cms
 - **2026-11-17 00:30, claimed.** Order U-076a, U-076b, U-076c, U-078, standard tier, one builder at a time. Round numbers: none yet.
-- **2026-11-17 01:40, U-076a:** [PR 1022](https://github.com/defaultdave/ramble/pull/1022) on `unit/U-076a-editorial-editing`. Round 1 at `d5e9eef`: review REQUEST_CHANGES, a11y FAIL (1), architecture FAIL, spec PASS, qa action_required (Postgres down). Round 2 (`wip/U-076a-r2`) merged with main to `7d1d4d3`, pushed: review APPROVE, a11y PASS, spec PASS, qa PASS (36 screenshots in `evidence/pr/unit-U-076a-editorial-editing/`), architecture FAIL (1 blocking B2: settle rule in the data layer). Round 3 `wip/U-076a-r3` fixing it. Checks not yet posted; auto-merge not queued. Verdicts in `drafts/u-076a-checks/`. Editorial entries are help articles; U-076c extends this form.
+- **2026-11-17 01:40, U-076a:** [PR 1022](https://github.com/defaultdave/ramble/pull/1022) on `unit/U-076a-editorial-editing`. Round 1 at `d5e9eef`: review REQUEST_CHANGES, a11y FAIL (1), architecture FAIL, spec PASS, qa action_required (Postgres down). Round 2 (`wip/U-076a-r2`) merged with main to `7d1d4d3`, pushed: review APPROVE, a11y PASS, spec PASS, qa PASS (36 screenshots in `evidence/pr/unit-U-076a-editorial-editing/`), architecture FAIL (1 blocking B2: settle rule in the data layer). Round 3 done: `wip/U-076a-r3` at `96a49eeb454d43ab4054d61b2156f83136b5ea2d` (settleEntry in lib; lint, typecheck, test 11038, test:db green, gitleaks clean), not pushed yet. Checks not yet posted; auto-merge not queued. Verdicts in `drafts/u-076a-checks/`. Editorial entries are help articles; U-076c extends this form.
 - **For the lead:** none yet.
 
 ### Lane: audit-fixes
