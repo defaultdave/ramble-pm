@@ -1,0 +1,3 @@
+VERDICT: APPROVE
+
+Review of PR 1033 (U-044), head f99d82332e25dcc76f1438017cccf21856c2b6d3, three rounds. Round 1: no findings beyond nits (key by paragraph text, toFixed half-rounding); scope, privacy (first name only, no email selected), aggregate SQL (visible only, no fan-out), cache tag after the commit all verified. Round 2 (shared name helpers, count(), visibleReview) and round 3 (id and row parsing, single 'A guest' constant): approved, no regressions in the booking email and order heading callers. The flaky tests/db/cancel-session-email.db.test.ts is not caused by this branch (own schema per file, no fake timers); it passed on later full runs.
