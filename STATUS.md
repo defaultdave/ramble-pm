@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-17 07:07 by the lead (swarm chat, resumed after compaction). Swarm PRs merged today, read from GitHub: 1019 (U-083b), 1020 (U-130), 1022 (U-076a), 1023, 1025, 1027, 1028 (audit batches), 1024 (U-060). Open: 1029 (U-014a audit, waits on the owner's read), 1026 (U-070, `knip` red, lane `w3-ops-host`). 1021 closed unmerged. Lead end steps not yet run today. Older `Updated` lines: `lanes/lead.md`.
+**Updated:** 2026-11-17 midday by the lead (swarm chat). Merged today, read from GitHub: 1019 (U-083b), 1020 (U-130), 1022 (U-076a), 1024 (U-060), 1026 (U-070), 1032 (U-076b), 1033 (U-044), 1036 (U-126), and audit batches 1023, 1025, 1027, 1028, 1029. Open, each waiting only on the owner's `human-read`: 1030 (U-072), 1031 (U-057), 1034 (U-049), 1035 (U-077). Audit #1017 is held until 1030 merges (same file). Left to build: U-076c, U-078, U-061. Lead end steps not yet run today. Older `Updated` lines: `lanes/lead.md`.
 
 ## Lanes
 
@@ -49,8 +49,6 @@ Moved to `lanes/earlier.md` (2026-11-04).
 
 ### Lane: w3-ops-host
 - **2026-11-17 00:18, lane claimed.** Order: U-083b, U-070 (cancel only, critical), U-126. Nothing built yet.
-- **2026-11-17 01:20, U-060:** built (builder 39 min), PR 1024 opened at 74887364, auto-merge not yet queued. Round 1 (review, qa, spec-compliance, a11y, arch audit): REQUEST_CHANGES/FAIL on prettier, seed on production-demo, B2/B17 duplications, PRD-29 non-refunded eligibility, malformed-token e2e, no-JS submit 500 (Origin null from no-referrer). Round 2 sent to the builder; no wip branch needed (builder's own worktree). U-044 and U-061 wait on U-060 landing.
-- **2026-11-17 02:10, U-060 round 2 built** (builder HEAD d24e83c5, all 12 fixes, gates green in its worktree). A local merge of origin/main (eb5ed67, clean) is committed in the builder worktree `agent-afd4ab52887aaf4e6`, NOT pushed; typecheck, lint, format, db:generate clean after the merge, `pnpm test` and `pnpm test:db` post-merge not confirmed. Next: confirm those, push via `agent-git.ts push unit/U-060-review-invites`, rerun the four agent checks plus a11y on the new head, post checks, `review 1024`, `automerge 1024`.
 - **For the lead:** (1) a stale `next-server` (pid 58164, from `Workspace/defaultdave/.../seo-perf-lighthouse`, 5 days old) held port 3100 and blocked e2e for a while; not ours, not killed. (2) QA left a stray `ramble_qa_u060` database in docker Postgres and a scratch pg dir under /var/folders/.../T/pg16. (3) Review rate limit shares the `manage:` bucket; keyed by token only (pre-existing pattern), audit item candidate.
 
 ### Earlier (before lanes)
@@ -67,7 +65,7 @@ Refreshed 2026-11-17 by the lead. Older lists and what was cleared on 2026-11-16
 3. **Sentry** (held until the demo is shared): the server and browser projects, the ops address, the three alert rules in `docs/runbooks/alerting.md`, then `SENTRY_DSN` and `SENTRY_BROWSER_DSN` (the browser one at build time too) in Vercel.
 4. **Method Layer 0** (open decision 3): not needed until P6.
 6. **Audit tickets that need a ruling** (2026-11-17, `audit-fixes` lane; questions and recommendations in `drafts/audit-fixes-triage-2026-11-17.md`): #998 (make `human-read` a required check in the `main` ruleset), #999 (`scope-check.ts` protected list, a bypass merge), #890 (NoScriptFilters client island or a server route), #1005 (Server Actions or a DECISIONS row extending B15), #1001 and #1004 (shape of the lockout fix; held until U-130 lands), #791 and #993 to #995 (scope and sizing). The lead brings these in one batch with the lanes' other asks.
-7. **Read and approve PR 1029 (U-014a audit batch S-A2, critical tier)** (2026-11-17, `audit-fixes` lane): https://github.com/defaultdave/ramble/pull/1029, head `348b7b9`. Small: removes a duplicate `botChallengeIsLive`. Agent checks pass, auto-merge queued, `human-read` waits on the approval. (PR 1020 and PR 1023 were approved and merged.)
+7. **Read and approve four critical-tier audit PRs** (2026-11-17; every other required check passes, auto-merge queued): https://github.com/defaultdave/ramble/pull/1030 (U-072 host loaders; unblocks #1017), https://github.com/defaultdave/ramble/pull/1031 (U-057 reminder re-time) and https://github.com/defaultdave/ramble/pull/1035 (U-077 refund retry flag), money code, read together; https://github.com/defaultdave/ramble/pull/1034 (U-049, tests only). Read notes: `lanes/audit-fixes.md`, `lanes/audit-fixes-b.md`.
 8. **B6 exempt list** (2026-11-17, `guest-signin` lane ruling, overrulable): add `holdsAnyRoleGrant` beside `readRoleGrants` in `.claude/standards/architecture.md` (protected file, Dave edits).
 
 Open item from the ADR 0007 measurement amendment (2026-10-18): what New York and US law require for first-party analytics and web-vitals beacons (PRD-73); not researched yet.
