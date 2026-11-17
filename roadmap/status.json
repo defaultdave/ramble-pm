@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-11-16",
-  "headline": "Nov 16: every slim-MVP build unit is merged except U-130, the guest sign-in link shown on screen while email is off (issue #989, critical tier, about 0.75 agent-days). Next is the walkthrough as guest, host and ops, then page-change units from its findings. PR 990 merged, so U-130 can start. Your ask: run the production migrations 0024 to 0032 before the next deploy.",
+  "asOf": "2026-11-17",
+  "headline": "Nov 17: swarm to finish. Five lanes at once: U-130 guest sign-in, the CMS and settings (U-076a to c, U-078), reviews (U-060, U-044, U-061), private requests, host cancel and the ops dashboard (U-083b, U-070, U-126), and the 40 open audit tickets. About 11 estimate-days that agents have been closing well under estimate; two critical reads for you (U-130, U-070). Gifting, wave 4 and real-launch units stay out. Then the walkthrough and page changes.",
   "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
   "phases": [
     {
@@ -129,6 +129,10 @@
     }
   ],
   "decisionsMade": [
+    {
+      "what": "Swarm to finish: slim MVP tail plus reviews, host cancel, CMS, settings, private requests and ops dashboard; gifting and wave 4 stay parked",
+      "when": "Nov 17, you"
+    },
     {
       "what": "Guest sign-in link shown on screen while email is off; role-holding addresses still go to the ops mailbox (U-130)",
       "when": "Nov 16, you"
@@ -424,6 +428,18 @@
     }
   },
   "standups": [
+    {
+      "date": "2026-11-17",
+      "done": [
+        "You merged PR 990 (U-130 in units.yaml)",
+        "Swarm scoped: five lanes, blocks in STATUS.md"
+      ],
+      "today": [
+        "Five lane chats: guest-signin, w3-cms, w3-reviews, w3-ops-host, audit-fixes",
+        "You: open the five chats; approve U-130 and U-070 when their checks pass"
+      ],
+      "heldUs": []
+    },
     {
       "date": "2026-11-16",
       "done": [

@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 16, 2026.** Nov 16: every slim-MVP build unit is merged except U-130, the guest sign-in link shown on screen while email is off (issue #989, critical tier, about 0.75 agent-days). Next is the walkthrough as guest, host and ops, then page-change units from its findings. PR 990 merged, so U-130 can start. Your ask: run the production migrations 0024 to 0032 before the next deploy.
+**As of Nov 17, 2026.** Nov 17: swarm to finish. Five lanes at once: U-130 guest sign-in, the CMS and settings (U-076a to c, U-078), reviews (U-060, U-044, U-061), private requests, host cancel and the ops dashboard (U-083b, U-070, U-126), and the 40 open audit tickets. About 11 estimate-days that agents have been closing well under estimate; two critical reads for you (U-130, U-070). Gifting, wave 4 and real-launch units stay out. Then the walkthrough and page changes.
 
 | Milestone | Likely |
 |---|---|
