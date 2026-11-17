@@ -9,7 +9,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
 | `guest-signin` | U-130: show the guest sign-in link on screen while email is off (DECISIONS 2026-11-16); owns (guest)/sign-in/, src/server/auth/ (sign-in link path only), src/lib/signIn.ts | swarm subagent, 2026-11-17 | handed off: PR 1020 open, checks posted, auto-merge queued, waiting on Dave's `human-read` | 2026-11-17 00:55 |
-| `w3-reviews` | U-060, U-044, U-061 (reviews, lite cut); owns schema/reviews, jobs/reviewInvite*, (checkout)/(site)/review/, fixtures/reviews.ts, db/browse.ts and db/home.ts (rating only), lib/experienceCards.ts, components/ExperienceCard/, ExperiencePage/ reviews block, (ops)/ops/reviews/ | swarm subagent, 2026-11-17 | active: starting U-060 | 2026-11-17 00:40 |
+| `w3-reviews` | U-060, U-044, U-061 (reviews, lite cut); owns schema/reviews, jobs/reviewInvite*, (checkout)/(site)/review/, fixtures/reviews.ts, db/browse.ts and db/home.ts (rating only), lib/experienceCards.ts, components/ExperienceCard/, ExperiencePage/ reviews block, (ops)/ops/reviews/ | swarm subagent round 2, 2026-11-17 | active: U-060 PR 1024 round 2 fixer | 2026-11-17 01:27 |
 | `w3-cms` | U-076a, U-076b, U-076c, U-078 (no gift switches): (ops)/ops/editorial/, ops/settings/, lib/richText/, components/RichTextEditor/, actions/editorial.ts, actions/settings.ts, db/settings.ts, db/taxonomy.ts | swarm subagent, 2026-11-17 | active: starting U-076a | 2026-11-17 00:30 |
 | `audit-fixes` | the open `audit` issues: triage against `main`, fix in batches of disjoint files; any file no other lane owns | swarm subagent round 2, 2026-11-17 | handed off: PRs 1023 (waits human-read), 1027 (CI) open, 1025 merged; next S-A2, S-B, S-F1, S-F2, S-G, C-A |:26 |
 | `w3-ops-host` | U-083b, U-070 (cancel only), U-126; owns (ops)/ops/requests/, (host)/host/sessions/[id]/cancel, (ops)/ops/page.tsx (dashboard) | swarm subagent, 2026-11-17 | active: starting U-083b | 2026-11-17 00:18 |
@@ -29,6 +29,7 @@ Moved to `lanes/earlier.md` (2026-11-04).
 
 ### Lane: w3-reviews
 - **2026-11-17 00:40, claimed.** Order U-060, U-044, U-061, all standard tier. Round numbers and PRs are logged here as they happen.
+- **Round 2 relaunch.** U-060 = PR 1024, branch `unit/U-060-review-invites`, reviewed head 7488736. Round 1: review RC, qa FAIL, spec RC, arch FAIL, a11y PASS. Findings and history: `lanes/w3-reviews.md`. Fixer branch `wip/U-060-r2`.
 - **For the lead:** none yet.
 
 ### Lane: w3-cms
