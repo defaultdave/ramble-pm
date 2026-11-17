@@ -223,3 +223,7 @@ Refreshed 2026-11-16 night by the lead from the dependabot-review chat's decisio
 - Lead error: told the w3-reviews and w3-cms relaunches that their earlier fixers had made no fix and were gone, from one look at a clean worktree. Both were still alive (U-076a r3 committed 96a49ee four minutes later; the U-060 builder had uncommitted edits). Correction notes went into both lanes' STATUS sections; expect one duplicated fixer run in each lane.
 - PR 1021 was filed on a `pm/` branch and could not pass `scope-manifest`; the owner closed it; re-filed as 1023.
 - End steps not run (context limit): roadmap, standup, schedule, board dates, audit-tickets, artifact, memory.
+
+
+## Older Updated line, moved 2026-11-17
+**Updated:** 2026-11-16 night by the lead. Folded the dependabot-review chat's decisions (DECISIONS 2026-11-16): Blocked items cleared except production migrations 0024 to 0032, Sentry, and two new asks (PR 990, U-129's issue). Merged today: ramble 979, 981, 982, 983, 984, 986, 987, 988; 985 closed. Board #19 reconciled: U-102, U-068, U-128 Done, plus ten merged units that had been left In Progress or Todo (U-004a, U-022, U-055, U-073, U-074a, U-074b, U-074c, U-075, U-125, U-120 as NEW-1; delta-log 2026-11-16); U-130 is #989, Todo. Schedule not refit (delta-log). Filed 28 audit tickets (#991 to #1018). Finished lanes swept to `lanes/`. Older `Updated` lines: `lanes/lead.md`.
