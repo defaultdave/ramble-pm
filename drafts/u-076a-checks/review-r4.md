@@ -1,0 +1,1 @@
+VERDICT: APPROVE (head bccffc5, delta b248d77..cabe70f). No Critical or Required. Behaviour unchanged on slug, notices, new-article create, edit path, editor encoding. Optional: keep a direct statusAfter-mapping test; declare newEntry after StoredEntry.

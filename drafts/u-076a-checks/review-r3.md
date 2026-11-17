@@ -1,0 +1,1 @@
+VERDICT: APPROVE (head b248d77, delta a1f2c97 vs 7d1d4d3). No Critical or Required. Optional: no test for precedence slug_taken before empty_body; empty_body redirect tested only with an id. settleEntry verified: behaviour unchanged, stale-tab and takedown cases covered.
