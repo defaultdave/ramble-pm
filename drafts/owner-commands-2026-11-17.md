@@ -89,6 +89,16 @@ with:
 
 Open point, not settled by the owner: issue #1005 also asks for a rate-limit key on those two handlers. The standards edit does not add one. The lead recommended adding the key (`confirm-sign-in` is a sign-in path), as a small build in the auth lane. Until the owner answers, #1005 stays open.
 
+## 8. Close three audit tickets that are fixed (added after the bookkeeping agent reported)
+
+`tools/audit-tickets.ts` has no close step (it files issues and syncs the board only), so these stay open although their rows in `audits/` say closed. Check the fixing PR in each row before running.
+
+```bash
+for n in 326 735 830; do gh issue close $n --repo defaultdave/ramble --reason completed --comment "Fixed; recorded as closed in the ramble-pm audit pass files (2026-11-17)."; done
+```
+
+Already done by the bookkeeping agent on 2026-11-17: U-051 and U-105 set Done on board #19, so #61 and #133 are closed. Basis: CI run https://github.com/defaultdave/ramble/actions/runs/44120039874 on main (8dabb24), e2e 187 passed, 6 skipped (all `font-swap.spec.ts`), 1 flaky; the booking-path spec running is inferred from its only skip condition, not read from a per-spec line. Those board edits ran under the owner's `gh` login, not the App.
+
 ## Other standards lines the lanes asked for (same file, owner edits)
 
 - Add `holdsAnyRoleGrant` beside `readRoleGrants` in the B6 exempt text (lane `guest-signin` ruling, 2026-11-17).
@@ -97,5 +107,5 @@ Open point, not settled by the owner: issue #1005 also asks for a rate-limit key
 
 ## What the next lead checks after these have run
 
-- `gh issue list --repo defaultdave/ramble --state open --limit 200 --json number,labels`: expect the 19 parked issues, plus whatever is still in flight: #1001 and #1004 (lane `audit-auth`), #1005 (rate-limit key), #999 until its PR merges, #61 and #133 and #326, #735, #830 unless the bookkeeping agent closed them (its entry is in `lanes/lead.md`).
+- `gh issue list --repo defaultdave/ramble --state open --limit 200 --json number,labels`: expect the 19 parked issues, plus whatever is still in flight: #1001 and #1004 (lane `audit-auth`), #1005 (rate-limit key), #999 until its PR merges. #61 and #133 are already closed.
 - `git show origin/main:scripts/merge-desk/scope-check.ts | grep PROTECTED` and `git show origin/main:.claude/standards/architecture.md | grep -c confirm-sign-in`.
