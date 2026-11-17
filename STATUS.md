@@ -9,6 +9,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
 | `guest-signin` | U-130: show the guest sign-in link on screen while email is off (DECISIONS 2026-11-16); owns (guest)/sign-in/, src/server/auth/ (sign-in link path only), src/lib/signIn.ts | swarm subagent, 2026-11-17 | active: building U-130 (builder next) | 2026-11-17 00:20 |
+| `w3-reviews` | U-060, U-044, U-061 (reviews, lite cut); owns schema/reviews, jobs/reviewInvite*, (checkout)/(site)/review/, fixtures/reviews.ts, db/browse.ts and db/home.ts (rating only), lib/experienceCards.ts, components/ExperienceCard/, ExperiencePage/ reviews block, (ops)/ops/reviews/ | swarm subagent, 2026-11-17 | active: starting U-060 | 2026-11-17 00:40 |
 | `lead` | Shared status, `## Next`, roadmap, memory; coordinates the 2026-11-17 swarm | PM lead swarm, 2026-11-17 (Fable) | active: coordinating the five-lane swarm, one Sonnet subagent per lane | 2026-11-17 00:20 |
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
@@ -20,6 +21,10 @@ Moved to `lanes/earlier.md` (2026-11-04).
 ### Lane: guest-signin
 - **2026-11-16, U-130 scoped, not started.** Problem: guests sign in only by emailed magic link, and email is off (`EMAIL_MODE=sink`), so no guest can create an account or sign in. Dave chose option 2: after a guest submits their address, the page shows the sign-in link (the same `/sign-in/confirm` page the email points to) instead of saying "check your email". Rules: it works only while `EMAIL_MODE` is `sink`; it refuses any address that holds a role grant (host, host_staff, ops roles), and those still go through the ops mailbox; the refusal looks the same as a normal "link sent" reply so it does not reveal which addresses hold roles. Known accepted hole: anyone who types an existing guest's address signs in as that guest. Tier: critical (auth path). The PRD-37 wording change goes in `delta-log.md`, since the PRD is frozen.
 - **2026-11-16 night, lead:** issue #989 and its board item exist (Todo). `units.yaml` entry merged as PR 990 (`d2f8f8f`, 2026-11-17). Lane row set to handed off: scoped, ready to build.
+
+### Lane: w3-reviews
+- **2026-11-17 00:40, claimed.** Order U-060, U-044, U-061, all standard tier. Round numbers and PRs are logged here as they happen.
+- **For the lead:** none yet.
 
 ### Earlier (before lanes)
 Moved to `lanes/earlier.md`.
