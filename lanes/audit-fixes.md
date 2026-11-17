@@ -60,3 +60,5 @@ lane: audit-fixes. Read STATUS.md in the ramble-pm repo by section, not whole: t
 
 
 - **2026-11-17 round 3:** PR 1028 (S-F1, U-127, #1002) merged: Suspense around the uncached miss read in hosts/[slug] (new HostContent.tsx) and picks/[slug]; before 200/500 alternation, after 200 x10, 30 NEXT_STATIC_GEN_BAILOUT lines gone; status stays 200 (SC-4). PR 1029 (S-A2, U-014a, #1000) opened, checks green, waits human-read. 1023, 1025, 1027 merged; audits rows closed.
+
+- **2026-11-17 round 4:** PR 1029 merged. S-B built (3 commits, one per issue) as PR 1030, head 2c38d15; #1017 held for PR 1026's opsSessions.ts edit. qa-agent action_required: no seeded DB or Docker in the sandbox for a host-page browser pass.
