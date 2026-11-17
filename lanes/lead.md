@@ -227,3 +227,10 @@ Refreshed 2026-11-16 night by the lead from the dependabot-review chat's decisio
 
 ## Older Updated line, moved 2026-11-17
 **Updated:** 2026-11-16 night by the lead. Folded the dependabot-review chat's decisions (DECISIONS 2026-11-16): Blocked items cleared except production migrations 0024 to 0032, Sentry, and two new asks (PR 990, U-129's issue). Merged today: ramble 979, 981, 982, 983, 984, 986, 987, 988; 985 closed. Board #19 reconciled: U-102, U-068, U-128 Done, plus ten merged units that had been left In Progress or Todo (U-004a, U-022, U-055, U-073, U-074a, U-074b, U-074c, U-075, U-125, U-120 as NEW-1; delta-log 2026-11-16); U-130 is #989, Todo. Schedule not refit (delta-log). Filed 28 audit tickets (#991 to #1018). Finished lanes swept to `lanes/`. Older `Updated` lines: `lanes/lead.md`.
+
+
+## 2026-11-17, lead swarm chat resumed after compaction (07:07 to about 09:40 local)
+- Relaunched lanes one unit per launch. Merged in this stretch, read from GitHub: 1022 (U-076a), 1024 (U-060), 1026 (U-070), 1029, 1030, 1031, 1034, 1035 (audit batches), 1032 (U-076b), 1033 (U-044), 1036 (U-126). Open at the end: 1037 (U-061), 1038 (U-078); U-076c and audit #1017 building.
+- Opened a second audit session (`audit-fixes-b`) and a second cms session (`w3-cms-b`) with disjoint files; both worked without collisions.
+- Failures: a lane posted qa-agent `action_required` without a database (PR 1030, fixed by a real pass); a lane's hand-made worktree had builder writes refused by a hook (U-076c, relaunched with harness isolation); PR 1030 went DIRTY on a README bullet after five other PRs merged and needed a second owner approval; the first w3-ops-host report said PR 1026 was ready while `knip` was red.
+- Owner direction: swarm runs look like the better default for auto runs; full-run audit after the swarm (DECISIONS). Owner goal set: address or close out every remaining ticket; triage delegated to `drafts/ticket-closeout-2026-11-17.md`.
