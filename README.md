@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 18, 2026.** Nov 18: the ticket close-out is one merge from done. 62 of 63 tickets are closed; the last, #999, closes when PR 1043 is bypass-merged. Every wave 3 unit and every audit fix is merged (PRs 1041, 1042, 1044, 1045, 1046, 1047). Next: the walkthrough, then page-change units from its findings.
+**As of Nov 18, 2026.** Nov 18: the ticket close-out is done. All 63 open tickets are closed and no PR is open; every wave 3 unit and audit fix is merged (PRs 1041 to 1047). Next: the walkthrough, then page-change units from its findings.
 
 | Milestone | Likely |
 |---|---|
@@ -24,7 +24,6 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Decisions needed**
 
-- Bypass-merge PR 1043 (merge desk and standards). Recommended: Merge it; the content is three standards lines and a wider protected list..
 - Walk the site as guest, host and ops. Recommended: Run it next..
 
 **Held up**

@@ -370,3 +370,6 @@ Dave merged PR 905, process audit suggestion 5.3. Every unit targets `main`. The
 - **2026-11-18, lead (PM decision, owner can overrule; he reads the PR as critical tier):** audit batch B-1 (W3-1, U-004a) keys every IPv6 client by its /64 in `src/lib/clientAddress.ts`, for all callers, instead of adding a second key used by the sign-in counter alone. Two consequences are accepted: the hold budget in `device.ts` is now shared by IPv6 guests in one /64, the same way IPv4 guests behind one router already share one; and the expectation at `src/server/ports/email/webhook.test.ts:90` changes to the /64 key, so that one test line joins the batch's scope. Why: a /64 is one subscriber's allocation, so any limit keyed on a full IPv6 address can be walked around; one rule for every limit is simpler than two keys.
 
 - **2026-11-18 (lane w3-fix-b2):** PR 1046 merged without an owner approval request: standard-tier PRs 1038, 1040 and 1045 merged the same way. The round 2 sessions.ts edit ruled above shipped as ruled.
+
+## 2026-11-18 (lead)
+- Ticket goal met: every open issue in the ramble repo is closed by completion or by decision, the last (#999) by the owner's bypass merge of PR 1043. Who: owner set the goal, lead ran it. Remaining follow-up: the B6 exempt-list line for the auth-row purges.

@@ -296,3 +296,6 @@ Removed 17 worktrees of merged PRs and 59 local branches (17 with worktrees, 42 
 ## 2026-11-18 05:55 close-out check (lead)
 - PRs 1042, 1044, 1047 merged on the owner's approvals; #1004 and #1005 closed. Removed worktrees agent-ad5a514ae76a58706, agent-a9eb300be6160add8, agent-a467f9d68123ff140, agent-a384aff08c8fe14ca, agent-aa173ffb08e80ed4c and branches unit/U-004a-audit-auth2, -auth3, -w3b1 and wip/U-004a-audit-auth3-r1, -r2, wip/U-004a-audit-w3b1, -r2. Audit rows N1111-4, N1111-5, W3-1 marked fixed.
 - Open: issue #999 and PR 1043 (owner bypass merge). Kept: worktree agent-ac7d257ba58237ca1 and branch pm/owner-pack-2026-11-18 until 1043 merges.
+
+## 2026-11-18 close-out complete (lead)
+- PR 1043 bypass-merged by the owner (04291ac); #999 closed; zero open issues and PRs. Removed worktree agent-ac7d257ba58237ca1 and branch pm/owner-pack-2026-11-18; N1105-2 marked fixed. Lead row handed off.

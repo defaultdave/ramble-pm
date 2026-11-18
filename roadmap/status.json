@@ -1,6 +1,6 @@
 {
  "asOf": "2026-11-18",
- "headline": "Nov 18: the ticket close-out is one merge from done. 62 of 63 tickets are closed; the last, #999, closes when PR 1043 is bypass-merged. Every wave 3 unit and every audit fix is merged (PRs 1041, 1042, 1044, 1045, 1046, 1047). Next: the walkthrough, then page-change units from its findings.",
+ "headline": "Nov 18: the ticket close-out is done. All 63 open tickets are closed and no PR is open; every wave 3 unit and audit fix is merged (PRs 1041 to 1047). Next: the walkthrough, then page-change units from its findings.",
  "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
  "phases": [
   {
@@ -99,13 +99,6 @@
   }
  ],
  "decisionsNeeded": [
-  {
-   "title": "Bypass-merge PR 1043 (merge desk and standards)",
-   "impact": "Closes #999, the last open ticket; adds the #1005, B6 and RichTextEditor lines to the architecture standard",
-   "detail": "It changes protected files, so it fails scope-manifest and human-read by design. Command: gh pr merge 1043 --repo defaultdave/ramble --squash --admin",
-   "recommendation": "Merge it; the content is three standards lines and a wider protected list.",
-   "blocks": "#999 and the follow-up line naming the auth-row purges in B6"
-  },
   {
    "title": "Walk the site as guest, host and ops",
    "impact": "Its findings become the page-change units, the next build work",
@@ -516,17 +509,16 @@
   {
    "date": "2026-11-18",
    "done": [
+    "PR 1043 bypass-merged (wider protected-files list, three standards lines); #999 closed: zero open tickets, zero open PRs",
     "PRs 1042, 1044 and 1047 merged on your approvals (sign-in row purge, rate-limit keys on the auth form posts, IPv6 /64 key); #1004 and #1005 closed",
     "PR 1046 merged (stale settings save, audit W3-2)",
     "PR 1041 merged (U-004a: per-client sign-in limit)",
     "Wave 3 audit: 17 raised, 4 kept; B-3 merged as PR 1045 (legal audit row in the transaction)",
     "Housekeeping: 17 merged worktrees and 59 local branches removed",
-    "Ticket close-out: 62 of 63 issues closed; #999 is left, with PR 1043 open",
     "Worktrees and branches of the merged PRs removed; audit rows N1111-4, N1111-5 and W3-1 marked fixed"
    ],
    "today": [
-    "Your bypass merge of PR 1043, which closes #999",
-    "Then one protected-files line naming the auth-row purges in B6",
+    "One protected-files line naming the auth-row purges in B6 (next lead chat)",
     "The walkthrough, then page-change units and the full-run audit"
    ],
    "heldUs": [
@@ -541,10 +533,6 @@
     {
      "what": "PR 1046 failed review and the architecture audit in round 1 (README rows, B13, B2) and B17 and B5 in round 2",
      "cost": "Two fix rounds on a small change"
-    },
-    {
-     "what": "PR 1043 waits on your bypass merge",
-     "cost": "One ticket (#999) stays open until you run it"
     }
    ]
   },
