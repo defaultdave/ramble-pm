@@ -156,3 +156,5 @@ Full list with reasons in `DECISIONS.md`.
 - Audit findings can be fixed straight from the pass file as `unit/<unit>-audit-<batch>` PRs with no ticket; the wave 3 pass kept 4 of 17 findings and merged two fixes within the hour.
 - The schedule refit fails until units added after the freeze (U-120 to U-130) have solo estimates in the estimate panel, and `board-dates.ts` fails while the board's Sprint field lacks its sprint options.
 
+- The close-out finished on 2026-11-18 with zero open issues and zero open pull requests. `audit-tickets.ts --run` files nothing when the dry run says so but still stops at its board sync while the Sprint field has no "Maintenance" option.
+- A background wait on GitHub can outlive its purpose: after the owner reports a merge, check GitHub directly and stop the wait rather than relying on it to exit.
