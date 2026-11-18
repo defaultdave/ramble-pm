@@ -23,7 +23,7 @@ Moved to `lanes/earlier.md` (2026-11-04).
 ## In flight
 
 ### Lane: audit-auth
-Round 2 launching (2026-11-18): #1005. PR 1041 merged 2026-11-18 00:44; PR 1042 green except `human-read`.
+**Round 3 lane PM owns this lane and PR 1044 since 2026-11-18 02:15 (lead).** The round 2 lane PM handed back incomplete at 02:10; if it resumes, it stops: no pushes, no checks, no fixer launches, and it reports to the lead. State at takeover: PR 1044 (#1005) open at `3ceac9e`, no checks posted, architecture-audit round 1 failed (B17, B2 twice), a round 1 fixer possibly alive in worktree `agent-a9eb300be6160add8`. PR 1042 green except `human-read`. Next after 1044: audit batch B-1 (W3-1).
 
 ### Lane: owner-pack
 PR 1043 (branch `pm/owner-pack-2026-11-18`, head 15b981a) opened as the App, owner review requested. Carries #999 (PROTECTED widened) and three standards lines. Fails `scope-manifest` by design; owner merges with bypass. For the lead: the auth-row purges are not named in B6 because PR 1042 is unmerged; add them to the B6 text after it merges.
