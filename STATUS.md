@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-18 01:20 by the lead (swarm chat, Fable). Wave 3 is complete: every unit merged, PR 1041 (#1001) merged 00:44. Open: PR 1042 (#1004), green except the owner's `human-read`. The lead ran the close-out at 01:35 (owner goal): 60 issues closed, 3 open (#999, #1004, #1005), each with a PR in flight. Lanes running: `audit-auth` (#1005), `owner-pack` (#999 and standards lines, one bypass PR), `audit-w3` (wave 3 audit, combined into fix batches), `housekeeping` (stale worktrees). Older `Updated` lines: `lanes/lead.md`.
+**Updated:** 2026-11-18 01:50 by the lead (swarm chat, Fable). Every remaining ticket is built or closed; what is left waits on the owner. Open issues: #999, #1004, #1005. Open PRs: 1042 (#1004), 1044 (#1005) and 1047 (audit W3-1), all critical tier, green except `human-read`; 1043 (#999 and standards lines) for a bypass merge. Merged today: 1041, 1045 (audit W3-3), 1046 (audit W3-2). The lead ran the ticket close-out at about 00:55 (60 issues closed). No lane is running. Clock times written earlier today in this file ran about 40 minutes fast. Older `Updated` lines: `lanes/lead.md`.
 
 ## Lanes
 
@@ -13,7 +13,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | `audit-w3` | read-only audit of wave 3 code (PRs 1019 to 1042) into `audits/wave3-2026-11-18.md`, combined into fix batches, low-value findings dropped; no code | swarm subagent, 2026-11-18 | handed off: 4 batches (B-1 to B-4), highest severity medium; not filed | 2026-11-18 01:30 |
 | `w3-fix-b2` | audit batch B-2 (W3-2, U-078, standard): stale settings form undoes a concurrent change; owns `opsSettings.ts`, `db/settings.ts`, the settings action and `/ops/settings` form; history in `lanes/w3-fix-b2.md` | swarm subagent, 2026-11-18 | handed off: PR 1046 merged 2026-11-18 06:41 | 2026-11-18 02:45 |
 | `w3-fix-b3` | audit batch B-3 (U-076c, standard): legal audit row inside the transaction, stale TODO and cache comments; owns `db/legal.ts`, `db/legalAdmin.ts`, comments in `home.ts`, `landing.ts`, `experiencePage.ts`; history in `lanes/w3-fix-b3.md` | swarm subagent, 2026-11-18 | handed off: PR 1045 merged (W3-3 fixed) | 2026-11-18 06:20 |
-| `lead` | Shared status, `## Next`, roadmap, memory; coordinates the ticket close-out swarm | PM lead swarm, 2026-11-18 (Fable; took over on the owner's word) | active: claimed 00:50; reading GitHub and the close-out sheet before launching lanes | 2026-11-18 00:50 |
+| `lead` | Shared status, `## Next`, roadmap, memory; ticket close-out | PM lead swarm, 2026-11-18 (Fable) | active: all lanes done; waiting on the owner's reads of PRs 1042, 1044, 1047 and bypass merge of 1043 | 2026-11-18 01:55 |
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
 
 ## Done
@@ -43,42 +43,37 @@ Moved to `lanes/earlier.md`.
 Eight open PRD facts (Q-11 to Q-21) with their working assumptions: `open-client-facts.md`. None blocks the demo.
 
 ## Blocked on Dave
-Refreshed 2026-11-18 01:20 by the lead. The list of 2026-11-17: `lanes/lead.md`. Nothing here stops the lanes.
+Refreshed 2026-11-18 01:50 by the lead. These four close the last three issues and the last audit fix.
 
-1. **Done by the lead on 2026-11-18 01:35 (owner goal, DECISIONS):** the close-out script ran with `--drop-parked`, and #992 was closed after it. Three issues remain open, each with a PR in flight: #999, #1004, #1005. To restore a parked unit: `gh issue reopen <n> --repo defaultdave/ramble`.
-2. **Read and approve PR 1042** (U-004a, critical; purge of expired sign-in rows): https://github.com/defaultdave/ramble/pull/1042. Read notes: `lanes/audit-auth.md`. The #1005 PR from lane `audit-auth` will need the same read.
-3. **Bypass-merge PR 1043** (owner-pack; closes #999, adds the #1005, B6 and `RichTextEditor` standards lines; fails `scope-manifest` and `human-read` by design, CI otherwise running at 01:45): `gh pr merge 1043 --repo defaultdave/ramble --squash --admin`. It replaces the hand edits in sections 6 and 7 of the 2026-11-17 file. Follow-up after PR 1042 merges: name the auth-row purges in the B6 exempt list (one line, next standards PR).
-4. **Walkthrough** (your time, five passes): `### Next chat: walkthrough`. Its findings become the page-change units, the next build work.
-5. **Production migrations 0024 to 0034:** run the `db-migrate-production` workflow before the next production deploy.
-6. **U-129:** create its issue and board item (PR 978 merged 2026-11-14), so it can be set Done.
-7. **Sentry** (held until the demo is shared): `docs/runbooks/alerting.md`. **Method Layer 0:** not needed until P6.
+1. **Read and approve PR 1042** (U-004a, critical; purge of expired sign-in rows; closes #1004): https://github.com/defaultdave/ramble/pull/1042. Read notes: `lanes/audit-auth.md`.
+2. **Read and approve PR 1044** (U-004a, critical; rate-limit keys on the two auth form posts; closes #1005): https://github.com/defaultdave/ramble/pull/1044. Its description is stale; apply the corrected one first: `gh pr edit 1044 --repo defaultdave/ramble --body-file /Users/davidfleming/Workspace/ramble-pm/drafts/pr-1044-body.md`.
+3. **Read and approve PR 1047** (U-004a, critical; per-client limits keyed by the IPv6 /64, audit W3-1; test, db and e2e were still running at 01:45): https://github.com/defaultdave/ramble/pull/1047. Ruling to check while reading: IPv6 guests in one /64 share one hold budget (DECISIONS 2026-11-18). 1044 and 1047 touch the same area; if the second goes DIRTY after the first merges, a lane merges `main` and it needs a second approval.
+4. **Bypass-merge PR 1043** (closes #999; adds the #1005, B6 and `RichTextEditor` standards lines; fails `scope-manifest` by design): `gh pr merge 1043 --repo defaultdave/ramble --squash --admin`. Follow-up after 1042 merges: name the auth-row purges in the B6 exempt list.
+5. **Read the full-run audit** and pick which recommendations to adopt: `drafts/full-run-audit-2026-11-18.md` (one-page summary first).
+6. **Walkthrough** (your time, five passes): `### Next chat: walkthrough`. Its findings become the page-change units.
+7. **Tooling the lead could not fix alone:** `board-dates.ts` needs the board's Sprint field deleted and rebuilt (a board settings change); `forecast.ts` needs solo estimates for U-120 to U-130 before the schedule can be refit.
+8. **Production migrations 0024 to 0034** before the next production deploy. **U-129:** create its issue and board item. **Sentry** and **Method Layer 0:** as before (`lanes/lead.md`).
 
 Open item from the ADR 0007 measurement amendment (2026-10-18): what New York and US law require for first-party analytics and web-vitals beacons (PRD-73); not researched yet.
 Legal and vendor questions for the real job, logged, not blocking the demo: Ramble holding host money and the New York gift law (counsel, Q-16); card refund age limit at 12 months (ask Stripe); Stripe's Connect review time.
 
 ## Next
-**Close-out swarm, 2026-11-18 (owner: keep combining and closing tickets, drop what is not needed).** One Fable lead chat, one Sonnet subagent per lane.
+**Ticket goal (owner, 2026-11-18): close out all Ramble tickets by completion or closing.** Everything agents can do is done. Order from here: (1) the owner's three reads and one bypass merge above, which close #999, #1004 and #1005; (2) after PR 1042 merges, one more protected-files PR naming the auth-row purges in B6; (3) run `bun tools/audit-tickets.ts` as a dry run and only then with `--run`, once W3-1's row reads fixed, so it files nothing; (4) the walkthrough, then page-change units from its findings with dictionary phases 1 to 4 riding along; (5) the owner's choices from the full-run audit.
 
-| Lane | Work | Ends with |
-|---|---|---|
-| `audit-auth` | #1005 rate-limit keys on the two auth form posts (U-004a, critical) | a PR waiting on `human-read` |
-| `owner-pack` | #999 and the standards lines in one protected-files PR | a PR for the owner's bypass merge |
-| `audit-w3` | audit of wave 3 code, findings combined into at most six fix batches, low-value ones dropped | `audits/wave3-2026-11-18.md` |
-
-Then, in order: (1) the lead opens one fix lane per `audit-w3` batch with disjoint files, at most five builders; (2) the walkthrough with the owner, then page-change units from its findings, with dictionary phases 1 to 4 riding along; (3) the full-run audit of the whole project run, as its own Opus chat (DECISIONS 2026-11-17). After the close-out script runs, the open issues are the parked ones, #992, and whatever is in flight.
+Not built, by decision: audit W3-4 (review text erasure) travels with U-085; the 45 cut and parked units are closed and stay in `docs/plan/units.yaml`.
 
 **Standing rule since 2026-10-29 (DECISIONS):** the PM proceeds on its recommendation wherever no owner-only capability is needed, logs the call, and lists it under "Decided for you" on the roadmap; work waits for Dave only on promotions, bypass merges, rulesets, the App, secrets, repo creation, deploys and spend.
 
-Older Next items (the 2026-11-17 five-lane table, the 2026-11-13 slim MVP goal, the text dictionary note): `lanes/lead.md`.
+Older Next items: `lanes/lead.md`.
 
 ## Next chat
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
 
-### Next chat: swarm (lead, runs the lanes as subagents)
-- **Before you start:** the owner runs every command and both file edits in `drafts/owner-commands-2026-11-17.md` (he said he will have done so; verify on GitHub and `main` first, using that file's last section). In flight at hand-off: lane `audit-auth` (#1001, #1004) and a bookkeeping agent (ticket sync, U-051 and U-105), whose reports did not reach you: read `lanes/audit-auth.md`, `lanes/lead.md` and GitHub. U-076c (PR 1040) and #1017 (PR 1039) are merged; wave 3 is complete.
-- **Run:** `/ramble-pm lane: lead` in a new desktop chat, started from the ramble main checkout, then paste the prompt.
-- **Model and effort:** Fable main chat; lane subagents and builders Sonnet; narrow checks Haiku.
-- **Prompt:** You are the lead and the swarm's coordinator. The owner's standing goal (2026-11-17): address or close out every remaining Ramble ticket. Start from `drafts/ticket-closeout-2026-11-17.md` (one disposition per open issue, a build plan in lanes, an owner answer sheet, the owner's close commands); if it is missing, redo that triage first. Read `lanes/lead.md` (entries 2026-11-17) and every open PR on GitHub (`gh pr list`, sandbox bypassed) before believing any lane row; the previous lead chat's subagents do not report to you. State at hand-off: wave 3 has U-130, U-083b, U-070, U-126, U-076a, U-076b, U-060, U-044 merged, U-061 (PR 1037) and U-078 (PR 1038) in review, U-076c building; all nine audit batches merged, audit #1017 building on `unit/U-072-audit-sb2`. Run the build plan as lanes, one unit per launch, background `general-purpose` Sonnet subagents, shell in the ramble checkout. Lessons: builders must be launched with the Agent tool's `isolation: "worktree"` (a hand-made worktree has its writes refused by a hook; never work around it); check a fixer's worktree twice, minutes apart, before calling it dead; audit fixes go on `unit/<owning unit>-audit-<batch>` with a `U-xxx:` title; a PR left open while others merge can go DIRTY and then needs the owner's approval again on the new head; QA must be a real pass, never `action_required`; cite logged rulings and ask for rule wording in every architecture-audit prompt; `STATUS.md` has a 25 KB publish limit. Owner asks to batch: the answer sheet in the close-out draft, critical-tier reads as PRs go green, the B6, B8 and Photo allowlist lines, production migrations 0024 onward before the next production deploy. The lead end steps were NOT run on 2026-11-17 (roadmap status.json and standup, schedule, `bun tools/plan/roadmap.ts`, board dates, `bun tools/audit-tickets.ts --run`, the artifact, public memory lessons): run them. Then close U-051 and U-105 if a CI e2e run shows the booking-path spec ran, open the walkthrough, and brief the full-run audit the owner asked for (DECISIONS 2026-11-17) as its own Opus chat. Don't commit in ramble outside the merge-desk scripts.
+### Next chat: lead
+- **Before you start:** approve PRs 1042, 1044 and 1047 and bypass-merge PR 1043 (the Blocked list has the links and commands).
+- **Run:** `/ramble-pm` in a new desktop chat, started from the ramble main checkout.
+- **Model and effort:** Sonnet, medium. Builders Sonnet, narrow checks Haiku.
+- **Prompt:** You are the lead. Goal: confirm the ticket close-out is complete. Read `## Blocked on Dave` and `## Next` in `STATUS.md`, then GitHub (`gh pr list` and `gh issue list --repo defaultdave/ramble`, sandbox bypassed). For each of PRs 1042, 1043, 1044, 1047: if merged, remove its worktree and local branches and mark its audit row or lane; if one went DIRTY, launch one builder from this chat (Agent tool, `isolation: "worktree"`, shell in the ramble checkout, never from a lane subagent and never a hand-made worktree) to merge `main`, rerun gates and the four checks, and ask the owner to approve the new head. When 1042 is merged, prepare the one-line B6 standards PR for the auth-row purges, as PR 1043 was prepared. Then dry-run `bun tools/audit-tickets.ts` and run it only if it would file nothing. Done looks like: zero open issues in `defaultdave/ramble`, zero open PRs, STATUS and the roadmap refreshed and published. Don't commit in ramble outside the merge-desk scripts.
 
 ### Next chat: walkthrough
 - **Before you start:** nothing. Pick local (`pnpm dev`, seeded) or the deployed site; on deployed, guest sign-in waits for U-130 and the personas are not seeded.

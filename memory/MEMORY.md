@@ -148,3 +148,11 @@ Full list with reasons in `DECISIONS.md`.
 - `forecast.ts` cannot price a unit added after the freeze: it needs a solo estimate in the frozen `plan/estimate-panel.json`, even for a unit marked done. Drop such units with `--drop`; a unit still to build cannot be forecast.
 - `audit-tickets.ts --run` can file every issue and then fail on the board sync with a network timeout; rerun it, since it files nothing twice.
 - When a script edits `STATUS.md` by heading, match the heading with its newline (`\n## Blocked on Dave\n`): the Lanes intro names the same headings in running text, and a bare match once cut the Lanes table and In flight (restored the same night).
+
+## Lessons from the 2026-11-18 close-out swarm
+- A builder's worktree is cut from the lead chat's working directory, not from where a lane subagent has moved its shell. Launch every builder from the lead chat with the shell in the app checkout and `isolation: "worktree"`; a builder launched from the state repo, or given a hand-made worktree, has its edits refused by a hook.
+- A lane subagent can be cut off mid-round and may wake later. Give each lane a budget note (write state after every step), and when a replacement takes over, write a stand-down note in the lane's STATUS section; the earlier agent reads it before any write and stops.
+- `tools/audit-tickets.ts` files and syncs but never closes. Dry-run it before `--run`, and mark fixed, later or won't rows first, or it files tickets for work already in a PR.
+- Audit findings can be fixed straight from the pass file as `unit/<unit>-audit-<batch>` PRs with no ticket; the wave 3 pass kept 4 of 17 findings and merged two fixes within the hour.
+- The schedule refit fails until units added after the freeze (U-120 to U-130) have solo estimates in the estimate panel, and `board-dates.ts` fails while the board's Sprint field lacks its sprint options.
+
