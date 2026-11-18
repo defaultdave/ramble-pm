@@ -255,3 +255,36 @@ Refreshed 2026-11-16 night by the lead from the dependabot-review chat's decisio
 | `w3-reviews` | U-060, U-044, U-061 | schema/reviews, jobs/reviewInvite*, (checkout)/(site)/review/, fixtures/reviews.ts, db/browse.ts and db/home.ts (rating only), lib/experienceCards.ts, components/ExperienceCard/, ExperiencePage/ reviews block, (ops)/ops/reviews/ | none |
 | `w3-ops-host` | U-083b, U-070 (cancel only), U-126 | (ops)/ops/requests/, (host)/host/sessions/[id]/cancel, (ops)/ops/page.tsx (dashboard) | U-070 |
 | `audit-fixes` | the 40 open audit tickets: triage against `main` first, then fix in batches of disjoint files | any file no other lane owns; a ticket in another lane's files goes to that lane or waits | per file touched |
+
+
+## Moved from STATUS.md on 2026-11-18 01:20 (replaced by the close-out swarm)
+
+**Updated:** 2026-11-17 midday by the lead (swarm chat). Merged today, read from GitHub: 1019 (U-083b), 1020 (U-130), 1022 (U-076a), 1024 (U-060), 1026 (U-070), 1032 (U-076b), 1033 (U-044), 1036 (U-126), and audit batches 1023, 1025, 1027, 1028, 1029. Open, each waiting only on the owner's `human-read`: 1030 (U-072), 1031 (U-057), 1034 (U-049), 1035 (U-077). Audit #1017 is held until 1030 merges (same file). Left to build: U-076c, U-078, U-061. Lead end steps not yet run today. Older `Updated` lines: `lanes/lead.md`.
+
+## Blocked on Dave
+Refreshed 2026-11-17 by the lead. Older lists and what was cleared on 2026-11-16: `lanes/lead.md`. Nothing here blocks the current goal.
+
+1. **Production migrations 0024 to 0032:** run the `db-migrate-production` workflow before the next production deploy.
+2. **U-129:** create its issue and board item (PR 978 merged 2026-11-14), so it can be set Done.
+3. **Sentry** (held until the demo is shared): the server and browser projects, the ops address, the three alert rules in `docs/runbooks/alerting.md`, then `SENTRY_DSN` and `SENTRY_BROWSER_DSN` (the browser one at build time too) in Vercel.
+4. **Method Layer 0** (open decision 3): not needed until P6.
+6. **Audit tickets that need a ruling** (2026-11-17, `audit-fixes` lane; questions and recommendations in `drafts/audit-fixes-triage-2026-11-17.md`): #998 (make `human-read` a required check in the `main` ruleset), #999 (`scope-check.ts` protected list, a bypass merge), #890 (NoScriptFilters client island or a server route), #1005 (Server Actions or a DECISIONS row extending B15), #1001 and #1004 (shape of the lockout fix; held until U-130 lands), #791 and #993 to #995 (scope and sizing). The lead brings these in one batch with the lanes' other asks.
+7. **Read and approve four critical-tier audit PRs** (2026-11-17; every other required check passes, auto-merge queued): https://github.com/defaultdave/ramble/pull/1030 (U-072 host loaders; unblocks #1017), https://github.com/defaultdave/ramble/pull/1031 (U-057 reminder re-time) and https://github.com/defaultdave/ramble/pull/1035 (U-077 refund retry flag), money code, read together; https://github.com/defaultdave/ramble/pull/1034 (U-049, tests only). Read notes: `lanes/audit-fixes.md`, `lanes/audit-fixes-b.md`.
+8. **B6 exempt list** (2026-11-17, `guest-signin` lane ruling, overrulable): add `holdsAnyRoleGrant` beside `readRoleGrants` in `.claude/standards/architecture.md` (protected file, Dave edits).
+
+Open item from the ADR 0007 measurement amendment (2026-10-18): what New York and US law require for first-party analytics and web-vitals beacons (PRD-73); not researched yet.
+Legal and vendor questions for the real job, logged, not blocking the demo: Ramble holding host money and the New York gift law (counsel, Q-16); card refund age limit at 12 months (ask Stripe); Stripe's Connect review time.
+
+
+## Next
+**Swarm, 2026-11-17 (Dave chose option 1, DECISIONS 2026-11-17).** Five lanes at once, one builder each (the machine limit). Each lane opens with `/ramble-pm lane: <name>` from its block under `## Next chat`. Shared rules: migrations collide on number, so the second unit to land merges `main` and regenerates; `(ops)/layout.tsx` nav links are shared by `w3-cms`, `w3-reviews` and `w3-ops-host`, so the second to land merges `main` first; e2e through the lock; one Postgres.
+
+| Lane | Units in order | Owns | Critical |
+|---|---|---|---|
+
+Then, as each lane ends: the walkthrough with Dave (block `walkthrough`), and page-change units from its findings, with dictionary phases 1 to 4 riding along. The lead also closes U-051 and U-105 on board #19 once a CI e2e run on `main` shows the booking-path spec ran (PRs 911 and 915 merged).
+
+**Standing rule since 2026-10-29 (DECISIONS):** the PM proceeds on its recommendation wherever no owner-only capability is needed, logs the call, and lists it under "Decided for you" on the roadmap; work waits for Dave only on promotions, bypass merges, rulesets, the App, secrets, repo creation, deploys and spend.
+
+Older Next items, the 2026-11-13 slim MVP goal (parked list) and the text dictionary note: `lanes/lead.md`.
+

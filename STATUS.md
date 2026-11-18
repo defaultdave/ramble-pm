@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-17 midday by the lead (swarm chat). Merged today, read from GitHub: 1019 (U-083b), 1020 (U-130), 1022 (U-076a), 1024 (U-060), 1026 (U-070), 1032 (U-076b), 1033 (U-044), 1036 (U-126), and audit batches 1023, 1025, 1027, 1028, 1029. Open, each waiting only on the owner's `human-read`: 1030 (U-072), 1031 (U-057), 1034 (U-049), 1035 (U-077). Audit #1017 is held until 1030 merges (same file). Left to build: U-076c, U-078, U-061. Lead end steps not yet run today. Older `Updated` lines: `lanes/lead.md`.
+**Updated:** 2026-11-18 01:20 by the lead (swarm chat, Fable). Wave 3 is complete: every unit merged, PR 1041 (#1001) merged 00:44. Open: PR 1042 (#1004), green except the owner's `human-read`. 63 issues open because the close commands of 2026-11-17 have not run; one script now does all of it (`drafts/owner-closeout-2026-11-18.sh`). Lanes running: `audit-auth` (#1005), `owner-pack` (#999 and standards lines, one bypass PR), `audit-w3` (wave 3 audit, combined into fix batches), `housekeeping` (stale worktrees). Older `Updated` lines: `lanes/lead.md`.
 
 ## Lanes
 
@@ -39,30 +39,34 @@ Moved to `lanes/earlier.md`.
 Eight open PRD facts (Q-11 to Q-21) with their working assumptions: `open-client-facts.md`. None blocks the demo.
 
 ## Blocked on Dave
-Refreshed 2026-11-17 by the lead. Older lists and what was cleared on 2026-11-16: `lanes/lead.md`. Nothing here blocks the current goal.
+Refreshed 2026-11-18 01:20 by the lead. The list of 2026-11-17: `lanes/lead.md`. Nothing here stops the lanes.
 
-1. **Production migrations 0024 to 0032:** run the `db-migrate-production` workflow before the next production deploy.
-2. **U-129:** create its issue and board item (PR 978 merged 2026-11-14), so it can be set Done.
-3. **Sentry** (held until the demo is shared): the server and browser projects, the ops address, the three alert rules in `docs/runbooks/alerting.md`, then `SENTRY_DSN` and `SENTRY_BROWSER_DSN` (the browser one at build time too) in Vercel.
-4. **Method Layer 0** (open decision 3): not needed until P6.
-6. **Audit tickets that need a ruling** (2026-11-17, `audit-fixes` lane; questions and recommendations in `drafts/audit-fixes-triage-2026-11-17.md`): #998 (make `human-read` a required check in the `main` ruleset), #999 (`scope-check.ts` protected list, a bypass merge), #890 (NoScriptFilters client island or a server route), #1005 (Server Actions or a DECISIONS row extending B15), #1001 and #1004 (shape of the lockout fix; held until U-130 lands), #791 and #993 to #995 (scope and sizing). The lead brings these in one batch with the lanes' other asks.
-7. **Read and approve four critical-tier audit PRs** (2026-11-17; every other required check passes, auto-merge queued): https://github.com/defaultdave/ramble/pull/1030 (U-072 host loaders; unblocks #1017), https://github.com/defaultdave/ramble/pull/1031 (U-057 reminder re-time) and https://github.com/defaultdave/ramble/pull/1035 (U-077 refund retry flag), money code, read together; https://github.com/defaultdave/ramble/pull/1034 (U-049, tests only). Read notes: `lanes/audit-fixes.md`, `lanes/audit-fixes-b.md`.
-8. **B6 exempt list** (2026-11-17, `guest-signin` lane ruling, overrulable): add `holdsAnyRoleGrant` beside `readRoleGrants` in `.claude/standards/architecture.md` (protected file, Dave edits).
+1. **Run the close-out script** (about a minute): `bash /Users/davidfleming/Workspace/ramble-pm/drafts/owner-closeout-2026-11-18.sh`. Closes 46 issues, folds five image tickets into #992, labels 14 as parked. Add `--drop-parked` to also close the 13 parked units (gifting, wave 4). Replaces `drafts/owner-commands-2026-11-17.md` sections 1 to 5 and 8.
+2. **Read and approve PR 1042** (U-004a, critical; purge of expired sign-in rows): https://github.com/defaultdave/ramble/pull/1042. Read notes: `lanes/audit-auth.md`. The #1005 PR from lane `audit-auth` will need the same read.
+3. **Bypass-merge the owner-pack PR** once lane `owner-pack` opens it (#999 protected list plus four standards lines); it replaces the hand edits in sections 6 and 7 of the 2026-11-17 file and the old B6 item.
+4. **Walkthrough** (your time, five passes): `### Next chat: walkthrough`. Its findings become the page-change units, the next build work.
+5. **Production migrations 0024 to 0034:** run the `db-migrate-production` workflow before the next production deploy.
+6. **U-129:** create its issue and board item (PR 978 merged 2026-11-14), so it can be set Done.
+7. **Sentry** (held until the demo is shared): `docs/runbooks/alerting.md`. **Method Layer 0:** not needed until P6.
 
 Open item from the ADR 0007 measurement amendment (2026-10-18): what New York and US law require for first-party analytics and web-vitals beacons (PRD-73); not researched yet.
 Legal and vendor questions for the real job, logged, not blocking the demo: Ramble holding host money and the New York gift law (counsel, Q-16); card refund age limit at 12 months (ask Stripe); Stripe's Connect review time.
 
 ## Next
-**Swarm, 2026-11-17 (Dave chose option 1, DECISIONS 2026-11-17).** Five lanes at once, one builder each (the machine limit). Each lane opens with `/ramble-pm lane: <name>` from its block under `## Next chat`. Shared rules: migrations collide on number, so the second unit to land merges `main` and regenerates; `(ops)/layout.tsx` nav links are shared by `w3-cms`, `w3-reviews` and `w3-ops-host`, so the second to land merges `main` first; e2e through the lock; one Postgres.
+**Close-out swarm, 2026-11-18 (owner: keep combining and closing tickets, drop what is not needed).** One Fable lead chat, one Sonnet subagent per lane.
 
-| Lane | Units in order | Owns | Critical |
-|---|---|---|---|
+| Lane | Work | Ends with |
+|---|---|---|
+| `audit-auth` | #1005 rate-limit keys on the two auth form posts (U-004a, critical) | a PR waiting on `human-read` |
+| `owner-pack` | #999 and the standards lines in one protected-files PR | a PR for the owner's bypass merge |
+| `audit-w3` | audit of wave 3 code, findings combined into at most six fix batches, low-value ones dropped | `audits/wave3-2026-11-18.md` |
+| `housekeeping` | remove worktrees and branches of merged PRs | a clean `git worktree list` |
 
-Then, as each lane ends: the walkthrough with Dave (block `walkthrough`), and page-change units from its findings, with dictionary phases 1 to 4 riding along. The lead also closes U-051 and U-105 on board #19 once a CI e2e run on `main` shows the booking-path spec ran (PRs 911 and 915 merged).
+Then, in order: (1) the lead opens one fix lane per `audit-w3` batch with disjoint files, at most five builders; (2) the walkthrough with the owner, then page-change units from its findings, with dictionary phases 1 to 4 riding along; (3) the full-run audit of the whole project run, as its own Opus chat (DECISIONS 2026-11-17). After the close-out script runs, the open issues are the parked ones, #992, and whatever is in flight.
 
 **Standing rule since 2026-10-29 (DECISIONS):** the PM proceeds on its recommendation wherever no owner-only capability is needed, logs the call, and lists it under "Decided for you" on the roadmap; work waits for Dave only on promotions, bypass merges, rulesets, the App, secrets, repo creation, deploys and spend.
 
-Older Next items, the 2026-11-13 slim MVP goal (parked list) and the text dictionary note: `lanes/lead.md`.
+Older Next items (the 2026-11-17 five-lane table, the 2026-11-13 slim MVP goal, the text dictionary note): `lanes/lead.md`.
 
 ## Next chat
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
