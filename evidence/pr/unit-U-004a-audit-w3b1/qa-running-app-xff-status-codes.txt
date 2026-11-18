@@ -1,0 +1,36 @@
+== (1) 12 different addresses in 2001:db8:1:2::/64, distinct emails
+req 1 xff=2001:db8:1:2:1:7::1 -> 200
+req 2 xff=2001:db8:1:2:2:14::2 -> 200
+req 3 xff=2001:db8:1:2:3:21::3 -> 200
+req 4 xff=2001:db8:1:2:4:28::4 -> 200
+req 5 xff=2001:db8:1:2:5:35::5 -> 200
+req 6 xff=2001:db8:1:2:6:42::6 -> 200
+req 7 xff=2001:db8:1:2:7:49::7 -> 200
+req 8 xff=2001:db8:1:2:8:56::8 -> 200
+req 9 xff=2001:db8:1:2:9:63::9 -> 200
+req 10 xff=2001:db8:1:2:10:70::10 -> 200
+req 11 xff=2001:db8:1:2:11:77::11 -> 429
+req 12 xff=2001:db8:1:2:12:84::12 -> 429
+== (1b) same /64, other spellings (full form, uppercase)
+xff=2001:0db8:0001:0002:ffff:ffff:ffff:ffff -> 429
+xff=2001:DB8:1:2::99 -> 429
+== (2) other /64s (2001:db8:1:3 and 2001:db8:9:2) still allowed after /64 above is limited
+xff=2001:db8:1:3::1 -> 200
+xff=2001:db8:9:2:1::1 -> 200
+xff=2001:db8:1:2::1 (limited /64 again) -> 429
+== (3) IPv4: 12 requests from 203.0.113.5, distinct emails
+req 1 xff=203.0.113.5 -> 200
+req 2 xff=203.0.113.5 -> 200
+req 3 xff=203.0.113.5 -> 200
+req 4 xff=203.0.113.5 -> 200
+req 5 xff=203.0.113.5 -> 200
+req 6 xff=203.0.113.5 -> 200
+req 7 xff=203.0.113.5 -> 200
+req 8 xff=203.0.113.5 -> 200
+req 9 xff=203.0.113.5 -> 200
+req 10 xff=203.0.113.5 -> 200
+req 11 xff=203.0.113.5 -> 429
+req 12 xff=203.0.113.5 -> 429
+== (3b) different IPv4 independent
+xff=203.0.113.6 -> 200
+xff=198.51.100.7 -> 200
