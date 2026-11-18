@@ -43,7 +43,7 @@ Refreshed 2026-11-18 01:20 by the lead. The list of 2026-11-17: `lanes/lead.md`.
 
 1. **Done by the lead on 2026-11-18 01:35 (owner goal, DECISIONS):** the close-out script ran with `--drop-parked`, and #992 was closed after it. Three issues remain open, each with a PR in flight: #999, #1004, #1005. To restore a parked unit: `gh issue reopen <n> --repo defaultdave/ramble`.
 2. **Read and approve PR 1042** (U-004a, critical; purge of expired sign-in rows): https://github.com/defaultdave/ramble/pull/1042. Read notes: `lanes/audit-auth.md`. The #1005 PR from lane `audit-auth` will need the same read.
-3. **Bypass-merge the owner-pack PR** once lane `owner-pack` opens it (#999 protected list plus four standards lines); it replaces the hand edits in sections 6 and 7 of the 2026-11-17 file and the old B6 item.
+3. **Bypass-merge PR 1043** (owner-pack; closes #999, adds the #1005, B6 and `RichTextEditor` standards lines; fails `scope-manifest` and `human-read` by design, CI otherwise running at 01:45): `gh pr merge 1043 --repo defaultdave/ramble --squash --admin`. It replaces the hand edits in sections 6 and 7 of the 2026-11-17 file. Follow-up after PR 1042 merges: name the auth-row purges in the B6 exempt list (one line, next standards PR).
 4. **Walkthrough** (your time, five passes): `### Next chat: walkthrough`. Its findings become the page-change units, the next build work.
 5. **Production migrations 0024 to 0034:** run the `db-migrate-production` workflow before the next production deploy.
 6. **U-129:** create its issue and board item (PR 978 merged 2026-11-14), so it can be set Done.
