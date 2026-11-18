@@ -11,7 +11,6 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | `audit-auth` | #1005 (U-004a, critical): rate-limit keys on the two auth form posts; PR 1042 (#1004) waits on `human-read`; history in `lanes/audit-auth.md` | swarm subagent round 2, 2026-11-18 | active: launching | 2026-11-18 01:05 |
 | `owner-pack` | one protected-files PR for the owner's bypass merge: #999 (`scripts/merge-desk/scope-check.ts`) and the standards lines in `.claude/standards/architecture.md`; history in `lanes/owner-pack.md` | swarm subagent, 2026-11-18 | handed off: PR 1043 open, waits on the owner's bypass merge | 2026-11-18 01:25 |
 | `audit-w3` | read-only audit of wave 3 code (PRs 1019 to 1042) into `audits/wave3-2026-11-18.md`, combined into fix batches, low-value findings dropped; no code | swarm subagent, 2026-11-18 | handed off: 4 batches (B-1 to B-4), highest severity medium; not filed | 2026-11-18 01:30 |
-| `housekeeping` | remove worktrees and local branches of merged PRs in the ramble checkout; no code | swarm subagent, 2026-11-18 | active: launching | 2026-11-18 01:05 |
 | `w3-fix-b2` | audit batch B-2 (W3-2, U-078, standard): stale settings form undoes a concurrent change; owns `opsSettings.ts`, `db/settings.ts`, the settings action and `/ops/settings` form; history in `lanes/w3-fix-b2.md` | swarm subagent, 2026-11-18 | active: launching | 2026-11-18 02:00 |
 | `w3-fix-b3` | audit batch B-3 (U-076c, standard): legal audit row inside the transaction, stale TODO and cache comments; owns `db/legal.ts`, `db/legalAdmin.ts`, comments in `home.ts`, `landing.ts`, `experiencePage.ts`; history in `lanes/w3-fix-b3.md` | swarm subagent, 2026-11-18 | active: launching | 2026-11-18 02:00 |
 | `lead` | Shared status, `## Next`, roadmap, memory; coordinates the ticket close-out swarm | PM lead swarm, 2026-11-18 (Fable; took over on the owner's word) | active: claimed 00:50; reading GitHub and the close-out sheet before launching lanes | 2026-11-18 00:50 |
@@ -23,7 +22,7 @@ Moved to `lanes/earlier.md` (2026-11-04).
 ## In flight
 
 ### Lane: audit-auth
-**Round 3 lane PM owns this lane and PR 1044 since 2026-11-18 02:15 (lead).** The round 2 lane PM handed back incomplete at 02:10; if it resumes, it stops: no pushes, no checks, no fixer launches, and it reports to the lead. State at takeover: PR 1044 (#1005) open at `3ceac9e`, no checks posted, architecture-audit round 1 failed (B17, B2 twice), a round 1 fixer possibly alive in worktree `agent-a9eb300be6160add8`. PR 1042 green except `human-read`. Next after 1044: audit batch B-1 (W3-1).
+**Round 3 lane PM, 2026-11-18.** PR 1044 (#1005) head `7783d8e`: four agent checks success, review requested, auto-merge set; `human-read` waits on the owner (read notes: `lanes/audit-auth.md`). PR 1042 green except `human-read`. Rounds: r1 `3ceac9e`, r2 `f490ecf`, r3 `7783d8e`. For the lead: PR 1044 body is stale (names `refuseOverClientLimit`, old test counts); needs `gh pr edit`. Next: audit batch B-1 (W3-1).
 
 ### Lane: owner-pack
 PR 1043 (branch `pm/owner-pack-2026-11-18`, head 15b981a) opened as the App, owner review requested. Carries #999 (PROTECTED widened) and three standards lines. Fails `scope-manifest` by design; owner merges with bypass. For the lead: the auth-row purges are not named in B6 because PR 1042 is unmerged; add them to the B6 text after it merges.
@@ -35,9 +34,6 @@ Done 2026-11-18: `audits/wave3-2026-11-18.md`, 17 raised, 4 kept, 13 dropped, no
 Launching (2026-11-18).
 
 ### Lane: w3-fix-b3
-Launching (2026-11-18).
-
-### Lane: housekeeping
 Launching (2026-11-18).
 
 ### Earlier (before lanes)
@@ -68,7 +64,6 @@ Legal and vendor questions for the real job, logged, not blocking the demo: Ramb
 | `audit-auth` | #1005 rate-limit keys on the two auth form posts (U-004a, critical) | a PR waiting on `human-read` |
 | `owner-pack` | #999 and the standards lines in one protected-files PR | a PR for the owner's bypass merge |
 | `audit-w3` | audit of wave 3 code, findings combined into at most six fix batches, low-value ones dropped | `audits/wave3-2026-11-18.md` |
-| `housekeeping` | remove worktrees and branches of merged PRs | a clean `git worktree list` |
 
 Then, in order: (1) the lead opens one fix lane per `audit-w3` batch with disjoint files, at most five builders; (2) the walkthrough with the owner, then page-change units from its findings, with dictionary phases 1 to 4 riding along; (3) the full-run audit of the whole project run, as its own Opus chat (DECISIONS 2026-11-17). After the close-out script runs, the open issues are the parked ones, #992, and whatever is in flight.
 
