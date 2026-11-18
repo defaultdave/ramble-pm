@@ -43,6 +43,7 @@ All addresses are on `ramble.test`, a reserved domain, so nothing reaches a real
 | 1.8 | `/help`, `/help/<slug>`, `/legal/<doc>`, `/accessibility`, `/contact` | Help, legal pages, the contact form |
 | 1.9 | `/gifts` | Gift guide. **Gifting is parked:** decide whether this page and its links stay, are hidden or go |
 | 1.10 | A made-up address | The not-found page |
+| 1.11 | `/` home, loaded | Accessibility sweep (audit H-23, was #367): axe run, keyboard only from the top to the footer, and 320 px width. The PM runs axe; findings go in the table below |
 
 ## Pass 2: book as a guest
 

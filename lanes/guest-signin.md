@@ -15,3 +15,9 @@
 - PR 1020 confirmed MERGED on GitHub (mergedAt 2026-11-17T06:59:11Z, head `c4168ef`). U-130 was already Done on board #19 (item `PVTI_lAHOAHFEDM4BnoszzhJYNNE`, linked to PR 1020); no Actual days, Dave minutes or Tokens were recorded in this file, so those stay blank. Issue #989 is closed through the board workflow.
 - Removed worktrees `agent-a5e6ae6027d01956f` and `agent-a4c1bb5f1144f20a1` (both clean, HEAD `c4168ef` is the PR head) and local branches `unit/U-130-guest-signin-on-screen`, `wip/U-130-r1`, `worktree-agent-a5e6ae6027d01956f`, `worktree-agent-a4c1bb5f1144f20a1`.
 - Still open for Dave, from the lane entry: B6 exempt-list addition for `holdsAnyRoleGrant` in `.claude/standards/architecture.md`.
+
+
+## Moved from STATUS.md on 2026-11-18 (lane complete)
+
+### Lane: guest-signin
+- **2026-11-17, closed:** U-130 merged (PR 1020), board Done, worktrees removed. Full entry in `lanes/guest-signin.md`.

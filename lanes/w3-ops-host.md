@@ -17,3 +17,13 @@
 - U-126 PR 1036: merged main, knip fix on two unused fixture exports, pushed (head moved through 5 audit rounds to 13fe9b8). Arch audit blocking items by round: B6 (latest-audit read unguarded), B17 (open-support and refund-failed predicates; tile pluralisation vs count(); support href and filter literals), B2 (separator in component). Each fixed. The haiku audit found new items on unchanged code each round; the last prompt demanded the rule wording per item. Merged 49dfb6e. QA PNGs in `evidence/pr/unit-U-126/`; QA throwaway DB dropped.
 - Machine notes: seed.db and sign-in-on-screen db tests and a HostSessions unit test flaked once each under load from other lanes; reruns passed.
 - Decisions confirmed in review: count reads write no audit row; today's sessions counts scheduled only; refund-failed and support links use the queues' filter params. Possible follow-up: the sessions tile links to unfiltered /ops/sessions (no today filter exists).
+
+
+## Moved from STATUS.md on 2026-11-18 (lane complete)
+
+### Lane: w3-ops-host
+- **2026-11-17 08:40, lane complete (round 2).** U-083b (PR 1019), U-070 (PR 1026, merge 997d578) and U-126 (PR 1036, merge 49dfb6e) merged; board #19 Done with actuals (U-070 0.6 d, 1.2M tokens; U-126 0.6 d, about 1.5M tokens, estimated). U-070's `knip` was red on an unused export (fixed on a9d15d8); U-126 took 5 arch-audit rounds (B6 unguarded read, B17 predicates and wording and links, B2 separator). Details: `lanes/w3-ops-host.md`.
+- **For the lead:** (1) a stale `next-server` (pid 58164, from `Workspace/defaultdave/.../seo-perf-lighthouse`, 5 days old) held port 3100 and blocked e2e for a while; not ours, not killed. (2) QA left a stray `ramble_qa_u060` database in docker Postgres and a scratch pg dir under /var/folders/.../T/pg16. (3) Review rate limit shares the `manage:` bucket; keyed by token only (pre-existing pattern), audit item candidate.
+
+### Next chat: w3-ops-host
+- **Status:** lane complete; nothing to run. The lead removes the row.

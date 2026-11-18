@@ -42,3 +42,18 @@ CI note for the lead: `hosts.spec.ts:14` flaked once, passed on retry (outside l
 - U-060 PR 1024 (4 rounds, Done 0.6 d), U-044 PR 1033 (3 rounds, 0.5 d), U-061 PR 1037 (2 rounds, 0.5 d). All merged, worktrees and branches removed.
 - Suggestions not built: keep the status filter and cursor after a hide/show redirect (U-061); free-text hide reason needs a column; unhide aria-label phrasing; ReviewsBlock jump link / stars rounding advisories; orderReceipt.ts literals 120/200 use nameClip; `key={paragraph}` in HostContent, GuideEntry, ExperiencePage; same no-referrer Origin problem on manage/[token] and orders/[reference] pages (no-JS post); seed reset is not one transaction; gift-recipient AC of U-060 deferred to U-064a.
 - Flaky: tests/db/cancel-session-email.db.test.ts 'has its job due...' fails in full local test:db runs sometimes (passes alone); hosts.spec.ts flakes once per run in e2e.
+
+
+## Moved from STATUS.md on 2026-11-18 (lane complete)
+
+### Lane: w3-reviews
+- **LEAD NOTE, 2026-11-17 01:45:** the round 1 session finished the fix. Local `unit/U-060-review-invites` is at `3796775` (round 2 fixes `d24e83c` plus `main` merged), not pushed; it reports typecheck, lint, format, `db:generate` and `test:db` green and `pnpm test` not seen. `wip/U-060-r2` has no commits. Use the unit branch: run `pnpm test` and the remaining gates, push, rerun the checks. Drop the duplicate fixer's result unless it adds something.
+- **LEAD NOTE, 2026-11-17 01:35 (correction to your round 2 brief):** the round 1 builder is still alive: its worktree `agent-afd4ab52887aaf4e6` (branch `unit/U-060-review-invites`) has uncommitted round 2 edits in progress. Your `wip/U-060-r2` fixer duplicates it. Check `git log` and `git status` there before any fast-forward of the unit branch; never discard its commits unseen. Take one complete result through review and say which in your report.
+- **2026-11-17 00:40, claimed.** Order U-060, U-044, U-061, all standard tier. Round numbers and PRs are logged here as they happen.
+- **Round 2 relaunch.** U-060 = PR 1024, branch `unit/U-060-review-invites`, reviewed head 7488736. Round 1: review RC, qa FAIL, spec RC, arch FAIL, a11y PASS. Findings and history: `lanes/w3-reviews.md`. Fixer branch `wip/U-060-r2`.
+- **2026-11-17 02:30, U-060 PR 1024 head 05656f0: four checks green, review requested, auto-merge queued; waits on CI and Dave's approval.** U-044 and U-061 wait for the merge. History and lessons: `lanes/w3-reviews.md`.
+- **2026-11-17: U-060 (PR 1024), U-044 (PR 1033), U-061 (PR 1037) merged, Done on board #19. Lane complete.**
+- **For the lead:** see `lanes/w3-reviews.md` "For the lead" (main checkout on `wip/U-076a-r7`, hosts.spec flake, `ramble_qa_u060` not empty, two memory lessons).
+
+### Next chat: w3-reviews
+- Lane complete (U-060, U-044, U-061 merged). Nothing to run; the lead removes the row.
