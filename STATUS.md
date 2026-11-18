@@ -8,10 +8,10 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
-| `audit-auth` | #1005 (U-004a, critical): rate-limit keys on the two auth form posts; PR 1042 (#1004) waits on `human-read`; history in `lanes/audit-auth.md` | swarm subagent round 2, 2026-11-18 | active: launching | 2026-11-18 01:05 |
+| `audit-auth` | #1005 (U-004a, critical): rate-limit keys on the two auth form posts; PR 1042 (#1004) waits on `human-read`; history in `lanes/audit-auth.md` | swarm subagent round 2, 2026-11-18 | handed off: PR 1044 at review (human-read); B-1 built, held on one out-of-scope test line | 2026-11-18 02:50 |
 | `owner-pack` | one protected-files PR for the owner's bypass merge: #999 (`scripts/merge-desk/scope-check.ts`) and the standards lines in `.claude/standards/architecture.md`; history in `lanes/owner-pack.md` | swarm subagent, 2026-11-18 | handed off: PR 1043 open, waits on the owner's bypass merge | 2026-11-18 01:25 |
 | `audit-w3` | read-only audit of wave 3 code (PRs 1019 to 1042) into `audits/wave3-2026-11-18.md`, combined into fix batches, low-value findings dropped; no code | swarm subagent, 2026-11-18 | handed off: 4 batches (B-1 to B-4), highest severity medium; not filed | 2026-11-18 01:30 |
-| `w3-fix-b2` | audit batch B-2 (W3-2, U-078, standard): stale settings form undoes a concurrent change; owns `opsSettings.ts`, `db/settings.ts`, the settings action and `/ops/settings` form; history in `lanes/w3-fix-b2.md` | swarm subagent, 2026-11-18 | active: launching | 2026-11-18 02:00 |
+| `w3-fix-b2` | audit batch B-2 (W3-2, U-078, standard): stale settings form undoes a concurrent change; owns `opsSettings.ts`, `db/settings.ts`, the settings action and `/ops/settings` form; history in `lanes/w3-fix-b2.md` | swarm subagent, 2026-11-18 | active: PR 1046 in round 2 | 2026-11-18 02:40 |
 | `w3-fix-b3` | audit batch B-3 (U-076c, standard): legal audit row inside the transaction, stale TODO and cache comments; owns `db/legal.ts`, `db/legalAdmin.ts`, comments in `home.ts`, `landing.ts`, `experiencePage.ts`; history in `lanes/w3-fix-b3.md` | swarm subagent, 2026-11-18 | handed off: PR 1045 merged (W3-3 fixed) | 2026-11-18 06:20 |
 | `lead` | Shared status, `## Next`, roadmap, memory; coordinates the ticket close-out swarm | PM lead swarm, 2026-11-18 (Fable; took over on the owner's word) | active: claimed 00:50; reading GitHub and the close-out sheet before launching lanes | 2026-11-18 00:50 |
 **Phase:** P1 ✅, P2 ✅, and the P3 gate ✅ (all 2026-10-18; the mobile flow and States page are signed off). P3 is complete, including the desktop revision. **P4 Plan started 2026-10-18:** artifacts 1 to 7 done; Dave adopted the recommendations on 2026-10-20 (tiered merge plus levers 2, 3, 4a; December 1 moves). Applied to every plan file. **Plan frozen 2026-10-20:** tag `plan-frozen-2026-10-20` on `8715c42` (history rewritten first to drop personal notes; see `delta-log.md`). Repo public with secret scanning and push protection; GitHub App created (phase A); merge settings, `integration`, and rulesets live (phase C); 133 unit issues on board #19. **P5 started early, 2026-10-20,** with U-118 (in progress; phases A and C done; see `delta-log.md`). From here the plan files are read-only; reality goes in `delta-log.md`.
@@ -22,7 +22,7 @@ Moved to `lanes/earlier.md` (2026-11-04).
 ## In flight
 
 ### Lane: audit-auth
-**Round 3 lane PM, 2026-11-18.** PR 1044 (#1005) head `7783d8e`: four agent checks success, review requested, auto-merge set; `human-read` waits on the owner (read notes: `lanes/audit-auth.md`). PR 1042 green except `human-read`. Rounds: r1 `3ceac9e`, r2 `f490ecf`, r3 `7783d8e`. For the lead: PR 1044 body is stale (names `refuseOverClientLimit`, old test counts); needs `gh pr edit`. Next: audit batch B-1 (W3-1).
+**Round 3 lane PM, 2026-11-18.** PR 1044 (#1005) head `7783d8e`: four agent checks success, review requested, auto-merge set; `human-read` waits on the owner (read notes: `lanes/audit-auth.md`). PR 1042 green except `human-read`. Rounds: r1 `3ceac9e`, r2 `f490ecf`, r3 `7783d8e`. For the lead: PR 1044 body is stale (names `refuseOverClientLimit`, old test counts); needs `gh pr edit`. B-1 (W3-1): built at `094770d` (local branch `wip/U-004a-audit-w3b1`, not pushed); waits on approval of one test-line edit in `webhook.test.ts` (out of scope).
 
 ### Lane: owner-pack
 PR 1043 (branch `pm/owner-pack-2026-11-18`, head 15b981a) opened as the App, owner review requested. Carries #999 (PROTECTED widened) and three standards lines. Fails `scope-manifest` by design; owner merges with bypass. For the lead: the auth-row purges are not named in B6 because PR 1042 is unmerged; add them to the B6 text after it merges.
@@ -31,7 +31,7 @@ PR 1043 (branch `pm/owner-pack-2026-11-18`, head 15b981a) opened as the App, own
 Done 2026-11-18: `audits/wave3-2026-11-18.md`, 17 raised, 4 kept, 13 dropped, none filed. For the lead: 4 batches, one per unit, no file overlap: B-1 U-004a (IPv6 /64 key, critical), B-2 U-078 (stale settings form), B-3 U-076c (legal audit in the transaction), B-4 U-044 (review erasure, with U-085). Highest severity medium. History: `lanes/audit-w3.md`.
 
 ### Lane: w3-fix-b2
-Launching (2026-11-18).
+PR 1046 (`unit/U-078-audit-w3b2`) open as the App. Round 1: review and architecture-audit FAIL (README rows, B13, B2), fixed. Round 2: architecture-audit B17 and B5 (reuse `checkExpectedVersion`, Zod the version), fixing. QA (live two-tab run) and spec-compliance PASS. History in `lanes/w3-fix-b2.md`.
 
 ### Lane: w3-fix-b3
 PR 1045 merged 2026-11-18 (`fdb1d5a`, head `ea3ea34`, U-076c standard), round 1, all four agent checks passed. W3-3 fixed: legal draft, edit and publish write their audit row in the same transaction; stale TODOs and taxonomy comments corrected. For the lead: none to carry.
