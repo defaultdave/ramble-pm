@@ -373,3 +373,5 @@ Dave merged PR 905, process audit suggestion 5.3. Every unit targets `main`. The
 
 ## 2026-11-18 (lead)
 - Ticket goal met: every open issue in the ramble repo is closed by completion or by decision, the last (#999) by the owner's bypass merge of PR 1043. Who: owner set the goal, lead ran it. Remaining follow-up: the B6 exempt-list line for the auth-row purges.
+- B6 follow-up wording (lead, 2026-11-18): the auth-row purges are exempt because only the pulse calls them, from the pulse route and from the dev-console `runOpsPulseAction`, which checks its own role first. Not "system jobs only": the builder found the Server Action path and stopped, as briefed. PR 1048; the owner's bypass merge approves the wording. Why: same shape as the existing `purgeExpiredRateLimits` exemption.
+- Full-run audit extended to the whole run (owner, 2026-11-18): pre-freeze half in `drafts/full-run-audit-pre-freeze-2026-11-18.md`, written by an Opus subagent; captured with the post-freeze half in the owner's vault. Adoption of its recommendations is the owner's call.

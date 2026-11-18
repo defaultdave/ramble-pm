@@ -302,5 +302,6 @@
   "TA-26": "Tight Date.now() offsets in checkout and holds DB tests",
   "TA-27": "Fixed test instant and time-offset helper declared in several files",
   "TA-28": "Missing race tests: consent grant vs withdraw, paying hold lapse",
-  "TA-29": "CI warning for test files over the size target"
+  "TA-29": "CI warning for test files over the size target",
+  "N1111-11": "Browse zero-result suggestions are cached by the raw filters"
 }

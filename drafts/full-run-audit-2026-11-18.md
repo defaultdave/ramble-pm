@@ -1,6 +1,6 @@
 # Full-run audit, 2026-11-18
 
-**Status: draft for the owner.** Read-only analysis of the Ramble run from the plan freeze (2026-10-20) to the ticket close-out (2026-11-18). Every recommendation is a proposal for the owner to decide. Nothing here changes a rule, a file or the board.
+**Status: draft for the owner.** Read-only analysis of the post-freeze half of the Ramble run, from the plan freeze (2026-10-20) to the ticket close-out (2026-11-18); the pre-freeze half (project start to the freeze) is in [full-run-audit-pre-freeze-2026-11-18.md](full-run-audit-pre-freeze-2026-11-18.md). Every recommendation is a proposal for the owner to decide. Nothing here changes a rule, a file or the board.
 
 **Asked for:** DECISIONS 2026-11-17, lead (owner direction): "run a full audit of the whole project run (plan to date: rounds per unit, rework, owner minutes, tokens, what the one-ticket pipeline cost against the swarm) and bring improvements", and settle whether swarm runs should be the default for auto runs.
 
@@ -9,6 +9,8 @@
 ---
 
 ## Executive summary
+
+The whole-run lessons for the planning method, joining both halves, are in [the pre-freeze file's whole-run summary](full-run-audit-pre-freeze-2026-11-18.md#whole-run-lessons-for-the-planning-method).
 
 ### What matters, in numbers
 
