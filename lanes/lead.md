@@ -292,3 +292,7 @@ Older Next items, the 2026-11-13 slim MVP goal (parked list) and the text dictio
 
 ## 2026-11-18, lane housekeeping closed (02:30)
 Removed 17 worktrees of merged PRs and 59 local branches (17 with worktrees, 42 without). Kept, for the owner or a later pass: `agent-a2858ff3358326da1` (`pm/audit-sc-form-focus-a11y`, PR 1021 closed unmerged); `agent-a4fce587dd4312101`, `agent-a67bce8e7cb3d154d`, `agent-aa24ea1d1381b48cb` (U-032, U-033, U-034: PRs merged but tracked files show deleted, so not removed without force); branches with no PR (`pm/agent-exp-2026-11-12-1`, `unit/U-001-preview-skip`, `unit/U-005-pulse-workflow`, `unit/U-047a-maint-tail-payment-tries`, `unit/U-127-audit-sf1-tmp`, seven `wip/` branches of U-002, U-020, U-033, U-035); stray unregistered directories under `.claude/worktrees/` (`agent-a12d6f2d7cc6e9e2c`, `u077-merge`, `scratch-u030.patch`).
+
+## 2026-11-18 05:55 close-out check (lead)
+- PRs 1042, 1044, 1047 merged on the owner's approvals; #1004 and #1005 closed. Removed worktrees agent-ad5a514ae76a58706, agent-a9eb300be6160add8, agent-a467f9d68123ff140, agent-a384aff08c8fe14ca, agent-aa173ffb08e80ed4c and branches unit/U-004a-audit-auth2, -auth3, -w3b1 and wip/U-004a-audit-auth3-r1, -r2, wip/U-004a-audit-w3b1, -r2. Audit rows N1111-4, N1111-5, W3-1 marked fixed.
+- Open: issue #999 and PR 1043 (owner bypass merge). Kept: worktree agent-ac7d257ba58237ca1 and branch pm/owner-pack-2026-11-18 until 1043 merges.

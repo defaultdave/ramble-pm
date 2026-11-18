@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 18, 2026.** Nov 18: wave 3 is done and the ticket close-out has run. Every wave 3 unit is merged (U-130, U-083b, U-070, U-126, U-076a to c, U-078, U-060, U-044, U-061) with nine audit batches; 60 tickets are closed and 3 are left (#999, #1004, #1005), each with a PR open. The wave 3 audit kept 4 of 17 findings: one fixed (PR 1045), one in review (PR 1046), one queued, one waits for U-085. You owe two critical reads (PR 1042, PR 1044), one bypass merge (PR 1043) and the walkthrough. Then page-change units and the full-run audit.
+**As of Nov 18, 2026.** Nov 18: the ticket close-out is one merge from done. 62 of 63 tickets are closed; the last, #999, closes when PR 1043 is bypass-merged. Every wave 3 unit and every audit fix is merged (PRs 1041, 1042, 1044, 1045, 1046, 1047). Next: the walkthrough, then page-change units from its findings.
 
 | Milestone | Likely |
 |---|---|
@@ -24,10 +24,8 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Decisions needed**
 
-- Read and approve PR 1042 (U-004a, critical). Recommended: Read it and approve; the PM sees no blocker..
-- Read and approve PR 1044 (U-004a, critical). Recommended: Read it after PR 1042; the same read..
 - Bypass-merge PR 1043 (merge desk and standards). Recommended: Merge it; the content is three standards lines and a wider protected list..
-- Walk the site as guest, host and ops. Recommended: Run it next, after the two reads..
+- Walk the site as guest, host and ops. Recommended: Run it next..
 
 **Held up**
 
