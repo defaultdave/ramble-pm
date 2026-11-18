@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-18 01:20 by the lead (swarm chat, Fable). Wave 3 is complete: every unit merged, PR 1041 (#1001) merged 00:44. Open: PR 1042 (#1004), green except the owner's `human-read`. 63 issues open because the close commands of 2026-11-17 have not run; one script now does all of it (`drafts/owner-closeout-2026-11-18.sh`). Lanes running: `audit-auth` (#1005), `owner-pack` (#999 and standards lines, one bypass PR), `audit-w3` (wave 3 audit, combined into fix batches), `housekeeping` (stale worktrees). Older `Updated` lines: `lanes/lead.md`.
+**Updated:** 2026-11-18 01:20 by the lead (swarm chat, Fable). Wave 3 is complete: every unit merged, PR 1041 (#1001) merged 00:44. Open: PR 1042 (#1004), green except the owner's `human-read`. The lead ran the close-out at 01:35 (owner goal): 60 issues closed, 3 open (#999, #1004, #1005), each with a PR in flight. Lanes running: `audit-auth` (#1005), `owner-pack` (#999 and standards lines, one bypass PR), `audit-w3` (wave 3 audit, combined into fix batches), `housekeeping` (stale worktrees). Older `Updated` lines: `lanes/lead.md`.
 
 ## Lanes
 
@@ -41,7 +41,7 @@ Eight open PRD facts (Q-11 to Q-21) with their working assumptions: `open-client
 ## Blocked on Dave
 Refreshed 2026-11-18 01:20 by the lead. The list of 2026-11-17: `lanes/lead.md`. Nothing here stops the lanes.
 
-1. **Run the close-out script** (about a minute): `bash /Users/davidfleming/Workspace/ramble-pm/drafts/owner-closeout-2026-11-18.sh`. Closes 46 issues, folds five image tickets into #992, labels 14 as parked. Add `--drop-parked` to also close the 13 parked units (gifting, wave 4). Replaces `drafts/owner-commands-2026-11-17.md` sections 1 to 5 and 8.
+1. **Done by the lead on 2026-11-18 01:35 (owner goal, DECISIONS):** the close-out script ran with `--drop-parked`, and #992 was closed after it. Three issues remain open, each with a PR in flight: #999, #1004, #1005. To restore a parked unit: `gh issue reopen <n> --repo defaultdave/ramble`.
 2. **Read and approve PR 1042** (U-004a, critical; purge of expired sign-in rows): https://github.com/defaultdave/ramble/pull/1042. Read notes: `lanes/audit-auth.md`. The #1005 PR from lane `audit-auth` will need the same read.
 3. **Bypass-merge the owner-pack PR** once lane `owner-pack` opens it (#999 protected list plus four standards lines); it replaces the hand edits in sections 6 and 7 of the 2026-11-17 file and the old B6 item.
 4. **Walkthrough** (your time, five passes): `### Next chat: walkthrough`. Its findings become the page-change units, the next build work.
