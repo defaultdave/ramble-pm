@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-11-17",
-  "headline": "Nov 17: swarm to finish. Five lanes at once: U-130 guest sign-in, the CMS and settings (U-076a to c, U-078), reviews (U-060, U-044, U-061), private requests, host cancel and the ops dashboard (U-083b, U-070, U-126), and the 40 open audit tickets. About 11 estimate-days that agents have been closing well under estimate; two critical reads for you (U-130, U-070). Gifting, wave 4 and real-launch units stay out. Then the walkthrough and page changes.",
+  "asOf": "2026-11-18",
+  "headline": "Nov 18: wave 3 is done and the ticket close-out has run. Every wave 3 unit is merged (U-130, U-083b, U-070, U-126, U-076a to c, U-078, U-060, U-044, U-061) with nine audit batches; 60 tickets are closed and 3 are left (#999, #1004, #1005), each with a PR open. The wave 3 audit kept 4 of 17 findings: one fixed (PR 1045), one in review (PR 1046), one queued, one waits for U-085. You owe two critical reads (PR 1042, PR 1044), one bypass merge (PR 1043) and the walkthrough. Then page-change units and the full-run audit.",
   "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
   "phases": [
     {
@@ -43,7 +43,7 @@
       "name": "Build",
       "state": "now",
       "when": "From Oct 20",
-      "note": "U-118 done Oct 21 (2 days against 3); agent auto-merge is on. Next: the architecture guardrails, then U-001"
+      "note": "U-118 done Oct 21 (2 days against 3). Wave 3 merged Nov 17 (guest sign-in, reviews, CMS, settings, host cancel, ops dashboard); close-out ran Nov 18. Next: the three open PRs, the walkthrough, then page-change units and the full-run audit"
     },
     {
       "id": "P6",
@@ -98,10 +98,39 @@
       "when": "Oct 20"
     }
   ],
-  "decisionsNeeded": [],
+  "decisionsNeeded": [
+    {
+      "title": "Read and approve PR 1042 (U-004a, critical)",
+      "impact": "Merges the purge of expired sign-in rows; ticket #1004 closes",
+      "detail": "Every other check passes; only human-read waits on you. The pulse deletes sign-in rows 30 days after they expired, in capped batches. Read notes in lanes/audit-auth.md.",
+      "recommendation": "Read it and approve; the PM sees no blocker.",
+      "blocks": "#1004, and naming the auth-row purges in the B6 exempt list"
+    },
+    {
+      "title": "Read and approve PR 1044 (U-004a, critical)",
+      "impact": "Merges rate-limit keys on the two auth form posts; ticket #1005 closes",
+      "detail": "Three rounds of fixes; four agent checks pass on the latest head and only human-read waits on you. The PR body is stale (names a function that is gone) and needs a gh pr edit.",
+      "recommendation": "Read it after PR 1042; the same read.",
+      "blocks": "#1005, and the IPv6 fix (B-1), which edits the same area"
+    },
+    {
+      "title": "Bypass-merge PR 1043 (merge desk and standards)",
+      "impact": "Closes #999; adds the #1005, B6 and RichTextEditor lines to the architecture standard",
+      "detail": "It changes protected files, so it fails scope-manifest and human-read by design. Command: gh pr merge 1043 --repo defaultdave/ramble --squash --admin",
+      "recommendation": "Merge it; the content is three standards lines and a wider protected list.",
+      "blocks": "#999 and the standards rulings the lanes asked for"
+    },
+    {
+      "title": "Walk the site as guest, host and ops",
+      "impact": "Its findings become the page-change units, the next build work",
+      "detail": "Five passes, phone width first. Script and findings table in drafts/walkthrough-2026-11.md; the walkthrough lane chat runs it with you.",
+      "recommendation": "Run it next, after the two reads.",
+      "blocks": "The page-change units and the dictionary phases"
+    }
+  ],
   "actionsForDave": [
     {
-      "title": "Production migrations 0024 to 0032",
+      "title": "Production migrations 0024 to 0034",
       "detail": "Run the db-migrate-production workflow before the next production deploy.",
       "where": "GitHub Actions"
     },
@@ -111,11 +140,6 @@
       "where": "Board #19"
     },
     {
-      "title": "Walk the site as guest, host and ops",
-      "detail": "Script and findings table in drafts/walkthrough-2026-11.md; a walkthrough lane chat runs it with you.",
-      "where": "Local dev or the deployed site"
-    },
-    {
       "title": "Sentry setup, when the demo is shared",
       "detail": "Server and browser projects, the ops address, three alert rules (docs/runbooks/alerting.md), then the two DSNs in Vercel.",
       "where": "Sentry, Vercel"
@@ -123,12 +147,87 @@
   ],
   "heldUp": [
     {
+      "what": "PR 1042 and PR 1044 (critical tier) wait for your read",
+      "waitingOn": "human-read, which only your approval passes",
+      "owner": "You"
+    },
+    {
+      "what": "PR 1043 changes protected files and fails scope-manifest by design",
+      "waitingOn": "Your bypass merge",
+      "owner": "You"
+    },
+    {
+      "what": "B-1 (IPv6 /64 sign-in key) is built but not pushed",
+      "waitingOn": "One test-line edit in webhook.test.ts, outside its scope manifest, and PR 1044 merging first",
+      "owner": "Lead / you"
+    },
+    {
       "what": "Real-job only: legal review, sponsor terms, Stripe review",
       "waitingOn": "Client facts with no one to ask in this demo; logged, not blocking",
       "owner": "Client"
     }
   ],
   "decisionsMade": [
+    {
+      "what": "Ticket close-out: the PM ran the close script under your goal; 60 closed (32 cut units, 13 parked units, audit tickets fixed, combined or dropped), 3 left, each with a PR (you, executed by the PM)",
+      "when": "Nov 18"
+    },
+    {
+      "what": "Five image-sizing tickets combined into #992 and #367 moved into the walkthrough; nothing built until sizes are measured on a preview (PM, you can overrule)",
+      "when": "Nov 18"
+    },
+    {
+      "what": "Wave 3 audit: 17 findings, 4 kept. B-2 and B-3 built now at standard tier; B-1 after #1005 at critical tier; B-4 (review text erasure) waits for U-085 (PM, you can overrule)",
+      "when": "Nov 18"
+    },
+    {
+      "what": "PR 1043 names only the rate-limit purge as a B6 exemption; the auth-row purges are added once PR 1042 merges (PM, you can overrule)",
+      "when": "Nov 18"
+    },
+    {
+      "what": "#1005: the two form posts keep their Route Handlers and get rate-limit keys with their own limits (PM, you can overrule)",
+      "when": "Nov 18"
+    },
+    {
+      "what": "Stale-settings fix (PR 1046) extends checkExpectedVersion instead of copying it, an edit outside the manifest the reuse rule requires (PM, you can overrule)",
+      "when": "Nov 18"
+    },
+    {
+      "what": "Close-out answers: all 14 recommended; the 32 cut tickets close as not planned, the 13 parked ones close too (you)",
+      "when": "Nov 17"
+    },
+    {
+      "what": "U-083b is a list-only private requests queue: there is no status column and nothing writes one yet (PM, you can overrule)",
+      "when": "Nov 17"
+    },
+    {
+      "what": "Sign-in counters: 10 an hour per client address beside 25 an hour per destination address; sign-in rows purged 30 days after they expire (PM, you can overrule)",
+      "when": "Nov 17"
+    },
+    {
+      "what": "Rulings: holdsAnyRoleGrant joins the B6 exempt reads, RichTextEditor is a client island (B8), the ops editorial list shows an error with retry (B13) (PM, you can overrule)",
+      "when": "Nov 17"
+    },
+    {
+      "what": "PR sizes accepted as one logical change: U-060 (12k lines, 7.5k a migration snapshot), U-078 and U-076c (PM, you can overrule)",
+      "when": "Nov 17"
+    },
+    {
+      "what": "Reviews: a refund above zero marks a booking refunded, reviews seed only where personas seed, the gift check waits for U-064a (PM, you can overrule)",
+      "when": "Nov 17"
+    },
+    {
+      "what": "Retiring a category or neighborhood hides it from new experiences only; guest filters stay until you decide (PM, you can overrule)",
+      "when": "Nov 17"
+    },
+    {
+      "what": "Unknown host and pick slugs return a stable 200 not-found page as the fix for #1002 (PM, you can overrule)",
+      "when": "Nov 17"
+    },
+    {
+      "what": "After the swarm, a full audit of the whole run, and swarms are likely the default for auto runs (you)",
+      "when": "Nov 17"
+    },
     {
       "what": "Swarm to finish: slim MVP tail plus reviews, host cancel, CMS, settings, private requests and ops dashboard; gifting and wave 4 stay parked",
       "when": "Nov 17, you"
@@ -357,15 +456,15 @@
   "watch": [
     {
       "what": "Schedule not refit since Nov 3",
-      "detail": "The forecast cannot price units added after the freeze, and only U-130 is left. Dates on this page are the Nov 3 refit; see delta-log Nov 16."
+      "detail": "A refit on Nov 18 stopped: the estimate panel has no solo estimate for U-120 to U-130, added after the freeze. The dates here are the Nov 3 refit; every unit in the plan is built, so they now describe work already done."
     },
     {
-      "what": "U-051 and U-105 still In Progress",
-      "detail": "Merged (PRs 911, 915); they close once CI's e2e job is shown to run the booking-path spec."
+      "what": "Three tickets stay open, each with a PR",
+      "detail": "#999 (PR 1043), #1004 (PR 1042), #1005 (PR 1044). They close when you read or bypass-merge."
     },
     {
-      "what": "28 new audit tickets untriaged",
-      "detail": "#991 to #1018 (IMG-1 to IMG-7 and the Nov 5 to 13 nightly items) are on the Maintenance sprint; the lead sorts them into page-change units or the tail."
+      "what": "B-1 and B-4 from the wave 3 audit are not built",
+      "detail": "B-1 is built locally and held on one test-line edit; B-4 travels with U-085, which was cut."
     },
     {
       "what": "Accepted risk in U-130",
@@ -416,7 +515,7 @@
     "Refit Oct 29 from today: the Prototype units done, U-005 and U-014a at review, and U-014a, U-016, U-047a, U-048 and U-049 built by agents under PM pattern notes (the owner's call, Oct 29).",
     "The frozen routing for comparison: the owner builds U-014a, U-016, U-047a, U-048 and U-049 himself at 12.5 hours a week."
   ],
-  "forecastNote": "Not refit since 2026-11-03 (see delta-log 2026-11-16): forecast.ts needs a frozen solo estimate for each unit and U-120 to U-130 have none. Every build unit is merged except U-130. Refit 2026-11-03 for the demo re-plan: start Oct 30, the 43 done units at zero, U-037 and U-102 partly done, 67 Parked and Cut units dropped with the new --drop flag (PR 733), Should units included. U-119 is left out: it has no solo estimate in the frozen panel and is mostly done. Two limits: the model ignores the board's sprint order (it starts Sprint 3 units in Sprint 2), and it does not count Sprint 2's non-unit tracks (maintenance waves 3 and 4, test audit, comment cleanup, architecture drift and dead code, client islands review). So its Dec 1 is the unit work alone; the board's Sprint values, set by hand, are the plan, and board-dates --run stays off until the model honours sprint order.",
+  "forecastNote": "Not refit since 2026-11-03 (delta-log 2026-11-16 and 2026-11-18: a refit with every merged unit at zero stops on the missing U-120 estimate): forecast.ts needs a frozen solo estimate for each unit and U-120 to U-130 have none. Every build unit is merged except U-130. Refit 2026-11-03 for the demo re-plan: start Oct 30, the 43 done units at zero, U-037 and U-102 partly done, 67 Parked and Cut units dropped with the new --drop flag (PR 733), Should units included. U-119 is left out: it has no solo estimate in the frozen panel and is mostly done. Two limits: the model ignores the board's sprint order (it starts Sprint 3 units in Sprint 2), and it does not count Sprint 2's non-unit tracks (maintenance waves 3 and 4, test audit, comment cleanup, architecture drift and dead code, client islands review). So its Dec 1 is the unit work alone; the board's Sprint values, set by hand, are the plan, and board-dates --run stays off until the model honours sprint order.",
   "frozen": {
     "prototype": {
       "likely": "2026-11-30",
@@ -429,16 +528,81 @@
   },
   "standups": [
     {
-      "date": "2026-11-17",
+      "date": "2026-11-18",
       "done": [
-        "You merged PR 990 (U-130 in units.yaml)",
-        "Swarm scoped: five lanes, blocks in STATUS.md"
+        "PR 1041 merged (U-004a: per-client sign-in limit)",
+        "Ticket close-out: 60 issues closed (32 cut units, 13 parked units, audit tickets fixed, combined or dropped); 3 left (#999, #1004, #1005), each with a PR",
+        "Wave 3 audit: 17 raised, 4 kept; B-3 merged as PR 1045 (legal audit row in the transaction)",
+        "Housekeeping: 17 merged worktrees and 59 local branches removed"
       ],
       "today": [
-        "Five lane chats: guest-signin, w3-cms, w3-reviews, w3-ops-host, audit-fixes",
-        "You: open the five chats; approve U-130 and U-070 when their checks pass"
+        "Your read of PR 1042 and PR 1044 (critical), and the bypass merge of PR 1043",
+        "PR 1046 (stale settings save) in round 2",
+        "B-1 (IPv6 key) built, queued behind PR 1044",
+        "The walkthrough, then page-change units and the full-run audit"
       ],
-      "heldUs": []
+      "heldUs": [
+        {
+          "what": "PR 1044 took three rounds",
+          "cost": "The architecture audit kept finding decisions in server code (B2); they moved into rateLimits.ts"
+        },
+        {
+          "what": "The audit-auth lane PM was cut off mid-round on PR 1044",
+          "cost": "The round 2 fix was found committed in the old worktree after two looks, and a round 3 lane PM took it over"
+        },
+        {
+          "what": "PR 1042 and PR 1044 wait on your read; PR 1043 on your bypass merge",
+          "cost": "Three tickets stay open until you act"
+        },
+        {
+          "what": "PR 1046 failed review and the architecture audit in round 1 (README rows, B13, B2) and B17 and B5 in round 2",
+          "cost": "Two fix rounds on a small change"
+        },
+        {
+          "what": "B-1 needs one test-line edit outside its manifest",
+          "cost": "Built but unpushed until someone approves the edit"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "done": [
+        "Wave 3 merged: U-083b (1019), U-130 (1020), U-076a (1022), U-060 (1024), U-070 (1026), U-076b (1032), U-044 (1033), U-126 (1036), U-061 (1037), U-078 (1038), U-076c (1040)",
+        "Nine audit batches and #1017 (PR 1039) merged",
+        "U-051 and U-105 set Done after a main CI run showed the booking-path spec ran",
+        "You answered the 14 close-out questions, all as recommended"
+      ],
+      "today": [
+        "Five lane chats ran the wave 3 units one at a time",
+        "U-004a audit PRs 1041 and 1042 built",
+        "Ticket close-out triage written (drafts/ticket-closeout-2026-11-17.md)"
+      ],
+      "heldUs": [
+        {
+          "what": "The lead called two lane fixers dead after one look at a clean worktree",
+          "cost": "Both were alive; one duplicated fixer run each on U-076a and U-060"
+        },
+        {
+          "what": "PR 1021 was filed on a pm/ branch and could not pass scope-manifest",
+          "cost": "You closed it; it was refiled as PR 1023"
+        },
+        {
+          "what": "A qa agent posted action_required with no database (PR 1030)",
+          "cost": "Fixed by a real QA pass"
+        },
+        {
+          "what": "U-076c's hand-made worktree had its builder writes refused by a hook",
+          "cost": "Relaunched with harness isolation"
+        },
+        {
+          "what": "PR 1030 went DIRTY on a README line after five other merges",
+          "cost": "A second owner approval on the new head"
+        },
+        {
+          "what": "A lane reported PR 1026 ready while knip was red",
+          "cost": "One more check and fix before the merge"
+        }
+      ]
     },
     {
       "date": "2026-11-16",

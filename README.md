@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 17, 2026.** Nov 17: swarm to finish. Five lanes at once: U-130 guest sign-in, the CMS and settings (U-076a to c, U-078), reviews (U-060, U-044, U-061), private requests, host cancel and the ops dashboard (U-083b, U-070, U-126), and the 40 open audit tickets. About 11 estimate-days that agents have been closing well under estimate; two critical reads for you (U-130, U-070). Gifting, wave 4 and real-launch units stay out. Then the walkthrough and page changes.
+**As of Nov 18, 2026.** Nov 18: wave 3 is done and the ticket close-out has run. Every wave 3 unit is merged (U-130, U-083b, U-070, U-126, U-076a to c, U-078, U-060, U-044, U-061) with nine audit batches; 60 tickets are closed and 3 are left (#999, #1004, #1005), each with a PR open. The wave 3 audit kept 4 of 17 findings: one fixed (PR 1045), one in review (PR 1046), one queued, one waits for U-085. You owe two critical reads (PR 1042, PR 1044), one bypass merge (PR 1043) and the walkthrough. Then page-change units and the full-run audit.
 
 | Milestone | Likely |
 |---|---|
@@ -18,17 +18,22 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
-- Production migrations 0024 to 0032. Run the db-migrate-production workflow before the next production deploy.
+- Production migrations 0024 to 0034. Run the db-migrate-production workflow before the next production deploy.
 - Create the U-129 issue and board item. PR 978 (image underlay) merged Nov 14 with no issue, so it cannot be set Done.
-- Walk the site as guest, host and ops. Script and findings table in drafts/walkthrough-2026-11.md; a walkthrough lane chat runs it with you.
 - Sentry setup, when the demo is shared. Server and browser projects, the ops address, three alert rules (docs/runbooks/alerting.md), then the two DSNs in Vercel.
 
 **Decisions needed**
 
-- None
+- Read and approve PR 1042 (U-004a, critical). Recommended: Read it and approve; the PM sees no blocker..
+- Read and approve PR 1044 (U-004a, critical). Recommended: Read it after PR 1042; the same read..
+- Bypass-merge PR 1043 (merge desk and standards). Recommended: Merge it; the content is three standards lines and a wider protected list..
+- Walk the site as guest, host and ops. Recommended: Run it next, after the two reads..
 
 **Held up**
 
+- PR 1042 and PR 1044 (critical tier) wait for your read: human-read, which only your approval passes
+- PR 1043 changes protected files and fails scope-manifest by design: Your bypass merge
+- B-1 (IPv6 /64 sign-in key) is built but not pushed: One test-line edit in webhook.test.ts, outside its scope manifest, and PR 1044 merging first
 - Real-job only: legal review, sponsor terms, Stripe review: Client facts with no one to ask in this demo; logged, not blocking
 <!-- roadmap:status:end -->
 
