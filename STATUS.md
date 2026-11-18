@@ -9,7 +9,7 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 | Lane | Scope | Session | State | Last update |
 |---|---|---|---|---|
 | `audit-auth` | #1005 (U-004a, critical): rate-limit keys on the two auth form posts; PR 1042 (#1004) waits on `human-read`; history in `lanes/audit-auth.md` | swarm subagent round 2, 2026-11-18 | active: launching | 2026-11-18 01:05 |
-| `owner-pack` | one protected-files PR for the owner's bypass merge: #999 (`scripts/merge-desk/scope-check.ts`) and the standards lines in `.claude/standards/architecture.md`; history in `lanes/owner-pack.md` | swarm subagent, 2026-11-18 | active: launching | 2026-11-18 01:05 |
+| `owner-pack` | one protected-files PR for the owner's bypass merge: #999 (`scripts/merge-desk/scope-check.ts`) and the standards lines in `.claude/standards/architecture.md`; history in `lanes/owner-pack.md` | swarm subagent, 2026-11-18 | handed off: PR 1043 open, waits on the owner's bypass merge | 2026-11-18 01:25 |
 | `audit-w3` | read-only audit of wave 3 code (PRs 1019 to 1042) into `audits/wave3-2026-11-18.md`, combined into fix batches, low-value findings dropped; no code | swarm subagent, 2026-11-18 | active: launching | 2026-11-18 01:05 |
 | `housekeeping` | remove worktrees and local branches of merged PRs in the ramble checkout; no code | swarm subagent, 2026-11-18 | active: launching | 2026-11-18 01:05 |
 | `lead` | Shared status, `## Next`, roadmap, memory; coordinates the ticket close-out swarm | PM lead swarm, 2026-11-18 (Fable; took over on the owner's word) | active: claimed 00:50; reading GitHub and the close-out sheet before launching lanes | 2026-11-18 00:50 |
@@ -24,7 +24,7 @@ Moved to `lanes/earlier.md` (2026-11-04).
 Round 2 launching (2026-11-18): #1005. PR 1041 merged 2026-11-18 00:44; PR 1042 green except `human-read`.
 
 ### Lane: owner-pack
-Launching (2026-11-18).
+PR 1043 (branch `pm/owner-pack-2026-11-18`, head 15b981a) opened as the App, owner review requested. Carries #999 (PROTECTED widened) and three standards lines. Fails `scope-manifest` by design; owner merges with bypass. For the lead: the auth-row purges are not named in B6 because PR 1042 is unmerged; add them to the B6 text after it merges.
 
 ### Lane: audit-w3
 Launching (2026-11-18).
