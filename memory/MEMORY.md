@@ -158,3 +158,8 @@ Full list with reasons in `DECISIONS.md`.
 
 - The close-out finished on 2026-11-18 with zero open issues and zero open pull requests. `audit-tickets.ts --run` files nothing when the dry run says so but still stops at its board sync while the Sprint field has no "Maintenance" option.
 - A background wait on GitHub can outlive its purpose: after the owner reports a merge, check GitHub directly and stop the wait rather than relying on it to exit.
+
+## Agent jobs in the cloud (2026-11-19)
+- A Claude Code cloud routine runs the nightly audit at 07:30 UTC and pushes an `audit/nightly-<date>` branch to this repository, never `main`. The lead reads and merges each branch. It has no visual or performance lens and files no tickets. Detail and limits: `lanes/agents-cloud.md`.
+- Cloud routine runs do not appear in `token-audit`; read their cost from the routine's run log.
+- A nightly fix agent (ADR 0011) is drafted but not live. The owner wants a Copilot code review trial on its pull requests (DECISIONS 2026-11-19).
