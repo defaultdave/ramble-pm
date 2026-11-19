@@ -36,6 +36,10 @@ Done 2026-11-18: PR 1046 (U-078, audit W3-2) merged 06:41, three rounds, all che
 ### Lane: w3-fix-b3
 PR 1045 merged 2026-11-18 (`fdb1d5a`, head `ea3ea34`, U-076c standard), round 1, all four agent checks passed. W3-3 fixed: legal draft, edit and publish write their audit row in the same transaction; stale TODOs and taxonomy comments corrected. For the lead: none to carry.
 
+### Lane: guest-signin
+- **2026-11-19, owner test pending.** U-130 merged 2026-11-17 ([PR 1020](https://github.com/defaultdave/ramble/pull/1020), `80cd4a1`), with sign-in rate-limit follow-ups 1041 and 1044. Not yet tested by the owner.
+- **For the lead:** add to `## Blocked on Dave`: "Test guest sign-in on the deployed site: enter a new email, get the on-screen link, land signed in; then a known staff or host address gets the normal 'link sent' reply and the link shows only in `/ops/mailbox`. Check `EMAIL_MODE` is `sink` there first." Also drop "guest sign-in waits for U-130" from `### Next chat: walkthrough`, since it has landed.
+
 ### Earlier (before lanes)
 Moved to `lanes/earlier.md`.
 
