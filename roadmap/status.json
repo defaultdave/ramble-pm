@@ -1,6 +1,6 @@
 {
- "asOf": "2026-11-18",
- "headline": "Nov 18: the ticket close-out is done. All 63 open tickets are closed and no PR is open; every wave 3 unit and audit fix is merged (PRs 1041 to 1047). Next: the walkthrough, then page-change units from its findings.",
+ "asOf": "2026-11-19",
+ "headline": "Nov 19: zero open tickets and PRs; PR 1048 (the B6 follow-up) merged. A cloud nightly audit now runs each night; a nightly fix agent is drafted. Next: test guest sign-in, then the walkthrough and its page-change units.",
  "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
  "phases": [
   {
@@ -109,6 +109,21 @@
  ],
  "actionsForDave": [
   {
+   "title": "Test guest sign-in on the deployed site",
+   "detail": "Check EMAIL_MODE is sink; a new email gets the on-screen link and lands signed in; a staff or host address gets 'link sent' and the link shows only in /ops/mailbox.",
+   "where": "Deployed site"
+  },
+  {
+   "title": "Check the cloud nightly audit's run log",
+   "detail": "No audit/nightly-2026-11-19 branch was pushed. Once one night runs clean, turn off the local ramble-nightly-audit task (it loses the visual and performance lenses).",
+   "where": "claude.ai routines"
+  },
+  {
+   "title": "Fix two paths in the nightly agent-review task",
+   "detail": "agent-memory to agent-memory-local; scripts/plan/site.ts to scripts/pm/site.ts.",
+   "where": "~/.claude/scheduled-tasks"
+  },
+  {
    "title": "Production migrations 0024 to 0034",
    "detail": "Run the db-migrate-production workflow before the next production deploy.",
    "where": "GitHub Actions"
@@ -126,19 +141,19 @@
  ],
  "heldUp": [
   {
-   "what": "PR 1042 and PR 1044 (critical tier) wait for your read",
-   "waitingOn": "human-read, which only your approval passes",
+   "what": "Last night's cloud audit left no report branch",
+   "waitingOn": "A look at the routine's run log; main had merges in the window",
    "owner": "You"
   },
   {
-   "what": "PR 1043 changes protected files and fails scope-manifest by design",
-   "waitingOn": "Your bypass merge",
+   "what": "Nightly fix agent (ADR 0011) is drafted, not pushed",
+   "waitingOn": "Your call to take it up, then the bypass merge, a spend-capped API key, the App secrets and the label",
    "owner": "You"
   },
   {
-   "what": "B-1 (IPv6 /64 sign-in key) is built but not pushed",
-   "waitingOn": "One test-line edit in webhook.test.ts, outside its scope manifest, and PR 1044 merging first",
-   "owner": "Lead / you"
+   "what": "Schedule refit and board dates",
+   "waitingOn": "Solo estimates for U-120 to U-130 and a rebuilt board Sprint field",
+   "owner": "You / lead"
   },
   {
    "what": "Real-job only: legal review, sponsor terms, Stripe review",
@@ -147,6 +162,14 @@
   }
  ],
  "decisionsMade": [
+  {
+   "what": "Copilot code review trial on the nightly fix agent's PRs (at most one a day), advisory only, not a required check (you)",
+   "when": "Nov 19"
+  },
+  {
+   "what": "Cloud nightly audit adopted beside the local one; the lead merges each audit/nightly branch after reading it (you)",
+   "when": "Nov 19"
+  },
   {
    "what": "Ticket close-out: the PM ran the close script under your goal; 60 closed (32 cut units, 13 parked units, audit tickets fixed, combined or dropped), 3 left, each with a PR (you, executed by the PM)",
    "when": "Nov 18"
@@ -434,16 +457,12 @@
  ],
  "watch": [
   {
+   "what": "Cloud audit coverage",
+   "detail": "The cloud routine reads code only: no visual or performance lens and no ticket filing. Its cost is not in token-audit; read it from the routine's run log."
+  },
+  {
    "what": "Schedule not refit since Nov 3",
    "detail": "A refit on Nov 18 stopped: the estimate panel has no solo estimate for U-120 to U-130, added after the freeze. The dates here are the Nov 3 refit; every unit in the plan is built, so they now describe work already done."
-  },
-  {
-   "what": "Three tickets stay open, each with a PR",
-   "detail": "#999 (PR 1043), #1004 (PR 1042), #1005 (PR 1044). They close when you read or bypass-merge."
-  },
-  {
-   "what": "B-1 and B-4 from the wave 3 audit are not built",
-   "detail": "B-1 is built locally and held on one test-line edit; B-4 travels with U-085, which was cut."
   },
   {
    "what": "Accepted risk in U-130",
@@ -506,6 +525,25 @@
   }
  },
  "standups": [
+  {
+   "date": "2026-11-19",
+   "done": [
+    "PR 1048 merged (B6 exemption for the auth-row purges); its worktree and branches removed",
+    "Cloud nightly audit recorded from the agents-cloud lane; its 11/18 report merged and N1118-1 closed by PR 1048",
+    "Copilot code review trial logged for the nightly fix agent's PRs"
+   ],
+   "today": [
+    "You: test guest sign-in on the deployed site; check the cloud routine's run log",
+    "The walkthrough, then page-change units",
+    "Your picks from the full-run audit; the fix agent go-live if you take it up"
+   ],
+   "heldUs": [
+    {
+     "what": "No cloud audit report for 11/19",
+     "cost": "Unknown until the run log is read; nothing lost yet, the local audit still runs"
+    }
+   ]
+  },
   {
    "date": "2026-11-18",
    "done": [

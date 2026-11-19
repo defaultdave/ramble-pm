@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 18, 2026.** Nov 18: the ticket close-out is done. All 63 open tickets are closed and no PR is open; every wave 3 unit and audit fix is merged (PRs 1041 to 1047). Next: the walkthrough, then page-change units from its findings.
+**As of Nov 19, 2026.** Nov 19: zero open tickets and PRs; PR 1048 (the B6 follow-up) merged. A cloud nightly audit now runs each night; a nightly fix agent is drafted. Next: test guest sign-in, then the walkthrough and its page-change units.
 
 | Milestone | Likely |
 |---|---|
@@ -18,6 +18,9 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
+- Test guest sign-in on the deployed site. Check EMAIL_MODE is sink; a new email gets the on-screen link and lands signed in; a staff or host address gets 'link sent' and the link shows only in /ops/mailbox.
+- Check the cloud nightly audit's run log. No audit/nightly-2026-11-19 branch was pushed. Once one night runs clean, turn off the local ramble-nightly-audit task (it loses the visual and performance lenses).
+- Fix two paths in the nightly agent-review task. agent-memory to agent-memory-local; scripts/plan/site.ts to scripts/pm/site.ts.
 - Production migrations 0024 to 0034. Run the db-migrate-production workflow before the next production deploy.
 - Create the U-129 issue and board item. PR 978 (image underlay) merged Nov 14 with no issue, so it cannot be set Done.
 - Sentry setup, when the demo is shared. Server and browser projects, the ops address, three alert rules (docs/runbooks/alerting.md), then the two DSNs in Vercel.
@@ -28,9 +31,9 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Held up**
 
-- PR 1042 and PR 1044 (critical tier) wait for your read: human-read, which only your approval passes
-- PR 1043 changes protected files and fails scope-manifest by design: Your bypass merge
-- B-1 (IPv6 /64 sign-in key) is built but not pushed: One test-line edit in webhook.test.ts, outside its scope manifest, and PR 1044 merging first
+- Last night's cloud audit left no report branch: A look at the routine's run log; main had merges in the window
+- Nightly fix agent (ADR 0011) is drafted, not pushed: Your call to take it up, then the bypass merge, a spend-capped API key, the App secrets and the label
+- Schedule refit and board dates: Solo estimates for U-120 to U-130 and a rebuilt board Sprint field
 - Real-job only: legal review, sponsor terms, Stripe review: Client facts with no one to ask in this demo; logged, not blocking
 <!-- roadmap:status:end -->
 
