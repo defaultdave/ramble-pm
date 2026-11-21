@@ -35,3 +35,24 @@ Moving the agent jobs off the owner's Mac. Opened 2026-11-18 from a side chat (n
 2. Merge the `audit/nightly-*` branches into `main` after reading them; mark N1118-1 resolved by #1048. Each night's branch is separate.
 3. `~/.claude/scheduled-tasks/ramble-nightly-agent-review/SKILL.md` has two wrong paths: `.claude/agent-memory/ramble-pm/MEMORY.md` (private notes are in `agent-memory-local`) and `scripts/plan/site.ts` (now `scripts/pm/site.ts`). Not fixed.
 4. `token-audit` cannot see cloud routine runs; read cost from the routine's run log.
+
+## 2026-11-21, why no nightly since 11/18 (agents-cloud chat)
+
+State of each nightly job:
+
+| Job | Where | State | Last run |
+|---|---|---|---|
+| Ramble nightly audit (cloud) | claude.ai routine `trig_019AVDCqk2jbtu79azLejPE2`, 07:30 UTC | on; no report since the 11/18 test run, by design (below) | test run 2026-11-18 19:16 UTC |
+| `ramble-nightly-audit` | desktop scheduled task, `30 2 * * *` | **off** (`enabled: false`) since the owner stopped automatic runs, DECISIONS 2026-11-13 | 2026-11-13 07:47 UTC |
+| `ramble-nightly-agent-review` | desktop scheduled task, `0 3 * * *` | **off**, same decision | 2026-11-13 08:37 UTC |
+| Nightly fix agent (ADR 0011) | ramble branch `pm/nightly-fix-agent` `41c1f94`, local only | parked; owner has not taken it up | never run |
+
+- **Cloud, 11/19 skipped by design (from the repo; the run log itself was not read, this chat has no routine or browser tool).** The only merge in the 07:30 UTC window was PR 1048 (`cfc4662`, 03:43 UTC), from `pm/b6-auth-purges`, changing one line of `.claude/standards/architecture.md` and no product code. The routine drops PM bookkeeping, promotion and sync PRs; the 11/18 test run dropped PR 1043 (`pm/owner-pack`) the same way. With nothing left to audit it writes no report. 11/20 and 11/21: no merges to `main`, so the 24-hour gate stopped them. Routine prompt not changed. To confirm: the 11/19 run on the routine page should end with a no-code or no-audit line; if it shows an error instead, reopen this lane.
+- **Local tasks, why silent:** both disabled in the desktop app's schedule store (`scheduled-tasks.json` under the app's `claude-code-sessions` folder): owner's 2026-11-13 decision. The 11-18 note "the local nightly audit stays on" (DECISIONS line 380, Blocked item 5) was wrong; there has been one audit a night (cloud) since 11-18, not two.
+- **Keep the local audit?** Owner's call. Off, the project has no visual or performance lens; those need Docker and a seeded database, which the cloud run lacks. Re-enabling costs a Mac session per night with merges (it skips nights without) and duplicates the three code lenses the cloud run already covers.
+- **Agent-review task paths** (`~/.claude/scheduled-tasks/ramble-nightly-agent-review/SKILL.md`), matter only if it is re-enabled: line 9 `.claude/agent-memory/ramble-pm/MEMORY.md` to `.claude/agent-memory-local/ramble-pm/MEMORY.md` (and the public memory now lives in `ramble-pm/memory/MEMORY.md`); line 42 `bun scripts/plan/site.ts publish` to `bun scripts/pm/site.ts publish`.
+
+### For the lead (2026-11-21)
+1. Correct `## Blocked on Dave` item 5: drop the 11/19 run-log check (skipped by design) unless the owner finds an error in the log; replace "turn off the local `ramble-nightly-audit` task" with "local nightly audit and agent review are off since 2026-11-13; re-enable only if you want the visual and performance lenses back"; the path fix applies only on re-enable.
+2. Public memory: the cloud nightly audit skips nights whose merges are only `pm/` bookkeeping or standards PRs, and a skipped night leaves no branch, so a missing `audit/nightly-<date>` branch is not by itself a failure.
+3. DECISIONS 2026-11-18 (cloud audit entry) says the local audit "stays on until the owner turns it off"; it was already off since 11-13. Add a correcting line rather than editing it.
