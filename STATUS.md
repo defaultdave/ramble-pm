@@ -43,7 +43,7 @@ PR 1045 merged 2026-11-18 (`fdb1d5a`, head `ea3ea34`, U-076c standard), round 1,
 
 ### Lane: agents-cloud
 - **2026-11-21, nightly jobs checked:** cloud routine on, no report since the 11/18 test run by design: 11/19 saw only PR 1048 (`pm/` branch, one line of `architecture.md`, no product code, dropped like PR 1043 in the test run); 11/20 and 11/21 had no merges. Run log not read here (no routine tool); routine prompt unchanged. Local `ramble-nightly-audit` and `ramble-nightly-agent-review` are disabled since the owner's 2026-11-13 stop, so one audit a night, not two. Fix agent (ADR 0011) parked. Table and paths: `lanes/agents-cloud.md`.
-- **For the lead:** rewrite Blocked item 5 (drop the run-log check and the "turn off local audit" step; local audit is already off and comes back only if the owner wants the visual and performance lenses); add a correcting DECISIONS line to the 11-18 "local audit stays on" entry; public memory: a missing `audit/nightly-<date>` branch can be a normal skip. Detail: `lanes/agents-cloud.md` "For the lead (2026-11-21)".
+- **For the lead:** rewrite Blocked item 5 (drop the run-log check and the "turn off local audit" step; local audit is already off and comes back only if the owner wants the visual and performance lenses); owner kept the local tasks off (DECISIONS 2026-11-21, which also corrects the 11-19 entry); public memory: a missing `audit/nightly-<date>` branch can be a normal skip. Detail: `lanes/agents-cloud.md` "For the lead (2026-11-21)".
 
 ### Earlier (before lanes)
 Moved to `lanes/earlier.md`.
