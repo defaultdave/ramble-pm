@@ -56,3 +56,8 @@ State of each nightly job:
 1. Correct `## Blocked on Dave` item 5: drop the 11/19 run-log check (skipped by design) unless the owner finds an error in the log; replace "turn off the local `ramble-nightly-audit` task" with nothing: the owner kept both local tasks off (DECISIONS 2026-11-21); the path fix applies only on re-enable.
 2. Public memory: the cloud nightly audit skips nights whose merges are only `pm/` bookkeeping or standards PRs, and a skipped night leaves no branch, so a missing `audit/nightly-<date>` branch is not by itself a failure.
 3. Done by the lane: DECISIONS 2026-11-21 records the owner keeping the local tasks off and corrects the 11-19 entry.
+
+## 2026-11-21, bug finder designed
+- Owner asked for a bug finder and fixer pair. Owner calls: GitHub Actions, opt-in per finding (DECISIONS 2026-11-21). Design: `drafts/adr-0012-bug-finder.md`. It reuses ADR 0011's runner split and secrets, and the fixer's picker gains a `Unit:` line for finder tickets.
+- Next: a builder adds ADR 0012, `bug-finder.yml` (dispatch only) and `scripts/bug-finder/` on local branch `pm/nightly-fix-agent`, so one owner bypass merge carries both. Block: `### Next chat: agents-cloud` in STATUS.md.
+- For the lead: Blocked item 5's fix-agent bullet now covers both agents (one PR, same secrets, plus a `finder` label); finder tickets are recorded in `audits/finder.md` when folded (open question in the draft).
