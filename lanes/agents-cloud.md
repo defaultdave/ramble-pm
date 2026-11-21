@@ -74,3 +74,4 @@ State of each nightly job:
   4. `gh label create finder --repo defaultdave/ramble`; same for `needs-owner` and `nightly-fix`
   5. After both ADRs are accepted: the four secrets and the variable, then `gh workflow run bug-finder.yml --repo defaultdave/ramble -f area=checkout` (then `area=ops`, `area=browse`). Label one good finding `nightly-fix` and run `gh workflow run nightly-fix.yml --repo defaultdave/ramble`.
 - For the lead: Blocked item 5 now means one push, PR and bypass merge carrying both ADRs, plus the labels and secrets above; ADRs 0011 and 0012 wait on the owner's acceptance.
+- 2026-11-21 10:40, at the owner's "run these": branch pushed (`3b17e96`), PR 1051 opened with the owner's login, labels `finder` and `nightly-fix` created (`needs-owner` already existed). The `--admin` merge was left to the owner (hard line).
