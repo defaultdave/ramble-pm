@@ -159,3 +159,9 @@ Reviews (U-060, U-044, U-061), host cancel (U-070), the CMS (U-076a to c), setti
 
 ## 2026-11-18 [lead]: schedule refit attempted, not regenerated
 - Ran the `roadmap/schedule.json` command with every merged unit at `--remaining 0` (the board-plan list, 66 units, U-037 now 0) and the same 68 `--drop` units (the 32 cut and 13 parked issues closed today were already dropped). `forecast.ts` stops with `estimate-panel.json has no solo estimate for U-120`: units U-120 to U-130 were added after the freeze and have no panel estimate (same limit as 2026-11-16). `roadmap/schedule.json` is unchanged, so the forecast is still the 2026-11-03 refit (finish likely Dec 2, range Nov 24 to Dec 8). Every unit in that plan is built; what remains is the walkthrough's page-change units, which have no estimates yet.
+
+## 2026-11-22 [lead]: production migration failures and an early promotion (2026-11-21)
+- `db-migrate-production` failed twice at `cfc4662` on 2026-11-21 (runs 44909239915 and 44917604713) with the Postgres error hidden by `drizzle-kit`. Migrations 0024 to 0034 were the pending set on record; the cause was not known at the time of writing.
+- The owner built production deployment `dpl_eJnFoMovxNpLGpqVeEueX6daPYdq` (`cfc4662`) and promoted it at 08:39 EST before any migration had passed. `/new-york/browse?q=walk` showed "Something went wrong". Rolled back at 09:24 to `dpl_AYrUKyz1PLkDiWjYzfrryE7ytbAp`; the same page then loaded without it. No other failing page was confirmed. The PM had wrongly reported the new build live before the promotion (it had not checked the domain).
+- U-003 follow-up, PR 1050 (merged 2026-11-21 10:40 EST, `b8e66aa`): `db:migrate` prints the Postgres error. The PM did not set U-003 on board #19 when the work started.
+- Working rule: promote production only after `db-migrate-production` is green.
