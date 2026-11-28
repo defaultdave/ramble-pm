@@ -19,7 +19,7 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 **Next for Dave**
 
 - Fix the production database secret, then migrate and deploy. Run 45052497572 failed on a stale neondb_owner password. Reset DATABASE_URL_UNPOOLED in the production-database environment, set BETTER_AUTH_SECRET (and SIGN_IN_LINK_SECRET if missing) in Vercel production, rerun db-migrate-production, then make a new production build and promote it.
-- Approve PRs 1063 and 1064. Dependabot's jest-dom 8 and minor-and-patch bumps with test-only lint fixes, replacing 1060 and 1061. Auto-merge is queued.
+- Bypass-merge PRs 1063 and 1064. Dependabot's jest-dom 8 and minor-and-patch bumps with test-only lint fixes, replacing 1060 and 1061. All checks green except scope-manifest, which a dependency bump cannot pass.
 - Test guest sign-in on the deployed site. Check EMAIL_MODE is sink; a new email gets the on-screen link and lands signed in; a staff or host address gets 'link sent' and the link shows only in /ops/mailbox.
 - Fix two paths in the nightly agent-review task. agent-memory to agent-memory-local; scripts/plan/site.ts to scripts/pm/site.ts.
 - Create the U-129 issue and board item. PR 978 (image underlay) merged Nov 14 with no issue, so it cannot be set Done.
@@ -32,7 +32,7 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 **Held up**
 
 - Production is on the Nov 4 build: The production database secret reset; migrations 0024 to 0034 and a new build wait on it, and so does the guest sign-in test
-- Dependabot bumps (jest-dom 8, 17 minor updates): CI and your approval on PRs 1063 and 1064
+- Dependabot bumps (jest-dom 8, 17 minor updates): Your bypass merge of PRs 1063 and 1064 (CI green)
 - Schedule refit and board dates: Solo estimates for U-120 to U-130 and a rebuilt board Sprint field
 - Real-job only: legal review, sponsor terms, Stripe review: Client facts with no one to ask in this demo; logged, not blocking
 <!-- roadmap:status:end -->

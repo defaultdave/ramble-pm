@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-28 02:10 by the lead. PR 1062 (gitleaks ignore list) and PR 1059 (Dependabot actions bump) merged on the owner's bypass. Dependabot PRs 1060 and 1061 are replaced by PRs 1063 and 1064 (same bump plus a test-only lint fix; the App cannot push to `dependabot/` branches); review requested and auto-merge queued on both. Production still on the 11/04 build (Blocked 6). Swept the handed-off lane sections into `lanes/`.
+**Updated:** 2026-11-28 02:10 by the lead. PR 1062 (gitleaks ignore list) and PR 1059 (Dependabot actions bump) merged on the owner's bypass. Dependabot PRs 1060 and 1061 are replaced by PRs 1063 and 1064 (same bump plus a test-only lint fix; the App cannot push to `dependabot/` branches); all checks green except `scope-manifest` (expected for a bump), so both wait on the owner's bypass merge. Production still on the 11/04 build (Blocked 6). Swept the handed-off lane sections into `lanes/`.
 
 ## Lanes
 
@@ -56,7 +56,7 @@ Refreshed 2026-11-18 12:06 by the lead. Nothing here blocks a ticket; all ticket
    - Fix two paths in `~/.claude/scheduled-tasks/ramble-nightly-agent-review/SKILL.md`: `agent-memory` to `agent-memory-local`, `scripts/plan/site.ts` to `scripts/pm/site.ts`.
 6. **Production migrations 0024 to 0034:** run 45052497572 failed on a bad password for `neondb_owner` (28P01). Owner: reset the `production-database` secret `DATABASE_URL_UNPOOLED`, set `BETTER_AUTH_SECRET` (logged as unset 2026-11-21) and, if missing, `SIGN_IN_LINK_SECRET` in Vercel production, rerun the workflow, then make a NEW production build (the parked `ramble-isfy5k3vc` was built before those variables) and promote it. Production stays on the 11/04 build until then (delta-log 2026-11-22). **U-129:** create its issue and board item. **Sentry** and **Method Layer 0:** as before (`lanes/lead.md`).
 
-7. **Approve PRs 1063 and 1064** (Dependabot's jest-dom 8 and minor-and-patch bumps, each with a test-only lint fix; they replace 1060 and 1061, which Dependabot closes once these land). Auto-merge is queued, so your approval merges them once checks pass. PRs 1062 and 1059 merged 2026-11-28.
+7. **Bypass-merge PRs 1063 and 1064** (Dependabot's jest-dom 8 and minor-and-patch bumps, each with a test-only lint fix; they replace 1060 and 1061, which Dependabot closes once these land). Every check passes except `scope-manifest`, which no dependency bump can pass (no unit ID, and bookkeeping PRs may touch only plan files), as with PR 982. PRs 1062 and 1059 merged 2026-11-28.
 
 Open item from the ADR 0007 measurement amendment (2026-10-18): what New York and US law require for first-party analytics and web-vitals beacons (PRD-73); not researched yet.
 Legal and vendor questions for the real job, logged, not blocking the demo: Ramble holding host money and the New York gift law (counsel, Q-16); card refund age limit at 12 months (ask Stripe); Stripe's Connect review time.
@@ -74,10 +74,10 @@ Older Next items: `lanes/lead.md`.
 One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane: <name>` (the PM claims the lane first). The lead's block is the default `/ramble-pm`.
 
 ### Next chat: lead
-- **Before you start:** reset the production database secret and rerun the migration workflow (Blocked 6); approve PRs 1063 and 1064 if they are still open.
+- **Before you start:** reset the production database secret and rerun the migration workflow (Blocked 6); bypass-merge PRs 1063 and 1064 if they are still open.
 - **Run:** `/ramble-pm` in a new desktop chat, started from the ramble main checkout.
 - **Model and effort:** Sonnet, medium. Builders Sonnet, narrow checks Haiku.
-- **Prompt:** You are the lead. Read `## Blocked on Dave` and `## Next` in `STATUS.md`. Check PRs 1063 and 1064 merged and Dependabot closed 1060 and 1061; then remove worktrees `dep-1060` and `dep-1061` and branches `pm/dep-jest-dom-8`, `pm/dep-minor-2026-11-23` and the two local `dependabot/` branches. Check Monday's scheduled `gitleaks` run passed (first since PR 1062). If the owner has run the production migration, make and promote the new build with him, then start the guest sign-in test and the walkthrough lane. Republish `index.html` to the claude.ai roadmap artifact (this chat had no artifact tool). Don't commit in ramble; publish ramble-pm with `site.ts publish`.
+- **Prompt:** You are the lead. Read `## Blocked on Dave` and `## Next` in `STATUS.md`. Check PRs 1063 and 1064 merged (owner bypass) and Dependabot closed 1060 and 1061; then remove worktrees `dep-1060` and `dep-1061` and branches `pm/dep-jest-dom-8`, `pm/dep-minor-2026-11-23` and the two local `dependabot/` branches. Check Monday's scheduled `gitleaks` run passed (first since PR 1062). If the owner has run the production migration, make and promote the new build with him, then start the guest sign-in test and the walkthrough lane. Republish `index.html` to the claude.ai roadmap artifact (this chat had no artifact tool). Don't commit in ramble; publish ramble-pm with `site.ts publish`.
 
 ### Next chat: walkthrough
 - **Before you start:** nothing. Pick local (`pnpm dev`, seeded) or the deployed site; on deployed, guest sign-in (U-130) has landed and the personas are not seeded.

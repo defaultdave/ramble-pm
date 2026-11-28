@@ -114,8 +114,8 @@
    "where": "GitHub, Vercel"
   },
   {
-   "title": "Approve PRs 1063 and 1064",
-   "detail": "Dependabot's jest-dom 8 and minor-and-patch bumps with test-only lint fixes, replacing 1060 and 1061. Auto-merge is queued.",
+   "title": "Bypass-merge PRs 1063 and 1064",
+   "detail": "Dependabot's jest-dom 8 and minor-and-patch bumps with test-only lint fixes, replacing 1060 and 1061. All checks green except scope-manifest, which a dependency bump cannot pass.",
    "where": "GitHub"
   },
   {
@@ -147,7 +147,7 @@
   },
   {
    "what": "Dependabot bumps (jest-dom 8, 17 minor updates)",
-   "waitingOn": "CI and your approval on PRs 1063 and 1064",
+   "waitingOn": "Your bypass merge of PRs 1063 and 1064 (CI green)",
    "owner": "You"
   },
   {
@@ -540,7 +540,7 @@
    ],
    "today": [
     "Owner: production database secret, then migrations, a new build and its promotion",
-    "You: approve PRs 1063 and 1064"
+    "You: bypass-merge PRs 1063 and 1064"
    ],
    "heldUs": [
     {
