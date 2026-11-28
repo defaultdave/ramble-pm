@@ -114,8 +114,8 @@
    "where": "GitHub, Vercel"
   },
   {
-   "title": "Bypass-merge PR 1062 and PR 1059",
-   "detail": "1062 adds 16 fake-fixture fingerprints to .gitleaksignore so the weekly full-history scan passes; 1059 is Dependabot's actions bump. Both touch protected paths, so scope-manifest fails by design. PRs 1060 and 1061 follow once their lint fixes land.",
+   "title": "Approve PRs 1063 and 1064",
+   "detail": "Dependabot's jest-dom 8 and minor-and-patch bumps with test-only lint fixes, replacing 1060 and 1061. Auto-merge is queued.",
    "where": "GitHub"
   },
   {
@@ -146,13 +146,8 @@
    "owner": "You"
   },
   {
-   "what": "Dependabot PRs 1059 to 1061, open since Nov 23",
-   "waitingOn": "Lint fixes for 1060 and 1061 (builder at work), then your bypass merges",
-   "owner": "Lead / you"
-  },
-  {
-   "what": "Weekly gitleaks scan red since Oct 26",
-   "waitingOn": "Your bypass merge of PR 1062",
+   "what": "Dependabot bumps (jest-dom 8, 17 minor updates)",
+   "waitingOn": "CI and your approval on PRs 1063 and 1064",
    "owner": "You"
   },
   {
@@ -539,12 +534,13 @@
    "done": [
     "Lead lane taken over from the Nov 22 chat",
     "Found the weekly full-history gitleaks scan red since Oct 26: 16 fake fixtures, no real secret; PR 1062 opened",
-    "Handed-off lane entries swept from STATUS.md into lanes/"
+    "Handed-off lane entries swept from STATUS.md into lanes/",
+    "PR 1062 (gitleaks ignore list) and PR 1059 (actions bump) merged on your bypass",
+    "Lint fixes for the two npm bumps built, checked against the manifest, and opened as PRs 1063 and 1064"
    ],
    "today": [
-    "A builder fixes lint on Dependabot PRs 1060 (jest-dom 8) and 1061 (17 minor updates)",
     "Owner: production database secret, then migrations, a new build and its promotion",
-    "Owner: bypass-merge PRs 1062 and 1059"
+    "You: approve PRs 1063 and 1064"
    ],
    "heldUs": [
     {
