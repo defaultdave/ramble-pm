@@ -7,7 +7,7 @@ Ramble is a demo marketplace for bookable experiences, built to prove a planning
 ## Now
 
 <!-- roadmap:status:start -->
-**As of Nov 19, 2026.** Nov 19: zero open tickets and PRs; PR 1048 (the B6 follow-up) merged. A cloud nightly audit now runs each night; a nightly fix agent is drafted. Next: test guest sign-in, then the walkthrough and its page-change units.
+**As of Nov 28, 2026.** Nov 28: the build is done and the nightly agents run on their own. Production is still on the Nov 4 build because its database password is stale. The weekly secret scan has failed since Oct 26 on fake test values; PR 1062 clears it. Next: the production secret, then test guest sign-in, then the walkthrough.
 
 | Milestone | Likely |
 |---|---|
@@ -18,10 +18,10 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Next for Dave**
 
+- Fix the production database secret, then migrate and deploy. Run 45052497572 failed on a stale neondb_owner password. Reset DATABASE_URL_UNPOOLED in the production-database environment, set BETTER_AUTH_SECRET (and SIGN_IN_LINK_SECRET if missing) in Vercel production, rerun db-migrate-production, then make a new production build and promote it.
+- Bypass-merge PR 1062 and PR 1059. 1062 adds 16 fake-fixture fingerprints to .gitleaksignore so the weekly full-history scan passes; 1059 is Dependabot's actions bump. Both touch protected paths, so scope-manifest fails by design. PRs 1060 and 1061 follow once their lint fixes land.
 - Test guest sign-in on the deployed site. Check EMAIL_MODE is sink; a new email gets the on-screen link and lands signed in; a staff or host address gets 'link sent' and the link shows only in /ops/mailbox.
-- Check the cloud nightly audit's run log. No audit/nightly-2026-11-19 branch was pushed. Once one night runs clean, turn off the local ramble-nightly-audit task (it loses the visual and performance lenses).
 - Fix two paths in the nightly agent-review task. agent-memory to agent-memory-local; scripts/plan/site.ts to scripts/pm/site.ts.
-- Production migrations 0024 to 0034. Run the db-migrate-production workflow before the next production deploy.
 - Create the U-129 issue and board item. PR 978 (image underlay) merged Nov 14 with no issue, so it cannot be set Done.
 - Sentry setup, when the demo is shared. Server and browser projects, the ops address, three alert rules (docs/runbooks/alerting.md), then the two DSNs in Vercel.
 
@@ -31,8 +31,9 @@ Forecast: Lever 4 too (money core to agents), Dave 12.5 h.
 
 **Held up**
 
-- Last night's cloud audit left no report branch: A look at the routine's run log; main had merges in the window
-- Nightly fix agent (ADR 0011) is drafted, not pushed: Your call to take it up, then the bypass merge, a spend-capped API key, the App secrets and the label
+- Production is on the Nov 4 build: The production database secret reset; migrations 0024 to 0034 and a new build wait on it, and so does the guest sign-in test
+- Dependabot PRs 1059 to 1061, open since Nov 23: Lint fixes for 1060 and 1061 (builder at work), then your bypass merges
+- Weekly gitleaks scan red since Oct 26: Your bypass merge of PR 1062
 - Schedule refit and board dates: Solo estimates for U-120 to U-130 and a rebuilt board Sprint field
 - Real-job only: legal review, sponsor terms, Stripe review: Client facts with no one to ask in this demo; logged, not blocking
 <!-- roadmap:status:end -->

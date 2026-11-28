@@ -1,6 +1,6 @@
 {
- "asOf": "2026-11-19",
- "headline": "Nov 19: zero open tickets and PRs; PR 1048 (the B6 follow-up) merged. A cloud nightly audit now runs each night; a nightly fix agent is drafted. Next: test guest sign-in, then the walkthrough and its page-change units.",
+ "asOf": "2026-11-28",
+ "headline": "Nov 28: the build is done and the nightly agents run on their own. Production is still on the Nov 4 build because its database password is stale. The weekly secret scan has failed since Oct 26 on fake test values; PR 1062 clears it. Next: the production secret, then test guest sign-in, then the walkthrough.",
  "recommended": "Lever 4 too (money core to agents), Dave 12.5 h",
  "phases": [
   {
@@ -109,24 +109,24 @@
  ],
  "actionsForDave": [
   {
+   "title": "Fix the production database secret, then migrate and deploy",
+   "detail": "Run 45052497572 failed on a stale neondb_owner password. Reset DATABASE_URL_UNPOOLED in the production-database environment, set BETTER_AUTH_SECRET (and SIGN_IN_LINK_SECRET if missing) in Vercel production, rerun db-migrate-production, then make a new production build and promote it.",
+   "where": "GitHub, Vercel"
+  },
+  {
+   "title": "Bypass-merge PR 1062 and PR 1059",
+   "detail": "1062 adds 16 fake-fixture fingerprints to .gitleaksignore so the weekly full-history scan passes; 1059 is Dependabot's actions bump. Both touch protected paths, so scope-manifest fails by design. PRs 1060 and 1061 follow once their lint fixes land.",
+   "where": "GitHub"
+  },
+  {
    "title": "Test guest sign-in on the deployed site",
    "detail": "Check EMAIL_MODE is sink; a new email gets the on-screen link and lands signed in; a staff or host address gets 'link sent' and the link shows only in /ops/mailbox.",
    "where": "Deployed site"
   },
   {
-   "title": "Check the cloud nightly audit's run log",
-   "detail": "No audit/nightly-2026-11-19 branch was pushed. Once one night runs clean, turn off the local ramble-nightly-audit task (it loses the visual and performance lenses).",
-   "where": "claude.ai routines"
-  },
-  {
    "title": "Fix two paths in the nightly agent-review task",
    "detail": "agent-memory to agent-memory-local; scripts/plan/site.ts to scripts/pm/site.ts.",
    "where": "~/.claude/scheduled-tasks"
-  },
-  {
-   "title": "Production migrations 0024 to 0034",
-   "detail": "Run the db-migrate-production workflow before the next production deploy.",
-   "where": "GitHub Actions"
   },
   {
    "title": "Create the U-129 issue and board item",
@@ -141,13 +141,18 @@
  ],
  "heldUp": [
   {
-   "what": "Last night's cloud audit left no report branch",
-   "waitingOn": "A look at the routine's run log; main had merges in the window",
+   "what": "Production is on the Nov 4 build",
+   "waitingOn": "The production database secret reset; migrations 0024 to 0034 and a new build wait on it, and so does the guest sign-in test",
    "owner": "You"
   },
   {
-   "what": "Nightly fix agent (ADR 0011) is drafted, not pushed",
-   "waitingOn": "Your call to take it up, then the bypass merge, a spend-capped API key, the App secrets and the label",
+   "what": "Dependabot PRs 1059 to 1061, open since Nov 23",
+   "waitingOn": "Lint fixes for 1060 and 1061 (builder at work), then your bypass merges",
+   "owner": "Lead / you"
+  },
+  {
+   "what": "Weekly gitleaks scan red since Oct 26",
+   "waitingOn": "Your bypass merge of PR 1062",
    "owner": "You"
   },
   {
@@ -162,6 +167,10 @@
   }
  ],
  "decisionsMade": [
+  {
+   "what": "The 16 weekly-scan gitleaks hits are fake test fixtures; ignore them by fingerprint rather than rewrite history (lead, overrule if you want)",
+   "when": "Nov 28"
+  },
   {
    "what": "Copilot code review trial on the nightly fix agent's PRs (at most one a day), advisory only, not a required check (you)",
    "when": "Nov 19"
@@ -525,6 +534,29 @@
   }
  },
  "standups": [
+  {
+   "date": "2026-11-28",
+   "done": [
+    "Lead lane taken over from the Nov 22 chat",
+    "Found the weekly full-history gitleaks scan red since Oct 26: 16 fake fixtures, no real secret; PR 1062 opened",
+    "Handed-off lane entries swept from STATUS.md into lanes/"
+   ],
+   "today": [
+    "A builder fixes lint on Dependabot PRs 1060 (jest-dom 8) and 1061 (17 minor updates)",
+    "Owner: production database secret, then migrations, a new build and its promotion",
+    "Owner: bypass-merge PRs 1062 and 1059"
+   ],
+   "heldUs": [
+    {
+     "what": "Six days with no lead session: three Dependabot PRs and a red scheduled scan sat unseen since Nov 23",
+     "cost": "About five days of open PRs; no work blocked"
+    },
+    {
+     "what": "Production migration blocked on the stale database secret since Nov 22",
+     "cost": "Production six days behind main; the guest sign-in test cannot run there"
+    }
+   ]
+  },
   {
    "date": "2026-11-19",
    "done": [

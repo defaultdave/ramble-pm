@@ -1,6 +1,6 @@
 # Status
 
-**Updated:** 2026-11-19 08:40 by the lead. Folded the `agents-cloud` lane: `audit/nightly-2026-11-18` merged into `main` here, N1118-1 closed by PR 1048, owner steps added to `## Blocked on Dave`; the owner wants a Copilot code review trial on the nightly fix PRs (DECISIONS). Earlier today: PR 1048 (B6 exemption for the auth-row purges) merged 2026-11-18 22:43 EST (`cfc4662`); its worktree and branches are removed. Zero open issues and PRs. Roadmap refreshed 2026-11-19 (status.json, standup, index.html); not run: schedule refit and board dates (blocked, item 4), N1111-11 filed by the owner as ramble #1049 (not on the Maintenance sprint: board #19 has no Sprint field now, so the board step fails until it is rebuilt; `nightly-fix` label does not exist yet), claude.ai artifact republish (no artifact tool in this chat). The full-run audit now covers the whole run: `drafts/full-run-audit-pre-freeze-2026-11-18.md` joins the post-freeze half, and both are captured in the owner's vault. Older `Updated` lines: `lanes/lead.md`.
+**Updated:** 2026-11-28 01:40 by the lead (took over from the 2026-11-22 chat). Weekly full-history gitleaks scan has failed every Monday since 2026-10-26 on 16 fake test fixtures; PR 1062 ignores them and waits on the owner's bypass merge. Dependabot PRs 1059 to 1061 open since 11-23: 1060 and 1061 fail lint, a builder is fixing them. Production still on the 11/04 build (Blocked 6). Swept the handed-off lane sections into `lanes/`.
 
 ## Lanes
 
@@ -21,21 +21,6 @@ Several PM chats run at once. Each works one lane and writes only its own parts 
 Moved to `lanes/earlier.md` (2026-11-04).
 
 ## In flight
-
-### Lane: audit-auth
-**Closed out by the lead, 2026-11-18 05:55.** PRs 1042 (#1004), 1044 (#1005) and 1047 (audit W3-1) merged on the owner's approvals; worktrees and branches removed. Nothing left in this lane. History: `lanes/audit-auth.md`.
-
-### Lane: owner-pack
-PR 1043 merged by the owner's bypass on 2026-11-18 (`04291ac`); #999 closed; worktree and branch removed. Nothing left in this lane.
-
-### Lane: audit-w3
-Done 2026-11-18: `audits/wave3-2026-11-18.md`, 17 raised, 4 kept, 13 dropped, none filed. For the lead: 4 batches, one per unit, no file overlap: B-1 U-004a (IPv6 /64 key, critical), B-2 U-078 (stale settings form), B-3 U-076c (legal audit in the transaction), B-4 U-044 (review erasure, with U-085). Highest severity medium. History: `lanes/audit-w3.md`.
-
-### Lane: w3-fix-b2
-Done 2026-11-18: PR 1046 (U-078, audit W3-2) merged 06:41, three rounds, all checks green, no owner approval (standard tier). For the lead: `checkExpectedVersion` in `src/lib/sessions.ts` is now generic (string versions, null never matches); duplication audit item: unify the integer and timestamp version forms. History in `lanes/w3-fix-b2.md`.
-
-### Lane: w3-fix-b3
-PR 1045 merged 2026-11-18 (`fdb1d5a`, head `ea3ea34`, U-076c standard), round 1, all four agent checks passed. W3-3 fixed: legal draft, edit and publish write their audit row in the same transaction; stale TODOs and taxonomy comments corrected. For the lead: none to carry.
 
 ### Lane: guest-signin
 - **2026-11-19, owner test pending.** U-130 merged 2026-11-17 ([PR 1020](https://github.com/defaultdave/ramble/pull/1020), `80cd4a1`), with sign-in rate-limit follow-ups 1041 and 1044. Not yet tested by the owner.
@@ -67,11 +52,11 @@ Refreshed 2026-11-18 12:06 by the lead. Nothing here blocks a ticket; all ticket
 3. **Walkthrough** (your time, five passes): `### Next chat: walkthrough`. Its findings become the page-change units.
 4. **Tooling the lead could not fix alone:** `board-dates.ts` needs the board's Sprint field deleted and rebuilt (a board settings change); `forecast.ts` needs solo estimates for U-120 to U-130 before the schedule can be refit.
 5. **Agent jobs in the cloud** (`lanes/agents-cloud.md`):
-   - Check the routine's run log for 2026-11-19 (https://claude.ai/code/routines/trig_019AVDCqk2jbtu79azLejPE2): no `audit/nightly-2026-11-19` branch was pushed although `main` had merges in the window.
-   - Turn off the local `ramble-nightly-audit` task once the cloud routine has one clean scheduled night. Doing so drops the visual and performance lenses, which the cloud run does not have.
    - Nightly fix agent (ADR 0011, branch `pm/nightly-fix-agent`, `41c1f94`, local only), if you take it up: push and open the PR (bypass merge); secrets `ANTHROPIC_API_KEY` (dedicated, spend-capped), `RAMBLE_APP_ID`, `RAMBLE_APP_INSTALLATION_ID`, `RAMBLE_APP_PRIVATE_KEY`; variable `CLAUDE_CODE_VERSION`; label `nightly-fix`. For the Copilot review trial: turn on Copilot code review for the repo (a settings or ruleset change, yours).
    - Fix two paths in `~/.claude/scheduled-tasks/ramble-nightly-agent-review/SKILL.md`: `agent-memory` to `agent-memory-local`, `scripts/plan/site.ts` to `scripts/pm/site.ts`.
 6. **Production migrations 0024 to 0034:** run 45052497572 failed on a bad password for `neondb_owner` (28P01). Owner: reset the `production-database` secret `DATABASE_URL_UNPOOLED`, set `BETTER_AUTH_SECRET` (logged as unset 2026-11-21) and, if missing, `SIGN_IN_LINK_SECRET` in Vercel production, rerun the workflow, then make a NEW production build (the parked `ramble-isfy5k3vc` was built before those variables) and promote it. Production stays on the 11/04 build until then (delta-log 2026-11-22). **U-129:** create its issue and board item. **Sentry** and **Method Layer 0:** as before (`lanes/lead.md`).
+
+7. **Bypass merges (protected paths, scope-manifest fails by design):** [PR 1062](https://github.com/defaultdave/ramble/pull/1062) (gitleaks ignore list, clears the weekly scan) and [PR 1059](https://github.com/defaultdave/ramble/pull/1059) (Dependabot, `actions/download-artifact` 7 to 8 in two workflows). PRs 1060 and 1061 follow once their lint fixes are pushed.
 
 Open item from the ADR 0007 measurement amendment (2026-10-18): what New York and US law require for first-party analytics and web-vitals beacons (PRD-73); not researched yet.
 Legal and vendor questions for the real job, logged, not blocking the demo: Ramble holding host money and the New York gift law (counsel, Q-16); card refund age limit at 12 months (ask Stripe); Stripe's Connect review time.
@@ -98,7 +83,7 @@ One block per lane. Open each lane in its own desktop chat with `/ramble-pm lane
 - **Before you start:** nothing. Pick local (`pnpm dev`, seeded) or the deployed site; on deployed, guest sign-in (U-130) has landed and the personas are not seeded.
 - **Run:** `/ramble-pm lane: walkthrough` in a new desktop chat, beside the guest-signin lane.
 - **Model and effort:** Sonnet, medium.
-- **Prompt:** Read `drafts/walkthrough-2026-11.md` in ramble-pm and the slim MVP goal under `## Next` in `STATUS.md`. First refresh the script's "Before you start" against `main`: the test console (`/ops/dev`, U-123) and reset demo data (U-124) have landed, so step 3 on jobs changes, and U-130 (guest sign-in link on screen while email is off) is coming. Then run the five passes with Dave one at a time (guest not signed in, book as a guest, host owner, ops, admin), phone width first, recording every finding he gives in the findings table with route, role and width. Read pages with `get_page_text` or `read_page`; screenshots at `scale: 0.5`. Done looks like: all five passes walked, the findings table sorted into page-change units (each with a scope line, size and tier) and won't-fix rows, and a proposed order in the lane's "For the lead" notes. Don't commit in ramble.
+- **Prompt:** Read `drafts/walkthrough-2026-11.md` in ramble-pm and the slim MVP goal under `## Next` in `STATUS.md`. First refresh the script's "Before you start" against `main`: the test console (`/ops/dev`, U-123) and reset demo data (U-124) have landed, so step 3 on jobs changes, and U-130 (guest sign-in link on screen while email is off) has landed (merged 2026-11-17). Then run the five passes with Dave one at a time (guest not signed in, book as a guest, host owner, ops, admin), phone width first, recording every finding he gives in the findings table with route, role and width. Read pages with `get_page_text` or `read_page`; screenshots at `scale: 0.5`. Done looks like: all five passes walked, the findings table sorted into page-change units (each with a scope line, size and tier) and won't-fix rows, and a proposed order in the lane's "For the lead" notes. Don't commit in ramble.
 
 ### lead
 

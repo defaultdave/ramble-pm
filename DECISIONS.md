@@ -388,3 +388,6 @@ Dave merged PR 905, process audit suggestion 5.3. Every unit targets `main`. The
 
 ## 2026-11-22 (agents-cloud)
 - First fixer ticket (owner, 2026-11-22, agents-cloud): the owner added `nightly-fix` to ramble issue 1057 (Back after payment, U-047b, standard tier), so the nightly fixer makes the fix instead of a builder, with ADR 0011 still Proposed. Why: the ticket is XS and the fixer has never made a fix.
+
+## 2026-11-28 (lead)
+- **Gitleaks history hits ignored by fingerprint (lead, PM decision, overrulable):** the weekly full-history `gitleaks` scan has failed every Monday since 2026-10-26. All 16 hits are fake values: 15 redaction-test fixtures from `550f365` (U-007) and one doc comment in `src/lib/checkoutForm.ts` (`86352fb`). PR 1062 adds their fingerprints to `.gitleaksignore` rather than rewriting history. Why: nothing real leaked, and a rewrite of `main` costs far more than an ignore list. The PR touches a protected path, so the owner bypass-merges.
